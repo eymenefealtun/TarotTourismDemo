@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="Tourism.MainPage.MVVM.View.CustomerView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="1200"
+             Background="#24292f">
+
+    <Grid>
+
+        <StackPanel>
+
+
+            <DataGrid x:Name="dgwCustomerOperation"
+                      HorizontalAlignment="Left"
+                      Margin="50,50,0,0"
+                      Width="850"
+                      Height="500"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      ScrollViewer.CanContentScroll="False"
+                      FontFamily="/Fonts/#Poppins"
+                      AlternatingRowBackground="LightGray"
+                      Loaded="dgwCustomerOperation_Loaded_1">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First Name"
+                                        MinWidth="80"
+                                        Binding="{Binding FirstName}" />
+                    <DataGridTextColumn Header="Last Name"
+                                        MinWidth="80"
+                                        Binding="{Binding LastName}" />
+                    <DataGridTextColumn Header="Phone"
+                                        MinWidth="20"
+                                        Binding="{Binding Phone}" />
+                    <DataGridTextColumn Header="Birth Date"
+                                        MinWidth="40"
+                                        Binding="{Binding BirthDate, StringFormat=d}" />
+                    <DataGridTextColumn Header="Gender"
+                                        MinWidth="20"
+                                        Binding="{Binding Gender}" />
+                    <DataGridTextColumn Header="Id"
+                                        MinWidth="50"
+                                        Binding="{Binding IdNumber}" />
+                    <DataGridTextColumn Header="Room Id"
+                                        MinWidth="30"
+                                        Binding="{Binding RoomId}" />
+                    <DataGridTextColumn Header="Reservation Id "
+                                        MinWidth="30"
+                                        Binding="{Binding ReservationId}" />
+                    <DataGridTextColumn Header="Bed Type"
+                                        MinWidth="30"
+                                        Binding="{Binding BedType}" />
+                    <DataGridTextColumn Header="Reservation Code"
+                                        MinWidth="80"
+                                        Binding="{Binding ReservationCode}" />
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+
+        </StackPanel>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,143 @@
+﻿<UserControl x:Class="Tourism.MainPage.MVVM.View.HomeView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="1250"
+             Background="#24292f"
+             >
+
+    <StackPanel>
+        <TextBlock Text="Discover"
+                   Foreground="White"
+                   FontSize="28"
+                   HorizontalAlignment="Left"
+                   Margin="15,0,0,5" 
+                   FontFamily="/Fonts/#Poppins"/>
+        <StackPanel Orientation="Horizontal">
+            <Border Width="400"
+                    Height="200"
+                    Margin="10,0,0,0">
+                <Border.Background>
+                    <LinearGradientBrush StartPoint="0,0"
+                                         EndPoint="1,2">
+                        <GradientStop Color="#5bc3ff" Offset="0.0" />
+                        <GradientStop Color="#3aa0ff" Offset="1 " />
+                    </LinearGradientBrush>
+                </Border.Background>
+
+                <Border.Clip>
+                    <RectangleGeometry RadiusX="10"
+                                       RadiusY="10"
+                                       Rect="0,0,400,200" />
+                </Border.Clip>
+
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="Word leader  &#x0a;in global finance"
+                                   Foreground="White"
+                                   FontSize="28"
+                                   Margin="20,10,10,0" 
+                                   FontFamily="/Fonts/#Poppins"/>
+                        <TextBlock Text="Get started today!"
+                                   Foreground="White"
+                                   FontSize="18"
+                                   Margin="20,10,10,0" 
+                                   FontFamily="/Fonts/#Poppins"/>
+                    </StackPanel>
+                    <Image Width="100"
+                           Height="100"
+                           Source="/Images/ked.JPG"
+                           Margin="301,120,-1,-20"                          
+                           RenderTransformOrigin="0.592,0.631">
+                        <Image.RenderTransform>
+                            <TransformGroup>
+                                <ScaleTransform />
+                                <SkewTransform />
+                                <RotateTransform Angle="-32.4" />
+                                <TranslateTransform X="5.587"
+                                                    Y="-6.97" />
+                            </TransformGroup>
+                        </Image.RenderTransform>
+                    </Image>
+                </Grid>
+
+            </Border>
+
+            <DataGrid Width="540"
+                      x:Name="dgwDailySales"
+                      IsReadOnly="True"
+                      Loaded="dgwDailySales_Loaded"
+                      Margin="5,0,0,0"
+                      ScrollViewer.CanContentScroll="False"
+                      Background="#24292f"
+                      AlternatingRowBackground="LightGray"
+                      AutoGenerateColumns="False"
+                      FontFamily="/Fonts/#Poppins">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Reservation Code"
+                                        MinWidth="120"
+                                        Binding="{Binding ReservationCode}" />
+                    <DataGridTextColumn Header="Pax"
+                                        MinWidth="15"   
+                                        Binding="{Binding Pax}" />
+                    <DataGridTextColumn Header="Room"
+                                        MinWidth="20"
+                                        Binding="{Binding Room}" />
+                    <DataGridTextColumn Header="Total Price"
+                                        MinWidth="70"
+                                        Binding="{Binding TotalPrice}" />
+                    <DataGridTextColumn Header="Created Date"
+                                        MinWidth="20"
+                                        Binding="{Binding CreatedDate}" />
+                    <DataGridTextColumn Header="Document Code"
+                                        MinWidth="30"
+                                        Binding="{Binding DocumentCode}" />
+
+                </DataGrid.Columns>
+            </DataGrid>
+
+        </StackPanel>
+        
+        <StackPanel>
+            <StackPanel.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="Margin" Value="20,0,0,0">
+
+                    </Setter>
+                </Style>
+            </StackPanel.Resources>
+
+            <TextBlock Text="Most Watched"
+                   Foreground="White"
+                   FontSize="20"
+                   HorizontalAlignment="Left"                    
+                   Margin="15,10,0,10" 
+                       FontFamily="/Fonts/#Poppins"/>
+            <StackPanel Orientation="Horizontal">
+                <Border Width="150"
+                        Height="150"
+                        Background="#844eff"
+                        CornerRadius="10"
+                        Margin="10,0,0,0"/>
+                <Border Width="150"
+                        Height="150"
+                        Background="#4e99ff"
+                        CornerRadius="10"/>
+                <Border Width="150"
+                        Height="150"
+                        Background="#4eff91"
+                        CornerRadius="10"/>
+                <Border Width="150"
+                        Height="150"
+                        Background="#ecff4e"    
+                        CornerRadius="10"/>
+            </StackPanel>
+          
+        </StackPanel>
+
+    </StackPanel>
+</UserControl>

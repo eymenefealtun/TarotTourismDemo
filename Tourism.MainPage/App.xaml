@@ -1,0 +1,60 @@
+﻿<Application x:Class="Tourism.MainPage.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Tourism.MainPage"
+             xmlns:viewModel="clr-namespace:Tourism.MainPage.MVVM.ViewModel"
+             xmlns:view="clr-namespace:Tourism.MainPage.MVVM.View"
+             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
+             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+    <Application.Resources>
+
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Theme/MainPage/MenuButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />
+                <ResourceDictionary Source="Theme/SearchTextBoxTheme.xaml" />
+                <ResourceDictionary Source="Theme/UpdatePage/EditButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/UpdatePage/CancelButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/UpdatePage/SaveButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/MainPage/CloseButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/MainPage/RestoreButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/MainPage/MinimizeButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/UpdatePage/UpdateTextBoxTheme.xaml" />       
+            </ResourceDictionary.MergedDictionaries>
+
+            <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
+
+
+            <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">
+                <view:HomeView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:OperationViewModel}">
+                <view:OperationsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CustomerViewModel}">
+                <view:CustomerView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
+                <view:SettingsView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:CustomerOperationViewModel}">
+                <view:CustomerOperationView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:AddOperationViewModel}">
+                <view:AddOperationView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:UpdateOperationViewModel}">
+                <view:UpdateOperationView />
+            </DataTemplate>
+
+
+
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

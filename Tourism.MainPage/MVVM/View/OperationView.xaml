@@ -1,0 +1,259 @@
+﻿<UserControl x:Class="Tourism.MainPage.MVVM.View.OperationsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View"
+             xmlns:viewModel="clr-namespace:Tourism.MainPage.MVVM.ViewModel"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
+             mc:Ignorable="d"
+             d:DesignHeight="800"
+             d:DesignWidth="1500"
+             Background="#24292f">
+
+
+    <Grid Name="OperationViewMainGrid"
+          Background="Transparent">
+
+        <Grid x:Name="Main">
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition  Width="50" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition Height="*" />
+                <RowDefinition Height="30" />
+            </Grid.RowDefinitions>
+
+
+            <Grid Grid.Row="1"
+                  Grid.Column="1">
+
+
+
+                <DataGrid x:Name="dgwOperationMain"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          Margin="0,0,0,0"
+                          Width="700"
+                          Height="425"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False"
+                          FontFamily="/Fonts/#Poppins"
+                          SelectedItem="{Binding SelectedItem}"
+                          ScrollViewer.CanContentScroll="False"
+                          MouseDoubleClick="dgwOperationMain_MouseDoubleClick"
+                          Loaded="dgwOperationMain_Loaded"
+                          AlternatingRowBackground="LightGray"
+                          VirtualizingPanel.IsVirtualizing="True"
+                          SelectionChanged="dgwOperationMain_SelectionChanged">
+
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Header="Add new Operation"
+                                      Click="MenuItem_Click">
+                            </MenuItem>
+                            <MenuItem  x:Name="menuUpdateOperation"
+                                       Click="menuUpdateOperation_Click">
+                            </MenuItem>
+                            <MenuItem Header="Example">
+                            </MenuItem>
+
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="DocumentCode"
+                                            MinWidth="120"
+                                            Binding="{Binding DocumentCode}" />
+                        <DataGridTextColumn Header="Operator"
+                                            MinWidth="50"
+                                            Binding="{Binding Operator}" />
+                        <DataGridTextColumn Header="StartDate"
+                                            MinWidth="70"
+                                            Binding="{Binding StartDate, StringFormat= d}" />
+                        <DataGridTextColumn Header="EndDate"
+                                            MinWidth="70"
+                                            Binding="{Binding EndDate, StringFormat= d}" />
+                        <DataGridTextColumn Header="Pax"
+                                            MinWidth="20"
+                                            Binding="{Binding Pax}" />
+                        <DataGridTextColumn Header="Room"
+                                            MinWidth="20"
+                                            Binding="{Binding Room}" />
+                        <DataGridTextColumn Header="Currency"
+                                            MinWidth="30"
+                                            Binding="{Binding Currency}" />
+
+                    </DataGrid.Columns>
+
+
+                </DataGrid >
+
+            </Grid>
+
+            <Grid Grid.Row="0"
+                  Grid.Column="0">
+                <Image Source="/Images/refresh.png"
+                       Height="30"
+                       Width="30" />
+                <Button x:Name="btnRefresh"
+                        ToolTip="Refresh"
+                        Background="Transparent"
+                        Foreground="White"
+                        FontSize="15"
+                        BorderBrush="{x:Null}"
+                        Click="btnRefresh_Click"
+                        MouseMove="btnRefresh_MouseMove">
+                </Button>
+
+            </Grid>
+
+
+
+
+            <Border Grid.Column="1"
+                    Background="#353340"
+                    Width="190"
+                    Height="40"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Margin="1,0,0,0"
+                    CornerRadius="10">
+                <Grid Grid.Row="0"
+                      Grid.Column="1">
+
+                    <TextBox  x:Name="tboxOperationSearch"
+                              Height="40"
+                              Width="190"
+                              Padding="5"
+                              BorderThickness="0"
+                              Margin="1"
+                              Background="Transparent"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              HorizontalContentAlignment="Left"
+                              VerticalContentAlignment="Center"
+                              FontSize="11"
+                              FontFamily="/Fonts/#Poppins"
+                              Foreground="#CFCFCF"
+                              TextChanged="tboxOperationSearch_TextChanged" />
+                    <TextBlock   Text="Search"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Center"
+                                 FontSize="11"
+                                 Margin="10,0,0,0"
+                                 FontFamily="/Fonts/#Poppins"
+                                 Foreground="DarkGray">
+                        <TextBlock.Style>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Visibility"
+                                        Value="Hidden" />
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding Text, ElementName=tboxOperationSearch}"
+                                                 Value="">
+                                        <Setter Property="Visibility"
+                                                Value="Visible" />
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </TextBlock.Style>
+                    </TextBlock>
+
+
+
+                </Grid>
+            </Border>
+
+
+            <DatePicker   x:Name="datePickStartDate"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          Height="26"
+                          HorizontalAlignment="Left"
+                          VerticalContentAlignment="Stretch"
+                          HorizontalContentAlignment="Left"
+                          VerticalAlignment="Top"
+                          Width="125"
+                          SelectedDateFormat="Short"
+                          ToolTip="Start Date: mm/dd/yyyy"
+                          Margin="395,1,0,0"
+                          BorderBrush="{x:Null}"
+                          SelectedDateChanged="datePickStartDate_SelectedDateChanged" />
+            <DatePicker   x:Name="datePickEndDate"
+                          Grid.Row="0"
+                          Grid.Column="1"
+                          Height="26"
+                          HorizontalAlignment="Left"
+                          VerticalContentAlignment="Stretch"
+                          HorizontalContentAlignment="Left"
+                          VerticalAlignment="Top"
+                          SelectedDateFormat="Short"
+                          Width="125"
+                          ToolTip="End Date: mm/dd/yyyy"
+                          Text="Select a Date"
+                          Margin="497,1,78,0"
+                          BorderBrush="{x:Null}"
+                          SelectedDateChanged="datePickEndDate_SelectedDateChanged" />
+
+
+
+            <ComboBox x:Name="cboxMainCategory"
+                      ToolTip="MainCategory"
+                      Height="20"
+                      Width="190"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Grid.Column="1"
+                      Grid.Row="0"
+                      HorizontalContentAlignment="Left"
+                      SelectedValuePath="Id"
+                      DisplayMemberPath="Name"
+                      VerticalContentAlignment="Center"
+                      Margin="195,4,0,0"
+                      SelectionChanged="cboxMainCategory_SelectionChanged" />
+
+            <ComboBox x:Name="cboxSubCategory"
+                      ToolTip="SubCategory"
+                      HorizontalContentAlignment="Left"
+                      DisplayMemberPath="Name"
+                      SelectedValuePath="Id"
+                      Grid.Column="1"
+                      Grid.Row="0"
+                      VerticalContentAlignment="Center"
+                      Visibility="Hidden"
+                      Height="20"
+                      Width="190"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Bottom"
+                      Margin="195,0,0,4"
+                      SelectionChanged="cboxSubCategory_SelectionChanged" />
+
+            <ComboBox x:Name="cboxOperator"
+                      ToolTip="Operator"
+                      Height="20"
+                      Width="100"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Top"
+                      Grid.Column="1"
+                      Grid.Row="0"
+                      HorizontalContentAlignment="Left"
+                      SelectedValuePath="Id"
+                      DisplayMemberPath="Name"
+                      VerticalContentAlignment="Center"
+                      Margin="602,4,0,0"
+                      SelectionChanged="cboxOperator_SelectionChanged" />
+
+
+
+
+
+        </Grid>
+
+    </Grid>
+
+</UserControl>

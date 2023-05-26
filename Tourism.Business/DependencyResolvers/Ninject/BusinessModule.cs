@@ -1,0 +1,48 @@
+﻿using Ninject.Modules;
+using Tourism.Business.Abstract.Models;
+using Tourism.Business.Concrete.Models;
+using Tourism.DataAccess.Abstract;
+using Tourism.DataAccess.Abstract.Models;
+using Tourism.DataAccess.Concrete.EntityFramework;  
+using Tourism.DataAccess.Concrete.Models;
+using Tourism.Entities.Concrete;
+
+namespace Tourism.Business.DependencyResolvers.Ninject
+{
+    public class BusinessModule : NinjectModule 
+    {
+        public override void Load()
+        {
+            Bind<IOperationService>().To<OperationManager>().InSingletonScope();
+            Bind<IOperationDal>().To<EfOperationDal>().InSingletonScope();
+
+            Bind<IOperationMainService>().To<OperationMainManager>().InSingletonScope();
+            Bind<IOperationMainDal>().To<EfOperationMainDal>().InSingletonScope();
+
+            Bind<IDailySaleService>().To<DailySaleManager>().InSingletonScope();
+            Bind<IDailySaleDal>().To<EfDailySaleDal>().InSingletonScope();
+
+            Bind<ICustomerOperationService>().To<CustomerOperationManager>().InSingletonScope();
+            Bind<ICustomerOperationDal>().To<EfCustomerOperationDal>().InSingletonScope();
+
+            Bind<IMainCategoryService>().To<MainCategoryManager>().InSingletonScope();
+            Bind<IMainCategoryDal>().To<EfMainCategoryDal>().InSingletonScope();
+
+            Bind<ISubCategoryService>().To<SubCategoryManager>().InSingletonScope();
+            Bind<ISubCategoryDal>().To<EfSubCategoryDal>().InSingletonScope();
+
+            Bind<IUserLevelService>().To<UserLevelManager>().InSingletonScope();
+            Bind<IUserLevelDal>().To<EfUserLevelDal>().InSingletonScope();
+
+            Bind<ICurrencyService>().To<CurrencyManager>().InSingletonScope();
+            Bind<ICurrencyDal>().To<EfCurrencyDal>().InSingletonScope();
+
+            Bind<IOperationInformationService>().To<OperationInformationManager>().InSingletonScope();      
+            Bind<IOperationInformationDal>().To<EfOperationInformationDal>().InSingletonScope();
+
+            Bind<IOperatorService>().To<OperatorManager>().InSingletonScope();      
+            Bind<IOperatorDal>().To<EfOperatorDal>().InSingletonScope();        
+
+        }
+    }
+}

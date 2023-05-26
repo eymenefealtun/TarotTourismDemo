@@ -1,0 +1,38 @@
+﻿using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Tourism.Entities.Models;
+using Tourism.MainPage.Core;
+using Tourism.MainPage.Services;
+
+namespace Tourism.MainPage.MVVM.ViewModel
+{
+    public class OperationViewModel : Core.ViewModel
+    {
+
+        private INavigationService _navigation;
+        public INavigationService Navigation
+        {
+            get => _navigation;
+            set
+            {
+                _navigation = value;
+                OnPropertyChanged();
+            }
+        }
+        public RelayCommand CustomerViewCommand { get; set; }   
+        public RelayCommand CustomerOperationViewCommand { get; set; }      
+        public OperationViewModel(INavigationService navigation)        
+        {       
+            Navigation = navigation;
+            CustomerViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerViewModel>(); }, canExecute: o => true);
+            CustomerOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerOperationViewModel>(); }, canExecute: o => true);
+        }
+
+
+    }
+}   
