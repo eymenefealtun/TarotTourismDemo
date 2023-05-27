@@ -100,10 +100,16 @@ ORDER BY O.StartDate").AsNoTracking().ToList();
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().FromSqlRaw(@"SELECT  R.ReservationCode, R.Pax, R.Room,R.TotalPrice, R.CreatedDate,O.DocumentCode  FROM Operations O  --R.ReservationCode,R.Pax, R.Room, R.TotalPrice 
+                return context.Set<TEntity>().FromSqlRaw(@"SELECT Ops.Name 'Operator' ,A.Name 'Agency',(SELECT CONCAT(o.StartDate,' | ', o.EndDate) )AS Period ,R.ReservationCode, R.Pax, R.Room,R.TotalPrice,O.DocumentCode,C.Name'Currency', Au.Username 'PurchasedBy', R.CreatedDate  FROM Operations O  --R.ReservationCode,R.Pax, R.Room, R.TotalPrice 
 JOIN Reservations R ON R.OperationId = O.ID
 JOIN OperationPrices Op ON Op.OperationId = O.Id
-ORDER BY R.CreatedDate DESC").AsNoTracking().ToList();
+JOIN OperatorUsers Ou ON Ou.Id = O.CreatedBy
+JOIN Operators Ops ON Ops.Id = Ou.OperatorId
+JOIN AgencyUsers Au ON Au.Id = R.AgencyUserId
+JOIN Agencies A ON A.Id = Au.AgencyId
+JOIN Currencies C ON C.Id = O.CurrencyId
+ORDER BY R.CreatedDate DESC
+").AsNoTracking().ToList();
             }
         }
 
@@ -111,7 +117,7 @@ ORDER BY R.CreatedDate DESC").AsNoTracking().ToList();
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().FromSqlRaw($"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType', R.ReservationCode From Customers C JOIN Rooms Ro ON Ro.Id = C.RoomId JOIN BedTypes B ON B.Id = Ro.BedTypeId JOIN Reservations R ON R.Id = Ro.ReservationId JOIN Operations O ON O.Id = R.OperationId WHERE O.Id = {operationId} ORDER BY Ro.ReservationId").AsNoTracking().ToList();
+                return context.Set<TEntity>().FromSqlRaw($"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType', R.ReservationCode, A.Name 'Agency' From Customers C JOIN Rooms Ro ON Ro.Id = C.RoomId JOIN BedTypes B ON B.Id = Ro.BedTypeId JOIN Reservations R ON R.Id = Ro.ReservationId JOIN Operations O ON O.Id = R.OperationId JOIN AgencyUsers Au ON Au.Id = R.AgencyUserId JOIN Agencies A ON A.Id = Au.AgencyId WHERE O.Id = {operationId} ORDER BY Ro.ReservationId").AsNoTracking().ToList();
             }
         }
 
@@ -119,11 +125,13 @@ ORDER BY R.CreatedDate DESC").AsNoTracking().ToList();
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().FromSqlRaw(@"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType',R.ReservationCode From Customers C 
+                return context.Set<TEntity>().FromSqlRaw(@"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType',R.ReservationCode, A.Name 'Agency' From Customers C 
 JOIN Rooms Ro ON Ro.Id = C.RoomId           
 JOIN BedTypes B ON B.Id = Ro.BedTypeId      
 JOIN Reservations R ON R.Id = Ro.ReservationId 
 JOIN Operations O ON O.Id = R.OperationId 
+JOIN AgencyUsers Au ON Au.Id = R.AgencyUserId 
+JOIN Agencies A ON A.Id = Au.AgencyId
 ORDER BY Ro.ReservationId").ToList();
             }
         }

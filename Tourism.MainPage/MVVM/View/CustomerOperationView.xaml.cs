@@ -1,9 +1,16 @@
 ﻿using System;
+using System.Collections;
+using System.ComponentModel;
+using System.Dynamic;
+using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Data;
 using System.Windows.Media;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
+using Tourism.Entities.Concrete;
+using Tourism.Entities.Models;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -30,7 +37,55 @@ namespace Tourism.MainPage.MVVM.View
 
         private void dgwCustomerOperation_Loaded(object sender, RoutedEventArgs e)
         {
-            ColoringRowsByDocumentCode();
+            if (dgwCustomerOperation.Items.Count > 0)
+            {
+                ColoringRowsByDocumentCode();
+                DeleteBedType();
+            }
+        }
+
+        private void DeleteBedType()
+        {
+            for (int i = 0; i < dgwCustomerOperation.Items.Count; i++)
+            {
+                DataGridRow dataGridRow = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i);
+                TextBlock cellContent = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRow) as TextBlock;               
+                
+                if (cellContent.Text == "Double")
+                {
+                    DataGridRow dataGridRowPlusOne = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i + 1);
+                    TextBlock cellContentPlusOne = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRowPlusOne) as TextBlock;
+                    cellContentPlusOne.Text = String.Empty;
+                    i++;
+                }
+                else if (cellContent.Text == "Triple")
+                {
+                    DataGridRow dataGridRowPlusOne = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i + 1);
+                    TextBlock cellContentPlusOne = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRowPlusOne) as TextBlock;
+
+                    DataGridRow dataGridRowPlusTwo = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i + 2);
+                    TextBlock cellContentPlusTwo = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRowPlusTwo) as TextBlock;
+                    cellContentPlusOne.Text = String.Empty;
+                    cellContentPlusTwo.Text = String.Empty;
+                    i += 2;
+                }
+                else if (cellContent.Text == "Quad")
+                {
+                    DataGridRow dataGridRowPlusOne = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i + 1);
+                    TextBlock cellContentPlusOne = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRowPlusOne) as TextBlock;
+
+                    DataGridRow dataGridRowPlusTwo = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i + 2);
+                    TextBlock cellContentPlusTwo = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRowPlusTwo) as TextBlock;
+
+                    DataGridRow dataGridRowPlusThree = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i + 3);
+                    TextBlock cellContentPlusThree = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRowPlusThree) as TextBlock;
+
+                    cellContentPlusOne.Text = String.Empty;
+                    cellContentPlusTwo.Text = String.Empty;
+                    cellContentPlusThree.Text = String.Empty;
+                    i += 3;
+                }
+            }
         }
 
         private void ColoringRowsByDocumentCode()
@@ -42,10 +97,10 @@ namespace Tourism.MainPage.MVVM.View
             for (int i = 1; i < dgwCustomerOperation.Items.Count; i++)
             {
                 DataGridRow dataGridRow = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i);
-                TextBlock cellContent = dgwCustomerOperation.Columns[9].GetCellContent(dataGridRow) as TextBlock;
+                TextBlock cellContent = dgwCustomerOperation.Columns[8].GetCellContent(dataGridRow) as TextBlock;
 
                 DataGridRow dataGridRowMinusOne = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i - 1);
-                TextBlock cellContentMinusOne = dgwCustomerOperation.Columns[9].GetCellContent(dataGridRowMinusOne) as TextBlock;
+                TextBlock cellContentMinusOne = dgwCustomerOperation.Columns[8].GetCellContent(dataGridRowMinusOne) as TextBlock;
 
                 if (cellContent.Text == cellContentMinusOne.Text && j == 0)
                 {
@@ -53,12 +108,12 @@ namespace Tourism.MainPage.MVVM.View
                 }
                 else if (cellContent.Text != cellContentMinusOne.Text && j == 0)
                 {
-                    dataGridRow.Background = Brushes.LightGray;
+                    dataGridRow.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#dbdcdc");
                     j = 1;
                 }
                 else if (cellContent.Text == cellContentMinusOne.Text && j != 0)
                 {
-                    dataGridRow.Background = Brushes.LightGray;
+                    dataGridRow.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#dbdcdc");
                     j++;
                 }
                 else if (cellContent.Text != cellContentMinusOne.Text && j != 0)

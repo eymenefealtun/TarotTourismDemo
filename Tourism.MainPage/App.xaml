@@ -22,7 +22,6 @@
                 <ResourceDictionary Source="Theme/UpdatePage/UpdateTextBoxTheme.xaml" />       
             </ResourceDictionary.MergedDictionaries>
 
-            <FontFamily x:Key="FontAwesome">/Fonts/fontawesome-webfont.ttf#FontAwesome</FontFamily>
 
 
             <DataTemplate DataType="{x:Type viewModel:HomeViewModel}">

@@ -34,65 +34,102 @@
                   Grid.Column="1">
 
 
+                <Border Grid.Column="1"
+                        Grid.Row="1"
+                        Width="660"
+                        Height="440"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="#f6f7f9"
+                        CornerRadius="20">
+                    <DataGrid x:Name="dgwOperationMain"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              Width="660"
+                              Height="425"
+                              IsReadOnly="True"
+                              AutoGenerateColumns="False"
+                              FontFamily="/Fonts/#Poppins"
+                              SelectedItem="{Binding SelectedItem}"
+                              ScrollViewer.CanContentScroll="False"
+                              HeadersVisibility="Column"
+                              Background="Transparent"
+                              BorderBrush="Transparent"
+                              Margin="0,0,0,10"
+                              MouseDoubleClick="dgwOperationMain_MouseDoubleClick"
+                              Loaded="dgwOperationMain_Loaded"
+                              AlternatingRowBackground="#dbdcdc"
+                              VirtualizingPanel.IsVirtualizing="True"
+                              SelectionChanged="dgwOperationMain_SelectionChanged">
 
-                <DataGrid x:Name="dgwOperationMain"
-                          HorizontalAlignment="Left"
-                          VerticalAlignment="Top"
-                          Margin="0,0,0,0"
-                          Width="700"
-                          Height="425"
-                          IsReadOnly="True"
-                          AutoGenerateColumns="False"
-                          FontFamily="/Fonts/#Poppins"
-                          SelectedItem="{Binding SelectedItem}"
-                          ScrollViewer.CanContentScroll="False"
-                          MouseDoubleClick="dgwOperationMain_MouseDoubleClick"
-                          Loaded="dgwOperationMain_Loaded"
-                          AlternatingRowBackground="LightGray"
-                          VirtualizingPanel.IsVirtualizing="True"
-                          SelectionChanged="dgwOperationMain_SelectionChanged">
+                        <DataGrid.Resources>
+                            <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                                   TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background"
+                                        Value="Transparent" />
+                                <Setter Property="BorderThickness"
+                                        Value="1" />
+                                <Setter Property="MinHeight"
+                                        Value="30" />
+                                <Setter Property="Cursor"
+                                        Value="Hand" />
+                                <Setter Property="Foreground"
+                                        Value="Black" />
+                                <Setter Property="FontFamily"
+                                        Value="/Fonts/#Poppins" />
+                                <Setter Property="BorderThickness"
+                                        Value="0.3" />
+                                <Setter Property="BorderBrush"
+                                        Value="Transparent" />
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Left" />
+                            </Style>
 
-                    <DataGrid.ContextMenu>
-                        <ContextMenu>
-                            <MenuItem Header="Add new Operation"
-                                      Click="MenuItem_Click">
-                            </MenuItem>
-                            <MenuItem  x:Name="menuUpdateOperation"
-                                       Click="menuUpdateOperation_Click">
-                            </MenuItem>
-                            <MenuItem Header="Example">
-                            </MenuItem>
-
-                        </ContextMenu>
-                    </DataGrid.ContextMenu>
-
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="DocumentCode"
-                                            MinWidth="120"
-                                            Binding="{Binding DocumentCode}" />
-                        <DataGridTextColumn Header="Operator"
-                                            MinWidth="50"
-                                            Binding="{Binding Operator}" />
-                        <DataGridTextColumn Header="StartDate"
-                                            MinWidth="70"
-                                            Binding="{Binding StartDate, StringFormat= d}" />
-                        <DataGridTextColumn Header="EndDate"
-                                            MinWidth="70"
-                                            Binding="{Binding EndDate, StringFormat= d}" />
-                        <DataGridTextColumn Header="Pax"
-                                            MinWidth="20"
-                                            Binding="{Binding Pax}" />
-                        <DataGridTextColumn Header="Room"
-                                            MinWidth="20"
-                                            Binding="{Binding Room}" />
-                        <DataGridTextColumn Header="Currency"
-                                            MinWidth="30"
-                                            Binding="{Binding Currency}" />
-
-                    </DataGrid.Columns>
+                        </DataGrid.Resources>
 
 
-                </DataGrid >
+                        <DataGrid.ContextMenu>
+                            <ContextMenu>
+                                <MenuItem Header="Add new Operation"
+                                          Click="MenuItem_Click">
+                                </MenuItem>
+                                <MenuItem  x:Name="menuUpdateOperation"
+                                           Click="menuUpdateOperation_Click">
+                                </MenuItem>
+                                <MenuItem Header="Example">
+                                </MenuItem>
+
+                            </ContextMenu>
+                        </DataGrid.ContextMenu>
+
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Header="  DocumentCode"
+                                                MinWidth="120"
+                                                Binding="{Binding DocumentCode}" />
+                            <DataGridTextColumn Header="Operator"
+                                                MinWidth="80"
+                                                Binding="{Binding Operator}" />
+                            <DataGridTextColumn Header="StartDate"
+                                                MinWidth="70"
+                                                Binding="{Binding StartDate, StringFormat= d}" />
+                            <DataGridTextColumn Header="EndDate"
+                                                MinWidth="70"
+                                                Binding="{Binding EndDate, StringFormat= d}" />
+                            <DataGridTextColumn Header="Pax"
+                                                MinWidth="40"
+                                                Binding="{Binding Pax}" />
+                            <DataGridTextColumn Header="Room"
+                                                MinWidth="50"
+                                                Binding="{Binding Room}" />
+                            <DataGridTextColumn Header="Currency"
+                                                MinWidth="80"
+                                                Binding="{Binding Currency}" />
+
+                        </DataGrid.Columns>
+
+
+                    </DataGrid >
+                </Border>
 
             </Grid>
 

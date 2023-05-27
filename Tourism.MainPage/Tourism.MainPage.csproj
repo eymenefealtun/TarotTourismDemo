@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Fonts\Pacifico.ttf" />
     <None Remove="Fonts\Poppins-Regular.ttf" />
     <None Remove="Images\back.png" />
     <None Remove="Images\ked.JPG" />
@@ -25,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Fonts\Pacifico.ttf" />
     <Resource Include="Fonts\Poppins-Regular.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>

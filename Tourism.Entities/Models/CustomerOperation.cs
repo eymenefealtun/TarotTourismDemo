@@ -21,5 +21,6 @@ namespace Tourism.Entities.Models
         public int ReservationId { get; set; }
         public string BedType { get; set; } 
         public string ReservationCode { get; set; }         
+        public string Agency { get; set; }         
     }
 }

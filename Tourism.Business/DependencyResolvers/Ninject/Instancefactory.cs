@@ -1,4 +1,4 @@
-﻿using Ninject;
+﻿ using Ninject;
 
 namespace Tourism.Business.DependencyResolvers.Ninject
 {

@@ -24,57 +24,83 @@
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
 
+            <Border Grid.Column="1"
+                    Grid.Row="1"
+                    Width="850"
+                    Height="450"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Background="#f6f7f9"
+                    CornerRadius="20">
+                <DataGrid x:Name="dgwCustomerOperation"
+                          HorizontalAlignment="Center"
+                          VerticalAlignment="Center"
+                          Width="850"
+                          Height="425"
+                          IsReadOnly="True"
+                          AutoGenerateColumns="False"
+                          ScrollViewer.CanContentScroll="False"
+                          EnableRowVirtualization="True"
+                          FontFamily="/Fonts/#Poppins"
+                          Loaded="dgwCustomerOperation_Loaded"
+                          HeadersVisibility="Column"
+                          Background="Transparent"
+                          BorderBrush="Transparent">
 
-            <DataGrid x:Name="dgwCustomerOperation"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Top"
-                      Grid.Row="1"
-                      Grid.Column="1"
-                      Width="850"
-                      Height="425"
-                      IsReadOnly="True"
-                      AutoGenerateColumns="False"
-                      ScrollViewer.CanContentScroll="False"
-                      EnableRowVirtualization="True"
-                      FontFamily="/Fonts/#Poppins"
-                      Loaded="dgwCustomerOperation_Loaded">
+                    <DataGrid.Resources>
+                        <Style TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="Foreground"
+                                    Value="Black" />
+                            <Setter Property="FontFamily"
+                                    Value="/Fonts/#Poppins" />
+                            <Setter Property="BorderThickness"
+                                    Value="0" />
+                            <Setter Property="BorderBrush"
+                                    Value="Transparent" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Center" />
+                        </Style>
+                    </DataGrid.Resources>
 
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="First Name"
-                                        MinWidth="80"
-                                        Binding="{Binding FirstName}" />
-                    <DataGridTextColumn Header="Last Name"
-                                        MinWidth="80"
-                                        Binding="{Binding LastName}" />
-                    <DataGridTextColumn Header="Phone"
-                                        MinWidth="20"
-                                        Binding="{Binding Phone}" />
-                    <DataGridTextColumn Header="Birth Date"
-                                        MinWidth="40"
-                                        Binding="{Binding BirthDate, StringFormat=d}" />
-                    <DataGridTextColumn Header="Gender"
-                                        MinWidth="20"
-                                        Binding="{Binding Gender}" />
-                    <DataGridTextColumn Header="Id"
-                                        MinWidth="50"
-                                        Binding="{Binding IdNumber}" />
-                    <DataGridTextColumn Header="Room Id"
-                                        MinWidth="30"
-                                        Binding="{Binding RoomId}" />
-                    <DataGridTextColumn Header="Reservation Id "
-                                        MinWidth="30"
-                                        Binding="{Binding ReservationId}" />
-                    <DataGridTextColumn Header="Bed Type"
-                                        MinWidth="30"
-                                        Binding="{Binding BedType}" />
-                    <DataGridTextColumn Header="ReservationCode"
-                                        MinWidth="30"
-                                        Binding="{Binding ReservationCode}">
-                    </DataGridTextColumn>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Bed Type"
+                                            Width="80"
+                                            Binding="{Binding BedType}" />
+                        <DataGridTextColumn Header="Gender"
+                                            Width="60"
+                                            Binding="{Binding Gender}" />
+                        <DataGridTextColumn Header="First Name"
+                                            Width="80"
+                                            Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="Last Name"
+                                            Width="80"
+                                            Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="Birth Date"
+                                            Width="80"
+                                            Binding="{Binding BirthDate, StringFormat=d}" />
+                        <DataGridTextColumn Header="Phone"
+                                            Width="110"
+                                            Binding="{Binding Phone}" />
+                        <DataGridTextColumn Header="Id"
+                                            Width="90"
+                                            Binding="{Binding IdNumber}" />
+                        <DataGridTextColumn Header="Agency"
+                                            Width="90"
+                                            Binding="{Binding Agency}" />
 
-                </DataGrid.Columns>
+                        <DataGridTextColumn Header="Reservation Code"
+                                            Width="130"
+                                            Binding="{Binding ReservationCode}">
+                        </DataGridTextColumn>
 
-            </DataGrid>
+
+                    </DataGrid.Columns>
+
+                </DataGrid>
+
+            </Border>
 
 
 
