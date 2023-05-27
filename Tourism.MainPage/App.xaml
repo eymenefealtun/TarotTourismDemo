@@ -19,8 +19,12 @@
                 <ResourceDictionary Source="Theme/MainPage/CloseButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/RestoreButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/MinimizeButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/UpdatePage/UpdateTextBoxTheme.xaml" />       
+                <ResourceDictionary Source="Theme/UpdatePage/UpdateTextBoxTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+
+            
+            <FontFamily x:Key="xlerach">pack://application:,,,/Fonts/#xlerach</FontFamily>
 
 
 

@@ -15,7 +15,7 @@
                    FontSize="28"
                    HorizontalAlignment="Left"
                    Margin="15,0,0,5"
-                   FontFamily="/Fonts/#Pacifico" />     
+                   FontFamily="/Fonts/#lackjack.otf#blackjack"/>       
         <StackPanel Orientation="Horizontal">
 
             <Border Width="660"
@@ -37,7 +37,7 @@
                           AutoGenerateColumns="False"
                           BorderBrush="Transparent"
                           HeadersVisibility="Column"
-                          FontFamily="/Fonts/#AovelSansRounded">
+                          FontFamily="{StaticResource xlerach2}">
                     <DataGrid.Resources>
 
                         <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -46,10 +46,10 @@
                             <Setter Property="Foreground"
                                     Value="Black" />
                             <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
+                                    Value="{StaticResource Roboto}" />
                             <Setter Property="BorderThickness"
                                     Value="0" />
-                            <Setter Property="BorderBrush"  
+                            <Setter Property="BorderBrush"
                                     Value="Transparent" />
                             <Setter Property="HorizontalContentAlignment"
                                     Value="Center" />
