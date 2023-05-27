@@ -23,8 +23,8 @@
             </ResourceDictionary.MergedDictionaries>
 
 
-            
-            <FontFamily x:Key="xlerach">pack://application:,,,/Fonts/#xlerach</FontFamily>
+
+            <FontFamily x:Key="PARACHUTESSANS">pack://application:,,,/Fonts/#PARACHUTESSANS-Bold</FontFamily>
 
 
 

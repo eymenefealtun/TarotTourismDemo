@@ -60,12 +60,39 @@
                             <Setter Property="BorderBrush"
                                     Value="Transparent" />
                             <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="FontFamily"
+                                    Value="/Fonts/#Roboto" />
+                        </Style>
+                        <Style x:Key="ToColumnCenter"
+                               TargetType="{x:Type DataGridColumnHeader}">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="BorderThickness"
+                                    Value="1" />
+                            <Setter Property="MinHeight"
+                                    Value="30" />
+                            <Setter Property="Cursor"
+                                    Value="Hand" />
+                            <Setter Property="Foreground"
+                                    Value="Black" />
+                            <Setter Property="FontFamily"
+                                    Value="/Fonts/#Poppins" />
+                            <Setter Property="BorderThickness"
+                                    Value="0.3" />
+                            <Setter Property="BorderBrush"
+                                    Value="Transparent" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+                            <Setter Property="FontFamily"
+                                    Value="/Fonts/#Roboto" />
+                            <Setter Property="HorizontalAlignment"
                                     Value="Center" />
                         </Style>
                     </DataGrid.Resources>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Bed Type"
+                        <DataGridTextColumn Header=" Bed Type"
                                             Width="80"
                                             Binding="{Binding BedType}" />
                         <DataGridTextColumn Header="Gender"
@@ -79,20 +106,25 @@
                                             Binding="{Binding LastName}" />
                         <DataGridTextColumn Header="Birth Date"
                                             Width="80"
-                                            Binding="{Binding BirthDate, StringFormat=d}" />
+                                            Binding="{Binding BirthDate, StringFormat=d}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
                         <DataGridTextColumn Header="Phone"
                                             Width="110"
-                                            Binding="{Binding Phone}" />
+                                            Binding="{Binding Phone}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
                         <DataGridTextColumn Header="Id"
                                             Width="90"
-                                            Binding="{Binding IdNumber}" />
+                                            Binding="{Binding IdNumber}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
                         <DataGridTextColumn Header="Agency"
                                             Width="90"
-                                            Binding="{Binding Agency}" />
+                                            Binding="{Binding Agency}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
 
                         <DataGridTextColumn Header="Reservation Code"
                                             Width="130"
-                                            Binding="{Binding ReservationCode}">
+                                            Binding="{Binding ReservationCode}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}">
                         </DataGridTextColumn>
 
 

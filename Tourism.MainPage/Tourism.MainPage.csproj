@@ -8,10 +8,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Fonts\blackjack.otf" />
-    <None Remove="Fonts\Pacifico.ttf" />
-    <None Remove="Fonts\PARACHUTESSANS-Bold.ttf" />
+    <None Remove="Fonts\Arimo-Bold.ttf" />
+    <None Remove="Fonts\Oxygen-Bold.ttf" />
     <None Remove="Fonts\Poppins-Regular.ttf" />
+    <None Remove="Fonts\Roboto-Bold.ttf" />
     <None Remove="Images\back.png" />
     <None Remove="Images\ked.JPG" />
     <None Remove="Images\refresh.png" />
@@ -28,16 +28,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Fonts\blackjack.otf">
+    <Resource Include="Fonts\Arimo-Bold.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
-    <Resource Include="Fonts\Pacifico.ttf">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </Resource>
-    <Resource Include="Fonts\PARACHUTESSANS-Bold.ttf">
+    <Resource Include="Fonts\Oxygen-Bold.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Fonts\Poppins-Regular.ttf">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Fonts\Roboto-Bold.ttf">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\back.png">

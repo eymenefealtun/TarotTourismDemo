@@ -15,17 +15,18 @@
                    FontSize="28"
                    HorizontalAlignment="Left"
                    Margin="15,0,0,5"
-                   FontFamily="/Fonts/#lackjack.otf#blackjack"/>       
+                   FontFamily="/Fonts/#Poppins" />
         <StackPanel Orientation="Horizontal">
 
-            <Border Width="660"
+            <Border Width="1050"
                     Height="350"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Background="#f6f7f9"
                     Margin="10,10,0,0"
                     CornerRadius="20">
-                <DataGrid Width="660"
+
+                <DataGrid Width="1050"
                           Height="330"
                           x:Name="dgwDailySales"
                           IsReadOnly="True"
@@ -37,7 +38,7 @@
                           AutoGenerateColumns="False"
                           BorderBrush="Transparent"
                           HeadersVisibility="Column"
-                          FontFamily="{StaticResource xlerach2}">
+                          FontFamily="/Fonts/#Poppins">
                     <DataGrid.Resources>
 
                         <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -46,49 +47,111 @@
                             <Setter Property="Foreground"
                                     Value="Black" />
                             <Setter Property="FontFamily"
-                                    Value="{StaticResource Roboto}" />
+                                    Value="/Fonts/#Roboto" />
+                            <Setter Property="FontSize"
+                                    Value="12" />
                             <Setter Property="BorderThickness"
-                                    Value="0" />
+                                    Value="1" />
+                            <Setter Property="BorderBrush"
+                                    Value="Transparent" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Left" />
+
+                        </Style>
+                        <Style TargetType="{x:Type DataGridColumnHeader}"
+                               x:Key="ToColumnCenter">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="Foreground"
+                                    Value="Black" />
+                            <Setter Property="FontFamily"
+                                    Value="/Fonts/#Roboto" />
+                            <Setter Property="FontSize"
+                                    Value="12" />
+                            <Setter Property="BorderThickness"
+                                    Value="1" />
                             <Setter Property="BorderBrush"
                                     Value="Transparent" />
                             <Setter Property="HorizontalContentAlignment"
                                     Value="Center" />
+
+                        </Style>
+                        <Style TargetType="{x:Type DataGridColumnHeader}"
+                               x:Key="ToColumnRight">
+                            <Setter Property="Background"
+                                    Value="Transparent" />
+                            <Setter Property="Foreground"
+                                    Value="Black" />
+                            <Setter Property="FontFamily"
+                                    Value="/Fonts/#Roboto" />
+                            <Setter Property="FontSize"
+                                    Value="12" />
+                            <Setter Property="BorderThickness"
+                                    Value="1" />
+                            <Setter Property="BorderBrush"
+                                    Value="Transparent" />
+                            <Setter Property="HorizontalContentAlignment"
+                                    Value="Right" />
+
+                        </Style>
+                        <Style x:Key="ToCenter"
+                               TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Center" />
+                        </Style>
+                        <Style x:Key="ToRight"
+                               TargetType="{x:Type TextBlock}">
+                            <Setter Property="HorizontalAlignment"
+                                    Value="Right" />
                         </Style>
                     </DataGrid.Resources>
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Operator"
+                        <DataGridTextColumn Header=" Operator"
                                             Width="60"
-                                            Binding="{Binding Operator}" />
+                                            Binding="{Binding Operator}">
+
+                        </DataGridTextColumn>
                         <DataGridTextColumn Header="Agency"
                                             Width="70"
                                             Binding="{Binding Agency}" />
-                        <DataGridTextColumn Header="Period"
-                                            Width="120"
-                                            Binding="{Binding Period}" />
                         <DataGridTextColumn Header="Reservation Code"
-                                            Width="120"
+                                            Width="150"
                                             Binding="{Binding ReservationCode}" />
-                        <DataGridTextColumn Header="Pax"
-                                            Width="30"
-                                            Binding="{Binding Pax}" />
-                        <DataGridTextColumn Header="Room"
-                                            Width="40"
-                                            Binding="{Binding Room}" />
-                        <DataGridTextColumn Header="Total Price"
-                                            Width="90"
-                                            Binding="{Binding TotalPrice}" />
+                        <DataGridTextColumn Header="Period"
+                                            Width="180"
+                                            Binding="{Binding Period}"
+                                            ElementStyle="{StaticResource ToCenter}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
                         <DataGridTextColumn Header="Document Code"
                                             Width="150"
                                             Binding="{Binding DocumentCode}" />
-                        <DataGridTextColumn Header="Currency"
-                                            Width="150"
-                                            Binding="{Binding Currency}" />
+                        <DataGridTextColumn Header="Pax"
+                                            Width="30"
+                                            Binding="{Binding Pax}"
+                                            ElementStyle="{StaticResource ToCenter}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
+                        <DataGridTextColumn Header="Room"
+                                            Width="40"
+                                            Binding="{Binding Room}"
+                                            ElementStyle="{StaticResource ToCenter}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
+                        <DataGridTextColumn Header="Total Price"
+                                            Width="70"
+                                            Binding="{Binding TotalPrice}"
+                                            ElementStyle="{StaticResource ToRight}"
+                                            HeaderStringFormat="d"
+                                            HeaderStyle="{StaticResource ToColumnRight}" />
+                        <DataGridTextColumn Header="CUR"
+                                            Width="30"
+                                            Binding="{Binding Currency}"
+                                            ElementStyle="{StaticResource ToCenter}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
                         <DataGridTextColumn Header="PurchasedBy"
-                                            Width="150"
+                                            Width="90"
                                             Binding="{Binding PurchasedBy}" />
                         <DataGridTextColumn Header="Created Date"
-                                            Width="130"
+                                            Width="160"
                                             Binding="{Binding CreatedDate}" />
 
 

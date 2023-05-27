@@ -21,7 +21,7 @@ namespace Tourism.DataAccess.Abstract
         List<T> GetDailySale();
         List<T> GetCustomerOperation(int operationId);
         List<T> SearchCustomerOperation(string name, int operationId);
-        List<T> SearchOperationMain(string documentCode, int? mainCategoryId, int? subCategoryId, DateTime startDate, DateTime endDate, int operatorId);
+        List<T> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate, int operatorId, int currencyId, bool isActive);
         List<T> GetCustomers();
         T Add(T entity);
         T Update(T entity);

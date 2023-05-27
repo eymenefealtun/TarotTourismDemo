@@ -57,14 +57,18 @@
                                     Value="Hand" />
                             <Setter Property="HorizontalContentAlignment"
                                     Value="Center" />
+                            <Setter Property="FontFamily"
+                                    Value="/Fonts/#Roboto" />
                         </Style>
 
                     </DataGrid.Resources>
-                    
+
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="First Name"
                                             Width="80"
-                                            Binding="{Binding FirstName}" />
+                                            Binding="{Binding FirstName}">
+                            
+                        </DataGridTextColumn>
                         <DataGridTextColumn Header="Last Name"
                                             Width="80"
                                             Binding="{Binding LastName}" />
@@ -72,22 +76,22 @@
                                             Width="110"
                                             Binding="{Binding Phone}" />
                         <DataGridTextColumn Header="Birth Date"
-                                            Width="60"
+                                            Width="90"
                                             Binding="{Binding BirthDate, StringFormat=d}" />
                         <DataGridTextColumn Header="Gender"
                                             Width="60"
                                             Binding="{Binding Gender}" />
                         <DataGridTextColumn Header="Id"
-                                            Width="80"
+                                            Width="120"
                                             Binding="{Binding IdNumber}" />
                         <DataGridTextColumn Header="Room Id"
                                             Width="60"
                                             Binding="{Binding RoomId}" />
                         <DataGridTextColumn Header="Bed Type"
-                                            Width="90"
+                                            Width="60"
                                             Binding="{Binding BedType}" />
                         <DataGridTextColumn Header="Reservation Code"
-                                            Width="120"
+                                            Width="150"
                                             Binding="{Binding ReservationCode}" />
 
                     </DataGrid.Columns>
@@ -95,7 +99,7 @@
                 </DataGrid>
 
             </Border>
-                
+
 
         </StackPanel>
 

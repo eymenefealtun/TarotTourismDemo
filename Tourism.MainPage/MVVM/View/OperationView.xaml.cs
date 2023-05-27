@@ -27,6 +27,7 @@ namespace Tourism.MainPage.MVVM.View
         private ISubCategoryService _subCategoryService;
         private IUserLevelService _userLevelService;
         private IOperatorService _operatorService;
+        private ICurrencyService _currencyService;
         #endregion  
 
         public string _documentCode;
@@ -35,6 +36,8 @@ namespace Tourism.MainPage.MVVM.View
         public int _subCategoryId;
         public int _operatorId;
         public int _operationId;
+        public int _currencyId;
+        public bool _isActive = true;
 
         public DateTime _startDate = DateTime.MinValue;
         public DateTime _endDate = DateTime.MaxValue;
@@ -48,14 +51,15 @@ namespace Tourism.MainPage.MVVM.View
             _operationService = Instancefactory.GetInstance<IOperationService>();
             _userLevelService = Instancefactory.GetInstance<IUserLevelService>();
             _operatorService = Instancefactory.GetInstance<IOperatorService>();
+            _currencyService = Instancefactory.GetInstance<ICurrencyService>();
         }
 
         private void dgwOperationMain_Loaded(object sender, RoutedEventArgs e)
         {
             dgwOperationMain.ItemsSource = _operationMainService.GetOperationMains();
             cboxMainCategory.ItemsSource = _mainCategoryService.GetAll();
+            cboxCurrency.ItemsSource = _currencyService.GetAll();
             cboxOperator.ItemsSource = _operatorService.GetAll();
-
 
 
         }
@@ -140,7 +144,7 @@ namespace Tourism.MainPage.MVVM.View
 
         private void SearchOperationMain()
         {
-            dgwOperationMain.ItemsSource = _operationMainService.SearchOperationMain(_operationSearch, _mainCategoryId, _subCategoryId, _startDate, _endDate, _operatorId);
+            dgwOperationMain.ItemsSource = _operationMainService.SearchOperationMain(_operationSearch, _mainCategoryId, _subCategoryId, _startDate, _endDate, _operatorId, _currencyId, _isActive);
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -157,10 +161,14 @@ namespace Tourism.MainPage.MVVM.View
                 cboxMainCategory.SelectedValue = 0;
                 cboxSubCategory.SelectedValue = 0;
                 cboxOperator.SelectedValue = 0;
+                cboxCurrency.SelectedValue = 0;
                 cboxSubCategory.Visibility = Visibility.Hidden;
                 _mainCategoryId = 0;
                 _subCategoryId = 0;
                 _operatorId = 0;
+                _currencyId = 0;
+                _isActive = true;
+                tglIsActive.IsChecked = false;
                 datePickStartDate.SelectedDate = DateTime.MinValue;
                 datePickEndDate.SelectedDate = DateTime.MaxValue;
                 dgwOperationMain.ItemsSource = _operationMainService.GetOperationMains();
@@ -209,6 +217,30 @@ namespace Tourism.MainPage.MVVM.View
                 SearchOperationMain();
             }
         }
+
+        private void cboxCurrency_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (cboxCurrency.SelectedIndex != -1)
+            {
+                _currencyId = Convert.ToInt32(cboxCurrency.SelectedValue);
+                SearchOperationMain();
+            }
+        }
+
+        private void tglIsActive_Click(object sender, RoutedEventArgs e)
+        {
+            if (tglIsActive.IsChecked == true)
+            {
+                _isActive = false;
+                SearchOperationMain();
+            }
+            else if (tglIsActive.IsChecked == false)
+            {
+                _isActive = true;
+                SearchOperationMain();
+            }
+        }
+
 
     }
 }

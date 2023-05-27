@@ -8,7 +8,7 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border Background="DarkGoldenrod"
+                        <Border Background="DarkGoldenRod"
                                 CornerRadius="20"
                                 x:Name="borderMain">
                             <Grid VerticalAlignment="Stretch"

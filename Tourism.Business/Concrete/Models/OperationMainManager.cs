@@ -26,9 +26,9 @@ namespace Tourism.Business.Concrete.Models
             return _operationMainDal.GetOperationMain();
         }
 
-        public List<OperationMain> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate, int operatorId)
+        public List<OperationMain> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate, int operatorId, int currencyId, bool isActive)
         {       
-            return _operationMainDal.SearchOperationMain(documentCode, mainCategoryId, subCategoryId, startDate, endDate, operatorId);
+            return _operationMainDal.SearchOperationMain(documentCode, mainCategoryId, subCategoryId, startDate, endDate, operatorId,currencyId,isActive);
         }
 
 

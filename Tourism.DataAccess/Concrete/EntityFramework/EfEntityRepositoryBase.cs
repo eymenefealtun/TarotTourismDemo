@@ -66,7 +66,7 @@ GROUP BY  O.DocumentCode,O.StartDate,O.EndDate,C.Name,Op.Name,O.Id
 ORDER BY O.StartDate").AsNoTracking().ToList();
             }
         }
-        public List<TEntity> SearchOperationMain(string documentCode, int? mainCategoryId, int? subCategoryId, DateTime startDate, DateTime endDate, int operatorId)
+        public List<TEntity> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate, int operatorId, int currencyId, bool isActive)
         {
             using (TContext context = new TContext())
             {
@@ -92,7 +92,7 @@ ORDER BY O.StartDate").AsNoTracking().ToList();
                 //GROUP BY  O.DocumentCode,O.StartDate,O.EndDate,C.Name,Op.Name OPTION(RECOMPILE)
                 //END
                 #endregion
-                return context.Set<TEntity>().FromSqlInterpolated($"EXEC sp_get_products_mainsearch {documentCode},{mainCategoryId},{subCategoryId},{startDate},{endDate}, {operatorId}").AsNoTracking().ToList();
+                return context.Set<TEntity>().FromSqlInterpolated($"EXEC sp_get_products_mainsearch {documentCode},{mainCategoryId},{subCategoryId},{startDate},{endDate}, {operatorId}, {currencyId}, {isActive}").AsNoTracking().ToList();
             }
         }
 

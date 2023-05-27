@@ -10,6 +10,6 @@ namespace Tourism.Business.Abstract.Models
     public interface IOperationMainService
     {
         List<OperationMain> GetOperationMains();        
-        List<OperationMain> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate,int operatorId);
+        List<OperationMain> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate,int operatorId, int currencyId, bool isActive);
     }
 }

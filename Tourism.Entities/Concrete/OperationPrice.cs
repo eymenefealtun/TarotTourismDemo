@@ -19,12 +19,12 @@ namespace Tourism.Entities.Concrete
         public decimal DoubleRoom { get; set; }
         public decimal TripleRoom { get; set; }
         public decimal QuadRoom { get; set; }
-        public decimal Child { get; set; }      
+        public decimal Child { get; set; }
         public decimal Baby { get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }
-        public Operation Operation { get; set; }  
-        
+        public Operation Operation { get; set; }
+
 
     }
 }

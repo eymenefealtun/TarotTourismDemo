@@ -83,8 +83,44 @@
                                         Value="Transparent" />
                                 <Setter Property="HorizontalContentAlignment"
                                         Value="Left" />
+                                <Setter Property="FontFamily"
+                                        Value="/Fonts/#Roboto" />
                             </Style>
-
+                            <Style x:Key="ToCenter"
+                                   TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment"
+                                        Value="Center" />
+                            </Style>
+                            <Style x:Key="ToRight"
+                                   TargetType="{x:Type TextBlock}">
+                                <Setter Property="HorizontalAlignment"
+                                        Value="Right" />
+                            </Style>
+                            <Style x:Key="ToColumnCenter"
+                                   TargetType="{x:Type DataGridColumnHeader}">
+                                <Setter Property="Background"
+                                        Value="Transparent" />
+                                <Setter Property="BorderThickness"
+                                        Value="1" />
+                                <Setter Property="MinHeight"
+                                        Value="30" />
+                                <Setter Property="Cursor"
+                                        Value="Hand" />
+                                <Setter Property="Foreground"
+                                        Value="Black" />
+                                <Setter Property="FontFamily"
+                                        Value="/Fonts/#Poppins" />
+                                <Setter Property="BorderThickness"
+                                        Value="0.3" />
+                                <Setter Property="BorderBrush"
+                                        Value="Transparent" />
+                                <Setter Property="HorizontalContentAlignment"
+                                        Value="Left" />
+                                <Setter Property="FontFamily"
+                                        Value="/Fonts/#Roboto" />
+                                <Setter Property="HorizontalAlignment"
+                                        Value="Center" />
+                            </Style>
                         </DataGrid.Resources>
 
 
@@ -117,13 +153,19 @@
                                                 Binding="{Binding EndDate, StringFormat= d}" />
                             <DataGridTextColumn Header="Pax"
                                                 MinWidth="40"
-                                                Binding="{Binding Pax}" />
+                                                Binding="{Binding Pax}"
+                                                ElementStyle="{StaticResource ToCenter}"
+                                                HeaderStyle="{StaticResource ToColumnCenter}" />
                             <DataGridTextColumn Header="Room"
                                                 MinWidth="50"
-                                                Binding="{Binding Room}" />
+                                                Binding="{Binding Room}"
+                                                ElementStyle="{StaticResource ToCenter}"
+                                                HeaderStyle="{StaticResource ToColumnCenter}" />
                             <DataGridTextColumn Header="Currency"
                                                 MinWidth="80"
-                                                Binding="{Binding Currency}" />
+                                                Binding="{Binding Currency}"
+                                                ElementStyle="{StaticResource ToCenter}"
+                                                HeaderStyle="{StaticResource ToColumnCenter}" />
 
                         </DataGrid.Columns>
 
@@ -284,6 +326,60 @@
                       VerticalContentAlignment="Center"
                       Margin="602,4,0,0"
                       SelectionChanged="cboxOperator_SelectionChanged" />
+            <ComboBox x:Name="cboxCurrency"
+                      ToolTip="Currency"
+                      Height="20"
+                      Width="100"
+                      HorizontalAlignment="Left"
+                      VerticalAlignment="Bottom"
+                      Grid.Column="1"
+                      Grid.Row="0"
+                      HorizontalContentAlignment="Left"
+                      SelectedValuePath="Id"
+                      DisplayMemberPath="Name"
+                      VerticalContentAlignment="Center"
+                      Margin="602,0,0,4"
+                      SelectionChanged="cboxCurrency_SelectionChanged" />
+
+            <ToggleButton x:Name="tglIsActive"
+                          ToolTip="IsActive"
+                          Grid.Column="1"
+                          Grid.Row="0"
+                          Width="20"
+                          Height="20"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          BorderBrush="Transparent"
+                          Click="tglIsActive_Click"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Bottom"
+                          Margin="572,0,0,4">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border x:Name="B1"
+                                BorderThickness="0"
+                                CornerRadius="20">
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked"
+                                     Value="True">
+                                <Setter TargetName="B1"
+                                        Property="Background"
+                                        Value="DarkRed" />
+                            </Trigger>
+                            <Trigger Property="IsChecked"
+                                     Value="False">
+                                <Setter TargetName="B1"
+                                        Property="Background"
+                                        Value="lime" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+
+
+
 
 
 
