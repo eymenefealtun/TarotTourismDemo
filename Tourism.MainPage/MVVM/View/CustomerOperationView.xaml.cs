@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections;
-using System.ComponentModel;
-using System.Dynamic;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
-using Tourism.Entities.Concrete;
 using Tourism.Entities.Models;
+using Tourism.MainPage.Core;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -20,28 +16,35 @@ namespace Tourism.MainPage.MVVM.View
         private ICustomerOperationService _customerOperationService;
         public string _documentCode;
         public int _operationId;
+        public int _subCategoryId;
+        public int _reservationId;
 
         public CustomerOperationView()
         {
+
         }
 
-        public CustomerOperationView(int operationId, string documentCode)
+        public CustomerOperationView(int operationId, string documentCode, int subCategoryId)
         {
             InitializeComponent();
             _customerOperationService = Instancefactory.GetInstance<ICustomerOperationService>();
             _operationId = operationId;
             _documentCode = documentCode;
-            dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperation(_operationId);
+            _subCategoryId = subCategoryId;
+            dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperation(_operationId, _isActive);
             txbOperation.Text = _documentCode;
         }
 
         private void dgwCustomerOperation_Loaded(object sender, RoutedEventArgs e)
         {
+
+
             if (dgwCustomerOperation.Items.Count > 0)
             {
                 ColoringRowsByDocumentCode();
-                DeleteBedType();
+                //DeleteBedType();
             }
+
         }
 
         private void DeleteBedType()
@@ -49,8 +52,8 @@ namespace Tourism.MainPage.MVVM.View
             for (int i = 0; i < dgwCustomerOperation.Items.Count; i++)
             {
                 DataGridRow dataGridRow = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i);
-                TextBlock cellContent = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRow) as TextBlock;               
-                
+                TextBlock cellContent = dgwCustomerOperation.Columns[0].GetCellContent(dataGridRow) as TextBlock;
+
                 if (cellContent.Text == "Double")
                 {
                     DataGridRow dataGridRowPlusOne = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i + 1);
@@ -91,6 +94,42 @@ namespace Tourism.MainPage.MVVM.View
         private void ColoringRowsByDocumentCode()
         {
             DataGridRow firstRow = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(0);
+
+            firstRow.Background = Brushes.White;
+            int j = 0;
+
+            for (int i = 1; i < dgwCustomerOperation.Items.Count; i++)
+            {
+                DataGridRow dataGridRow = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i);
+                TextBlock cellContent = dgwCustomerOperation.Columns[8].GetCellContent(dataGridRow) as TextBlock;
+
+                DataGridRow dataGridRowMinusOne = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i - 1);
+                TextBlock cellContentMinusOne = dgwCustomerOperation.Columns[8].GetCellContent(dataGridRowMinusOne) as TextBlock;
+
+                if (cellContent.Text == cellContentMinusOne.Text && j == 0)
+                {
+                    dataGridRow.Background = Brushes.White;
+                }
+                else if (cellContent.Text != cellContentMinusOne.Text && j == 0)
+                {
+                    dataGridRow.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#dbdcdc");
+                    j = 1;
+                }
+                else if (cellContent.Text == cellContentMinusOne.Text && j != 0)
+                {
+                    dataGridRow.Background = (SolidColorBrush)new BrushConverter().ConvertFrom("#dbdcdc");
+                    j++;
+                }
+                else if (cellContent.Text != cellContentMinusOne.Text && j != 0)
+                {
+                    dataGridRow.Background = Brushes.White;
+                    j = 0;
+                }
+            }
+        }
+        private void ColoringRowsByDataGrid()
+        {
+            DataGridRow firstRow = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(0);
             firstRow.Background = Brushes.White;
             int j = 0;
 
@@ -129,11 +168,11 @@ namespace Tourism.MainPage.MVVM.View
 
             if (!String.IsNullOrEmpty(tboxCustomerOperationSearch.Text))
             {
-                dgwCustomerOperation.ItemsSource = _customerOperationService.SearchCustomerOperation(tboxCustomerOperationSearch.Text, _operationId);
+                dgwCustomerOperation.ItemsSource = _customerOperationService.SearchCustomerOperation(tboxCustomerOperationSearch.Text, _operationId, _isActive);
             }
             else
             {
-                dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperation(_operationId);
+                dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperation(_operationId, _isActive);
             }
         }
 
@@ -147,11 +186,56 @@ namespace Tourism.MainPage.MVVM.View
             GetCustomerOperationView();
         }
 
-        private void btnBack_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        private void dgwCustomerOperation_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            btnBack.Opacity = 0.1;
+            try
+            {
+                CustomerOperation customerOperation = ((DataGrid)sender).SelectedItem as CustomerOperation;
+                int reservationId = customerOperation.ReservationId;
+                _reservationId = reservationId;
+                GetReservationDetail();
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
         }
 
+        private void GetReservationDetail()
+        {
+            ReservationDetailView reservationDetailView = new ReservationDetailView(_operationId, _subCategoryId, _reservationId, _isActive);
+            MainGrid.Children.Add(reservationDetailView);
+        }
+        private bool _isActive = true;
+        private void tglIsActive_Click(object sender, RoutedEventArgs e)
+        {
+            if (tglIsActive.IsChecked == true)
+            {
+                _isActive = false;
+                //CustomerOperationView customer = new CustomerOperationView();
+                dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperation(_operationId, _isActive);
 
+                //object sender2 = new object[0];
+                //RoutedEventArgs e2 = new RoutedEventArgs();
+                //dgwCustomerOperation_Loaded(sender2, e2);
+
+            }
+            else if (tglIsActive.IsChecked == false)
+            {
+                _isActive = true;
+                ///CustomerOperationView customer = new CustomerOperationView();
+                dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperation(_operationId, _isActive);
+
+                //object sender2 = new object[0];
+                //RoutedEventArgs e2 = new RoutedEventArgs();
+                //dgwCustomerOperation_Loaded(sender2, e2);
+            }
+        }
+
+        private void btnExportToExcel_Click(object sender, RoutedEventArgs e)
+
+        {
+            Utilities.ExportCustomerOperationToExcel(dgwCustomerOperation,_documentCode);
+        }
     }
 }

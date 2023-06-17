@@ -16,8 +16,8 @@
                                 <TextBlock Text="{TemplateBinding Property=Content}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
-                                           FontSize="18"
                                            FontWeight="Thin"
+                                           FontSize="16"
                                            FontFamily="Marlett"
                                            Foreground="#CFCFCF" />
                             </Grid>

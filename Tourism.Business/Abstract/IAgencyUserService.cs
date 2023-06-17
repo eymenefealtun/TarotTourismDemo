@@ -8,7 +8,8 @@ using Tourism.DataAccess.Abstract;
 namespace Tourism.Entities.Concrete
 {
     public interface IAgencyUserService
-    { 
+    {
+        AgencyUser Get(int userId);
     }
 
 }

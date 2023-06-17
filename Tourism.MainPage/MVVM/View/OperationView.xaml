@@ -29,7 +29,18 @@
                 <RowDefinition Height="30" />
             </Grid.RowDefinitions>
 
-
+            <Button x:Name="btnExportToExcel"
+                    Foreground="Green"
+                    ToolTip="Export to Excel"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Content="&#xE8B6;"
+                    Style="{StaticResource RefreshAndBackButtonTheme}"
+                    Command="{Binding OperationViewCommand}"
+                    Click="btnExportToExcel_Click" />
             <Grid Grid.Row="1"
                   Grid.Column="1">
 
@@ -37,14 +48,12 @@
                 <Border Grid.Column="1"
                         Grid.Row="1"
                         Width="660"
-                        Height="440"
+                        Height="425"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Background="#f6f7f9"
                         CornerRadius="20">
                     <DataGrid x:Name="dgwOperationMain"
-                              HorizontalAlignment="Left"
-                              VerticalAlignment="Center"
                               Width="660"
                               Height="425"
                               IsReadOnly="True"
@@ -175,22 +184,18 @@
 
             </Grid>
 
-            <Grid Grid.Row="0"
-                  Grid.Column="0">
-                <Image Source="/Images/refresh.png"
-                       Height="30"
-                       Width="30" />
-                <Button x:Name="btnRefresh"
-                        ToolTip="Refresh"
-                        Background="Transparent"
-                        Foreground="White"
-                        FontSize="15"
-                        BorderBrush="{x:Null}"
-                        Click="btnRefresh_Click"
-                        MouseMove="btnRefresh_MouseMove">
-                </Button>
+            <Button x:Name="btnRefresh"
+                    ToolTip="Refresh"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Foreground="White"
+                    FontSize="30"
+                    Content="&#xE777;"
+                    Style="{StaticResource RefreshAndBackButtonTheme}"
+                    Click="btnRefresh_Click" />
 
-            </Grid>
+
+
 
 
 
@@ -294,6 +299,7 @@
                       DisplayMemberPath="Name"
                       VerticalContentAlignment="Center"
                       Margin="195,4,0,0"
+                      Style="{StaticResource ComboBoxTheme}"
                       SelectionChanged="cboxMainCategory_SelectionChanged" />
 
             <ComboBox x:Name="cboxSubCategory"
@@ -309,6 +315,7 @@
                       Width="190"
                       HorizontalAlignment="Left"
                       VerticalAlignment="Bottom"
+                      Style="{StaticResource ComboBoxTheme}"
                       Margin="195,0,0,4"
                       SelectionChanged="cboxSubCategory_SelectionChanged" />
 
@@ -324,22 +331,35 @@
                       SelectedValuePath="Id"
                       DisplayMemberPath="Name"
                       VerticalContentAlignment="Center"
+                      Style="{StaticResource ComboBoxTheme}"
                       Margin="602,4,0,0"
                       SelectionChanged="cboxOperator_SelectionChanged" />
-            <ComboBox x:Name="cboxCurrency"
-                      ToolTip="Currency"
-                      Height="20"
-                      Width="100"
-                      HorizontalAlignment="Left"
-                      VerticalAlignment="Bottom"
-                      Grid.Column="1"
-                      Grid.Row="0"
-                      HorizontalContentAlignment="Left"
-                      SelectedValuePath="Id"
-                      DisplayMemberPath="Name"
-                      VerticalContentAlignment="Center"
-                      Margin="602,0,0,4"
-                      SelectionChanged="cboxCurrency_SelectionChanged" />
+
+            <ComboBox  x:Name="cboxCurrency"
+                       ToolTip="Currency"
+                       Height="20"
+                       Width="100"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Bottom"
+                       Grid.Column="1"
+                       Grid.Row="0"
+                       HorizontalContentAlignment="Left"
+                       SelectedValuePath="Id"
+                       DisplayMemberPath="Name"
+                       VerticalContentAlignment="Center"
+                       Margin="602,0,0,4"
+                       Style="{StaticResource ComboBoxTheme}"
+                       SelectionChanged="cboxCurrency_SelectionChanged">
+
+                <ComboBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit Currencies"
+                                  x:Name="editCurrency"
+                                  Click="editCurrency_Click" />
+                    </ContextMenu>
+                </ComboBox.ContextMenu>
+
+            </ComboBox>
 
             <ToggleButton x:Name="tglIsActive"
                           ToolTip="IsActive"
@@ -353,35 +373,35 @@
                           Click="tglIsActive_Click"
                           HorizontalAlignment="Left"
                           VerticalAlignment="Bottom"
-                          Margin="572,0,0,4">
+                          Margin="573,0,0,4">
                 <ToggleButton.Template>
                     <ControlTemplate TargetType="ToggleButton">
-                        <Border x:Name="B1"
-                                BorderThickness="0"
-                                CornerRadius="20">
-                        </Border>
+                        <TextBlock Text="&#xE73A;"
+                                   x:Name="txtMain"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   FontSize="19"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   Margin="0,0,0,0"
+                                   Foreground="White" />
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked"
                                      Value="True">
-                                <Setter TargetName="B1"
-                                        Property="Background"
-                                        Value="DarkRed" />
+                                <Setter TargetName="txtMain"
+                                        Property="TextBlock.Text"
+                                        Value="&#xE739;" />
                             </Trigger>
                             <Trigger Property="IsChecked"
                                      Value="False">
-                                <Setter TargetName="B1"
-                                        Property="Background"
-                                        Value="lime" />
+                                <Setter TargetName="txtMain"
+                                        Property="TextBlock.Text"
+                                        Value="&#xE73A;" />
                             </Trigger>
                         </ControlTemplate.Triggers>
+
                     </ControlTemplate>
                 </ToggleButton.Template>
             </ToggleButton>
-
-
-
-
-
 
 
 

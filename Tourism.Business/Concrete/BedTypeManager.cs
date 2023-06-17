@@ -15,8 +15,9 @@ namespace Tourism.Entities.Concrete
             _bedTypeDal = bedTypedal;       
         }
 
-                
-
-
+        public List<BedType> GetAll()
+        {
+            return _bedTypeDal.GetAll();
+        }
     }
 }

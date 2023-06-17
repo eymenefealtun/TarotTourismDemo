@@ -9,6 +9,7 @@ namespace Tourism.Entities.Concrete
 {
     public interface IOperatorUserService     
     {
-
+        OperatorUser GetByUserId(int userId);     
+        List<OperatorUser> GetAll();     
     }
 }

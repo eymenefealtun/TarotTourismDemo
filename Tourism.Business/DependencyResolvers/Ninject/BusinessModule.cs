@@ -3,13 +3,13 @@ using Tourism.Business.Abstract.Models;
 using Tourism.Business.Concrete.Models;
 using Tourism.DataAccess.Abstract;
 using Tourism.DataAccess.Abstract.Models;
-using Tourism.DataAccess.Concrete.EntityFramework;  
+using Tourism.DataAccess.Concrete.EntityFramework;
 using Tourism.DataAccess.Concrete.Models;
 using Tourism.Entities.Concrete;
 
 namespace Tourism.Business.DependencyResolvers.Ninject
 {
-    public class BusinessModule : NinjectModule 
+    public class BusinessModule : NinjectModule
     {
         public override void Load()
         {
@@ -25,6 +25,10 @@ namespace Tourism.Business.DependencyResolvers.Ninject
             Bind<ICustomerOperationService>().To<CustomerOperationManager>().InSingletonScope();
             Bind<ICustomerOperationDal>().To<EfCustomerOperationDal>().InSingletonScope();
 
+
+            Bind<ICustomerService>().To<CustomerManager>().InSingletonScope();
+            Bind<ICustomerDal>().To<EfCustomerDal>().InSingletonScope();
+
             Bind<IMainCategoryService>().To<MainCategoryManager>().InSingletonScope();
             Bind<IMainCategoryDal>().To<EfMainCategoryDal>().InSingletonScope();
 
@@ -37,12 +41,33 @@ namespace Tourism.Business.DependencyResolvers.Ninject
             Bind<ICurrencyService>().To<CurrencyManager>().InSingletonScope();
             Bind<ICurrencyDal>().To<EfCurrencyDal>().InSingletonScope();
 
-            Bind<IOperationInformationService>().To<OperationInformationManager>().InSingletonScope();      
+            Bind<IOperationInformationService>().To<OperationInformationManager>().InSingletonScope();
             Bind<IOperationInformationDal>().To<EfOperationInformationDal>().InSingletonScope();
 
-            Bind<IOperatorService>().To<OperatorManager>().InSingletonScope();      
-            Bind<IOperatorDal>().To<EfOperatorDal>().InSingletonScope();        
+            Bind<IOperatorService>().To<OperatorManager>().InSingletonScope();
+            Bind<IOperatorDal>().To<EfOperatorDal>().InSingletonScope();
+
+            Bind<IAgencyUserService>().To<AgencyUserManager>().InSingletonScope();
+            Bind<IAgencyUserDal>().To<EfAgencyUserDal>().InSingletonScope();
+
+            Bind<IReservationService>().To<ReservationManager>().InSingletonScope();
+            Bind<IReservationDal>().To<EfReservationDal>().InSingletonScope();
+
+            Bind<IAgencyService>().To<AgencyManager>().InSingletonScope();
+            Bind<IAgencyDal>().To<EfAgencyDal>().InSingletonScope();
+
+            Bind<IOperatorUserService>().To<OperatorUserManager>().InSingletonScope();
+            Bind<IOperatorUserDal>().To<EfOperatorUserDal>().InSingletonScope();
+
+            Bind<IRoomService>().To<RoomManager>().InSingletonScope();
+            Bind<IRoomDal>().To<EfRoomDal>().InSingletonScope();
+
+            Bind<IBedTypeService>().To<BedTypeManager>().InSingletonScope();
+            Bind<IBedTypeDal>().To<EfBedTypeDal>().InSingletonScope();
+
 
         }
+
+
     }
 }

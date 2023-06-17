@@ -1,4 +1,4 @@
-﻿ using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using System.Net;
 using Tourism.Entities.Concrete;
@@ -24,19 +24,23 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         public DbSet<BedType> BedTypes { get; set; }
         public DbSet<Customer> Customers { get; set; }
 
-        //--->>>Models            
-        public DbSet<OperationMain> OperationMains { get; set; }
+
+        #region Models
+
+        public DbSet<OperationMain> OperationMain { get; set; }     
         public DbSet<DailySale> DailySales { get; set; }
         public DbSet<CustomerOperation> CustomerOperations { get; set; }
         public DbSet<OperationInformation> OperationInformations { get; set; }
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) 
+        #endregion
+
+        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
-            
+
         }
         public AppDbContext()
         {
-            
+
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -85,4 +89,3 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
 
     }
 }
-    

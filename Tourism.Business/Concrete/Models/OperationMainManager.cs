@@ -20,8 +20,14 @@ namespace Tourism.Business.Concrete.Models
         {
             _operationMainDal = operationMainDal;
         }
-                
-        public List<OperationMain> GetOperationMains()
+
+        //public OperationMain GetByOperationId(int operationId)
+
+        //{
+        //    return _operationMainDal.Get(x => x.Id == operationId);
+        //}
+
+        public List<OperationMain> GetOperationMain()
         {
             return _operationMainDal.GetOperationMain();
         }

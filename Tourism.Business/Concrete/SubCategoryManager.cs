@@ -17,13 +17,16 @@ namespace Tourism.Entities.Concrete
 
         public List<SubCategory> GetAll()
         {
-            return _subCategoryDal.GetAll();
+            return _subCategoryDal.GetAll();            
         }
         public List<SubCategory> GetByMainCategory(int mainCategoryId)
         {
             return _subCategoryDal.GetAllWithFilter(x => x.MainCategoryId == mainCategoryId);
         }
-
+        public SubCategory GetBySubCategoryId(int subCategoryId)
+        {
+            return _subCategoryDal.Get(x => x.Id == subCategoryId);
+        }
 
     }
 }

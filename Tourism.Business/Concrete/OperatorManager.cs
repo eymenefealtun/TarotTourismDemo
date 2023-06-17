@@ -15,12 +15,14 @@ namespace Tourism.Entities.Concrete
         {
             _operatorDal = operatorDal;             
         }
-        public List<Operator> GetAll()      
+        public List<Operator> GetAll()              
         {
             return _operatorDal.GetAll();
         }
 
-
-
+        public Operator GetByOperatorId(int operatorId)             
+        {
+            return _operatorDal.Get(x=>x.Id == operatorId);          
+        }
     }
 }

@@ -19,12 +19,14 @@ namespace Tourism.DataAccess.Abstract
         List<T> GetAll();
         List<T> GetOperationMain();
         List<T> GetDailySale();
-        List<T> GetCustomerOperation(int operationId);
-        List<T> SearchCustomerOperation(string name, int operationId);
+        List<T> GetCustomerOperation(int operationId, bool isActive);
+        List<T> GetCustomerOperationByReservationId(int operationId, int reservationId, bool isActive);
+        List<T> SearchCustomerOperation(string name, int operationId, bool isActive);
         List<T> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate, int operatorId, int currencyId, bool isActive);
         List<T> GetCustomers();
         T Add(T entity);
         T Update(T entity);
+        List<T> BulkUpdate(List<T> entity);
 
     }
 }

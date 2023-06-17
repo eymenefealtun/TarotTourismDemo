@@ -7,8 +7,8 @@ using Tourism.DataAccess.Abstract;
 
 namespace Tourism.Entities.Concrete
 {
-    public interface IRoomService 
-    {       
-
+    public interface IRoomService
+    {
+        List<Room> GetByReservationId(int reservationId);
     }
 }

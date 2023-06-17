@@ -16,10 +16,11 @@
                                 <TextBlock Text="{TemplateBinding Property=Content}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
-                                           FontSize="28"
+                                           FontSize="26"
                                            FontWeight="Thin"
                                            FontFamily="Marlett"                 
-                                           Foreground="#CFCFCF" />
+                                           Foreground="#CFCFCF"
+                                           Margin="1.4,1,0,0"/>
                             </Grid>
                         </Border>
                         <ControlTemplate.Triggers>

@@ -36,8 +36,8 @@
                           AlternatingRowBackground="#dbdcdc"
                           HeadersVisibility="Column"
                           BorderBrush="Transparent"
-                          Background="Transparent"
-                          Loaded="dgwCustomerOperation_Loaded_1">
+                          Loaded="dgwCustomerOperation_Loaded"        
+                          Background="Transparent">
                     <DataGrid.Resources>
                         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                                TargetType="{x:Type DataGridColumnHeader}">
@@ -60,14 +60,13 @@
                             <Setter Property="FontFamily"
                                     Value="/Fonts/#Roboto" />
                         </Style>
-
                     </DataGrid.Resources>
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="First Name"
                                             Width="80"
                                             Binding="{Binding FirstName}">
-                            
+
                         </DataGridTextColumn>
                         <DataGridTextColumn Header="Last Name"
                                             Width="80"

@@ -10,5 +10,8 @@ namespace Tourism.Entities.Concrete
 {
     public interface IReservationService 
     {
-    }       
+        Reservation Get(int reservationId);
+        Reservation Update(Reservation reservation);
+
+    }
 }

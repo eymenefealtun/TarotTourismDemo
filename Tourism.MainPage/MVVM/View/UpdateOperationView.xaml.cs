@@ -1,17 +1,11 @@
-﻿using Azure;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Query.Internal;
+﻿using Microsoft.EntityFrameworkCore;
 using System;
-using System.Net;
-using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.DataAccess.Abstract;
-using Tourism.DataAccess.Concrete.EntityFramework;
 using Tourism.Entities.Concrete;
 using Operation = Tourism.Entities.Concrete.Operation;
 
@@ -53,11 +47,6 @@ namespace Tourism.MainPage.MVVM.View
         {
             InitializeComponent();
 
-        }
-
-        private void btnBack_MouseMove(object sender, MouseEventArgs e)
-        {
-            btnBack.Opacity = 0.1;
         }
 
         private void btnBack_Click(object sender, RoutedEventArgs e)
@@ -121,7 +110,7 @@ namespace Tourism.MainPage.MVVM.View
                     else
                     {
                         toggleBtnIsActive.IsChecked = false;
-  
+
                     }
                 }
             }
@@ -271,7 +260,7 @@ namespace Tourism.MainPage.MVVM.View
                     UpdateOperation();
 
                     MessageBox.Show("Succesfully Saved", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                    
+
                     GetInfo();
                     btnEditDescriptionPart.IsHitTestVisible = true;
                     btnEditPricePart.IsHitTestVisible = true;
@@ -302,7 +291,7 @@ namespace Tourism.MainPage.MVVM.View
                 {
                     UpdateOperation();
                     MessageBox.Show("Succesfully Saved", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                    
+
                     GetInfo();
                     btnEditDescriptionPart.IsHitTestVisible = true;
                     btnEditMainPart.IsHitTestVisible = true;
@@ -325,14 +314,14 @@ namespace Tourism.MainPage.MVVM.View
 
         private void btnSaveNotePart_Click(object sender, RoutedEventArgs e)
         {
-            tboxSingleRoom.Text = "YETER";
+            // tboxSingleRoom.Text = "YETER";
             if (MessageBox.Show("Are you sure you want to save?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
                     UpdateOperation();
                     MessageBox.Show("Succesfully Saved", "", MessageBoxButton.OK, MessageBoxImage.Information);
-                   
+
                     GetInfo();
                     btnEditDescriptionPart.IsHitTestVisible = true;
                     btnEditMainPart.IsHitTestVisible = true;
@@ -389,9 +378,9 @@ namespace Tourism.MainPage.MVVM.View
         }
 
         private void GetInfo()
-        {           
-            var operation = _operationInformationService.GetOperationInformation(_operationId);            
-            
+        {
+            var operation = _operationInformationService.GetOperationInformation(_operationId);
+
             _operationVersion = operation.OperationRowVersion;
             _operationPriceVersion = operation.OperationPriceRowVersion;
 

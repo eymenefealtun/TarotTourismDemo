@@ -21,17 +21,15 @@
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
-        <Image Height="40"
-               Width="40"
-               Source="/Images/back.png" />
+
         <Button x:Name="btnBack"
-                Background="Transparent"
-                BorderBrush="Transparent"
-                Foreground="#da4543"
+                Foreground="White"
+                FontSize="30"
+                Content="&#xEC52;"      
+                Style="{StaticResource RefreshAndBackButtonTheme}"
                 ToolTip="Back"
                 Command="{Binding OperationViewCommand}"
-                Click="btnBack_Click"
-                MouseMove="btnBack_MouseMove" />
+                Click="btnBack_Click" />
 
         <Grid Grid.Row="1"
               Grid.Column="1">

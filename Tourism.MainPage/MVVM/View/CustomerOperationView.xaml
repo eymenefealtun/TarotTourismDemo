@@ -43,9 +43,11 @@
                           EnableRowVirtualization="True"
                           FontFamily="/Fonts/#Poppins"
                           Loaded="dgwCustomerOperation_Loaded"
+                          MouseDoubleClick="dgwCustomerOperation_MouseDoubleClick"
                           HeadersVisibility="Column"
                           Background="Transparent"
-                          BorderBrush="Transparent">
+                          BorderBrush="Transparent"
+                   >
 
                     <DataGrid.Resources>
                         <Style TargetType="{x:Type DataGridColumnHeader}">
@@ -87,7 +89,7 @@
                             <Setter Property="FontFamily"
                                     Value="/Fonts/#Roboto" />
                             <Setter Property="HorizontalAlignment"
-                                    Value="Center" />
+                                    Value="Left" />
                         </Style>
                     </DataGrid.Resources>
 
@@ -185,9 +187,56 @@
                             </Style>
                         </TextBlock.Style>
                     </TextBlock>
+
+                  
+                    
                 </Grid>
+                
 
             </Border>
+
+
+            <ToggleButton x:Name="tglIsActive"
+                          ToolTip="IsActive"
+                          Grid.Column="1"
+                          Grid.Row="0"
+                          Width="20"
+                          Height="20"
+                          Background="Transparent"
+                          BorderThickness="0"
+                          BorderBrush="Transparent"
+                          Click="tglIsActive_Click"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Center"
+                          Margin="820,0,0,0">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <TextBlock Text="&#xE73A;"
+                                   x:Name="txtMain"
+                                   VerticalAlignment="Center"
+                                   HorizontalAlignment="Left"
+                                   FontSize="19"
+                                   FontFamily="Segoe MDL2 Assets"
+                                   Margin="0,0,0,0"
+                                   Foreground="White" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked"
+                                     Value="True">
+                                <Setter TargetName="txtMain"
+                                        Property="TextBlock.Text"
+                                        Value="&#xE739;" />
+                            </Trigger>
+                            <Trigger Property="IsChecked"
+                                     Value="False">
+                                <Setter TargetName="txtMain"
+                                        Property="TextBlock.Text"
+                                        Value="&#xE73A;" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
 
             <TextBlock x:Name="txbOperation"
                        VerticalAlignment="Center"
@@ -198,17 +247,27 @@
                        FontFamily="/Fonts/#Poppins"
                        Margin="195,0,0,0" />
 
-            <Image Height="40"
-                   Width="40"
-                   Source="/Images/back.png" />
             <Button x:Name="btnBack"
-                    Background="Transparent"
-                    BorderBrush="Transparent"
-                    Foreground="#da4543"
+                    Foreground="White"
                     ToolTip="Back"
+                    FontSize="30"
+                    Content="&#xEC52;"
+                    Style="{StaticResource RefreshAndBackButtonTheme}" 
                     Command="{Binding OperationViewCommand}"
-                    Click="btnBack_Click"
-                    MouseMove="btnBack_MouseMove" />
+                    Click="btnBack_Click" />
+
+            <Button x:Name="btnExportToExcel"
+                    Foreground="Green"
+                    ToolTip="Export to Excel"
+                    FontSize="30"
+                    HorizontalAlignment="Center"
+                    VerticalAlignment="Top"
+                    Grid.Column="0"
+                    Grid.Row="1"
+                    Content="&#xE8B6;"
+                    Style="{StaticResource RefreshAndBackButtonTheme}"
+                    Command="{Binding OperationViewCommand}"
+                    Click="btnExportToExcel_Click" />
 
 
 

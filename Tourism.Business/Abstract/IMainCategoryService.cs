@@ -10,5 +10,7 @@ namespace Tourism.Entities.Concrete
     public interface IMainCategoryService
     {
         List<MainCategory> GetAll();                
+        MainCategory GetByMainCategoryId(int mainCategoryId);                           
+       // MainCategory GetBySubcategoryId(int mainCategoryId);                           
     }
 }

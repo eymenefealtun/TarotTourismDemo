@@ -15,7 +15,9 @@ namespace Tourism.Entities.Concrete
             _roomDal = roomDal;             
         }
 
-
-
+        public List<Room> GetByReservationId(int reservationId)
+        {
+            return _roomDal.GetAllWithFilter(x => x.ReservationId == reservationId);
+        }
     }
 }

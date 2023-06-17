@@ -13,13 +13,11 @@ namespace Tourism.Entities.Concrete
         public AgencyManager(IAgencyDal agencyService)
         {
             _agencyDal = agencyService;
-        }   
+        }
 
-
-
-
-
-
-
+        public Agency GetByAgencyId(int agencyId)
+        {
+            return _agencyDal.Get(x => x.Id == agencyId);
+        }
     }
 }

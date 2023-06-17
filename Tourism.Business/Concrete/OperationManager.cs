@@ -19,10 +19,7 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
             _operationDal = operationDal;
         }
 
-        public List<Operation> GetAllWithFilter()
-        {
-            return _operationDal.GetAllWithFilter();
-        }
+
         public List<Operation> GetAll()
         {
             return _operationDal.GetAll();
@@ -38,8 +35,14 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
 
         public Operation Update(Operation operation)
         {
-           ValidationTool.FluentValidate(new OperationValidator(), operation);
+            ValidationTool.FluentValidate(new OperationValidator(), operation);
             return _operationDal.Update(operation);
+        }
+
+
+        public Operation GetByOperationId(int operationId)
+        {
+            return _operationDal.Get(x => x.Id == operationId);
         }
     }
 }

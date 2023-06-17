@@ -8,14 +8,37 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MVVM\ViewModel\reservationDetailViewModel.xaml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="Fonts\Arimo-Bold.ttf" />
     <None Remove="Fonts\Oxygen-Bold.ttf" />
     <None Remove="Fonts\Poppins-Regular.ttf" />
     <None Remove="Fonts\Roboto-Bold.ttf" />
     <None Remove="Images\back.png" />
+    <None Remove="Images\currencyCancel.png" />
+    <None Remove="Images\currencyEdit.png" />
+    <None Remove="Images\currencySave.png" />
     <None Remove="Images\ked.JPG" />
     <None Remove="Images\refresh.png" />
     <None Remove="Images\settings.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Page Remove="MVVM\ViewModel\reservationDetailViewModel.xaml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <COMReference Include="Microsoft.Office.Interop.Excel">
+      <WrapperTool>tlbimp</WrapperTool>
+      <VersionMinor>9</VersionMinor>
+      <VersionMajor>1</VersionMajor>
+      <Guid>00020813-0000-0000-c000-000000000046</Guid>
+      <Lcid>0</Lcid>
+      <Isolated>false</Isolated>
+      <EmbedInteropTypes>true</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -25,6 +48,7 @@
   <ItemGroup>
     <Folder Include="MVVM\Model\" />
     <Folder Include="Theme\AddPage\" />
+    <Folder Include="Theme\ReservationDetailsPage\" />
   </ItemGroup>
 
   <ItemGroup>
@@ -41,6 +65,15 @@
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\back.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\currencyCancel.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\currencyEdit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <Resource Include="Images\currencySave.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>
     <Resource Include="Images\ked.JPG">

@@ -10,5 +10,10 @@ namespace Tourism.Entities.Concrete
     public interface ICurrencyService 
     {
         List<Currency> GetAll();
+
+        Currency Update(Currency currency);
+        Currency Add(Currency currency);        
+
+
     }
 }

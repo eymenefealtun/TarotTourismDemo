@@ -43,11 +43,6 @@ namespace Tourism.MainPage.MVVM.View
             this.Visibility = Visibility.Collapsed;
         }
 
-        private void btnBack_MouseMove(object sender, MouseEventArgs e)
-        {
-            btnBack.Opacity = 0.1;
-        }
-
         private void btnAddAll_Click(object sender, RoutedEventArgs e)
         {
 

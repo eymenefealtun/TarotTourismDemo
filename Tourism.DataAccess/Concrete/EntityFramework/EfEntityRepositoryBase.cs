@@ -54,16 +54,17 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().FromSqlRaw(@"SELECT O.DocumentCode,Op.Name'Operator',O.StartDate,O.EndDate,SUM(R.Pax) 'Pax', SUM(R.Room)'Room',C.Name 'Currency', O.Id FROM Reservations R
-FULL JOIN Operations O ON O.Id = R.OperationId
+                return context.Set<TEntity>().FromSqlRaw(@"SELECT O.DocumentCode,Op.Name'Operator',O.StartDate,O.EndDate, SUM(R.Pax)  'Pax', SUM(R.Room)'Room',C.Name 'Currency', O.Id,Sc.Id 'SubCategoryId' FROM Operations O   
+FULL JOIN Reservations R ON R.OperationId = O.Id
 FULL  JOIN SubCategory Sc ON sc.Id = O.SubCategoryId
 FULL  JOIN MainCategory Mc ON Mc.Id = Sc.MainCategoryId                 
 FULL  JOIN Currencies C ON C.Id = O.CurrencyId
 FULL  JOIN OperatorUsers Opu ON Opu.Id = O.CreatedBy            
 FULL  JOIN Operators Op ON Op.Id = Opu.OperatorId
-WHERE O.DocumentCode IS NOT NULL AND O.IsActive = 1
-GROUP BY  O.DocumentCode,O.StartDate,O.EndDate,C.Name,Op.Name,O.Id
-ORDER BY O.StartDate").AsNoTracking().ToList();
+WHERE O.DocumentCode IS NOT NULL AND O.IsActive = 1 AND ( (R.IsActive = 1 OR (R.Pax Is Null OR R.Pax = 0 ) ))
+GROUP BY  O.DocumentCode,O.StartDate,O.EndDate,C.Name,Op.Name,O.Id,Sc.Id
+ORDER BY O.StartDate
+").AsNoTracking().ToList();
             }
         }
         public List<TEntity> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate, int operatorId, int currencyId, bool isActive)
@@ -113,19 +114,29 @@ ORDER BY R.CreatedDate DESC
             }
         }
 
-        public List<TEntity> GetCustomerOperation(int operationId)
+        public List<TEntity> GetCustomerOperation(int operationId, bool isActive)
+        {            
+            using (TContext context = new TContext())
+            {
+                //return context.Set<TEntity>().FromSqlRaw($"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType',B.Id'BedTypeId', R.ReservationCode, A.Name 'Agency' From Customers C JOIN Rooms Ro ON Ro.Id = C.RoomId JOIN BedTypes B ON B.Id = Ro.BedTypeId JOIN Reservations R ON R.Id = Ro.ReservationId JOIN Operations O ON O.Id = R.OperationId JOIN AgencyUsers Au ON Au.Id = R.AgencyUserId JOIN Agencies A ON A.Id = Au.AgencyId WHERE O.Id = {operationId} ORDER BY Ro.ReservationId").AsNoTracking().ToList();
+                return context.Set<TEntity>().FromSqlRaw($"SELECT (CASE WHEN lag_BedType is null THEN B.Name ELSE NULL END )AS BedType,Ro.Id'RoomId',C.Id 'CustomerId', C.FirstName 'FirstName',C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,R.Id'ReservationId',B.Id'BedTypeId', R.ReservationCode, A.Name 'Agency',R.IsActive'IsActive' FROM ( SELECT * , lag(RoomId) OVER (PARTITION BY RoomId ORDER BY FirstName) AS lag_BedType FROM Customers ) C JOIN Rooms Ro ON Ro.Id = C.RoomId  JOIN BedTypes B ON B.Id = Ro.BedTypeId   JOIN Reservations R ON R.Id = Ro.ReservationId  JOIN Operations O ON O.Id = R.OperationId JOIN AgencyUsers Au ON Au.Id = R.AgencyUserId JOIN Agencies A ON A.Id = Au.AgencyId WHERE O.Id = {operationId} AND R.IsActive = {Convert.ToInt32(isActive)} ORDER BY Ro.ReservationId").AsNoTracking().ToList();
+            }
+        }
+        public List<TEntity> GetCustomerOperationByReservationId(int operationId, int reservationId, bool isActive)
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().FromSqlRaw($"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType', R.ReservationCode, A.Name 'Agency' From Customers C JOIN Rooms Ro ON Ro.Id = C.RoomId JOIN BedTypes B ON B.Id = Ro.BedTypeId JOIN Reservations R ON R.Id = Ro.ReservationId JOIN Operations O ON O.Id = R.OperationId JOIN AgencyUsers Au ON Au.Id = R.AgencyUserId JOIN Agencies A ON A.Id = Au.AgencyId WHERE O.Id = {operationId} ORDER BY Ro.ReservationId").AsNoTracking().ToList();
+                //return context.Set<TEntity>().FromSqlRaw($"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType',B.Id'BedTypeId', R.ReservationCode, A.Name 'Agency' From Customers C JOIN Rooms Ro ON Ro.Id = C.RoomId JOIN BedTypes B ON B.Id = Ro.BedTypeId JOIN Reservations R ON R.Id = Ro.ReservationId JOIN Operations O ON O.Id = R.OperationId JOIN AgencyUsers Au ON Au.Id = R.AgencyUserId JOIN Agencies A ON A.Id = Au.AgencyId WHERE O.Id = {operationId} AND R.Id = {reservationId} ORDER BY Ro.ReservationId").AsNoTracking().ToList();
+                return context.Set<TEntity>().FromSqlRaw($"SELECT (CASE WHEN lag_BedType is null THEN B.Name ELSE NULL END )AS BedType,Ro.Id'RoomId',C.Id 'CustomerId', C.FirstName 'FirstName',C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,R.Id'ReservationId',B.Id'BedTypeId', R.ReservationCode, A.Name 'Agency',R.IsActive'IsActive' FROM ( SELECT * , lag(RoomId) OVER (PARTITION BY RoomId ORDER BY FirstName) AS lag_BedType FROM Customers ) C JOIN Rooms Ro ON Ro.Id = C.RoomId  JOIN BedTypes B ON B.Id = Ro.BedTypeId   JOIN Reservations R ON R.Id = Ro.ReservationId  JOIN Operations O ON O.Id = R.OperationId JOIN AgencyUsers Au ON Au.Id = R.AgencyUserId JOIN Agencies A ON A.Id = Au.AgencyId WHERE O.Id = {operationId} AND R.Id = {reservationId} AND R.IsActive = {Convert.ToInt32(isActive)}  ORDER BY Ro.ReservationId").AsNoTracking().ToList();
             }
         }
+
 
         public List<TEntity> GetCustomers()
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().FromSqlRaw(@"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType',R.ReservationCode, A.Name 'Agency' From Customers C 
+                return context.Set<TEntity>().FromSqlRaw(@"SELECT C.FirstName,C.Id 'CustomerId', C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType',R.ReservationCode, A.Name 'Agency',B.Id 'BedTypeId',R.IsActive'IsActive' From Customers C 
 JOIN Rooms Ro ON Ro.Id = C.RoomId           
 JOIN BedTypes B ON B.Id = Ro.BedTypeId      
 JOIN Reservations R ON R.Id = Ro.ReservationId 
@@ -136,11 +147,11 @@ ORDER BY Ro.ReservationId").ToList();
             }
         }
 
-        public List<TEntity> SearchCustomerOperation(string name, int operationId)
+        public List<TEntity> SearchCustomerOperation(string name, int operationId, bool isActive)
         {
             using (TContext context = new TContext())
             {
-                return context.Set<TEntity>().FromSqlRaw($"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate, C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType',R.ReservationCode,O.Id From Customers C JOIN Rooms Ro ON Ro.Id = C.RoomId JOIN BedTypes B ON B.Id = Ro.BedTypeId JOIN Reservations R ON R.Id = Ro.ReservationId JOIN Operations O ON O.Id = R.OperationId WHERE C.FirstName LIKE '%{name}%' AND O.Id = {operationId} ORDER BY Ro.ReservationId").AsNoTracking().ToList();
+                return context.Set<TEntity>().FromSqlRaw($"SELECT C.FirstName, C.LastName, C.Phone, C.BirthDate,B.Id'BedTypeId', C.Gender, C.IdNumber,Ro.Id'RoomId',R.Id'ReservationId',B.Name 'BedType',R.ReservationCode,O.Id,R.IsActive'IsActive',C.Id'CustomerId', A.Name 'Agency' From Customers C JOIN Rooms Ro ON Ro.Id = C.RoomId jOIN BedTypes B ON B.Id = Ro.BedTypeId JOIN Reservations R ON R.Id = Ro.ReservationId JOIN Operations O ON O.Id = R.OperationId JOIN AgencyUsers Au On Au.Id = R.AgencyUserId JOIN Agencies A ON A.Id = Au.AgencyId WHERE C.FirstName LIKE '%{name}%' AND O.Id = {operationId} AND R.IsActive = {Convert.ToInt32(isActive)} ORDER BY Ro.ReservationId").AsNoTracking().ToList();
             }
         }
 
@@ -163,6 +174,31 @@ ORDER BY Ro.ReservationId").ToList();
                 context.Set<TEntity>().Update(entity);
                 context.SaveChanges();
                 return entity;
+            }
+        }
+
+
+
+        //public  void TEntity BulkUpdate(List<TEntity> entity)  //left here
+        public List<TEntity> BulkUpdate(List<TEntity> entity)  //left here
+        {
+            using (TContext context = new TContext())
+            {
+                for (int i = 0; i < entity.Count; i++)
+                {
+                    context.Set<TEntity>().Update(entity[i]);
+                }
+
+                context.SaveChanges();
+
+
+                //foreach (var item in entity)
+                //{
+                //    return item;
+                //}
+
+                return entity.ToList();
+
             }
         }
 

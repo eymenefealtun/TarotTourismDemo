@@ -9,5 +9,6 @@ namespace Tourism.Entities.Concrete
 {
     public interface IAgencyService 
     {
+        Agency GetByAgencyId(int agencyId);
     }
 }

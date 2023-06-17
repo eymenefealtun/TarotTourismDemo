@@ -152,7 +152,7 @@
                                             Binding="{Binding PurchasedBy}" />
                         <DataGridTextColumn Header="Created Date"
                                             Width="160"
-                                            Binding="{Binding CreatedDate}" />
+                                            Binding="{Binding CreatedDate, StringFormat=d}" />
 
 
                     </DataGrid.Columns>

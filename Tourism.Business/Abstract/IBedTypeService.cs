@@ -7,8 +7,8 @@ using Tourism.DataAccess.Abstract;
 
 namespace Tourism.Entities.Concrete
 {
-    public interface IBedTypeService 
+    public interface IBedTypeService
     {
-
+        List<BedType> GetAll();
     }
 }

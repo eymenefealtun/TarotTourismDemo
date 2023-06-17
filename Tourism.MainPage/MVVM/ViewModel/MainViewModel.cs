@@ -19,6 +19,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
         public RelayCommand CustomerOperationViewCommand { get; set; }
         public RelayCommand AddOperationViewCommand { get; set; }
         public RelayCommand UpdateOperationViewCommand { get; set; }
+        public RelayCommand ReservationDetailViewCommand { get; set; }
 
         //public HomeViewModel HomeVm { get; set; }
         //public OperationViewModel OperationVm { get; set; }
@@ -58,6 +59,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
             CustomerOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerOperationViewModel>(); }, canExecute: o => true);
             AddOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<AddOperationViewModel>(); }, canExecute: o => true);
             UpdateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<UpdateOperationViewModel>(); }, canExecute: o => true);
+            ReservationDetailViewCommand = new RelayCommand(o => { Navigation.NavigateTo<ReservationDetailViewModel>(); }, canExecute: o => true);      
 
 
 

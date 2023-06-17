@@ -15,7 +15,14 @@ namespace Tourism.Entities.Concrete
             _operatorUserDal = operatorUserDal;     
         }
 
+        public List<OperatorUser> GetAll()
+        {
+            return _operatorUserDal.GetAll();
+        }
 
-
+        public OperatorUser GetByUserId(int userId)     
+        {
+            return _operatorUserDal.Get(x=>x.Id == userId);                 
+        }
     }
 }

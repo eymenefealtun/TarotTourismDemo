@@ -19,5 +19,6 @@ namespace Tourism.Entities.Models
         public int? Room { get; set; }
         public string Currency { get; set; }
         public int Id { get; set; } 
+        public int SubCategoryId { get; set; }      
     }
 }

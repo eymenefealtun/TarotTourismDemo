@@ -1,19 +1,15 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Storage;
+﻿using Azure;
 using System;
-using System.Data;
-using System.Drawing;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
-using System.Windows.Media;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
 using Tourism.Entities.Models;
+using Tourism.MainPage.Core;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -32,12 +28,12 @@ namespace Tourism.MainPage.MVVM.View
 
         public string _documentCode;
         public string _operationSearch;
-        public int _mainCategoryId;
+        public int _mainCategoryId;     
         public int _subCategoryId;
         public int _operatorId;
         public int _operationId;
         public int _currencyId;
-        public bool _isActive = true;
+        public bool _isActive ;
 
         public DateTime _startDate = DateTime.MinValue;
         public DateTime _endDate = DateTime.MaxValue;
@@ -56,12 +52,11 @@ namespace Tourism.MainPage.MVVM.View
 
         private void dgwOperationMain_Loaded(object sender, RoutedEventArgs e)
         {
-            dgwOperationMain.ItemsSource = _operationMainService.GetOperationMains();
+            _isActive = true;
+            dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
             cboxMainCategory.ItemsSource = _mainCategoryService.GetAll();
             cboxCurrency.ItemsSource = _currencyService.GetAll();
             cboxOperator.ItemsSource = _operatorService.GetAll();
-
-
         }
 
         private void cboxMainCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -74,8 +69,6 @@ namespace Tourism.MainPage.MVVM.View
                 _subCategoryId = 0;
                 SearchOperationMain();
             }
-
-
         }
 
         private void cboxSubCategory_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -96,19 +89,22 @@ namespace Tourism.MainPage.MVVM.View
 
         private void dgwOperationMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            try
-            {
+            //try
+            //{
                 OperationMain operationMain = ((DataGrid)sender).SelectedItem as OperationMain;
                 string documentCode = operationMain.DocumentCode;
                 int operationId = operationMain.Id;
+                int subCategoryId = operationMain.SubCategoryId;
                 _operationId = operationId;
                 _documentCode = documentCode;
+                _subCategoryId = subCategoryId;
                 GetCustomerOperationView();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Not Valid!");
-            }
+            //}
+            //catch (Exception exception)
+            //{
+            //    MessageBox.Show("Not Valid!");
+            //    MessageBox.Show(exception.Message);
+            //}
         }
         private void dgwOperationMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -121,7 +117,6 @@ namespace Tourism.MainPage.MVVM.View
                 _operationId = operationId;
                 menuUpdateOperation.Header = $"Detail of {_documentCode}";
             }
-
         }
 
         private void datePickStartDate_SelectedDateChanged(object sender, SelectionChangedEventArgs e)
@@ -144,6 +139,16 @@ namespace Tourism.MainPage.MVVM.View
 
         private void SearchOperationMain()
         {
+            _subCategoryId = Convert.ToInt32(cboxSubCategory.SelectedValue);
+            if (tglIsActive.IsChecked == false)
+            {
+                _isActive = true;
+
+            }
+            else if (tglIsActive.IsChecked == true)
+            {
+                _isActive = false;
+            }
             dgwOperationMain.ItemsSource = _operationMainService.SearchOperationMain(_operationSearch, _mainCategoryId, _subCategoryId, _startDate, _endDate, _operatorId, _currencyId, _isActive);
         }
 
@@ -152,36 +157,9 @@ namespace Tourism.MainPage.MVVM.View
             GetAddOperationView();
         }
 
-        private void btnRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            try
-            {
-                tboxOperationSearch.Text = String.Empty;
-                cboxMainCategory.SelectedIndex = -1;
-                cboxMainCategory.SelectedValue = 0;
-                cboxSubCategory.SelectedValue = 0;
-                cboxOperator.SelectedValue = 0;
-                cboxCurrency.SelectedValue = 0;
-                cboxSubCategory.Visibility = Visibility.Hidden;
-                _mainCategoryId = 0;
-                _subCategoryId = 0;
-                _operatorId = 0;
-                _currencyId = 0;
-                _isActive = true;
-                tglIsActive.IsChecked = false;
-                datePickStartDate.SelectedDate = DateTime.MinValue;
-                datePickEndDate.SelectedDate = DateTime.MaxValue;
-                dgwOperationMain.ItemsSource = _operationMainService.GetOperationMains();
-            }
-            catch (Exception)
-            {
-                MessageBox.Show("Error for refreshing!");
-            }
-        }
-
         private void GetCustomerOperationView()
         {
-            CustomerOperationView customerOperationView = new CustomerOperationView(_operationId, _documentCode);
+            CustomerOperationView customerOperationView = new CustomerOperationView(_operationId, _documentCode, _subCategoryId);       
             OperationViewMainGrid.Children.Add(customerOperationView);
         }
 
@@ -196,18 +174,13 @@ namespace Tourism.MainPage.MVVM.View
             OperationViewMainGrid.Children.Add(updateOperationView);
         }
 
-        private void btnRefresh_MouseMove(object sender, MouseEventArgs e)
-        {
-            btnRefresh.Opacity = 0.1;
-        }
+
 
         private void menuUpdateOperation_Click(object sender, RoutedEventArgs e)
         {
             GetUpdateOperation();
 
         }
-
-
 
         private void cboxOperator_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -232,6 +205,7 @@ namespace Tourism.MainPage.MVVM.View
             if (tglIsActive.IsChecked == true)
             {
                 _isActive = false;
+
                 SearchOperationMain();
             }
             else if (tglIsActive.IsChecked == false)
@@ -241,6 +215,46 @@ namespace Tourism.MainPage.MVVM.View
             }
         }
 
+        private void editCurrency_Click(object sender, RoutedEventArgs e)
+        {
+            Currency currency = new Currency();
+            currency.ShowDialog();
+        }
 
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                tboxOperationSearch.Text = String.Empty;
+                cboxMainCategory.SelectedIndex = -1;
+                cboxMainCategory.SelectedValue = 0;
+                cboxSubCategory.SelectedValue = 0;
+                cboxOperator.SelectedValue = 0;
+                cboxCurrency.SelectedValue = 0;
+                cboxSubCategory.Visibility = Visibility.Hidden;
+                _mainCategoryId = 0;
+                _subCategoryId = 0;
+                _operatorId = 0;
+                _currencyId = 0;
+                _isActive = true;
+                tglIsActive.IsChecked = false;
+                datePickStartDate.SelectedDate = DateTime.MinValue;
+                datePickEndDate.SelectedDate = DateTime.MaxValue;
+                dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error for refreshing!");
+            }
+        }
+
+        private void btnExportToExcel_Click(object sender, RoutedEventArgs e)
+        {
+            Utilities.ExportToExcel(dgwOperationMain);
+        }
     }
+
+
+
+
 }

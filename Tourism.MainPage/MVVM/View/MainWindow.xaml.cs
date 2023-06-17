@@ -1,16 +1,9 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Drawing;
+﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using Tourism.MainPage.Core;
-using Tourism.MainPage.MVVM.ViewModel;
-using Tourism.MainPage.Services;
+
 
 namespace Tourism.MainPage
 {
@@ -24,11 +17,11 @@ namespace Tourism.MainPage
 
         }
 
-        public MainWindow(Brush color)
+        public MainWindow(int number )
         {
             InitializeComponent();
 
-            mainWindowMainBorder.Background = color;
+            this.IsHitTestVisible = false;
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -54,11 +47,6 @@ namespace Tourism.MainPage
             btnOperations.IsChecked = false;
             btnHome.IsChecked = false;
 
-        }
-
-        private void btnSettings_MouseMove(object sender, MouseEventArgs e)
-        {
-            btnSettings.Opacity = 0.1;
         }
 
         private void RestoreDown()

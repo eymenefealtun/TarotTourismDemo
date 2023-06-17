@@ -18,7 +18,7 @@ namespace Tourism.MainPage.MVVM.View
         private void btnDarkTheme_Checked(object sender, RoutedEventArgs e)
         {
             var color = Brushes.Black;
-            MainWindow mainWindow = new MainWindow(color);
+            //MainWindow mainWindow = new MainWindow(color);
 
      
 
