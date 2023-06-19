@@ -264,6 +264,7 @@
                           VerticalAlignment="Top"
                           Width="125"
                           SelectedDateFormat="Short"
+                          
                           ToolTip="Start Date: mm/dd/yyyy"
                           Margin="395,1,0,0"
                           BorderBrush="{x:Null}"

@@ -1,5 +1,5 @@
-﻿using Azure;
-using System;
+﻿using System;
+using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
@@ -28,12 +28,12 @@ namespace Tourism.MainPage.MVVM.View
 
         public string _documentCode;
         public string _operationSearch;
-        public int _mainCategoryId;     
+        public int _mainCategoryId;
         public int _subCategoryId;
         public int _operatorId;
         public int _operationId;
         public int _currencyId;
-        public bool _isActive ;
+        public bool _isActive;
 
         public DateTime _startDate = DateTime.MinValue;
         public DateTime _endDate = DateTime.MaxValue;
@@ -48,6 +48,10 @@ namespace Tourism.MainPage.MVVM.View
             _userLevelService = Instancefactory.GetInstance<IUserLevelService>();
             _operatorService = Instancefactory.GetInstance<IOperatorService>();
             _currencyService = Instancefactory.GetInstance<ICurrencyService>();
+
+            var ci = CultureInfo.CreateSpecificCulture(CultureInfo.CurrentCulture.Name);
+            ci.DateTimeFormat.ShortDatePattern = "MM/dd/yyyy";
+            Thread.CurrentThread.CurrentCulture = ci;
         }
 
         private void dgwOperationMain_Loaded(object sender, RoutedEventArgs e)
@@ -89,8 +93,8 @@ namespace Tourism.MainPage.MVVM.View
 
         private void dgwOperationMain_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            //try
-            //{
+            try
+            {
                 OperationMain operationMain = ((DataGrid)sender).SelectedItem as OperationMain;
                 string documentCode = operationMain.DocumentCode;
                 int operationId = operationMain.Id;
@@ -99,12 +103,12 @@ namespace Tourism.MainPage.MVVM.View
                 _documentCode = documentCode;
                 _subCategoryId = subCategoryId;
                 GetCustomerOperationView();
-            //}
-            //catch (Exception exception)
-            //{
-            //    MessageBox.Show("Not Valid!");
-            //    MessageBox.Show(exception.Message);
-            //}
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show("Not Valid!");
+                MessageBox.Show(exception.Message);
+            }
         }
         private void dgwOperationMain_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -159,7 +163,7 @@ namespace Tourism.MainPage.MVVM.View
 
         private void GetCustomerOperationView()
         {
-            CustomerOperationView customerOperationView = new CustomerOperationView(_operationId, _documentCode, _subCategoryId);       
+            CustomerOperationView customerOperationView = new CustomerOperationView(_operationId, _documentCode, _subCategoryId);
             OperationViewMainGrid.Children.Add(customerOperationView);
         }
 

@@ -2,8 +2,6 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Documents;
-using System.Windows.Input;
-using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
@@ -16,22 +14,16 @@ namespace Tourism.MainPage.MVVM.View
 
         #region Service
         private IOperationService _operationService;
-        private IOperationMainService _operationMainService;
-        private ICustomerOperationService _customerOperationService;
         private IMainCategoryService _mainCategoryService;
         private ISubCategoryService _subCategoryService;
-        private IUserLevelService _userLevelService;
         private ICurrencyService _currencyService;
         #endregion
         public AddOperationView()
         {
             InitializeComponent();
-            _operationMainService = Instancefactory.GetInstance<IOperationMainService>();
-            _customerOperationService = Instancefactory.GetInstance<ICustomerOperationService>();
             _mainCategoryService = Instancefactory.GetInstance<IMainCategoryService>();
             _subCategoryService = Instancefactory.GetInstance<ISubCategoryService>();
             _operationService = Instancefactory.GetInstance<IOperationService>();
-            _userLevelService = Instancefactory.GetInstance<IUserLevelService>();
             _currencyService = Instancefactory.GetInstance<ICurrencyService>();
 
             cboxCurrency.ItemsSource = _currencyService.GetAll();
@@ -47,7 +39,7 @@ namespace Tourism.MainPage.MVVM.View
         {
 
 
-            if (MessageBox.Show("Are you sure you want to add?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            if (MessageBox.Show("Are you sure you want to create the operation?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 try
                 {
@@ -77,7 +69,7 @@ namespace Tourism.MainPage.MVVM.View
                         }
                     };
                     _operationService.Add(operation);
-                    MessageBox.Show("Saved!");
+                    MessageBox.Show("Operation created!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Asterisk);
                     Refresh();
                 }
                 catch (Exception exception)

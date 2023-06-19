@@ -25,7 +25,7 @@
         <Button x:Name="btnBack"
                 Foreground="White"
                 FontSize="30"
-                Content="&#xEC52;"      
+                Content="&#xEC52;"
                 Style="{StaticResource RefreshAndBackButtonTheme}"
                 ToolTip="Back"
                 Command="{Binding OperationViewCommand}"
@@ -184,6 +184,7 @@
                       SelectedValuePath="Id"
                       DisplayMemberPath="Name"
                       VerticalContentAlignment="Center"
+                      Style="{StaticResource ComboBoxTheme}"
                       Margin="103,5,0,0" />
             <ComboBox x:Name="cboxMainCategory"
                       Height="20"
@@ -195,6 +196,7 @@
                       HorizontalContentAlignment="Left"
                       SelectedValuePath="Id"
                       DisplayMemberPath="Name"
+                      Style="{StaticResource ComboBoxTheme}"
                       VerticalContentAlignment="Center"
                       Margin="103,13,0,0"
                       SelectionChanged="cboxMainCategory_SelectionChanged" />
@@ -205,6 +207,7 @@
                       VerticalAlignment="Top"
                       Grid.Column="1"
                       Grid.Row="0"
+                      Style="{StaticResource ComboBoxTheme}"
                       HorizontalContentAlignment="Left"
                       SelectedValuePath="Id"
                       DisplayMemberPath="Name"
