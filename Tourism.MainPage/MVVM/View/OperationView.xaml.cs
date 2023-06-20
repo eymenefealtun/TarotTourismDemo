@@ -221,8 +221,8 @@ namespace Tourism.MainPage.MVVM.View
 
         private void editCurrency_Click(object sender, RoutedEventArgs e)
         {
-            Currency currency = new Currency();
-            currency.ShowDialog();
+            CurrencyWindow currencyWindow = new CurrencyWindow();
+            currencyWindow.ShowDialog();
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
@@ -245,6 +245,9 @@ namespace Tourism.MainPage.MVVM.View
                 datePickStartDate.SelectedDate = DateTime.MinValue;
                 datePickEndDate.SelectedDate = DateTime.MaxValue;
                 dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
+                cboxMainCategory.ItemsSource = _mainCategoryService.GetAll();
+                cboxOperator.ItemsSource = _operatorService.GetAll();
+                cboxCurrency.ItemsSource = _currencyService.GetAll();
             }
             catch (Exception)
             {
@@ -255,6 +258,22 @@ namespace Tourism.MainPage.MVVM.View
         private void btnExportToExcel_Click(object sender, RoutedEventArgs e)
         {
             Utilities.ExportToExcel(dgwOperationMain);
+        }
+
+
+
+        private void editMainCategory_Click(object sender, RoutedEventArgs e)
+        {
+            //_category ca = _category.main;
+            CategoryWindow categoryWindow = new CategoryWindow("main");
+            categoryWindow.ShowDialog();
+        }
+
+        private void editSubCategory_Click(object sender, RoutedEventArgs e)
+        {
+            ISubCategoryService subCategoryService = _subCategoryService;
+            CategoryWindow categoryWindow = new CategoryWindow("sub", _mainCategoryId, subCategoryService);
+            categoryWindow.ShowDialog();
         }
     }
 

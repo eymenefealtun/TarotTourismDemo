@@ -264,7 +264,6 @@
                           VerticalAlignment="Top"
                           Width="125"
                           SelectedDateFormat="Short"
-                          
                           ToolTip="Start Date: mm/dd/yyyy"
                           Margin="395,1,0,0"
                           BorderBrush="{x:Null}"
@@ -288,7 +287,7 @@
 
 
             <ComboBox x:Name="cboxMainCategory"
-                      ToolTip="MainCategory"
+                      ToolTip="Main Category"
                       Height="20"
                       Width="190"
                       HorizontalAlignment="Left"
@@ -301,10 +300,18 @@
                       VerticalContentAlignment="Center"
                       Margin="195,4,0,0"
                       Style="{StaticResource ComboBoxTheme}"
-                      SelectionChanged="cboxMainCategory_SelectionChanged" />
+                      SelectionChanged="cboxMainCategory_SelectionChanged">
+                <ComboBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit Main Category"
+                                  x:Name="editMainCategory"
+                                  Click="editMainCategory_Click" />
+                    </ContextMenu>
+                </ComboBox.ContextMenu>
+            </ComboBox>
 
             <ComboBox x:Name="cboxSubCategory"
-                      ToolTip="SubCategory"
+                      ToolTip="Sub Category"
                       HorizontalContentAlignment="Left"
                       DisplayMemberPath="Name"
                       SelectedValuePath="Id"
@@ -318,7 +325,16 @@
                       VerticalAlignment="Bottom"
                       Style="{StaticResource ComboBoxTheme}"
                       Margin="195,0,0,4"
-                      SelectionChanged="cboxSubCategory_SelectionChanged" />
+                      SelectionChanged="cboxSubCategory_SelectionChanged">
+                <ComboBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem Header="Edit Sub Category"
+                                  x:Name="editSubCategory"
+                                  Click="editSubCategory_Click" />
+                    </ContextMenu>
+                </ComboBox.ContextMenu>
+
+            </ComboBox>
 
             <ComboBox x:Name="cboxOperator"
                       ToolTip="Operator"

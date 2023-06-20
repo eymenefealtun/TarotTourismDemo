@@ -7,7 +7,7 @@ using Tourism.DataAccess.Concrete.EntityFramework;
 
 namespace Tourism.Entities.Concrete
 {
-    public class MainCategoryManager : IMainCategoryService     
+    public class MainCategoryManager : IMainCategoryService
     {
         private IMainCategoryDal _mainCategoryDal;  
         public MainCategoryManager(IMainCategoryDal mainCategoryDal)
@@ -16,7 +16,7 @@ namespace Tourism.Entities.Concrete
         }
 
         public MainCategory GetByMainCategoryId(int mainCategoryId)
-        {
+        {       
             return _mainCategoryDal.Get(x=>x.Id == mainCategoryId);      
         }
         //public MainCategory GetBySubcategoryId(int subCateogryId)
@@ -29,7 +29,14 @@ namespace Tourism.Entities.Concrete
             return _mainCategoryDal.GetAll();           
         }
 
+        public MainCategory Update(MainCategory mainCategory)
+        {
+            return _mainCategoryDal.Update(mainCategory);
+        }
 
-
+        public MainCategory Add(MainCategory mainCategory)
+        {           
+            return _mainCategoryDal.Add(mainCategory);
+        }
     }
 }

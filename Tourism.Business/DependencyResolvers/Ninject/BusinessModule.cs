@@ -13,6 +13,7 @@ namespace Tourism.Business.DependencyResolvers.Ninject
     {
         public override void Load()
         {
+
             Bind<IOperationService>().To<OperationManager>().InSingletonScope();
             Bind<IOperationDal>().To<EfOperationDal>().InSingletonScope();
 
@@ -24,7 +25,6 @@ namespace Tourism.Business.DependencyResolvers.Ninject
 
             Bind<ICustomerOperationService>().To<CustomerOperationManager>().InSingletonScope();
             Bind<ICustomerOperationDal>().To<EfCustomerOperationDal>().InSingletonScope();
-
 
             Bind<ICustomerService>().To<CustomerManager>().InSingletonScope();
             Bind<ICustomerDal>().To<EfCustomerDal>().InSingletonScope();

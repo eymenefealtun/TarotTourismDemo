@@ -29,7 +29,7 @@
 
         <Button x:Name="btnBack"
                 Foreground="White"
-                FontSize="30"       
+                FontSize="30"
                 Content="&#xEC52;"
                 Style="{StaticResource RefreshAndBackButtonTheme}"
                 ToolTip="Back"

@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-
+    <!--Text="&#xE74E;"-->
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
            x:Key="SaveCurrencyButtonTheme">
@@ -14,7 +14,7 @@
                             <Grid VerticalAlignment="Stretch"
                                   HorizontalAlignment="Stretch"
                                   Background="{TemplateBinding Background}">
-                                <TextBlock Text="&#xE74E;"
+                                <TextBlock Text="{TemplateBinding Property=Content}"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
                                            FontSize="12"

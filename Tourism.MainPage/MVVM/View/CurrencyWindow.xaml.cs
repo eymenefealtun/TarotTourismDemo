@@ -7,16 +7,16 @@ using Tourism.Entities.Concrete;
 namespace Tourism.MainPage.MVVM.View
 {
 
-    public partial class Currency : Window
+    public partial class CurrencyWindow : Window
     {
         private ICurrencyService _currencyService;
 
-        private int _currencyId;
+        private int _currencyId;            
         private string _currencyName;
-        public Currency()
+        public CurrencyWindow( )     
         {
             InitializeComponent();
-
+     
             _currencyService = Instancefactory.GetInstance<ICurrencyService>();
 
         }

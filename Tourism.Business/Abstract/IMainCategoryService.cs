@@ -11,6 +11,9 @@ namespace Tourism.Entities.Concrete
     {
         List<MainCategory> GetAll();                
         MainCategory GetByMainCategoryId(int mainCategoryId);                           
+        MainCategory Add(MainCategory mainCategory);                                  
+        MainCategory Update(MainCategory mainCategory);                           
        // MainCategory GetBySubcategoryId(int mainCategoryId);                           
-    }
+    }       
 }
+        

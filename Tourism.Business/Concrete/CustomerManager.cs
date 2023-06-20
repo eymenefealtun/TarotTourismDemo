@@ -30,7 +30,7 @@ namespace Tourism.Entities.Concrete
 
         public List<Customer> GetByRoomId(int roomId)
         {
-            return _customerDal.GetAllWithFilter(x => x.RoomId == roomId);
+            return _customerDal.GetAll(x => x.RoomId == roomId);
         }
 
         public Customer Update(Customer customer)

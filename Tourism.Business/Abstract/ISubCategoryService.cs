@@ -9,8 +9,10 @@ namespace Tourism.Entities.Concrete
 {
     public interface ISubCategoryService
     {
+        SubCategory Add(SubCategory subCategory);       
         List<SubCategory> GetAll();
         List<SubCategory> GetByMainCategory(int mainCategoryId);
         SubCategory GetBySubCategoryId(int subCategoryId);      
+        SubCategory Update(SubCategory subCategory);      
     }
 }

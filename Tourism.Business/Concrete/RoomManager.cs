@@ -17,7 +17,7 @@ namespace Tourism.Entities.Concrete
 
         public List<Room> GetByReservationId(int reservationId)
         {
-            return _roomDal.GetAllWithFilter(x => x.ReservationId == reservationId);
+            return _roomDal.GetAll(x => x.ReservationId == reservationId);
         }
     }
 }

@@ -3,44 +3,20 @@ using System.Windows.Controls;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 using System.Windows;
-using System.Windows.Media;
 using System.Linq;
 using Tourism.Business.Abstract.Models;
 using Tourism.Entities.Models;
 using Tourism.DataAccess.Abstract;
-using System.Threading;
 using System.Collections.Generic;
 using System.Globalization;
-using System.Windows.Input;
 using System.Windows.Documents;
-using Azure;
 using Operation = Tourism.Entities.Concrete.Operation;
-using Microsoft.EntityFrameworkCore;
 using Tourism.MainPage.Core;
+using Microsoft.EntityFrameworkCore;
 
 namespace Tourism.MainPage.MVVM.View
 {
-    public class BindingProxy : Freezable
-    {
-        #region Overrides of Freezable
 
-        protected override Freezable CreateInstanceCore()
-        {
-            return new BindingProxy();
-        }
-
-        #endregion
-
-        public object Data
-        {
-            get { return (object)GetValue(DataProperty); }
-            set { SetValue(DataProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for Data.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty DataProperty =
-            DependencyProperty.Register("Data", typeof(object), typeof(BindingProxy), new UIPropertyMetadata(null));
-    }
 
     public partial class ReservationDetailView : UserControl
     {
@@ -59,14 +35,15 @@ namespace Tourism.MainPage.MVVM.View
         private IRoomService _roomService;
         private IBedTypeService _bedTypeService;
 
-
-
         private int _operationId;
         private int _subCateogryId;
         private int _reservationId;
         private bool _isActive;
-
+        private List<Customer> _customers;
+        private Reservation _reservation;
         private List<CustomerOperation> _customerOperations;
+        List<Room> _room;
+
         public ReservationDetailView(int operationId, int subCategoryId, int reservationId, bool isActive)
         {
             InitializeComponent();
@@ -92,15 +69,12 @@ namespace Tourism.MainPage.MVVM.View
             dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperationByReservationId(_operationId, _reservationId, _isActive);
 
             _customerOperations = _customerOperationService.GetCustomerOperationByReservationId(_operationId, _reservationId, _isActive);
-            //columnBedType.ItemsSource = _bedTypeService.GetAll();
-            //            columnBedType.SelectedItemBinding 
 
-            //cboxBedType.ItemsSource = _bedTypeService.GetAll();
         }
+
         public ReservationDetailView()
         {
             InitializeComponent();
-
         }
 
         private void UserControl_Loaded(object sender, RoutedEventArgs e)
@@ -108,89 +82,6 @@ namespace Tourism.MainPage.MVVM.View
             GetInfos();
             GetBottom();
         }
-
-
-        private void btnBack_Click(object sender, RoutedEventArgs e)
-        {
-            this.Visibility = Visibility.Collapsed;
-        }
-
-        private string _firstName;
-        private string _lastName;
-        private string _gender;
-        private string _idNumber;
-        private string _phone;
-        private DateTime _birthDate;
-        private void btnEdit_Click(object sender, RoutedEventArgs e)
-        {
-
-            btnSave.Visibility = Visibility.Visible;
-            btnCancel.Visibility = Visibility.Visible;
-            tboxFirstName.Visibility = Visibility.Visible;
-            tboxLastName.Visibility = Visibility.Visible;
-            tboxGender.Visibility = Visibility.Visible;
-            tboxIdNumber.Visibility = Visibility.Visible;
-            tboxPhone.Visibility = Visibility.Visible;
-            cboxBedType.Visibility = Visibility.Visible;
-            tboxBirthDate.Visibility = Visibility.Visible;
-
-
-            Button button = sender as Button;
-            //Tourism.Entities.Concrete.Currency currency = button.CommandParameter as Tourism.Entities.Concrete.Currency;
-            // BedType bedType = button.CommandParameter as BedType;
-            Customer customer = button.CommandParameter as Customer;
-
-            if (customer != null)
-            {
-                _firstName = customer.FirstName;
-                _lastName = customer.LastName;
-                _gender = customer.Gender;
-                _idNumber = customer.IdNumber;
-                _phone = customer.Phone;
-                _birthDate = customer.BirthDate;
-                tboxFirstName.Text = _firstName;
-                tboxLastName.Text = _lastName;
-                tboxGender.Text = _gender;
-                tboxIdNumber.Text = _idNumber;
-                tboxPhone.Text = _phone;
-                tboxBirthDate.Text = _birthDate.ToString();
-            }
-
-
-
-
-
-        }
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-
-            btnSave.Visibility = Visibility.Hidden;
-            btnCancel.Visibility = Visibility.Hidden;
-            btnEdit.Visibility = Visibility.Visible;
-            tboxFirstName.Visibility = Visibility.Hidden;
-            tboxLastName.Visibility = Visibility.Hidden;
-            tboxGender.Visibility = Visibility.Hidden;
-            tboxIdNumber.Visibility = Visibility.Hidden;
-            tboxPhone.Visibility = Visibility.Hidden;
-            cboxBedType.Visibility = Visibility.Hidden;
-            tboxBirthDate.Visibility = Visibility.Hidden;
-            dgwCustomerOperation.IsReadOnly = true;
-            dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperationByReservationId(_operationId, _reservationId, _isActive);
-
-            //GetInfos();
-
-
-        }
-        private void btnEdit_Click_1(object sender, RoutedEventArgs e)
-        {
-            btnEdit.Visibility = Visibility.Hidden;
-            btnCancel.Visibility = Visibility.Visible;
-            btnSave.Visibility = Visibility.Visible;
-            dgwCustomerOperation.IsReadOnly = false;
-            dgwCustomerOperation.Columns[0].IsReadOnly = true;
-
-        }
-        Reservation _reservation;
         private void GetInfos()
         {
 
@@ -225,11 +116,8 @@ namespace Tourism.MainPage.MVVM.View
             tboxCreatedDate.Text = _reservation.CreatedDate.ToString();
             Operator @operator = _operatorService.GetByOperatorId(createdBy.OperatorId); //operator başına @ koymayınca hata verioyr neden bilmiyorum
 
-
-
-
-
         }
+
         private void GetBottom()
         {
             RenewReservation();
@@ -237,70 +125,91 @@ namespace Tourism.MainPage.MVVM.View
             tboxDiscountedPrice.Text = _reservation.DiscountedPrice.ToString();
             rbtboxNote.Document.Blocks.Clear();
             rbtboxNote.Document.Blocks.Add(new Paragraph(new Run(_reservation.Note)));
-
             toggleBtnIsActive.IsChecked = _reservation.IsActive == true ? toggleBtnIsActive.IsChecked = true : toggleBtnIsActive.IsChecked = false;
         }
-        List<Customer> _customers;
+
+        private void btnBack_Click(object sender, RoutedEventArgs e)
+        {
+            this.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+
+            btnSave.Visibility = Visibility.Hidden;
+            btnCancel.Visibility = Visibility.Hidden;
+            btnEdit.Visibility = Visibility.Visible;
+            dgwCustomerOperation.IsReadOnly = true;
+            dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperationByReservationId(_operationId, _reservationId, _isActive);
+
+        }
+
+        private void btnEdit_Click_1(object sender, RoutedEventArgs e)
+        {
+            btnEdit.Visibility = Visibility.Hidden;
+            btnCancel.Visibility = Visibility.Visible;
+            btnSave.Visibility = Visibility.Visible;
+            dgwCustomerOperation.IsReadOnly = false;
+            dgwCustomerOperation.Columns[0].IsReadOnly = true;
+
+        }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
-
                 if (MessageBox.Show("Are you sure you want to save?", "Update", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
                 {
-                    RenewReservation();
                     _customers = new List<Customer>();
                     for (int i = 0; i < dgwCustomerOperation.Items.Count; i++)
                     {
-                        try
+                        DataGridRow dataGridRow = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i);
+                        var gender = dgwCustomerOperation.Columns[1].GetCellContent(dataGridRow) as TextBlock;
+                        var firstName = dgwCustomerOperation.Columns[2].GetCellContent(dataGridRow) as TextBlock;
+                        var lastName = dgwCustomerOperation.Columns[3].GetCellContent(dataGridRow) as TextBlock;
+                        var birthDateTextBlock = dgwCustomerOperation.Columns[4].GetCellContent(dataGridRow) as TextBlock;
+                        var phone = dgwCustomerOperation.Columns[5].GetCellContent(dataGridRow) as TextBlock;
+                        var idNumber = dgwCustomerOperation.Columns[6].GetCellContent(dataGridRow) as TextBlock;
+                        _customers.Add(new Customer
                         {
-                            DataGridRow dataGridRow = (DataGridRow)dgwCustomerOperation.ItemContainerGenerator.ContainerFromIndex(i);
-                            var gender = dgwCustomerOperation.Columns[1].GetCellContent(dataGridRow) as TextBlock;
-                            var firstName = dgwCustomerOperation.Columns[2].GetCellContent(dataGridRow) as TextBlock;
-                            var lastName = dgwCustomerOperation.Columns[3].GetCellContent(dataGridRow) as TextBlock;
-                            var birthDateTextBlock = dgwCustomerOperation.Columns[4].GetCellContent(dataGridRow) as TextBlock;
-                            var phone = dgwCustomerOperation.Columns[5].GetCellContent(dataGridRow) as TextBlock;
-                            var idNumber = dgwCustomerOperation.Columns[6].GetCellContent(dataGridRow) as TextBlock;
-                            _customers.Add(new Customer
-                            {
-                                //Id = Convert.ToInt32(_customerService.GetByRoomId(_customerOperations[i].CustomerId)),
-                                Id = Convert.ToInt32(_customerOperations[i].CustomerId),
-                                FirstName = firstName.Text.ToString(),
-                                LastName = lastName.Text.ToString(),
-                                Phone = phone.Text.ToString(),
-                                BirthDate = Convert.ToDateTime(DateTime.ParseExact(birthDateTextBlock.Text, "M/d/yyyy", CultureInfo.InvariantCulture)),
-                                Gender = gender.Text.ToString(),
-                                IdNumber = idNumber.Text.ToString(),
-                                RoomId = _customerOperations[i].RoomId,
-
-                            });
-                        }
-                        catch (Exception excepttion)
-                        {
-
-                            MessageBox.Show(excepttion.Message);
-                        }
-
+                            Id = Convert.ToInt32(_customerOperations[i].CustomerId),
+                            FirstName = firstName.Text.ToString(),
+                            LastName = lastName.Text.ToString(),
+                            Phone = phone.Text.ToString(),
+                            BirthDate = Convert.ToDateTime(DateTime.ParseExact(birthDateTextBlock.Text, "M/d/yyyy", CultureInfo.InvariantCulture)),
+                            Gender = gender.Text.ToString(),
+                            IdNumber = idNumber.Text.ToString(),
+                            RoomId = _customerOperations[i].RoomId,
+                            RowVersion = _customerOperations[i].CustomerRowVersion
+                        });
                     }
                     _customerService.BulkUpdate(_customers);
                     MessageBox.Show("Saved", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
-
+                    _customerOperations = _customerOperationService.GetCustomerOperationByReservationId(_operationId, _reservationId, _isActive);
+                    dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperationByReservationId(_operationId, _reservationId, _isActive);
                     btnEdit.Visibility = Visibility.Visible;
                     btnCancel.Visibility = Visibility.Hidden;
                     btnSave.Visibility = Visibility.Hidden;
                     dgwCustomerOperation.IsReadOnly = true;
                 }
             }
-
+            catch (DbUpdateConcurrencyException)
+            {
+                MessageBox.Show("These customers already updated by another user while you are in this page!" + Environment.NewLine + "Customer informations are going to updated according to previous modification done by another user, after you click OK.", "Tarot MIS - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                _customerOperations = _customerOperationService.GetCustomerOperationByReservationId(_operationId, _reservationId, _isActive);
+                dgwCustomerOperation.ItemsSource = _customerOperationService.GetCustomerOperationByReservationId(_operationId, _reservationId, _isActive);
+                btnEdit.Visibility = Visibility.Visible;
+                btnCancel.Visibility = Visibility.Hidden;
+                btnSave.Visibility = Visibility.Hidden;
+                dgwCustomerOperation.IsReadOnly = true;
+            }
             catch (Exception excepttion)
             {
-
                 MessageBox.Show(excepttion.Message);
             }
-
         }
+
+
 
         private void btnEditBottom_Click(object sender, RoutedEventArgs e)
         {
@@ -326,13 +235,10 @@ namespace Tourism.MainPage.MVVM.View
             if (MessageBox.Show("Are you sure you want to save?", "Save", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
                 UpdateReservation();
-                MessageBox.Show("Saved", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
         private void UpdateReservation()
         {
-            RenewReservation();
-
             try
             {
                 var text = new TextRange(rbtboxNote.Document.ContentStart, rbtboxNote.Document.ContentEnd).Text;
@@ -349,9 +255,10 @@ namespace Tourism.MainPage.MVVM.View
                     AgencyUserId = _reservation.AgencyUserId,
                     OperationId = _reservation.OperationId,
                     IsActive = _reservation.IsActive,
+                    RowVersion = _reservation.RowVersion,
                 };
-
                 _reservationService.Update(reservation);
+                MessageBox.Show("Saved", "Saved", MessageBoxButton.OK, MessageBoxImage.Information);
                 btnEditBottom.Visibility = Visibility.Visible;
                 btnCancelBottom.Visibility = Visibility.Hidden;
                 btnSaveBottom.Visibility = Visibility.Hidden;
@@ -360,6 +267,17 @@ namespace Tourism.MainPage.MVVM.View
                 GetBottom();
 
             }
+            catch (DbUpdateConcurrencyException)
+            {
+                MessageBox.Show("This reservation already updated by another user while you are in this page!" + Environment.NewLine + "Reservation informations are going to updated according to previous modification done by another user, after you click OK.", "Tarot MIS - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                RenewReservation();
+                btnEditBottom.Visibility = Visibility.Visible;
+                btnCancelBottom.Visibility = Visibility.Hidden;
+                btnSaveBottom.Visibility = Visibility.Hidden;
+                tboxDiscountedPrice.IsReadOnly = true;
+                rbtboxNote.IsReadOnly = true;
+                GetBottom();
+            }
             catch (Exception exception)
             {
                 MessageBox.Show(exception.Message);
@@ -367,70 +285,65 @@ namespace Tourism.MainPage.MVVM.View
         }
         private void ChangeActicityOfReservation()
         {
-            RenewReservation();
+            //RenewReservation();
             _reservation.IsActive = _isActive;
-            try
+
+            if (_isActive == true)
             {
-                if (_isActive == true)
+                Reservation reservation = new Reservation
                 {
-                    Reservation reservation = new Reservation
-                    {
-                        Id = _reservation.Id,
-                        ReservationCode = _reservation.ReservationCode,
-                        Pax = dgwCustomerOperation.Items.Count, //
-                        Room = _room.Count,//
+                    Id = _reservation.Id,
+                    ReservationCode = _reservation.ReservationCode,
+                    Pax = dgwCustomerOperation.Items.Count, //
+                    Room = _room.Count,//
 
-                        TotalPrice = _reservation.TotalPrice,
-                        Note = new TextRange(rbtboxNote.Document.ContentStart, rbtboxNote.Document.ContentEnd).Text,
-                        DiscountedPrice = Convert.ToDecimal(tboxDiscountedPrice.Text),
-                        CreatedDate = _reservation.CreatedDate,
-                        AgencyUserId = _reservation.AgencyUserId,
-                        OperationId = _reservation.OperationId,
-                        IsActive = _reservation.IsActive,
-                    };
-                    _reservationService.Update(reservation);
-                    btnEditBottom.Visibility = Visibility.Visible;
-                    btnCancelBottom.Visibility = Visibility.Hidden;
-                    btnSaveBottom.Visibility = Visibility.Hidden;
-                    rbtboxNote.IsReadOnly = true;
-                    tboxDiscountedPrice.IsReadOnly = true;
-                    GetBottom();
-                }
-                else if (_isActive == false)
-                {
-                    Reservation reservation = new Reservation
-                    {
-                        Id = _reservation.Id,
-                        ReservationCode = _reservation.ReservationCode,
-                        Pax = Convert.ToInt32(null),
-                        Room = Convert.ToInt32(null),
-                        TotalPrice = _reservation.TotalPrice,
-                        Note = new TextRange(rbtboxNote.Document.ContentStart, rbtboxNote.Document.ContentEnd).Text,
-                        DiscountedPrice = Convert.ToDecimal(tboxDiscountedPrice.Text),
-                        CreatedDate = _reservation.CreatedDate,
-                        AgencyUserId = _reservation.AgencyUserId,
-                        OperationId = _reservation.OperationId,
-                        IsActive = _reservation.IsActive,
-                    };
-                    _reservationService.Update(reservation);
-                    btnEditBottom.Visibility = Visibility.Visible;
-                    btnCancelBottom.Visibility = Visibility.Hidden;
-                    btnSaveBottom.Visibility = Visibility.Hidden;
-                    rbtboxNote.IsReadOnly = true;
-                    tboxDiscountedPrice.IsReadOnly = true;
-                    GetBottom();
-                }
-
-
-
-
+                    TotalPrice = _reservation.TotalPrice,
+                    Note = new TextRange(rbtboxNote.Document.ContentStart, rbtboxNote.Document.ContentEnd).Text,
+                    DiscountedPrice = Convert.ToDecimal(tboxDiscountedPrice.Text),
+                    CreatedDate = _reservation.CreatedDate,
+                    AgencyUserId = _reservation.AgencyUserId,
+                    OperationId = _reservation.OperationId,
+                    IsActive = _reservation.IsActive,
+                    RowVersion = _reservation.RowVersion,
+                };
+                _reservationService.Update(reservation);
+                btnEditBottom.Visibility = Visibility.Visible;
+                btnCancelBottom.Visibility = Visibility.Hidden;
+                btnSaveBottom.Visibility = Visibility.Hidden;
+                rbtboxNote.IsReadOnly = true;
+                tboxDiscountedPrice.IsReadOnly = true;
+                GetBottom();
             }
-            catch (Exception exception)
+            else if (_isActive == false)
             {
-                MessageBox.Show(exception.Message);
+                Reservation reservation = new Reservation
+                {
+                    Id = _reservation.Id,
+                    ReservationCode = _reservation.ReservationCode,
+                    Pax = Convert.ToInt32(null),
+                    Room = Convert.ToInt32(null),
+                    TotalPrice = _reservation.TotalPrice,
+                    Note = new TextRange(rbtboxNote.Document.ContentStart, rbtboxNote.Document.ContentEnd).Text,
+                    DiscountedPrice = Convert.ToDecimal(tboxDiscountedPrice.Text),
+                    CreatedDate = _reservation.CreatedDate,
+                    AgencyUserId = _reservation.AgencyUserId,
+                    OperationId = _reservation.OperationId,
+                    IsActive = _reservation.IsActive,
+                    RowVersion = _reservation.RowVersion,
+                };
+                _reservationService.Update(reservation);
+                btnEditBottom.Visibility = Visibility.Visible;
+                btnCancelBottom.Visibility = Visibility.Hidden;
+                btnSaveBottom.Visibility = Visibility.Hidden;
+                rbtboxNote.IsReadOnly = true;
+                tboxDiscountedPrice.IsReadOnly = true;
+                GetBottom();
             }
+
+
+
         }
-        List<Room> _room;
+
         private void RenewReservation()
         {
             Reservation reservation2 = _reservationService.Get(_reservationId);
@@ -449,17 +362,22 @@ namespace Tourism.MainPage.MVVM.View
                     {
                         _isActive = false;
                         ChangeActicityOfReservation();
-                        MessageBox.Show("Reservation succesfully deactivated!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Reservation succesfully deactivated!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    //catch (DbUpdateConcurrencyException)
-                    //{
-                    //    MessageBox.Show("This package already updated by another user while you are in this page!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //    GetInfo();
-                    //}
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        MessageBox.Show("This reservation already updated by another user while you are in this page!" + Environment.NewLine + "Reservation informations are going to updated according to previous modification done by another user, after you click OK.", "Tarot MIS - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        RenewReservation();
+                        btnEditBottom.Visibility = Visibility.Visible;
+                        btnCancelBottom.Visibility = Visibility.Hidden;
+                        btnSaveBottom.Visibility = Visibility.Hidden;
+                        tboxDiscountedPrice.IsReadOnly = true;
+                        rbtboxNote.IsReadOnly = true;
+                        GetBottom();
+                    }
                     catch (Exception exception)
                     {
                         MessageBox.Show(exception.Message);
-                        GetBottom();
                     }
                 }
                 else
@@ -477,17 +395,22 @@ namespace Tourism.MainPage.MVVM.View
                         _isActive = true;
 
                         ChangeActicityOfReservation();
-                        MessageBox.Show("Reservation succesfully activated!", "", MessageBoxButton.OK, MessageBoxImage.Information);
+                        MessageBox.Show("Reservation succesfully activated!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    //catch (DbUpdateConcurrencyException)
-                    //{
-                    //    MessageBox.Show("This package already updated by another user while you are in this page!", "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                    //}
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        MessageBox.Show("This reservation already updated by another user while you are in this page!" + Environment.NewLine + "Reservation informations are going to updated according to previous modification done by another user, after you click OK.", "Tarot MIS - Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                        RenewReservation();
+                        btnEditBottom.Visibility = Visibility.Visible;
+                        btnCancelBottom.Visibility = Visibility.Hidden;
+                        btnSaveBottom.Visibility = Visibility.Hidden;
+                        tboxDiscountedPrice.IsReadOnly = true;
+                        rbtboxNote.IsReadOnly = true;
+                        GetBottom();
+                    }
                     catch (Exception exception)
                     {
                         MessageBox.Show(exception.Message);
-                        GetBottom();
-
                     }
                 }
                 else
@@ -496,7 +419,6 @@ namespace Tourism.MainPage.MVVM.View
                     GetBottom();
                 }
             }
-
 
 
         }

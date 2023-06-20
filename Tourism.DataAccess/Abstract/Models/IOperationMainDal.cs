@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.Entities.Concrete;
-using Tourism.Entities.Models;
+﻿using Tourism.Entities.Models;
 
 namespace Tourism.DataAccess.Abstract.Models
 {
     public interface IOperationMainDal : IEntityRepository<OperationMain>
     {
+        List<OperationMain> GetOperationMain();
+        List<OperationMain> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate, int operatorId, int currencyId, bool isActive);
     }
 }

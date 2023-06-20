@@ -1,11 +1,11 @@
-﻿<Window x:Class="Tourism.MainPage.MVVM.View.CurrencyWindow"
+﻿<Window x:Class="Tourism.MainPage.MVVM.View.CategoryWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View"      
+        xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View"
         mc:Ignorable="d"
-        Title="Currency"
+        Title="CategoryWindow"
         Height="310"
         Width="420"
         AllowsTransparency="True"
@@ -16,19 +16,22 @@
     <Border Background="#154c79"
             CornerRadius="10">
 
+
         <Grid>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="200" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
             <Border Background="White"
                     Height="310"
-                    Width="110"
+                    Width="200"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     CornerRadius="10">
-                <DataGrid x:Name="dgwCurrency"
+
+                <DataGrid x:Name="dgwCategory"
                           Height="300"
                           Width="200"
                           IsReadOnly="True"
@@ -43,13 +46,12 @@
                           AlternatingRowBackground="#dbdcdc"
                           RowHeight="25"
                           Margin="0,0,0,10"
-                          Loaded="dgwCurrency_Loaded">
+                          Loaded="dgwCategory_Loaded">
 
                     <DataGrid.Columns>
-                        <DataGridTextColumn Header="Currency"
-                                            Width="60"
+                        <DataGridTextColumn Header=" Category Name"
+                                            Width="130"
                                             Binding="{Binding Name}" />
-
 
                         <DataGridTemplateColumn x:Name="columnEdit"
                                                 Header=""
@@ -61,6 +63,26 @@
                                             ToolTip="Edit"
                                             Style="{StaticResource EditCurrencyButtonTheme}"
                                             Click="btnEdit_Click" />
+
+                                </DataTemplate>
+
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="columnRelocate"
+                                                Header=""
+                                                Width="25">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="btnRelocate"
+                                            CommandParameter="{Binding}"
+                                            ToolTip="Relocate"
+                                            Height="20"
+                                            Width="20"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Center"
+                                            Content="&#xE8DE;"
+                                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                                            Click="btnRelocate_Click" />
 
                                 </DataTemplate>
 
@@ -98,6 +120,8 @@
             </Border>
 
 
+
+
             <Grid Grid.Column="1">
 
                 <Button Height="20"
@@ -125,29 +149,29 @@
                         <Grid>
                             <TextBlock HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
-                                       x:Name="txtCurrency"
-                                       Text="Update Currency"
+                                       x:Name="txtCategory"
+                                       Text="Update Category"
                                        Foreground="White"
                                        FontSize="14"
                                        Margin="2,1,0,0"
                                        FontFamily="/Fonts/#Poppins" />
-                            <TextBox x:Name="tboxCurrencyName"
+                            <TextBox x:Name="tboxUpdateCategory"
                                      IsReadOnly="True"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      Margin="0,25,0,0"
                                      Style="{StaticResource UpdateTextBoxTheme}" />
 
-                            <Button x:Name="btnCancel"
+                            <Button x:Name="btnCancelUpdate"
                                     CommandParameter="{Binding}"
                                     ToolTip="Cancel"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     Margin="0,22.5,0,0"
                                     Style="{StaticResource CancelCurrencyButtonTheme}"
-                                    Click="btnCancel_Click" />
+                                    Click="btnCancelUpdate_Click" />
 
-                            <Button x:Name="btnSave"
+                            <Button x:Name="btnSaveUpdate"
                                     CommandParameter="{Binding}"
                                     ToolTip="Save"
                                     Margin="61.5,22.5,0,0"
@@ -155,15 +179,15 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     Style="{StaticResource SaveCurrencyButtonTheme}"
-                                    Click="btnSave_Click" />
+                                    Click="btnSaveUpdate_Click" />
+
+
+
                         </Grid>
 
-
                     </Border>
-
-
-
                 </StackPanel>
+
 
                 <StackPanel x:Name="stackAdd"
                             Visibility="Hidden">
@@ -177,35 +201,35 @@
                         <Grid>
                             <TextBlock HorizontalAlignment="Left"
                                        VerticalAlignment="Top"
-                                       Text="Add Currency"
+                                       Text="Add Category"
                                        Foreground="White"
                                        FontSize="14"
                                        Margin="1,1,0,0"
                                        FontFamily="/Fonts/#Poppins" />
-                            <TextBox x:Name="tboxAddCurrency"
+                            <TextBox x:Name="tboxAddCategory"
                                      HorizontalAlignment="Left"
                                      VerticalAlignment="Top"
                                      Margin="0,25,0,0"
                                      Style="{StaticResource UpdateTextBoxTheme}" />
 
-                            <Button x:Name="btnAddCancel"
+                            <Button x:Name="btnCancelAdd"
                                     CommandParameter="{Binding}"
                                     ToolTip="Cancel"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     Margin="0,22.5,0,0"
                                     Style="{StaticResource CancelCurrencyButtonTheme}"
-                                    Click="btnAddCancel_Click" />
+                                    Click="btnCancelAdd_Click" />
 
-                            <Button x:Name="btnAddSave"
+                            <Button x:Name="btnSaveAdd"
                                     CommandParameter="{Binding}"
                                     ToolTip="Save"
+                                    Content="&#xE74E;"
                                     Margin="61.5,22.5,0,0"
                                     HorizontalAlignment="Center"
-                                    Content="&#xE74E;"
                                     VerticalAlignment="Top"
                                     Style="{StaticResource SaveCurrencyButtonTheme}"
-                                    Click="btnAddSave_Click" />
+                                    Click="btnSaveAdd_Click" />
                         </Grid>
 
 
@@ -215,17 +239,89 @@
 
                 </StackPanel>
 
+                <StackPanel x:Name="stackRelocate"
+                            Visibility="Hidden">
+                    <Border Background="Black"
+                            Height="80"
+                            Width="160"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="2,30,0,0"
+                            CornerRadius="0,10,0,10">
+                        <Grid>
+
+                            <TextBlock HorizontalAlignment="Left"
+                                       VerticalAlignment="Top"
+                                       Text="Relocate the Category"
+                                       Foreground="White"
+                                       FontSize="14"
+                                       Margin="1,1,0,0"
+                                       FontFamily="/Fonts/#Poppins" />
+                            <TextBox x:Name="tboxSubToMain"
+                                     HorizontalAlignment="Left"
+                                     VerticalAlignment="Top"
+                                     IsReadOnly="True"
+                                     Margin="4,25,0,4"
+                                     Style="{StaticResource UpdateTextBoxTheme}" />
+                            <ComboBox Width="56"
+                                      x:Name="cboxMainCategory"
+                                      Height="20"
+                                      SelectedValuePath="Id"
+                                      DisplayMemberPath="Name"
+                                      HorizontalAlignment="Right"
+                                      VerticalAlignment="Top"
+                                      Visibility="Visible"
+                                      Margin="0,25,4,0"
+                                      Style="{StaticResource ComboBoxTheme}" />
+
+                            <TextBlock Text="&#xE72A;"
+                                       Height="20"
+                                       VerticalAlignment="Top"
+                                       Margin="0,25,0,0"
+                                       HorizontalAlignment="Center"
+                                       FontSize="20"
+                                       FontFamily="Segoe MDL2 Assets"
+                                       Foreground="White" />
+
+                            <Button x:Name="btnCancelRelocate"
+                                    CommandParameter="{Binding}"
+                                    ToolTip="Cancel"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Margin="0,0,33,2"
+                                    Style="{StaticResource CancelCurrencyButtonTheme}"
+                                    Click="btnCancelRelocate_Click" />
+
+                            <Button x:Name="btnSaveRelocate"
+                                    CommandParameter="{Binding}"
+                                    ToolTip="Save"
+                                    Content="&#xE74E;"
+                                    Margin="0,0,2,2"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Bottom"
+                                    Style="{StaticResource SaveCurrencyButtonTheme}"
+                                    Click="btnSaveRelocate_Click" />
+
+                        </Grid>
+
+
+                    </Border>
+
+
+
+                </StackPanel>
+
+
+
                 <ToggleButton HorizontalAlignment="Left"
-                              x:Name="btnAddCurrency"
+                              x:Name="btnAddCategory"
                               VerticalAlignment="Top"
                               ToolTip="Add new currency"
                               Margin="2,0,0,0"
-                              Checked="btnAddCurrency_Checked"
-                              Unchecked="btnAddCurrency_Unchecked"
+                              Checked="btnAddCategory_Checked"
+                              Unchecked="btnAddCategory_Unchecked"
                               Style="{StaticResource AddCurrencyButtonTheme}" />
             </Grid>
-
-
 
 
         </Grid>
