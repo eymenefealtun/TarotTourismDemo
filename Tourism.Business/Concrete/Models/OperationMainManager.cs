@@ -1,14 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.Business.Abstract.Models;
+﻿using Tourism.Business.Abstract.Models;
 using Tourism.DataAccess.Abstract.Models;
-using Tourism.DataAccess.Concrete.EntityFramework;
-using Tourism.Entities.Abstract;
-using Tourism.Entities.Concrete;
 using Tourism.Entities.Models;
 
 namespace Tourism.Business.Concrete.Models

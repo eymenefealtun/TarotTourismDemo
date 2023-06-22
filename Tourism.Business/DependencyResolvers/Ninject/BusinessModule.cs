@@ -65,7 +65,8 @@ namespace Tourism.Business.DependencyResolvers.Ninject
             Bind<IBedTypeService>().To<BedTypeManager>().InSingletonScope();
             Bind<IBedTypeDal>().To<EfBedTypeDal>().InSingletonScope();
 
-
+            Bind<IOperatorUserFullService>().To<OperatorUserFullManager>().InSingletonScope();
+            Bind<IOperatorUserFullDal>().To<EfOperatorUserFullDal>().InSingletonScope();        
         }
 
 

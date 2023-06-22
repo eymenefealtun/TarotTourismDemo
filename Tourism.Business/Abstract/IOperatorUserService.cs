@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.DataAccess.Abstract;
-
+﻿
 namespace Tourism.Entities.Concrete
 {
-    public interface IOperatorUserService     
+    public interface IOperatorUserService
     {
-        OperatorUser GetByUserId(int userId);     
-        List<OperatorUser> GetAll();     
+        OperatorUser GetByUserId(int userId);
+        List<OperatorUser> GetAll();
+        OperatorUser Add(OperatorUser operatorUser);
+        OperatorUser Update(OperatorUser operatorUser);
+
     }
 }

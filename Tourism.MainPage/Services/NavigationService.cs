@@ -1,11 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Query.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;using System.Text;
-
+﻿using System;
 using Tourism.MainPage.Core;
-using Tourism.MainPage.MVVM.ViewModel;
 
 namespace Tourism.MainPage.Services
 {
@@ -18,7 +12,7 @@ namespace Tourism.MainPage.Services
     {
         private readonly Func<Type, ViewModel> _viewModelFactory;
 
-        public  ViewModel _currentView;
+        public ViewModel _currentView;
         public ViewModel CurrentView
         {
             get => _currentView;
@@ -29,15 +23,15 @@ namespace Tourism.MainPage.Services
             }
         }
 
-        public NavigationService(Func<Type,ViewModel> viewModelFactory)     
+        public NavigationService(Func<Type, ViewModel> viewModelFactory)
         {
             _viewModelFactory = viewModelFactory;
         }
 
         public void NavigateTo<TViewModel>() where TViewModel : ViewModel
         {
-            ViewModel viewModel =_viewModelFactory.Invoke(typeof(TViewModel));
-            CurrentView = viewModel; 
+            ViewModel viewModel = _viewModelFactory.Invoke(typeof(TViewModel));
+            CurrentView = viewModel;
         }
 
     }

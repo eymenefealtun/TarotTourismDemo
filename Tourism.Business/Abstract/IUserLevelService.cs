@@ -1,15 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.DataAccess.Abstract;
-
+﻿
 namespace Tourism.Entities.Concrete
 {
-    public interface IUserLevelService 
+    public interface IUserLevelService
     {
-        List<UserLevel> GetAll();   
-
+        List<UserLevel> GetAll();       
+        UserLevel Add(UserLevel userLevel);
     }
 }

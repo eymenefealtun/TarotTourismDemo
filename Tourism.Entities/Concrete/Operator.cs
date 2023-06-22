@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.Entities.Abstract;
+﻿using Tourism.Entities.Abstract;
 
 namespace Tourism.Entities.Concrete
 {
@@ -11,7 +6,7 @@ namespace Tourism.Entities.Concrete
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<OperatorUser> OperatorUsers { get; set; }           
+        public List<OperatorUser> OperatorUsers { get; set; }       
 
     }
 }

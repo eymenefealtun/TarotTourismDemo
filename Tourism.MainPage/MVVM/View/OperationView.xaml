@@ -3,14 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View"
-             xmlns:viewModel="clr-namespace:Tourism.MainPage.MVVM.ViewModel"
-             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
              mc:Ignorable="d"
              d:DesignHeight="800"
              d:DesignWidth="1500"
-             Background="#24292f">
+             Background="#0f171e">
 
 
     <Grid Name="OperationViewMainGrid"

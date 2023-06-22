@@ -36,6 +36,7 @@ namespace Tourism.MainPage
             services.AddSingleton<AddOperationViewModel>();      
             services.AddSingleton<UpdateOperationViewModel>();      
             services.AddSingleton<ReservationDetailViewModel>();      
+            services.AddSingleton<OperatorUserViewModel>();      
             
             services.AddSingleton<INavigationService, Services.NavigationService>(); 
 

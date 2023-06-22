@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
 
@@ -17,7 +18,7 @@ namespace Tourism.MainPage
 
         }
 
-        public MainWindow(int number )
+        public MainWindow(int number)
         {
             InitializeComponent();
 
@@ -189,5 +190,44 @@ namespace Tourism.MainPage
         }
 
 
+
+        private void btnModifications_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnModifications.IsChecked == true)
+            {
+                UncheckExcepModification();
+                btnSubOperatorUser.Visibility = Visibility.Visible;
+                btnTrial1.Visibility = Visibility.Visible;
+                btnTrial2.Visibility = Visibility.Visible;
+                
+            }
+            else if (btnModifications.IsChecked == false)
+            {
+                UncheckExcepModification();
+                btnSubOperatorUser.Visibility = Visibility.Collapsed;
+                btnTrial1.Visibility = Visibility.Collapsed;
+                btnTrial2.Visibility = Visibility.Collapsed;
+
+            }
+
+        }
+
+        private void UncheckExcepModification()
+        {
+            btnHome.IsChecked = false;
+            btnOperations.IsChecked = false;
+            btnCustomers.IsChecked = false;
+            btnOperations.IsChecked = false;
+        }
+
+        private void btnSubOperatorUser_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnMenuButtonTheme_Click(object sender, RoutedEventArgs e)
+        {
+            
+        }
     }
 }

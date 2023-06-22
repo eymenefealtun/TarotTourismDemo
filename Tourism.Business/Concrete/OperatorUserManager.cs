@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.DataAccess.Concrete.EntityFramework;
+﻿using Tourism.Business.Utilites;
+using Tourism.Business.ValidationRules.FluentValidation;
 
 namespace Tourism.Entities.Concrete
 {
@@ -12,7 +8,14 @@ namespace Tourism.Entities.Concrete
         private IOperatorUserDal _operatorUserDal;
         public OperatorUserManager(IOperatorUserDal operatorUserDal)
         {
-            _operatorUserDal = operatorUserDal;     
+            _operatorUserDal = operatorUserDal;
+        }
+
+        public OperatorUser Add(OperatorUser operatorUser)
+        {
+            ValidationTool.FluentValidate(new OperatorUserValidator(), operatorUser);
+
+            return _operatorUserDal.Add(operatorUser);          
         }
 
         public List<OperatorUser> GetAll()
@@ -20,9 +23,15 @@ namespace Tourism.Entities.Concrete
             return _operatorUserDal.GetAll();
         }
 
-        public OperatorUser GetByUserId(int userId)     
+        public OperatorUser GetByUserId(int userId)
         {
-            return _operatorUserDal.Get(x=>x.Id == userId);                 
+            return _operatorUserDal.Get(x => x.Id == userId);
+        }
+
+        public OperatorUser Update(OperatorUser operatorUser)
+        {
+            ValidationTool.FluentValidate(new OperatorUserValidator(), operatorUser);
+            return _operatorUserDal.Update(operatorUser);
         }
     }
 }

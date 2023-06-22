@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
-using System.Net;
 using Tourism.Entities.Concrete;
 using Tourism.Entities.Models;
 
@@ -27,10 +26,11 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
 
         #region Models
 
-        public DbSet<OperationMain> OperationMain { get; set; }     
+        public DbSet<OperationMain> OperationMain { get; set; }
         public DbSet<DailySale> DailySales { get; set; }
         public DbSet<CustomerOperation> CustomerOperations { get; set; }
         public DbSet<OperationInformation> OperationInformations { get; set; }
+        public DbSet<OperatorUserFull> OperatorUserFulls { get; set; }
 
         #endregion
 
@@ -46,6 +46,7 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         {
             modelBuilder.Entity<Operation>().HasOne(x => x.OperatorUserCreated).WithMany(x => x.OperatorCreate).HasForeignKey(x => x.CreatedBy);
             modelBuilder.Entity<Operation>().HasOne(x => x.OperatorUserUpdated).WithMany(x => x.OperatorUpdate).HasForeignKey(x => x.LastUpdatedBy);
+
             // modelBuilder.Entity<OperationInformation>().Property(x => x.RowVersion).IsRowVersion();
 
             //modelBuilder.Entity<Operation>().Property(x => x.RowVersion).HasColumnType("timestamp").ValueGeneratedOnAddOrUpdate().IsConcurrencyToken();

@@ -11,19 +11,21 @@
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MainPage/MenuButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />     
-                <ResourceDictionary Source="Theme/RefreshAndBackButtonTheme.xaml" />            
-                <ResourceDictionary Source="Theme/SearchTextBoxTheme.xaml" />       
+                <ResourceDictionary Source="Theme/MainPage/MenuButtoWithSubTheme.xaml" />
+                <ResourceDictionary Source="Theme/MainPage/MenuSubButtonTheme.xaml" />                  
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />             
+                <ResourceDictionary Source="Theme/RefreshAndBackButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/SearchTextBoxTheme.xaml" />
                 <ResourceDictionary Source="Theme/UpdatePage/EditButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/UpdatePage/CancelButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/UpdatePage/SaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/CloseButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/MainPage/SettingsButtonTheme.xaml" />     
+                <ResourceDictionary Source="Theme/MainPage/SettingsButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/RestoreButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/MinimizeButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/UpdatePage/UpdateTextBoxTheme.xaml" />
-                <ResourceDictionary Source="Theme/CurrencyPage/AddCurrencyButtonTheme.xaml" />              
-                <ResourceDictionary Source="Theme/CurrencyPage/EditCurrencyButtonTheme.xaml" />              
+                <ResourceDictionary Source="Theme/CurrencyPage/AddCurrencyButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/CurrencyPage/EditCurrencyButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrencyPage/SaveCurrencyButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrencyPage/CancelCurrencyButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrencyPage/CurrencyCloseButtonTheme.xaml" />
@@ -32,8 +34,10 @@
                 <ResourceDictionary Source="Theme/GeneralTextboxTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralEditToggleButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralSaveButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/GeneralCancelButtonTheme.xaml" />             
-            </ResourceDictionary.MergedDictionaries>        
+                <ResourceDictionary Source="Theme/GeneralCancelButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/OperatorUserPage/AddNewUserTheme.xaml" />
+                <ResourceDictionary Source="Theme/OperatorUserPage/UpdateUserButtonTheme.xaml" />
+            </ResourceDictionary.MergedDictionaries>
 
 
 
@@ -69,7 +73,11 @@
                 <view:UpdateOperationView />
             </DataTemplate>
             <DataTemplate DataType="{x:Type viewModel:ReservationDetailViewModel}">
-                <view:ReservationDetailView />      
+                <view:ReservationDetailView />
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:OperatorUserViewModel}">
+                <view:OperatorUserView />
             </DataTemplate>
 
 

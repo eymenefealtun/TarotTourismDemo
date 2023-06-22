@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Tourism.MainPage.Core;
-using Tourism.MainPage.MVVM.View;
+﻿using Tourism.MainPage.Core;
 using Tourism.MainPage.Services;
 
 namespace Tourism.MainPage.MVVM.ViewModel
@@ -20,6 +13,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
         public RelayCommand AddOperationViewCommand { get; set; }
         public RelayCommand UpdateOperationViewCommand { get; set; }
         public RelayCommand ReservationDetailViewCommand { get; set; }
+        public RelayCommand OperatorUserViewCommand { get; set; }       
 
         //public HomeViewModel HomeVm { get; set; }
         //public OperationViewModel OperationVm { get; set; }
@@ -59,7 +53,8 @@ namespace Tourism.MainPage.MVVM.ViewModel
             CustomerOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerOperationViewModel>(); }, canExecute: o => true);
             AddOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<AddOperationViewModel>(); }, canExecute: o => true);
             UpdateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<UpdateOperationViewModel>(); }, canExecute: o => true);
-            ReservationDetailViewCommand = new RelayCommand(o => { Navigation.NavigateTo<ReservationDetailViewModel>(); }, canExecute: o => true);      
+            ReservationDetailViewCommand = new RelayCommand(o => { Navigation.NavigateTo<ReservationDetailViewModel>(); }, canExecute: o => true);
+            OperatorUserViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperatorUserViewModel>(); }, canExecute: o => true);      
 
 
 
