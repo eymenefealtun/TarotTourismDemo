@@ -1,19 +1,18 @@
 ﻿<Application x:Class="Tourism.MainPage.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="clr-namespace:Tourism.MainPage"
              xmlns:viewModel="clr-namespace:Tourism.MainPage.MVVM.ViewModel"
-             xmlns:view="clr-namespace:Tourism.MainPage.MVVM.View"
-             xmlns:theme="clr-namespace:Microsoft.Windows.Themes;assembly=PresentationFramework.Aero2"
-             xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml">
+             xmlns:view="clr-namespace:Tourism.MainPage.MVVM.View">
     <Application.Resources>
 
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Theme/MainPage/MenuButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/MenuButtoWithSubTheme.xaml" />
-                <ResourceDictionary Source="Theme/MainPage/MenuSubButtonTheme.xaml" />                  
-                <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />             
+                <ResourceDictionary Source="Theme/MainPage/MenuSubButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/MainPage/MenuButtonWithSecondSubTheme.xaml" />
+                <ResourceDictionary Source="Theme/MainPage/MenuSecondSubButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />
                 <ResourceDictionary Source="Theme/RefreshAndBackButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/SearchTextBoxTheme.xaml" />
                 <ResourceDictionary Source="Theme/UpdatePage/EditButtonTheme.xaml" />
@@ -35,6 +34,7 @@
                 <ResourceDictionary Source="Theme/GeneralEditToggleButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralSaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralCancelButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/InfoIconButtonTheme.xaml" />          
                 <ResourceDictionary Source="Theme/OperatorUserPage/AddNewUserTheme.xaml" />
                 <ResourceDictionary Source="Theme/OperatorUserPage/UpdateUserButtonTheme.xaml" />
             </ResourceDictionary.MergedDictionaries>
@@ -80,7 +80,15 @@
                 <view:OperatorUserView />
             </DataTemplate>
 
-
+            <DataTemplate DataType="{x:Type viewModel:CurrencyViewModel}">
+                <view:CurrencyView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:MainCategoryViewModel}">
+                <view:MainCategoryView />
+            </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:SubCategoryViewModel}">
+                <view:SubCategoryView />                    
+            </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>

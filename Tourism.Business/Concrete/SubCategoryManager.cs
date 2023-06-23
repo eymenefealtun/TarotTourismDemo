@@ -1,4 +1,6 @@
-﻿
+﻿using Tourism.Business.Utilites;
+using Tourism.Business.ValidationRules.FluentValidation;
+
 namespace Tourism.Entities.Concrete
 {
     public class SubCategoryManager : ISubCategoryService
@@ -11,6 +13,7 @@ namespace Tourism.Entities.Concrete
 
         public SubCategory Add(SubCategory subCategory)
         {
+            ValidationTool.FluentValidate(new SubCategoryValidator(), subCategory);
             return _subCategoryDal.Add(subCategory);
         }
 
@@ -29,6 +32,7 @@ namespace Tourism.Entities.Concrete
 
         public SubCategory Update(SubCategory subCategory)
         {
+            ValidationTool.FluentValidate(new SubCategoryValidator(), subCategory);
             return _subCategoryDal.Update(subCategory);
         }
     }

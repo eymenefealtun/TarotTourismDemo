@@ -1,8 +1,8 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Style BasedOn="{StaticResource {x:Type Button}}"
-           TargetType="{x:Type Button}"
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type RadioButton}"           
            x:Key="SettingsButtonTheme"
            x:Name="btnMain">
         <Style.Setters>
@@ -11,13 +11,15 @@
                     Value="Transparent" />
             <Setter Property="BorderBrush"
                     Value="{x:Null}" />
+            <Setter Property="Foreground"
+                    Value="#8197a0" />
             <Setter Property="FontFamily"
                     Value="Segoe MDL2 Assets" />
 
             <Setter Property="Template">
 
                 <Setter.Value>
-                    <ControlTemplate TargetType="Button">
+                    <ControlTemplate TargetType="RadioButton">          
                         <TextBlock Text="{TemplateBinding Property=Content}"
                                    x:Name="refreshgSign"
                                    HorizontalAlignment="Center"
@@ -28,7 +30,10 @@
                                       Value="True">
                                 <Setter TargetName="refreshgSign"
                                         Property="Foreground"
-                                        Value="White" />        
+                                        Value="White" />
+                            </Trigger>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Foreground" Value="White"/>
                             </Trigger>
 
                         </ControlTemplate.Triggers>

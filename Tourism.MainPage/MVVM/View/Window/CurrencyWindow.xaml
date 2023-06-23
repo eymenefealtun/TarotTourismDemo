@@ -18,18 +18,18 @@
         <Grid>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="110" />
+                <ColumnDefinition Width="130" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <Border Background="White"
                     Height="310"
-                    Width="110"
+                    Width="130"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     CornerRadius="10">
                 <DataGrid x:Name="dgwCurrency"      
                           Height="300"
-                          Width="110"
+                          Width="130"
                           IsReadOnly="True"
                           FontFamily="/Fonts/#Poppins"
                           SelectedItem="{Binding SelectedItem}"

@@ -59,6 +59,8 @@
                     Value="Transparent" />
             <Setter Property="BorderThickness"
                     Value="0" />
+            <Setter Property="Cursor"
+                    Value="Hand" />
         </Style.Setters>
     </Style>
 </ResourceDictionary>

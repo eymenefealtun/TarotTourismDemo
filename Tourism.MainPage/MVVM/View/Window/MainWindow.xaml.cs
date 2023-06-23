@@ -2,9 +2,10 @@
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
-
+using Tourism.MainPage.MVVM.View;
 
 namespace Tourism.MainPage
 {
@@ -43,11 +44,13 @@ namespace Tourism.MainPage
 
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
-
             btnCustomers.IsChecked = false;
             btnOperations.IsChecked = false;
             btnHome.IsChecked = false;
-
+            btnModifications.BorderThickness = new Thickness(0);
+            btnCurrency.IsChecked = false;
+            btnSubOperatorUser.IsChecked = false;
+            btnCategories.IsChecked = false;
         }
 
         private void RestoreDown()
@@ -71,6 +74,7 @@ namespace Tourism.MainPage
         }
 
 
+        #region Screen
         private void btnTop_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
             DragMove();
@@ -188,46 +192,89 @@ namespace Tourism.MainPage
             public POINT ptMinTrackSize;
             public POINT ptMaxTrackSize;
         }
+        #endregion
 
 
 
         private void btnModifications_Click(object sender, RoutedEventArgs e)
         {
-            if (btnModifications.IsChecked == true)
+            btnSettings.IsChecked = false;
+            if (btnSubOperatorUser.Visibility == Visibility.Collapsed)
             {
-                UncheckExcepModification();
                 btnSubOperatorUser.Visibility = Visibility.Visible;
-                btnTrial1.Visibility = Visibility.Visible;
-                btnTrial2.Visibility = Visibility.Visible;
-                
+                btnCurrency.Visibility = Visibility.Visible;
+                btnCategories.Visibility = Visibility.Visible;
+           
+
             }
-            else if (btnModifications.IsChecked == false)
+            else if (btnSubOperatorUser.Visibility == Visibility.Visible)
             {
-                UncheckExcepModification();
                 btnSubOperatorUser.Visibility = Visibility.Collapsed;
-                btnTrial1.Visibility = Visibility.Collapsed;
-                btnTrial2.Visibility = Visibility.Collapsed;
+                btnCurrency.Visibility = Visibility.Collapsed;
+                btnCategories.Visibility = Visibility.Collapsed;
+                btnSubCategory.Visibility = Visibility.Collapsed;
+                btnMainCategory.Visibility = Visibility.Collapsed;
+                btnCategories.BorderThickness = new Thickness(0);
 
             }
 
         }
 
-        private void UncheckExcepModification()
-        {
-            btnHome.IsChecked = false;
-            btnOperations.IsChecked = false;
-            btnCustomers.IsChecked = false;
-            btnOperations.IsChecked = false;
-        }
 
-        private void btnSubOperatorUser_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void btnMenuButtonTheme_Click(object sender, RoutedEventArgs e)
         {
-            
+            btnModifications.BorderThickness = new Thickness(0);
+            btnSettings.IsChecked = false;
+
         }
+
+
+        private void btnSubMenu_Click(object sender, RoutedEventArgs e)
+        {
+            if (sender.GetType() == typeof(RadioButton))
+            {
+                RadioButton radioButton = (RadioButton)sender;
+
+            }
+            if (sender.GetType() == typeof(ToggleButton))
+            {
+                ToggleButton toggleButton = (ToggleButton)sender;
+                OpenCategories(toggleButton);
+                return;
+
+            }
+
+            btnModifications.IsChecked = true;
+            btnModifications.BorderThickness = new Thickness(1);
+            btnSettings.IsChecked = false;
+
+
+        }
+
+        private void OpenCategories(ToggleButton radioButton)
+        {
+            if (radioButton == btnCategories)
+            {
+                if (btnSubCategory.Visibility == Visibility.Collapsed)
+                {
+                    btnSubCategory.Visibility = Visibility.Visible;
+                    btnMainCategory.Visibility = Visibility.Visible;
+                    btnCategories.BorderThickness = new Thickness(1);
+                }
+                else if (btnSubCategory.Visibility == Visibility.Visible)
+                {
+                    btnSubCategory.Visibility = Visibility.Collapsed;
+                    btnMainCategory.Visibility = Visibility.Collapsed;
+                    btnCategories.BorderThickness = new Thickness(0);
+
+                }
+
+            }
+        }
+
+
+
+
     }
 }

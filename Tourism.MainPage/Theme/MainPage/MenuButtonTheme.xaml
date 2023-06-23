@@ -4,7 +4,7 @@
     <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
            TargetType="{x:Type RadioButton}"
            x:Key="MenuButtonTheme"
-           x:Shared="False">
+        >
         
         <Style.Setters>     
             <Setter Property="Template">
@@ -52,12 +52,14 @@
 
             <Setter Property="BorderThickness"
                     Value="0 " />
+            <Setter Property="Cursor"
+                    Value="Hand" />
 
         </Style.Setters>
         <Style.Triggers>
             <Trigger Property="IsChecked"
                      Value="True">
-
+   
             </Trigger>
             <Trigger Property="IsMouseOver"
                      Value="True">

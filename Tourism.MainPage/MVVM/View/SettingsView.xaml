@@ -20,61 +20,20 @@
             <RowDefinition Height="30" />
         </Grid.RowDefinitions>
 
-        <Grid Grid.Row="0">
+        <Grid Grid.Row="1"
+              Grid.Column="1">
             <TextBlock Text="SETTINGS"
                        FontSize="22"
                        Foreground="White"
                        FontFamily="/Fonts/#Poppins"
                        Margin="20,10,0,0"
-                       HorizontalAlignment="Left" />
+                       HorizontalAlignment="Center" 
+                       VerticalAlignment="Center"/>
         </Grid>
 
         <Grid Grid.Row="1">
 
 
-            <ToggleButton Height="50"
-                          Width="50"
-                          x:Name="btnDarkTheme"
-                          VerticalContentAlignment="Center"
-                          HorizontalContentAlignment="Left"
-                          HorizontalAlignment="Left"
-                          IsChecked="False"
-                          VerticalAlignment="Top"
-                          Background="Transparent"
-                          Margin="3,0,0,0"
-                          BorderBrush="White"
-                          Checked="btnDarkTheme_Checked" />
-            <TextBlock Text="Dark Theme"
-                       Foreground="#0C090A"
-                       Height="30"
-                       Width="150"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="25"
-                       FontFamily="/Fonts/#Poppins"
-                       Margin="55,8,0,0" />
-
-            <ToggleButton Height="50"
-                          x:Name="btnRedTheme"
-                          Width="50"
-                          VerticalContentAlignment="Center"
-                          HorizontalContentAlignment="Left"
-                          HorizontalAlignment="Left"
-                          IsChecked="False"
-                          VerticalAlignment="Top"
-                          Background="Transparent"
-                          Margin="3,60,0,0"
-                          BorderBrush="White"
-                          Checked="btnRedTheme_Checked" />
-            <TextBlock Text="Red Theme"
-                       Foreground="#da4543"
-                       Height="30"
-                       Width="150"
-                       HorizontalAlignment="Left"
-                       VerticalAlignment="Top"
-                       FontSize="25"
-                       FontFamily="/Fonts/#Poppins"
-                       Margin="55,68,0,0" />
 
         </Grid>
 

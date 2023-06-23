@@ -2,13 +2,12 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
-           TargetType="{x:Type ToggleButton}"
-           x:Key="MenuSubButtonTheme"
-           x:Shared="False">
+           TargetType="{x:Type RadioButton}"
+           x:Key="MenuSubButtonTheme">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="ToggleButton">
+                    <ControlTemplate TargetType="RadioButton">
                         <Border Background="{TemplateBinding Background}"
                                 CornerRadius="15,0,0,15">
                             <Grid VerticalAlignment="Stretch"
@@ -32,7 +31,9 @@
 
                             <Trigger Property="IsChecked"
                                      Value="True">
-
+                                <Setter TargetName="mainText"
+                                        Property="Foreground"
+                                        Value="White" />
                             </Trigger>
 
                             <Trigger Property="IsMouseOver"
@@ -53,23 +54,10 @@
 
             <Setter Property="BorderThickness"
                     Value="0 " />
+            <Setter Property="Cursor"
+                    Value="Hand" />
 
         </Style.Setters>
-
-        <Style.Triggers>
-
-            <Trigger Property="IsChecked"
-                     Value="True">
-
-
-            </Trigger>
-            <Trigger Property="IsMouseOver"
-                     Value="True">
-
-
-            </Trigger>
-        </Style.Triggers>
-
 
     </Style>
 

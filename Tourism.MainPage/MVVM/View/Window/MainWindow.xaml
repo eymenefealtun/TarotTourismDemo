@@ -19,6 +19,7 @@
 
     <Border x:Name="mainWindowMainBorder"
             Background="#1b2530">
+
         <Grid x:Name="mainGrid">
 
             <Grid.ColumnDefinitions>
@@ -32,14 +33,14 @@
 
             <TextBlock  x:Name="mainText"
                         Grid.Column="0"
-                        Grid.Row="1"
+                        Grid.Row="0"
                         Text="Tarot MIS"
                         Width="150"
-                        VerticalAlignment="Top"
+                        VerticalAlignment="Center"
                         HorizontalAlignment="Left"
                         Foreground="White"
-                        FontSize="14"
-                        Margin="15,-10,0,0"
+                        FontSize="10"
+                        Margin="15,0,0,0"
                         FontFamily="/Fonts/#Poppins" />
 
             <ScrollViewer Grid.Row="1"
@@ -61,8 +62,8 @@
                                  Style="{StaticResource MenuButtonTheme}"
                                  IsChecked="True"
                                  Margin="0,10,0,0"
-                                 Command="{Binding Path= HomeViewCommand}" 
-                                 Click="btnMenuButtonTheme_Click"/>
+                                 Command="{Binding Path= HomeViewCommand}"
+                                 Click="btnMenuButtonTheme_Click" />
 
                     <RadioButton Content="Operations"
                                  x:Name="btnOperations"
@@ -73,7 +74,7 @@
                                  Click="btnMenuButtonTheme_Click" />
 
 
-
+                    <!--#region Modofications -->
 
                     <ToggleButton Content="Modifications"
                                   Height="50"
@@ -81,32 +82,50 @@
                                   FontSize="14"
                                   Style="{StaticResource MenuButtoWithSubTheme}"
                                   Click="btnModifications_Click" />
+                    <RadioButton Content="OperatorUser"
+                                 Height="30"
+                                 x:Name="btnSubOperatorUser"
+                                 Visibility="Collapsed"
+                                 Click="btnSubMenu_Click"
+                                 Command="{Binding OperatorUserViewCommand}"
+                                 Style="{StaticResource MenuSubButtonTheme}" />
 
-                    <ToggleButton Content="OperatorUser"
+                    <!--#region Categories -->
+                    <ToggleButton Content="Categories"
+                                  x:Name="btnCategories"
                                   Height="30"
-                                  x:Name="btnSubOperatorUser"
-                                  FontSize="14"
-                                  Visibility="Visible"
-                                  Click="btnSubOperatorUser_Click"
-                                  Command="{Binding OperatorUserViewCommand}"
-                                  Style="{StaticResource MenuSubButtonTheme}" />
-                    <ToggleButton Content="Trial1"
-                                  Height="30"
-                                  x:Name="btnTrial1"
-                                  FontSize="14"
+                                  FontSize="12"
                                   Visibility="Collapsed"
-                                  Style="{StaticResource MenuSubButtonTheme}" />
-                    <ToggleButton Content="Trial2"
-                                  x:Name="btnTrial2"
-                                  Height="30"
-                                  FontSize="14"
-                                  Visibility="Collapsed"
-                                  Style="{StaticResource MenuSubButtonTheme}" />
+                                  Click="btnSubMenu_Click"
+                                  Style="{StaticResource MenuButtonWithSecondSubTheme}" />
+                    <RadioButton Content="- SubCategory"
+                                 Height="30"
+                                 x:Name="btnSubCategory"
+                                 Visibility="Collapsed"
+                                 Click="btnSubMenu_Click"
+                                 Command="{Binding SubCategoryViewCommand}"
+                                 Style="{StaticResource MenuSecondSubButtonTheme}" />
+                    <RadioButton Content="- MainCategory"
+                                 Height="30"
+                                 x:Name="btnMainCategory"
+                                 Visibility="Collapsed"
+                                 Click="btnSubMenu_Click"
+                                 Command="{Binding MainCategoryViewCommand}"
+                                 Style="{StaticResource MenuSecondSubButtonTheme}" />
+                    <!--#endregion-->
 
 
 
 
+                    <RadioButton Content="Currency"
+                                 Height="30"
+                                 x:Name="btnCurrency"
+                                 Visibility="Collapsed"
+                                 Click="btnSubMenu_Click"
+                                 Command="{Binding CurrencyViewCommand}"
+                                 Style="{StaticResource MenuSubButtonTheme}" />
 
+                    <!--#endregion-->
 
 
                     <RadioButton Content="Customers"
@@ -116,6 +135,13 @@
                                  FontSize="14"
                                  Style="{StaticResource MenuButtonTheme}"
                                  Click="btnMenuButtonTheme_Click" />
+
+                    <RadioButton Content=""
+                                 Height="50"
+                                 Command="{Binding Path= CustomerViewCommand}"
+                                 FontSize="14"
+                                 IsHitTestVisible="False"
+                                 Style="{StaticResource MenuButtonTheme}" />
 
 
 
@@ -159,51 +185,68 @@
 
 
 
-            <StackPanel Grid.Row="1"
-                        Grid.Column="0"
-                        VerticalAlignment="Bottom">
+            <Grid Grid.Row="1"
+                  Grid.Column="0"
+                  Height="50"
+                  VerticalAlignment="Bottom"
+                  Background="#18212b">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40" />
+                    <ColumnDefinition Width="130" />
+                    <ColumnDefinition />
+
+                </Grid.ColumnDefinitions>
+                <Border Width="30"
+                        Height="30"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Background="#8cda43"
+                        Margin="2,0,0,0"
+                        CornerRadius="15,15,15,15">
+                    <TextBlock FontFamily="Segoe MDL2 Assets"
+                               Text="&#xE77B;"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               FontWeight="Heavy"
+                               FontSize="18"
+                               Foreground="#1f300f" />
+
+                </Border>
 
                 <TextBlock Text="Eymen"
                            FontFamily="/Fonts/#Poppins"
-                           Foreground="Wheat"
-                           VerticalAlignment="Bottom"
+                           Foreground="#c7cacf"
+                           VerticalAlignment="Center"
                            HorizontalAlignment="Left"
                            FontSize="14"
-                           Margin="18,4.5,0,0" />
-                <Border Width="15"
-                        Height="30"
-                        HorizontalAlignment="Left"
-                        VerticalAlignment="Bottom"
-                        Background="#008000"
-                        CornerRadius="0,15,15,0"
-                        Margin="0,-25.5,0,0" />
+                           Grid.Column="1"
+                           Margin="5,0,0,0" />
 
+                <RadioButton x:Name="btnSettings"
+                             Height="30"
+                             Width="30"
+                             Content="&#xF8B0;"
+                             FontSize="20"
+                             Cursor="Hand"
+                             FontFamily="Segoe MDL2 Assets"
+                             HorizontalAlignment="Right"
+                             VerticalAlignment="Center"
+                             HorizontalContentAlignment="Center"
+                             VerticalContentAlignment="Center"
+                             Click="btnSettings_Click"
+                             Grid.Column="2"
+                             Style="{StaticResource SettingsButtonTheme}"
+                             Command="{Binding Path= SettingsViewCommand}">
 
-
-                <Button x:Name="btnSettings"
-                        Height="30"
-                        Width="30"
-                        Margin="0,-30,0,0"
-                        Content="&#xF8B0;"
-                        FontSize="20"
-                        Foreground="Black"
-                        FontFamily="Segoe MDL2 Assets"
-                        HorizontalAlignment="Right"
-                        VerticalAlignment="Center"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
-                        Click="btnSettings_Click"
-                        Style="{StaticResource SettingsButtonTheme}"
-                        Command="{Binding Path= SettingsViewCommand}">
-
-                </Button>
+                </RadioButton>
 
 
 
 
 
 
-            </StackPanel>
+            </Grid>
 
 
             <ContentControl Grid.Row="1"

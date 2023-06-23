@@ -150,8 +150,10 @@ namespace Tourism.MainPage.MVVM.View
 
         }
 
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            dgwOperatorUser.ItemsSource = _operatorFullService.GetOperatorUsers();
 
-
-
+        }
     }
 }

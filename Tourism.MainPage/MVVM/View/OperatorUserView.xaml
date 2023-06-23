@@ -100,6 +100,7 @@
                                     <Button x:Name="btnEdit"
                                             CommandParameter="{Binding}"
                                             ToolTip="Edit"
+                                            Cursor="Hand"
                                             Style="{StaticResource EditCurrencyButtonTheme}"
                                             Click="btnEdit_Click" />
 
@@ -358,15 +359,15 @@
                                 HorizontalAlignment="Right"
                                 x:Name="btnCancelUpdate"
                                 Margin="0,0,37,0"
-                                Style="{StaticResource CancelCurrencyButtonTheme}" 
-                                Click="btnCancelUpdate_Click"/>
+                                Style="{StaticResource CancelCurrencyButtonTheme}"
+                                Click="btnCancelUpdate_Click" />
                         <Button Grid.Row="4"
                                 x:Name="btnSaveUpdate"
                                 Content="&#xE74E;"
                                 Style="{StaticResource SaveCurrencyButtonTheme}"
                                 HorizontalAlignment="Right"
-                                Margin="0,0,5,0" 
-                                Click="btnSaveUpdate_Click"/>
+                                Margin="0,0,5,0"
+                                Click="btnSaveUpdate_Click" />
                     </Grid>
 
                 </Border>
@@ -374,6 +375,17 @@
 
             </StackPanel>
 
+
+            <Button x:Name="btnRefresh"
+                    ToolTip="Refresh"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Foreground="White"
+                    FontSize="30"
+                    Content="&#xE777;"
+                    Cursor="Hand"
+                    Style="{StaticResource RefreshAndBackButtonTheme}"
+                    Click="btnRefresh_Click" />
 
         </Grid>
 
