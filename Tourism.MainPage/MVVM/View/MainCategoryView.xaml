@@ -179,7 +179,7 @@
                       Margin="405,40,0,0"
                       Visibility="Collapsed"
                       Width="130"
-                      Content="Update the user"
+                      Content="Update the category"
                       Style="{StaticResource UpdateUserButtonTheme}" />
 
         <StackPanel VerticalAlignment="Top"

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Globalization;
 using System.Threading;
 using System.Windows;
@@ -57,6 +58,7 @@ namespace Tourism.MainPage.MVVM.View
         private void dgwOperationMain_Loaded(object sender, RoutedEventArgs e)
         {
             _isActive = true;
+
             dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
             cboxMainCategory.ItemsSource = _mainCategoryService.GetAll();
             cboxCurrency.ItemsSource = _currencyService.GetAll();
@@ -143,6 +145,8 @@ namespace Tourism.MainPage.MVVM.View
 
         private void SearchOperationMain()
         {
+
+
             _subCategoryId = Convert.ToInt32(cboxSubCategory.SelectedValue);
             if (tglIsActive.IsChecked == false)
             {
@@ -154,6 +158,7 @@ namespace Tourism.MainPage.MVVM.View
                 _isActive = false;
             }
             dgwOperationMain.ItemsSource = _operationMainService.SearchOperationMain(_operationSearch, _mainCategoryId, _subCategoryId, _startDate, _endDate, _operatorId, _currencyId, _isActive);
+            dgwOperationMain.Items.SortDescriptions.Add(new SortDescription("StartDate", ListSortDirection.Ascending));
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)
@@ -242,8 +247,16 @@ namespace Tourism.MainPage.MVVM.View
                 _currencyId = 0;
                 _isActive = true;
                 tglIsActive.IsChecked = false;
-                datePickStartDate.SelectedDate = DateTime.MinValue;
-                datePickEndDate.SelectedDate = DateTime.MaxValue;
+                //datePickEndDate = new DatePicker();
+                //datePickStartDate = new DatePicker();
+
+                //datePickStartDate.SelectedDate = DateTime.MinValue;
+                //datePickEndDate.SelectedDate = DateTime.MaxValue;
+
+                datePickStartDate.SelectedDate = null;
+                datePickEndDate.SelectedDate = null;
+                _endDate = DateTime.MaxValue;
+                _startDate = DateTime.MinValue;
                 dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
                 cboxMainCategory.ItemsSource = _mainCategoryService.GetAll();
                 cboxOperator.ItemsSource = _operatorService.GetAll();

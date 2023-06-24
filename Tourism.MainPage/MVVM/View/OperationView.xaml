@@ -259,13 +259,15 @@
                           VerticalContentAlignment="Stretch"
                           HorizontalContentAlignment="Left"
                           VerticalAlignment="Top"
-                          Width="125"
+                          Width="120"
                           Cursor="Hand"
                           SelectedDateFormat="Short"
                           ToolTip="Start Date: mm/dd/yyyy"
                           Margin="395,1,0,0"
+                          CalendarStyle="{StaticResource GeneralCalendarTheme}"
                           BorderBrush="{x:Null}"
                           SelectedDateChanged="datePickStartDate_SelectedDateChanged" />
+
             <DatePicker   x:Name="datePickEndDate"
                           Grid.Row="0"
                           Grid.Column="1"
@@ -280,8 +282,12 @@
                           ToolTip="End Date: mm/dd/yyyy"
                           Text="Select a Date"
                           Margin="497,1,78,0"
+                          CalendarStyle="{StaticResource GeneralCalendarTheme}"
                           BorderBrush="{x:Null}"
-                          SelectedDateChanged="datePickEndDate_SelectedDateChanged" />
+                          SelectedDateChanged="datePickEndDate_SelectedDateChanged">
+
+
+            </DatePicker>
 
 
 

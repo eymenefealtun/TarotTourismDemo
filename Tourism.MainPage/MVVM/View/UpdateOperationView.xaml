@@ -184,6 +184,7 @@
                               HorizontalAlignment="Left"
                               SelectedDateFormat="Short"
                               BorderBrush="{x:Null}"
+                              CalendarStyle="{StaticResource GeneralCalendarTheme}"
                               Margin="-3,35,0,0">
                     <DatePicker.Resources>
                         <Style TargetType="DatePickerTextBox">
@@ -206,6 +207,7 @@
                               HorizontalAlignment="Left"
                               SelectedDateFormat="Short"
                               ToolTip="End Date: mm/dd/yyyy"
+                              CalendarStyle="{StaticResource GeneralCalendarTheme}"
                               BorderBrush="{x:Null}"
                               Margin="-3,65,0,0">
                     <DatePicker.Resources>
@@ -232,6 +234,7 @@
                           DisplayMemberPath="Name"
                           VerticalContentAlignment="Center"
                           Margin="0,100,0,0"
+                          Style="{StaticResource ComboBoxTheme}"
                           SelectionChanged="cboxMainCategory_SelectionChanged" />
                 <ComboBox x:Name="cboxSubCategory"
                           Height="20"
@@ -241,6 +244,7 @@
                           VerticalAlignment="Top"
                           HorizontalContentAlignment="Left"
                           SelectedValuePath="Id"
+                          Style="{StaticResource ComboBoxTheme}"
                           DisplayMemberPath="Name"
                           VerticalContentAlignment="Center"
                           Margin="0,130,0,0" />
@@ -425,6 +429,7 @@
                           SelectedValuePath="Id"
                           IsHitTestVisible="False"
                           DisplayMemberPath="Name"
+                          Style="{StaticResource ComboBoxTheme}"
                           VerticalContentAlignment="Center"
                           Margin="0,0,0,0" />
 

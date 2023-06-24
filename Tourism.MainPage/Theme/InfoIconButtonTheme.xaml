@@ -59,7 +59,7 @@
 
                         <ControlTemplate.Triggers>
 
-                            <Trigger  Property="IsMouseOver"
+                            <Trigger  Property="IsMouseDirectlyOver"
                                       Value="True">
 
 

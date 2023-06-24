@@ -39,7 +39,6 @@
                 Foreground="#627581"
                 ToolTip="Choose main category first"
                 Grid.Column="1"
-                Click="infoIcon_Click"
                 HorizontalAlignment="Left"
                 Margin="170,0,0,0"
                 Style="{StaticResource InfoIconButtonTheme}" />
@@ -96,6 +95,7 @@
                                     <Button x:Name="btnEdit"
                                             CommandParameter="{Binding}"
                                             ToolTip="Edit"
+                                            Click="btnEdit_Click"
                                             Style="{StaticResource EditCurrencyButtonTheme}" />
 
                                 </DataTemplate>
@@ -114,6 +114,7 @@
                                             Width="20"
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center"
+                                            Click="btnRelocate_Click"
                                             Content="&#xE8DE;"
                                             Style="{StaticResource SaveCurrencyButtonTheme}" />
 
@@ -125,7 +126,6 @@
                     </DataGrid.Columns>
 
                     <DataGrid.Resources>
-
                         <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
                                TargetType="{x:Type DataGridColumnHeader}">
 
@@ -154,8 +154,8 @@
             </Border>
 
 
-            <Label x:Name="lblNoData" 
-                Content="No category was found!"
+            <Label x:Name="lblNoData"
+                   Content="No category was found!"
                    Grid.Row="1"
                    FontFamily="/Fonts/#Poppins"
                    FontWeight="Heavy"
@@ -167,6 +167,278 @@
 
         </Grid>
 
+
+
+        <ToggleButton x:Name="btnAddNewCategory"
+                      Height="30"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Left"
+                      Grid.Column="1"
+                      Grid.Row="1"
+                      Margin="405,0,0,0"
+                      Visibility="Visible"
+                      Width="130"
+                      Content="Add new category"
+                      Click="btnAddNewCategory_Click"
+                      Style="{StaticResource AddNewUserButtonTheme}" />
+
+        <StackPanel VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Grid.Column="1"
+                    x:Name="stckAddNewCategory"
+                    Grid.Row="1"
+                    Background="Transparent"
+                    Visibility="Hidden"
+                    Margin="469,30,0,0"
+                    Width="150"
+                    Height="110">
+
+            <Border  Background="#5834aa"
+                     Width="150"
+                     Height="110"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     CornerRadius="0,10,0,10">
+                <Grid  Width="150"
+                       Height="110">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
+
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Name"
+                               FontSize="10"
+                               FontFamily="/Fonts/#Poppins"
+                               Foreground="#ffffff"
+                               Grid.Row="0"
+                               VerticalAlignment="Center"
+                               Margin="1" />
+                    <TextBox  x:Name="tboxAddCategoryName"
+                              Height="20"
+                              Width="90"
+                              Grid.Row="0"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Right"
+                              Margin="0,0,5,0"
+                              Style="{StaticResource GeneralTextboxTheme}" />
+
+                    <TextBlock Text="Main cat"
+                               FontSize="10"
+                               FontFamily="/Fonts/#Poppins"
+                               Foreground="#ffffff"
+                               Grid.Row="1"
+                               VerticalAlignment="Center"
+                               Margin="1" />
+
+                    <ComboBox  x:Name="cboxAddMainCategoryId"
+                               Height="20"
+                               Width="90"
+                               Grid.Row="1"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Right"
+                               Margin="0,0,5,0"
+                               DisplayMemberPath="Name"
+                               SelectedValuePath="Id"
+                               Style="{StaticResource ComboBoxTheme}" />
+
+                    <Button Grid.Row="4"
+                            HorizontalAlignment="Right"
+                            x:Name="btnCancelAddCategory"
+                            Margin="0,0,37,0"
+                            Click="btnCancelAddCategory_Click"
+                            Style="{StaticResource CancelCurrencyButtonTheme}" />
+                    <Button Grid.Row="4"
+                            x:Name="btnSaveAddCategory"
+                            Content="&#xE74E;"
+                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                            HorizontalAlignment="Right"
+                            Click="btnSaveAddCategory_Click"
+                            Margin="0,0,5,0" />
+                </Grid>
+
+            </Border>
+
+
+        </StackPanel>
+
+
+        <ToggleButton x:Name="btnUpdateCategory"
+                      Height="30"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Left"
+                      Grid.Column="1"
+                      Grid.Row="1"
+                      Margin="405,40,0,0"
+                      Visibility="Hidden"
+                      IsHitTestVisible="False"
+                      Width="130"
+                      Content="Update the category"
+                      Style="{StaticResource UpdateUserButtonTheme}" />
+
+        <StackPanel VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Grid.Column="1"
+                    x:Name="stckUpdateCategory"
+                    Grid.Row="1"
+                    Background="Transparent"
+                    Visibility="Hidden"
+                    Margin="469,70,0,0"
+                    Width="150"
+                    Height="80">
+
+            <Border  Background="#c9ff4e"
+                     Width="150"
+                     Height="80"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     CornerRadius="0,10,0,10">
+                <Grid  Width="150"
+                       Height="80">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
+
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Name"
+                               FontSize="10"
+                               FontFamily="/Fonts/#Poppins"
+                               Foreground="#535050"
+                               Grid.Row="0"
+                               VerticalAlignment="Center"
+                               Margin="1" />
+
+                    <TextBox  x:Name="tboxUpdateCategory"
+                              Height="20"
+                              Width="90"
+                              Grid.Row="0"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Right"
+                              Margin="0,0,5,0"
+                              Style="{StaticResource GeneralTextboxTheme}" />
+                    <Button Grid.Row="4"
+                            HorizontalAlignment="Right"
+                            x:Name="btnCancelUpdate"
+                            Margin="0,0,37,0"
+                            Style="{StaticResource CancelCurrencyButtonTheme}"
+                            Click="btnCancelUpdate_Click" />
+                    <Button Grid.Row="4"
+                            x:Name="btnSaveUpdate"
+                            Content="&#xE74E;"
+                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,5,0"
+                            Click="btnSaveUpdate_Click" />
+                </Grid>
+
+            </Border>
+
+
+        </StackPanel>
+
+
+        <ToggleButton x:Name="btnRelocateCategory"
+                      Height="30"
+                      VerticalAlignment="Top"
+                      HorizontalAlignment="Left"
+                      Foreground="#437dda"
+                      Grid.Column="1"
+                      Grid.Row="1"
+                      FontSize="11"
+                      Margin="405,80,0,0"
+                      Visibility="Hidden"
+                      IsHitTestVisible="False"
+                      Width="130"
+                      Content="Relocate the category"
+                      Style="{StaticResource GeneralModificationButtonTheme}" />
+
+        <StackPanel VerticalAlignment="Top"
+                    HorizontalAlignment="Left"
+                    Grid.Column="1"
+                    x:Name="stckRelocate"
+                    Grid.Row="1"
+                    Background="Transparent"
+                    Visibility="Hidden"
+                    Margin="469,110,0,0"
+                    Width="150"
+                    Height="80">
+
+            <Border  Background="#437dda"
+                     Width="150"
+                     Height="80"
+                     VerticalAlignment="Center"
+                     HorizontalAlignment="Center"
+                     CornerRadius="0,10,0,10">
+                <Grid  Width="150"
+                       Height="80">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="&#xE72A;"
+                               Height="20"
+                               VerticalAlignment="Center"
+                               Margin="0,0,0,0"
+                               HorizontalAlignment="Center"
+                               FontSize="20"
+                               FontFamily="Segoe MDL2 Assets"
+                               Foreground="Black" />
+
+
+                    <TextBox  x:Name="tboxRelocateSubCategoryName"
+                              Height="20"
+                              Width="50"
+                              Grid.Row="0"
+                              VerticalAlignment="Center"
+                              HorizontalAlignment="Left"
+                              IsReadOnly="True"
+                              Margin="5,0,0,0"
+                              Style="{StaticResource GeneralTextboxTheme}" />
+                    <ComboBox Style="{StaticResource ComboBoxTheme}"
+                              Width="50"
+                              x:Name="cboxRelocateMainCategory"
+                              Height="20"
+                              HorizontalAlignment="Right"
+                              SelectedValuePath="Id"
+                              DisplayMemberPath="Name"
+                              VerticalAlignment="Center"
+                              Margin="0,0,5,0" />
+
+                    <Button Grid.Row="4"
+                            HorizontalAlignment="Right"
+                            x:Name="btnRelocateCancel"
+                            Margin="0,0,37,0"
+                            Style="{StaticResource CancelCurrencyButtonTheme}"
+                            Click="btnRelocateCancel_Click" />
+                    <Button Grid.Row="4"
+                            x:Name="btnRelocateSave"
+                            Content="&#xE74E;"
+                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,5,0"
+                            Click="btnRelocateSave_Click" />
+                </Grid>
+
+            </Border>
+
+
+        </StackPanel>
+
+
+
+        <Button x:Name="btnRefresh"
+                ToolTip="Refresh"
+                Grid.Row="0"
+                Grid.Column="0"
+                Foreground="White"
+                FontSize="30"
+                Content="&#xE777;"
+                Cursor="Hand"
+                Style="{StaticResource RefreshAndBackButtonTheme}"
+                Click="btnRefresh_Click" />
 
 
     </Grid>

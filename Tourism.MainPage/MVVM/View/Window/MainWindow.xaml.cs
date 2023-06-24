@@ -51,6 +51,9 @@ namespace Tourism.MainPage
             btnCurrency.IsChecked = false;
             btnSubOperatorUser.IsChecked = false;
             btnCategories.IsChecked = false;
+
+            btnSubCategory.IsChecked = false;
+            btnMainCategory.IsChecked = false;
         }
 
         private void RestoreDown()
@@ -204,7 +207,7 @@ namespace Tourism.MainPage
                 btnSubOperatorUser.Visibility = Visibility.Visible;
                 btnCurrency.Visibility = Visibility.Visible;
                 btnCategories.Visibility = Visibility.Visible;
-           
+
 
             }
             else if (btnSubOperatorUser.Visibility == Visibility.Visible)

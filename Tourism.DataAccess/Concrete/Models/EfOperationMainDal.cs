@@ -20,7 +20,7 @@ namespace Tourism.DataAccess.Concrete.Models
         FULL  JOIN Operators Op ON Op.Id = Opu.OperatorId
         WHERE O.DocumentCode IS NOT NULL AND O.IsActive = 1 AND ( (R.IsActive = 1 OR (R.Pax Is Null OR R.Pax = 0 ) ))
         GROUP BY  O.DocumentCode,O.StartDate,O.EndDate,C.Name,Op.Name,O.Id,Sc.Id
-        ORDER BY O.StartDate
+        ORDER BY O.StartDate 
         ").AsNoTracking().ToList();
             }
         }
@@ -51,7 +51,8 @@ namespace Tourism.DataAccess.Concrete.Models
                 //GROUP BY  O.DocumentCode,O.StartDate,O.EndDate,C.Name,Op.Name OPTION(RECOMPILE)
                 //END
                 #endregion
-                return context.Set<OperationMain>().FromSqlInterpolated($"EXEC sp_get_products_mainsearch {documentCode},{mainCategoryId},{subCategoryId},{startDate},{endDate}, {operatorId}, {currencyId}, {isActive}").AsNoTracking().ToList();
+                //return context.Set<OperationMain>().FromSqlInterpolated($"EXEC sp_get_products_mainsearch {documentCode},{mainCategoryId},{subCategoryId},{startDate},{endDate}, {operatorId}, {currencyId}, {isActive}").AsNoTracking().ToList();
+                return context.Set<OperationMain>().FromSqlInterpolated($" EXEC sp_get_products_mainsearch {documentCode},{mainCategoryId},{subCategoryId},{startDate},{endDate}, {operatorId}, {currencyId}, {isActive}").AsNoTracking().ToList();
             }
         }
 

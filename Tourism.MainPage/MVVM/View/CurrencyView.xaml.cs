@@ -3,6 +3,7 @@ using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 using System.Windows;
 using System;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -80,11 +81,13 @@ namespace Tourism.MainPage.MVVM.View
             btnUpdateCurrrency.Visibility = Visibility.Hidden;
             stckUpdateUser.Visibility = Visibility.Hidden;
             columnEdit.Visibility = Visibility.Visible;
+
         }
 
 
         private void btnAddCurrency_Click(object sender, RoutedEventArgs e)
         {
+            columnEdit.Visibility = Visibility.Hidden;
             if (btnAddCurrency.IsChecked == true)
                 stckAddNewCurrency.Visibility = Visibility.Visible;
             btnAddCurrency.IsHitTestVisible = false;
@@ -128,7 +131,7 @@ namespace Tourism.MainPage.MVVM.View
             btnAddCurrency.IsChecked = false;
             tboxAddName.Text = string.Empty;
             btnAddCurrency.IsHitTestVisible = true;
-
+            columnEdit.Visibility = Visibility.Visible;
         }
 
 
