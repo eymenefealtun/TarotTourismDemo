@@ -232,10 +232,32 @@ namespace Tourism.MainPage.MVVM.View
             }
         }
 
-        private void btnExportToExcel_Click(object sender, RoutedEventArgs e)
-
+        private void btnExcel_Click(object sender, RoutedEventArgs e)
         {
-            Utilities.ExportCustomerOperationToExcel(dgwCustomerOperation,_documentCode);
+            Utilities.ExportCustomerOperationToExcel(dgwCustomerOperation, _documentCode);
+
+        }
+
+        private void btnTools_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnTools.IsChecked = true;
+            btnExcel.Visibility = Visibility.Visible;
+            btnWord.Visibility = Visibility.Visible;
+        }
+
+        private void btnTools_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnTools.IsChecked = false;
+            btnExcel.Visibility = Visibility.Collapsed;
+            btnWord.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnTools_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnTools.IsChecked == false)
+                btnTools.IsChecked = true;
+            else if (btnTools.IsChecked == true)
+                btnTools.IsChecked = false;
         }
     }
 }

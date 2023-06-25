@@ -1,0 +1,60 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="{x:Type Button}"
+           x:Name="btnMain"
+           x:Key="ExcelButtonTheme">
+        <Style.Setters>
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Width"
+                    Value="40" />
+            <Setter Property="Height"
+                    Value="40" />
+            <Setter Property="ToolTip"
+                    Value="Export to excel" />
+
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Grid VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
+                            <Border Background="#745869"
+                                    Cursor="Hand"
+                                    x:Name="mainBorder">
+                                <TextBlock x:Name="icon"
+                                           Foreground="#72ce1c"
+                                           FontSize="35"
+                                           Text="&#xE8B6;"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontFamily="SEGOE MDL2 Assets" />
+                            </Border>
+
+
+
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+                                <Setter TargetName="icon"
+                                        Property="Foreground"
+                                        Value="#509014" />
+
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

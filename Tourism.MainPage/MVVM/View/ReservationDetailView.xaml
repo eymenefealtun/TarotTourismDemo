@@ -76,18 +76,36 @@
                     Style="{StaticResource GeneralSaveButtonTheme}"
                     Click="btnSave_Click" />
 
-            <Button x:Name="btnExportToExcel"
-                    Foreground="Green"
-                    ToolTip="Export to Excel"
-                    FontSize="30"
-                    HorizontalAlignment="Center"
-                    VerticalAlignment="Top"
-                    Grid.Column="0"
-                    Grid.Row="2"
-                    Content="&#xE8B6;"
-                    Style="{StaticResource RefreshAndBackButtonTheme}"
-                    Command="{Binding OperationViewCommand}"
-                    Click="btnExportToExcel_Click" />
+            <Grid Grid.Row="2"
+                  Grid.Column="0">
+                <ToggleButton Margin="0,5,0,0"
+                              Style="{StaticResource ToolsButtonTheme}"
+                              x:Name="btnTools"
+                              VerticalAlignment="Top"
+                              MouseEnter="btnTools_MouseEnter"
+                              MouseLeave="btnTools_MouseLeave"
+                              Click="btnTools_Click" />
+
+
+                <Button Style="{StaticResource ExcelButtonTheme}"
+                        x:Name="btnExcel"
+                        Click="btnExcel_Click"
+                        Visibility="Collapsed"
+                        VerticalAlignment="Top"
+                        Margin="0,45,0,0"
+                        MouseEnter="btnTools_MouseEnter"
+                        MouseLeave="btnTools_MouseLeave" />
+
+                <Button Style="{StaticResource WordButtonTheme}"
+                        Margin="0,85,0,0"
+                        x:Name="btnWord"
+                        Visibility="Collapsed"
+                        VerticalAlignment="Top"
+                        MouseEnter="btnTools_MouseEnter"
+                        MouseLeave="btnTools_MouseLeave" />
+            </Grid>
+
+
 
             <Border Grid.Column="1"
                     Grid.Row="2"

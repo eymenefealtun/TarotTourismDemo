@@ -4,6 +4,7 @@ using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
@@ -288,9 +289,41 @@ namespace Tourism.MainPage.MVVM.View
             CategoryWindow categoryWindow = new CategoryWindow("sub", _mainCategoryId, subCategoryService);
             categoryWindow.ShowDialog();
         }
+
+        private void btnExcel_Click(object sender, RoutedEventArgs e)
+        {
+            Utilities.ExportToExcel(dgwOperationMain);
+
+        }
+
+        private void btnTools_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnTools.IsChecked = true;
+            btnExcel.Visibility = Visibility.Visible;
+            btnWord.Visibility = Visibility.Visible;
+        }
+
+        private void btnTools_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnTools.IsChecked = false;
+            btnExcel.Visibility = Visibility.Collapsed;
+            btnWord.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnTools_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnTools.IsChecked == false)
+                btnTools.IsChecked = true;
+            else if (btnTools.IsChecked == true)
+                btnTools.IsChecked = false;
+        }
+
+
+
+
+
+
+
     }
-
-
-
 
 }

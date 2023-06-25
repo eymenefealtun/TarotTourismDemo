@@ -1,0 +1,77 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style BasedOn="{StaticResource {x:Type ToggleButton}}"
+           TargetType="{x:Type ToggleButton}"
+           x:Name="btnMain"
+           x:Key="ToolsButtonTheme">
+        <Style.Setters>
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="BorderBrush"
+                    Value="Transparent" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Width"
+                    Value="40" />
+            <Setter Property="IsChecked"
+                    Value="False" />
+            <Setter Property="Height"
+                    Value="40" />
+
+
+
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Grid VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
+                            <!--<Grid.RowDefinitions>
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                                <RowDefinition Height="40" />
+                            </Grid.RowDefinitions>-->
+                            <Border Background="#816275"
+                                    CornerRadius="10"
+                                    Grid.Row="0"
+                                    x:Name="mainBorder">
+                                <TextBlock x:Name="icon"
+                                           Foreground="#d4d5d5"
+                                           FontSize="35"
+                                           Text="&#xEC7A;"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           FontFamily="SEGOE MDL2 Assets" />
+                            </Border>
+                            <!--<Border Background="Transparent"
+                                    Grid.Row="1" />
+                            <Border Background="Transparent"
+                                    Grid.Row="2" />-->
+
+
+                        </Grid>
+
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked"
+                                     Value="True">
+                                <Setter TargetName="mainBorder"
+                                        Property="Background"
+                                        Value="#745869" />
+                                <Setter TargetName="mainBorder"
+                                        Property="CornerRadius"
+                                        Value="10,10,0,0" />
+
+                            </Trigger>
+                            <!--<Trigger Property="IsMouseOver"
+                                     Value="True">
+                                --><!--<Setter TargetName="icon"
+                                        Property="Foreground"       
+                                        Value="#bfc0c0" />--><!--
+                            </Trigger>-->
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

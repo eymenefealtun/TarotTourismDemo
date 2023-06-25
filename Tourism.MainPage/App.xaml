@@ -12,34 +12,45 @@
                 <ResourceDictionary Source="Theme/MainPage/MenuSubButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/MenuButtonWithSecondSubTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/MenuSecondSubButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />         
-                <ResourceDictionary Source="Theme/GeneralModificationButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/GeneralCalendarTheme.xaml" />       
-                <ResourceDictionary Source="Theme/RefreshAndBackButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/GeneralDatePickerTheme.xaml" />
-                <ResourceDictionary Source="Theme/SearchTextBoxTheme.xaml" />
-                <ResourceDictionary Source="Theme/UpdatePage/EditButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/UpdatePage/CancelButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/UpdatePage/SaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/CloseButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/SettingsButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/RestoreButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/MainPage/MinimizeButtonTheme.xaml" />
+
+                <ResourceDictionary Source="Theme/UpdatePage/EditButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/UpdatePage/CancelButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/UpdatePage/SaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/UpdatePage/UpdateTextBoxTheme.xaml" />
+
                 <ResourceDictionary Source="Theme/CurrencyPage/AddCurrencyButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrencyPage/EditCurrencyButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrencyPage/SaveCurrencyButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrencyPage/CancelCurrencyButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/CurrencyPage/CurrencyCloseButtonTheme.xaml" />
+
                 <ResourceDictionary Source="Theme/OperationPage/ComboboxToggleButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/OperationPage/ComboBoxTheme.xaml" />
+
+                <ResourceDictionary Source="Theme/OperatorUserPage/AddNewUserTheme.xaml" />
+                <ResourceDictionary Source="Theme/OperatorUserPage/UpdateUserButtonTheme.xaml" />
+
+                <ResourceDictionary Source="Theme/TextBoxTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralModificationButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralCalendarTheme.xaml" />
+                <ResourceDictionary Source="Theme/RefreshAndBackButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/ToolsButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralDatePickerTheme.xaml" />
+                <ResourceDictionary Source="Theme/SearchTextBoxTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralTextboxTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralEditToggleButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralSaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralCancelButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/InfoIconButtonTheme.xaml" />          
-                <ResourceDictionary Source="Theme/OperatorUserPage/AddNewUserTheme.xaml" />
-                <ResourceDictionary Source="Theme/OperatorUserPage/UpdateUserButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/InfoIconButtonTheme.xaml" />
+
+
+                <ResourceDictionary Source="Theme/Tools/ExcelButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/Tools/WordButtonTheme.xaml" />            
+
             </ResourceDictionary.MergedDictionaries>
 
 
@@ -86,13 +97,16 @@
             <DataTemplate DataType="{x:Type viewModel:CurrencyViewModel}">
                 <view:CurrencyView />
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:MainCategoryViewModel}">
                 <view:MainCategoryView />
             </DataTemplate>
+
             <DataTemplate DataType="{x:Type viewModel:SubCategoryViewModel}">
-                <view:SubCategoryView />                    
+                <view:SubCategoryView />
             </DataTemplate>
 
         </ResourceDictionary>
     </Application.Resources>
+
 </Application>

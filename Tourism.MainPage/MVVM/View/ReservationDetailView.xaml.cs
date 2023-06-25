@@ -13,6 +13,7 @@ using System.Windows.Documents;
 using Operation = Tourism.Entities.Concrete.Operation;
 using Tourism.MainPage.Core;
 using Microsoft.EntityFrameworkCore;
+using System.Windows.Input;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -423,9 +424,32 @@ namespace Tourism.MainPage.MVVM.View
 
         }
 
-        private void btnExportToExcel_Click(object sender, RoutedEventArgs e)
+        private void btnExcel_Click(object sender, RoutedEventArgs e)
         {
             Utilities.ExportReservationDetailToExcel(dgwCustomerOperation, _reservation.ReservationCode);
+
+        }
+
+        private void btnTools_MouseEnter(object sender, MouseEventArgs e)
+        {
+            btnTools.IsChecked = true;
+            btnExcel.Visibility = Visibility.Visible;
+            btnWord.Visibility = Visibility.Visible;
+        }
+
+        private void btnTools_MouseLeave(object sender, MouseEventArgs e)
+        {
+            btnTools.IsChecked = false;
+            btnExcel.Visibility = Visibility.Collapsed;
+            btnWord.Visibility = Visibility.Collapsed;
+        }
+
+        private void btnTools_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnTools.IsChecked == false)
+                btnTools.IsChecked = true;
+            else if (btnTools.IsChecked == true)
+                btnTools.IsChecked = false;
         }
     }
 }
