@@ -1,5 +1,4 @@
-﻿
-namespace Tourism.Entities.Abstract
+﻿namespace Tourism.Core.Entities
 {
     public interface IEntity
     {

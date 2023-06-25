@@ -1,4 +1,5 @@
-﻿
+﻿using Tourism.Entities.Abstract;
+
 namespace Tourism.Entities.Concrete
 {
     public class UserLevelManager : IUserLevelService

@@ -1,8 +1,8 @@
-﻿ using Ninject;
+﻿using Ninject;
 
 namespace Tourism.Business.DependencyResolvers.Ninject
 {
-    public class Instancefactory
+    public class Instancefactory //this part might be transfered to Tourism.Core
     {
         public static T GetInstance<T>()
         {

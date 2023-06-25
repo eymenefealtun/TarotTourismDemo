@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.DataAccess.Abstract;
-using Tourism.Entities.Abstract;
+﻿using Tourism.Core.DataAccess.EntityFramework.Abstract;
+using Tourism.Entities.Concrete;
 
-namespace Tourism.Entities.Concrete
+namespace Tourism.Entities.Abstract
 {
     public interface IOperatorDal : IEntityRepository<Operator>
     {

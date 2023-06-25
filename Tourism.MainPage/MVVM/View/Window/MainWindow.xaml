@@ -74,7 +74,7 @@
                                  Click="btnMenuButtonTheme_Click" />
 
 
-                    <!--#region Modofications -->
+                    <!--#region Modifications -->
 
                     <ToggleButton Content="Modifications"
                                   Height="50"
@@ -86,7 +86,7 @@
                                  Height="30"
                                  x:Name="btnSubOperatorUser"
                                  Visibility="Collapsed"
-                                 Click="btnSubMenu_Click"
+                                 Click="btnModificationsSubMenu_Click"
                                  Command="{Binding OperatorUserViewCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
 
@@ -96,20 +96,20 @@
                                   Height="30"
                                   FontSize="12"
                                   Visibility="Collapsed"
-                                  Click="btnSubMenu_Click"
+                                  Click="btnModificationsSubMenu_Click"
                                   Style="{StaticResource MenuButtonWithSecondSubTheme}" />
                     <RadioButton Content="- SubCategory"
                                  Height="30"
                                  x:Name="btnSubCategory"
                                  Visibility="Collapsed"
-                                 Click="btnSubMenu_Click"
+                                 Click="btnModificationsSubMenu_Click"
                                  Command="{Binding SubCategoryViewCommand}"
                                  Style="{StaticResource MenuSecondSubButtonTheme}" />
                     <RadioButton Content="- MainCategory"
                                  Height="30"
                                  x:Name="btnMainCategory"
                                  Visibility="Collapsed"
-                                 Click="btnSubMenu_Click"
+                                 Click="btnModificationsSubMenu_Click"
                                  Command="{Binding MainCategoryViewCommand}"
                                  Style="{StaticResource MenuSecondSubButtonTheme}" />
                     <!--#endregion-->
@@ -121,7 +121,7 @@
                                  Height="30"
                                  x:Name="btnCurrency"
                                  Visibility="Collapsed"
-                                 Click="btnSubMenu_Click"
+                                 Click="btnModificationsSubMenu_Click"
                                  Command="{Binding CurrencyViewCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
 
@@ -136,10 +136,48 @@
                                  Style="{StaticResource MenuButtonTheme}"
                                  Click="btnMenuButtonTheme_Click" />
 
+                    <!--#region Income -->
+                    <ToggleButton Content="Income"
+                                  Height="50"
+                                  x:Name="btnIncome"
+                                  FontSize="14"
+                                  Click="btnIncome_Click"
+                                  Style="{StaticResource MenuButtoWithSubTheme}" />
+
+
+                    <RadioButton Content="Incoming"
+                                 x:Name="btnIncomeIncoming"
+                                 Height="30"
+                                 FontSize="12"
+                                 Visibility="Collapsed"
+                                 Click="btnIncomeSubClick"
+                                 Style="{StaticResource MenuSubButtonTheme}" />
+
+
+                    <RadioButton Content="Outgoing"
+                                 x:Name="btnIncomeOutgoing"
+                                 Height="30"
+                                 FontSize="12"
+                                 Visibility="Collapsed"
+                                 Click="btnIncomeSubClick"
+                                 Style="{StaticResource MenuSubButtonTheme}" />
+
+
+                    <!--#endregion-->
+                    <!--#region Outcome -->
+                    <ToggleButton Content="Outcome"
+                                  Height="50"
+                                  x:Name="btnOutcome"
+                                  FontSize="14"
+                                  Style="{StaticResource MenuButtoWithSubTheme}" />
+
+
+
+                    <!--#endregion-->
+
+
                     <RadioButton Content=""
                                  Height="50"
-                                 Command="{Binding Path= CustomerViewCommand}"
-                                 FontSize="14"
                                  IsHitTestVisible="False"
                                  Style="{StaticResource MenuButtonTheme}" />
 

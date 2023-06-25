@@ -4,7 +4,6 @@ using System.Globalization;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;

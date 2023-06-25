@@ -1,5 +1,5 @@
-﻿using Tourism.Business.Utilites;
-using Tourism.Business.ValidationRules.FluentValidation;
+﻿using Tourism.Business.ValidationRules.FluentValidation;
+using Tourism.Core.CrossCuttingConcerns.Validation.ValidatorTool;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
 

@@ -5,6 +5,7 @@ using Tourism.DataAccess.Abstract;
 using Tourism.DataAccess.Abstract.Models;
 using Tourism.DataAccess.Concrete.EntityFramework;
 using Tourism.DataAccess.Concrete.Models;
+using Tourism.Entities.Abstract;
 using Tourism.Entities.Concrete;
 
 namespace Tourism.Business.DependencyResolvers.Ninject

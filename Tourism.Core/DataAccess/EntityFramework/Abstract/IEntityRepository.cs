@@ -1,8 +1,7 @@
 ﻿using System.Linq.Expressions;
-using Tourism.Entities.Abstract;
-
-
-namespace Tourism.DataAccess.Abstract
+using Tourism.Core.Entities;
+            
+namespace Tourism.Core.DataAccess.EntityFramework.Abstract
 {
     public interface IEntityRepository<T> where T : class, IEntity, new()
     {

@@ -1,4 +1,4 @@
-﻿using Tourism.Entities.Abstract;
+﻿using Tourism.Core.Entities;
 
 namespace Tourism.Entities.Concrete
 {

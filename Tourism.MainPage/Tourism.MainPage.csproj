@@ -20,9 +20,13 @@
     <None Remove="Images\currencyCancel.png" />
     <None Remove="Images\currencyEdit.png" />
     <None Remove="Images\currencySave.png" />
+    <None Remove="Images\excel48.png" />
+    <None Remove="Images\excel480.png" />
     <None Remove="Images\ked.JPG" />
     <None Remove="Images\refresh.png" />
     <None Remove="Images\settings.png" />
+    <None Remove="Images\word48.png" />
+    <None Remove="Images\word480.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -39,6 +43,21 @@
       <Isolated>false</Isolated>
       <EmbedInteropTypes>true</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\excel48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\excel480.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\word48.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Images\word480.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>

@@ -17,6 +17,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tourism.MainPage", "Tourism
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Agency", "Agency", "{CFC68F86-44D8-47F7-8891-AF3A84B56D83}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tourism.Core", "Tourism.Core\Tourism.Core.csproj", "{6A8F786B-7B66-4C46-A06C-92F216BC1076}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{261CA381-4A83-438E-B863-2B2CB420BA11}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{261CA381-4A83-438E-B863-2B2CB420BA11}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{261CA381-4A83-438E-B863-2B2CB420BA11}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6A8F786B-7B66-4C46-A06C-92F216BC1076}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6A8F786B-7B66-4C46-A06C-92F216BC1076}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6A8F786B-7B66-4C46-A06C-92F216BC1076}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6A8F786B-7B66-4C46-A06C-92F216BC1076}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

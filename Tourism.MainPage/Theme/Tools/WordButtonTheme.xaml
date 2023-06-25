@@ -29,13 +29,23 @@
                                     Cursor="Hand"
                                     x:Name="mainBorder"
                                     CornerRadius="0,0,10,10">       
-                                <TextBlock x:Name="icon"
+                                <!--<TextBlock x:Name="icon"
                                            Foreground="#0000FF"
                                            FontSize="35"
                                            Text="&#xE8B5;"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
-                                           FontFamily="SEGOE MDL2 Assets" />
+                                           FontFamily="SEGOE MDL2 Assets" />-->
+                                <Image VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="wordIcon"        
+                                       Width="{TemplateBinding Width}"
+                                       Height="{TemplateBinding Height}">
+
+                                    <Image.Source>
+                                        <BitmapImage UriSource="\Images\word48.png" />
+                                    </Image.Source>
+                                </Image>
                             </Border>
 
 
@@ -46,10 +56,12 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver"
                                      Value="True">
-                                <Setter TargetName="icon"
+                                <!--<Setter TargetName="icon"
                                         Property="Foreground"
-                                        Value="#4B7BF5" />
-
+                                        Value="#4B7BF5" />-->
+                                <Setter TargetName="wordIcon"
+                                        Property="Margin"
+                                        Value="5,0,0,0" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>

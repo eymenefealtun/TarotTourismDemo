@@ -1,14 +1,14 @@
-﻿using System.Data;
+﻿using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Linq.Expressions;
-using Tourism.DataAccess.Abstract;
-using Tourism.Entities.Abstract;
+using Tourism.Core.DataAccess.EntityFramework.Abstract;
+using Tourism.Core.Entities;
 
-
-namespace Tourism.DataAccess.Concrete.EntityFramework
+namespace Tourism.Core.DataAccess.EntityFramework.Concrete
 {
     public class EfEntityRepositoryBase<TEntity, TContext> : IEntityRepository<TEntity>
         where TEntity : class, IEntity, new()
-        where TContext : AppDbContext, new()
+        where TContext : DbContext, new()
     {
 
         public TEntity Get(Expression<Func<TEntity, bool>> filter)
@@ -178,3 +178,5 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
 
     }
 }
+
+

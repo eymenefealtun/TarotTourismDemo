@@ -5,7 +5,6 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
-using Tourism.MainPage.MVVM.View;
 
 namespace Tourism.MainPage
 {
@@ -31,31 +30,6 @@ namespace Tourism.MainPage
             this.Close();
         }
 
-
-        private void btnRestoreDown_Click(object sender, RoutedEventArgs e)
-        {
-            RestoreDown();
-        }
-
-        private void btnMinimize_Click(object sender, RoutedEventArgs e)
-        {
-            this.WindowState = WindowState.Minimized;
-        }
-
-        private void btnSettings_Click(object sender, RoutedEventArgs e)
-        {
-            btnCustomers.IsChecked = false;
-            btnOperations.IsChecked = false;
-            btnHome.IsChecked = false;
-            btnModifications.BorderThickness = new Thickness(0);
-            btnCurrency.IsChecked = false;
-            btnSubOperatorUser.IsChecked = false;
-            btnCategories.IsChecked = false;
-
-            btnSubCategory.IsChecked = false;
-            btnMainCategory.IsChecked = false;
-        }
-
         private void RestoreDown()
         {
             if (this.WindowState == WindowState.Maximized)
@@ -76,6 +50,15 @@ namespace Tourism.MainPage
             }
         }
 
+        private void btnRestoreDown_Click(object sender, RoutedEventArgs e)
+        {
+            RestoreDown();
+        }
+
+        private void btnMinimize_Click(object sender, RoutedEventArgs e)
+        {
+            this.WindowState = WindowState.Minimized;
+        }
 
         #region Screen
         private void btnTop_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -197,18 +180,34 @@ namespace Tourism.MainPage
         }
         #endregion
 
+        private void btnSettings_Click(object sender, RoutedEventArgs e)
+        {
+            btnCustomers.IsChecked = false;
+            btnOperations.IsChecked = false;
+            btnHome.IsChecked = false;
+
+
+            LooseFocusOfSubButton(btnModifications);
+            btnCurrency.IsChecked = false;
+            btnSubOperatorUser.IsChecked = false;
+
+            btnSubCategory.IsChecked = false;
+            btnMainCategory.IsChecked = false;
+
+
+            LooseFocusOfSubButton(btnIncome);
+            btnIncomeIncoming.IsChecked = false;
+            btnIncomeOutgoing.IsChecked = false;
+        }
 
 
         private void btnModifications_Click(object sender, RoutedEventArgs e)
         {
-            btnSettings.IsChecked = false;
             if (btnSubOperatorUser.Visibility == Visibility.Collapsed)
             {
                 btnSubOperatorUser.Visibility = Visibility.Visible;
                 btnCurrency.Visibility = Visibility.Visible;
                 btnCategories.Visibility = Visibility.Visible;
-
-
             }
             else if (btnSubOperatorUser.Visibility == Visibility.Visible)
             {
@@ -217,8 +216,8 @@ namespace Tourism.MainPage
                 btnCategories.Visibility = Visibility.Collapsed;
                 btnSubCategory.Visibility = Visibility.Collapsed;
                 btnMainCategory.Visibility = Visibility.Collapsed;
-                btnCategories.BorderThickness = new Thickness(0);
-
+                LooseFocusOfSubButton(btnCategories);
+                btnCategories.IsChecked = false;
             }
 
         }
@@ -227,56 +226,85 @@ namespace Tourism.MainPage
 
         private void btnMenuButtonTheme_Click(object sender, RoutedEventArgs e)
         {
-            btnModifications.BorderThickness = new Thickness(0);
+            LooseFocusOfSubButton(btnModifications);
+            LooseFocusOfSubButton(btnIncome);
             btnSettings.IsChecked = false;
-
         }
 
 
-        private void btnSubMenu_Click(object sender, RoutedEventArgs e)
+        private void btnModificationsSubMenu_Click(object sender, RoutedEventArgs e)
         {
             if (sender.GetType() == typeof(RadioButton))
             {
                 RadioButton radioButton = (RadioButton)sender;
-
             }
             if (sender.GetType() == typeof(ToggleButton))
             {
                 ToggleButton toggleButton = (ToggleButton)sender;
                 OpenCategories(toggleButton);
                 return;
-
             }
-
-            btnModifications.IsChecked = true;
-            btnModifications.BorderThickness = new Thickness(1);
-            btnSettings.IsChecked = false;
-
-
+            LooseFocusOfSubButton(btnIncome);
+            FocusToSubButton(btnModifications);
         }
 
-        private void OpenCategories(ToggleButton radioButton)
+
+        private void LooseFocusOfSubButton(ToggleButton button)
         {
-            if (radioButton == btnCategories)
+            button.BorderThickness = new Thickness(0);
+        }
+
+        private void FocusToSubButton(ToggleButton button)
+        {
+            button.BorderThickness = new Thickness(1);
+            btnSettings.IsChecked = false;
+        }
+
+
+        private void OpenCategories(ToggleButton toggleButton)
+        {
+            if (toggleButton == btnCategories)
             {
                 if (btnSubCategory.Visibility == Visibility.Collapsed)
                 {
                     btnSubCategory.Visibility = Visibility.Visible;
                     btnMainCategory.Visibility = Visibility.Visible;
-                    btnCategories.BorderThickness = new Thickness(1);
                 }
                 else if (btnSubCategory.Visibility == Visibility.Visible)
                 {
                     btnSubCategory.Visibility = Visibility.Collapsed;
                     btnMainCategory.Visibility = Visibility.Collapsed;
-                    btnCategories.BorderThickness = new Thickness(0);
-
+                    LooseFocusOfSubButton(btnCategories);
                 }
+            }
+
+        }
+
+
+
+        private void btnIncome_Click(object sender, RoutedEventArgs e)
+        {
+            if (btnIncomeIncoming.Visibility == Visibility.Collapsed)
+            {
+                btnIncomeIncoming.Visibility = Visibility.Visible;
+                btnIncomeOutgoing.Visibility = Visibility.Visible;
+                btnIncome.IsChecked = true; //changes the icon
+            }
+            else if (btnIncomeIncoming.Visibility == Visibility.Visible)
+            {
+                btnIncomeIncoming.Visibility = Visibility.Collapsed;
+                btnIncomeOutgoing.Visibility = Visibility.Collapsed;
+                btnIncome.IsChecked = false;
 
             }
         }
 
 
+        private void btnIncomeSubClick(object sender, RoutedEventArgs e)
+        {
+            LooseFocusOfSubButton(btnModifications);
+            FocusToSubButton(btnIncome);
+        }
 
 
     }

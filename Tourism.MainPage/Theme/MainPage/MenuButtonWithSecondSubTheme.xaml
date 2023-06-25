@@ -46,11 +46,11 @@
                                      Value="True">
                                 <Setter TargetName="lblSubListIcon"
                                         Property="Content"
-                                        Value="&#xE8C4;" />
+                                        Value="&#xE8C5;" />
 
 
                             </Trigger>
-                            <Trigger Property="BorderThickness"
+                            <!--<Trigger Property="BorderThickness"
                                      Value="1">
                                 <Setter TargetName="lblSubListIcon"
                                         Property="Content"
@@ -63,7 +63,7 @@
                                 <Setter TargetName="lblSubListIcon"
                                         Property="Content"
                                         Value="&#xE8C4;" />
-                            </Trigger>
+                            </Trigger>-->
 
                             <Trigger Property="IsMouseOver"
                                      Value="True">

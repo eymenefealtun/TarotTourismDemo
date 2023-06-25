@@ -28,13 +28,24 @@
                             <Border Background="#745869"
                                     Cursor="Hand"
                                     x:Name="mainBorder">
-                                <TextBlock x:Name="icon"
+                                <!--<TextBlock x:Name="icon"
                                            Foreground="#72ce1c"
                                            FontSize="35"
                                            Text="&#xE8B6;"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
-                                           FontFamily="SEGOE MDL2 Assets" />
+                                           FontFamily="SEGOE MDL2 Assets" />-->
+                                <Image VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       x:Name="excelIcon"
+                                       Width="{TemplateBinding Width}"
+                                       Height="{TemplateBinding Height}">
+
+
+                                    <Image.Source>
+                                        <BitmapImage UriSource="\Images\excel48.png" /> 
+                                    </Image.Source>
+                                </Image>
                             </Border>
 
 
@@ -45,9 +56,12 @@
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver"
                                      Value="True">
-                                <Setter TargetName="icon"
+                                <!--<Setter TargetName="icon"
                                         Property="Foreground"
-                                        Value="#509014" />
+                                        Value="#509014" />-->
+                                <Setter TargetName="excelIcon"
+                                        Property="Margin"
+                                        Value="5,0,0,0" />
 
                             </Trigger>
                         </ControlTemplate.Triggers>

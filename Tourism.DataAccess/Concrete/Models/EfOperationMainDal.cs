@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Tourism.Core.DataAccess.EntityFramework.Concrete;
 using Tourism.DataAccess.Abstract.Models;
 using Tourism.DataAccess.Concrete.EntityFramework;
 using Tourism.Entities.Models;
