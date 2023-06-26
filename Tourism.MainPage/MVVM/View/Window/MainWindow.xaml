@@ -51,8 +51,13 @@
                     <TextBox Height="40"
                              VerticalContentAlignment="Center"
                              HorizontalAlignment="Left"
+                             x:Name="tboxSearch"
                              Margin="5,20,0,0"
-                             Grid.Column="1"
+                             Background="#353340"
+                             Foreground="#CFCFCF"
+                             Tag="Search"
+                             Grid.Row="1"
+                             TextChanged="tboxSearch_TextChanged"
                              Style="{StaticResource ModernTextBox}" />
 
                     <RadioButton Content="Home"
@@ -150,7 +155,8 @@
                                  Height="30"
                                  FontSize="12"
                                  Visibility="Collapsed"
-                                 Click="btnIncomeSubClick"
+                                 Click="btnIncomeSubClick"      
+                                 Command="{Binding Path=EmptyPageViewCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
 
 
@@ -159,7 +165,8 @@
                                  Height="30"
                                  FontSize="12"
                                  Visibility="Collapsed"
-                                 Click="btnIncomeSubClick"
+                                 Click="btnIncomeSubClick"      
+                                 Command="{Binding Path=GeneralIncomeOutgoingCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
 
 

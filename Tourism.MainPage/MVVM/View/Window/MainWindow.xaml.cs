@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Microsoft.Office.Interop.Excel;
+using System;
+using System.Linq;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -8,20 +11,64 @@ using System.Windows.Interop;
 
 namespace Tourism.MainPage
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : System.Windows.Window
     {
         public string _textMain;
-
+        ToggleButton[] _allButtons;
+        ToggleButton[] _allMainButtons;
+        ToggleButton[] _firstSubButtons;
+        ToggleButton[] _secondSubButtons;
+        ToggleButton[] _modificationSubButtons;
+        ToggleButton[] _modificationSecondSubButtons;
+        ToggleButton[] _incomeSubButtons;
+        ToggleButton[] _mainWithSubButtons;
+        ToggleButton[] _modificationCategorySecondSubButton;
+        ToggleButton[] _firstSubButtonsWithSubs;
         public MainWindow()
         {
             InitializeComponent();
+            ToggleButton[] allButtons = new ToggleButton[] { btnCategories, btnCurrency, btnCustomers, btnHome, btnIncome, btnIncomeIncoming, btnIncomeOutgoing, btnMainCategory, btnModifications, btnOperations, btnOutcome, btnSubCategory, btnSubOperatorUser };
 
+            ToggleButton[] allMainButtons = new ToggleButton[] { btnHome, btnOperations, btnModifications, btnCustomers, btnIncome, btnOutcome };
+            ToggleButton[] mainWithSubButtons = new ToggleButton[] { btnModifications, btnIncome, btnOutcome };
+
+
+            #region firstSubButtons
+            ToggleButton[] firstSubButtons = new ToggleButton[] { btnSubOperatorUser, btnCategories, btnCurrency, btnIncomeIncoming, btnIncomeOutgoing };
+            ToggleButton[] firstSubButtonsWithSubs = new ToggleButton[] { btnCategories };
+
+            ToggleButton[] modificationSubButtons = new ToggleButton[] { btnSubOperatorUser, btnCategories, btnCurrency };
+
+            ToggleButton[] incomeSubButtons = new ToggleButton[] { btnIncomeIncoming, btnIncomeOutgoing };
+            #endregion
+
+
+            #region secondSubButtons
+            ToggleButton[] secondSubButtons = new ToggleButton[] { btnSubCategory, btnMainCategory };
+
+            ToggleButton[] modificationSecondSubButtons = new ToggleButton[] { btnSubCategory, btnMainCategory };
+            ToggleButton[] modificationCategorySecondSubButton = new ToggleButton[] { btnSubCategory, btnMainCategory };
+
+            #endregion
+
+
+
+
+            _firstSubButtons = firstSubButtons;
+            _secondSubButtons = secondSubButtons;
+            _allMainButtons = allMainButtons;
+            _modificationSecondSubButtons = modificationSecondSubButtons;
+            _modificationSubButtons = modificationSubButtons;
+            _incomeSubButtons = incomeSubButtons;
+            _allButtons = allButtons;
+            _mainWithSubButtons = mainWithSubButtons;
+            _modificationCategorySecondSubButton = modificationCategorySecondSubButton;
+            _firstSubButtonsWithSubs = firstSubButtonsWithSubs;
         }
 
         public MainWindow(int number)
         {
             InitializeComponent();
-
             this.IsHitTestVisible = false;
         }
 
@@ -265,12 +312,12 @@ namespace Tourism.MainPage
         {
             if (toggleButton == btnCategories)
             {
-                if (btnSubCategory.Visibility == Visibility.Collapsed)
+                if (toggleButton.IsChecked == true)
                 {
                     btnSubCategory.Visibility = Visibility.Visible;
                     btnMainCategory.Visibility = Visibility.Visible;
                 }
-                else if (btnSubCategory.Visibility == Visibility.Visible)
+                else if (toggleButton.IsChecked == false)
                 {
                     btnSubCategory.Visibility = Visibility.Collapsed;
                     btnMainCategory.Visibility = Visibility.Collapsed;
@@ -306,6 +353,121 @@ namespace Tourism.MainPage
             FocusToSubButton(btnIncome);
         }
 
+        private void tboxSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string search = tboxSearch.Text.ToLower();
+
+
+            for (int i = 0; i < _mainWithSubButtons.Length; i++)
+            {
+                    _mainWithSubButtons[i].IsChecked = false;
+            }
+            for (int i = 0; i < _firstSubButtonsWithSubs.Length; i++)        
+            {
+                _firstSubButtonsWithSubs[i].IsChecked = false;
+            }
+
+
+            for (int i = 0; i < _allMainButtons.Length; i++)
+            {
+                var button = _allMainButtons[i];
+                if (Search(button, search))
+                {
+                    button.Visibility = Visibility.Visible;
+                }
+                else if (!Search(button, search))
+                {
+                    button.Visibility = Visibility.Collapsed;
+                }
+            }
+
+            for (int i = 0; i < _firstSubButtons.Length; i++)
+            {
+                var button = _firstSubButtons[i];
+                if (Search(button, search))
+                {
+                    button.Visibility = Visibility.Visible;
+                    if (IsInsideOfTheArray(button, _modificationSubButtons))
+                    {
+                        btnModifications.Visibility = Visibility.Visible;
+                        //btnModifications.IsChecked = true;
+                    }
+                    else if (IsInsideOfTheArray(button, _incomeSubButtons))
+                    {
+                        btnIncome.Visibility = Visibility.Visible;
+                        //btnIncome.IsChecked = true;
+                    }
+                }
+                else if (!Search(button, search))
+                {
+                    button.Visibility = Visibility.Collapsed;
+
+                }
+            }
+            for (int i = 0; i < _secondSubButtons.Length; i++)
+            {
+                var button = _secondSubButtons[i];
+                if (Search(button, search))
+                {
+                    button.Visibility = Visibility.Visible;
+
+                    if (IsInsideOfTheArray(button, _modificationCategorySecondSubButton))
+                    {
+                        btnModifications.Visibility = Visibility.Visible;
+                        //btnModifications.IsChecked = true;
+                        //btnCategories.IsChecked = true;
+                        btnCategories.Visibility = Visibility.Visible;
+                    }
+                }
+                else if (!Search(button, search))
+                {
+                    button.Visibility = Visibility.Collapsed;
+                }
+            }
+
+
+            if (search == null || search == "")
+            {
+                for (int i = 0; i < _firstSubButtons.Length; i++)
+                {
+                    _firstSubButtons[i].Visibility = Visibility.Collapsed;
+                }
+                for (int i = 0; i < _secondSubButtons.Length; i++)
+                {
+                    _secondSubButtons[i].Visibility = Visibility.Collapsed;
+                }
+                for (int i = 0; i < _allMainButtons.Length; i++)
+                {
+                    _allMainButtons[i].Visibility = Visibility.Visible;
+                }
+                for (int i = 0; i < _mainWithSubButtons.Length; i++)
+                {
+                    _mainWithSubButtons[i].IsChecked = false;
+                }
+                for (int i = 0; i < _firstSubButtonsWithSubs.Length; i++)
+                {
+                    _firstSubButtonsWithSubs[i].IsChecked = false;
+
+                }
+            }
+
+
+        }
+
+        private bool IsInsideOfTheArray(object button, Array array)
+        {
+            if (Array.IndexOf(array, button) > -1)
+                return true;
+            return false;
+        }
+        private bool Search(ToggleButton button, string search)
+        {
+            if (button.Content.ToString().ToLower().Contains(search))
+            {
+                return true;
+            }
+            return false;
+        }
 
     }
 }

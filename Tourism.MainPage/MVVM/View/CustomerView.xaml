@@ -9,98 +9,172 @@
              d:DesignWidth="1200"
              Background="#0f171e">
 
-    <Grid>
+    <!--<Grid Name="CustomerViewMainGrid"
+          Background="Transparent">-->
 
-        <StackPanel>
+    <Grid x:Name="Main">
 
-            <Border Grid.Column="1"
-                    Grid.Row="1"
-                    Width="900"
-                    Height="520"
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition  Width="50" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="30" />
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0"
+              Grid.Column="1">
+            <TextBox Height="40"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left"
+                     x:Name="tboxSearchName"
+                     Tag="Search by name"
+                     Background="#bada43"
+                     TextChanged="tboxSearchName_TextChanged"
+                     Style="{StaticResource ModernTextBox}" />
+            <TextBox Height="40"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left"
+                     x:Name="tboxSearchId"
+                     Margin="200,0,0,0"
+                     Tag="Search by id"
+                     Background="#852a29"
+                     Foreground="#CFCFCF"
+                     TextChanged="tboxSearchId_TextChanged"
+                     Style="{StaticResource ModernTextBox}" />
+            <TextBox Height="40"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left"
+                     x:Name="tboxSearchReservationCode"
+                     Margin="400,0,0,0"
+                     Background="#43da45"
+                     Tag="Search by reservation code"
+                     TextChanged="tboxSearchReservationCode_TextChanged"
+                     Style="{StaticResource ModernTextBox}" />
+
+
+            <Button x:Name="infoIcon"
+                    VerticalAlignment="Center"
+                    FontSize="30"
+                    Cursor="Hand"
+                    Foreground="#627581"
+                    ToolTip="You can search simultaneously with three variables"
+                    Grid.Column="1"
                     HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Background="#f6f7f9"
-                    Margin="50,50,0,0"
-                    CornerRadius="20">
-
-                <DataGrid x:Name="dgwCustomerOperation"
-                          HorizontalAlignment="Center"
-                          VerticalAlignment="Center"
-                          Width="900"
-                          Height="500"
-                          AutoGenerateColumns="False"
-                          IsReadOnly="True"
-                          Margin="0,0,0,10"
-                          ScrollViewer.CanContentScroll="False"
-                          FontFamily="/Fonts/#Poppins"
-                          AlternatingRowBackground="#dbdcdc"
-                          HeadersVisibility="Column"
-                          BorderBrush="Transparent"
-                          Loaded="dgwCustomerOperation_Loaded"        
-                          Background="Transparent">
-                    <DataGrid.Resources>
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                               TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="SnapsToDevicePixels"
-                                    Value="True" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Left" />
-                            <Setter Property="MinWidth"
-                                    Value="0" />
-                            <Setter Property="MinHeight"
-                                    Value="30" />
-                            <Setter Property="Cursor"
-                                    Value="Hand" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Center" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                        </Style>
-                    </DataGrid.Resources>
-
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="First Name"
-                                            Width="80"
-                                            Binding="{Binding FirstName}">
-
-                        </DataGridTextColumn>
-                        <DataGridTextColumn Header="Last Name"
-                                            Width="80"
-                                            Binding="{Binding LastName}" />
-                        <DataGridTextColumn Header="Phone"
-                                            Width="110"
-                                            Binding="{Binding Phone}" />
-                        <DataGridTextColumn Header="Birth Date"
-                                            Width="90"
-                                            Binding="{Binding BirthDate, StringFormat=d}" />
-                        <DataGridTextColumn Header="Gender"
-                                            Width="60"
-                                            Binding="{Binding Gender}" />
-                        <DataGridTextColumn Header="Id"
-                                            Width="120"
-                                            Binding="{Binding IdNumber}" />
-                        <DataGridTextColumn Header="Room Id"
-                                            Width="60"
-                                            Binding="{Binding RoomId}" />
-                        <DataGridTextColumn Header="Bed Type"
-                                            Width="60"
-                                            Binding="{Binding BedType}" />
-                        <DataGridTextColumn Header="Reservation Code"
-                                            Width="150"
-                                            Binding="{Binding ReservationCode}" />
-
-                    </DataGrid.Columns>
-
-                </DataGrid>
-
-            </Border>
+                    Margin="600,0,0,0"
+                    Style="{StaticResource InfoIconButtonTheme}" />
+        </Grid>
 
 
-        </StackPanel>
 
+
+
+
+
+        <Button x:Name="btnRefresh"
+                ToolTip="Refresh"
+                Grid.Row="0"
+                Grid.Column="0"
+                Foreground="White"
+                FontSize="30"
+                Cursor="Hand"
+                Content="&#xE777;"
+                Style="{StaticResource RefreshAndBackButtonTheme}"
+                Click="btnRefresh_Click" />
+
+
+
+        <Border Grid.Column="1"
+                Grid.Row="1"
+                Width="900"
+                Height="520"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Background="#f6f7f9"
+                Margin="50,50,0,0"
+                CornerRadius="20">
+
+            <DataGrid x:Name="dgwCustomerOperation"
+                      HorizontalAlignment="Center"
+                      VerticalAlignment="Center"
+                      Width="900"
+                      Height="500"
+                      AutoGenerateColumns="False"
+                      IsReadOnly="True"
+                      Margin="0,0,0,10"
+                      ScrollViewer.CanContentScroll="False"
+                      FontFamily="/Fonts/#Poppins"
+                      AlternatingRowBackground="#dbdcdc"
+                      HeadersVisibility="Column"
+                      BorderBrush="Transparent"
+                      Loaded="dgwCustomerOperation_Loaded"
+                      Background="Transparent">
+                <DataGrid.Resources>
+                    <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
+                           TargetType="{x:Type DataGridColumnHeader}">
+                        <Setter Property="Background"
+                                Value="Transparent" />
+                        <Setter Property="BorderThickness"
+                                Value="1" />
+                        <Setter Property="SnapsToDevicePixels"
+                                Value="True" />
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Left" />
+                        <Setter Property="MinWidth"
+                                Value="0" />
+                        <Setter Property="MinHeight"
+                                Value="30" />
+                        <Setter Property="Cursor"
+                                Value="Hand" />
+                        <Setter Property="HorizontalContentAlignment"
+                                Value="Center" />
+                        <Setter Property="FontFamily"
+                                Value="/Fonts/#Roboto" />
+                    </Style>
+                </DataGrid.Resources>
+
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="First Name"
+                                        Width="80"
+                                        Binding="{Binding FirstName}">
+
+                    </DataGridTextColumn>
+                    <DataGridTextColumn Header="Last Name"
+                                        Width="80"
+                                        Binding="{Binding LastName}" />
+                    <DataGridTextColumn Header="Phone"
+                                        Width="110"
+                                        Binding="{Binding Phone}" />
+                    <DataGridTextColumn Header="Birth Date"
+                                        Width="90"
+                                        Binding="{Binding BirthDate, StringFormat=d}" />
+                    <DataGridTextColumn Header="Gender"
+                                        Width="60"
+                                        Binding="{Binding Gender}" />
+                    <DataGridTextColumn Header="Id"
+                                        Width="120"
+                                        Binding="{Binding IdNumber}" />
+                    <DataGridTextColumn Header="Room Id"
+                                        Width="60"
+                                        Binding="{Binding RoomId}" />
+                    <DataGridTextColumn Header="Bed Type"
+                                        Width="60"
+                                        Binding="{Binding BedType}" />
+                    <DataGridTextColumn Header="Reservation Code"
+                                        Width="150"
+                                        Binding="{Binding ReservationCode}" />
+
+                </DataGrid.Columns>
+
+            </DataGrid>
+
+        </Border>
+
+
+        <!--</Grid>-->
     </Grid>
 </UserControl>

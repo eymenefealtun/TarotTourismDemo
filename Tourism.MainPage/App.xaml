@@ -46,6 +46,7 @@
                 <ResourceDictionary Source="Theme/GeneralSaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralCancelButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/InfoIconButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralDataGridTheme.xaml" />     
 
 
                 <ResourceDictionary Source="Theme/Tools/ExcelButtonTheme.xaml" />
@@ -106,6 +107,13 @@
                 <view:SubCategoryView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:GeneralIncomeOutgoingViewModel}">
+                <view:GeneralIncomeOutgoingView />          
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:EmptyPageViewModel}">
+                <view:EmptyPageView />      
+            </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>
 

@@ -1,8 +1,7 @@
 ﻿
-
 namespace Tourism.MainPage.MVVM.ViewModel
 {
-    class MainCategoryViewModel : Core.ViewModel
+    public class EmptyPageViewModel : Core.ViewModel
     {
     }
 }

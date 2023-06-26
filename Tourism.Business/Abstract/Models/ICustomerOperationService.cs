@@ -6,7 +6,8 @@ namespace Tourism.Business.Abstract.Models
     {                       
         List<CustomerOperation> GetCustomerOperation(int operationId, bool isActive);
         List<CustomerOperation> SearchCustomerOperation(string name, int operationId, bool isActive);
-        List<CustomerOperation> GetCustomers();     
+        List<CustomerOperation> GetCustomers();
+        List<CustomerOperation> GetCustomersWithFilter(string firstName, string id, string reservationCode);
         List<CustomerOperation> GetCustomerOperationByReservationId(int operationId, int reservationId, bool isActive);            
         
     }

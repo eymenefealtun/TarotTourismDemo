@@ -17,6 +17,8 @@ namespace Tourism.MainPage.MVVM.ViewModel
         public RelayCommand CurrencyViewCommand { get; set; }
         public RelayCommand MainCategoryViewCommand { get; set; }
         public RelayCommand SubCategoryViewCommand { get; set; }
+        public RelayCommand GeneralIncomeOutgoingCommand { get; set; }                        
+        public RelayCommand EmptyPageViewCommand { get; set; }                             
 
         //public HomeViewModel HomeVm { get; set; }
         //public OperationViewModel OperationVm { get; set; }
@@ -61,8 +63,10 @@ namespace Tourism.MainPage.MVVM.ViewModel
             CurrencyViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CurrencyViewModel>(); }, canExecute: o => true);
             MainCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<MainCategoryViewModel>(); }, canExecute: o => true);
             SubCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SubCategoryViewModel>(); }, canExecute: o => true);
+            GeneralIncomeOutgoingCommand = new RelayCommand(o => { Navigation.NavigateTo<GeneralIncomeOutgoingViewModel>(); }, canExecute: o => true);
+            EmptyPageViewCommand = new RelayCommand(o => { Navigation.NavigateTo<EmptyPageViewModel>(); }, canExecute: o => true);              
 
-
+                    
 
             #region Old
             //HomeVm = new HomeViewModel();             

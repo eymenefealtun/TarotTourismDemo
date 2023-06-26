@@ -34,6 +34,8 @@ namespace Tourism.MainPage
             services.AddSingleton<CurrencyViewModel>();
             services.AddSingleton<MainCategoryViewModel>();
             services.AddSingleton<SubCategoryViewModel>();
+            services.AddSingleton<GeneralIncomeOutgoingViewModel>();
+            services.AddSingleton<EmptyPageViewModel>();
 
             services.AddSingleton<INavigationService, Services.NavigationService>();
 

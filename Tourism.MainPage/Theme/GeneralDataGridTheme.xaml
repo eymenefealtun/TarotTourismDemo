@@ -1,0 +1,53 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Style x:Key="GeneralDataGridTheme"
+           BasedOn="{StaticResource {x:Type DataGrid}}"
+           TargetType="DataGrid"
+           x:Name="mainDataGrid">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="IsReadOnly"
+                Value="True" />
+        <Setter Property="AutoGenerateColumns"
+                Value="False" />
+        <Setter Property="HeadersVisibility"
+                Value="Column" />
+        <Setter Property="Background"
+                Value="Transparent" />      
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="FontFamily"
+                Value="/Fonts/#Poppins" />
+        <Setter Property="AlternatingRowBackground"
+                Value="#dbdcdc" />
+        <Setter Property="VirtualizingPanel.IsVirtualizing"
+                Value="True" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="DataGrid">
+                    <Grid VerticalAlignment="Stretch"
+                          HorizontalAlignment="Stretch">
+                        <!--<DataGrid Width="{TemplateBinding Width}"
+                               Height="{TemplateBinding Height}"
+                                  Background="Red">-->
+                            <Border Width="{TemplateBinding Width}"
+                                    Height="{TemplateBinding Height}"     
+                                    Background="#f6f7f9"            
+                                    CornerRadius="20" />
+
+                        <!--</DataGrid>-->
+                   
+                        
+                        
+
+                    </Grid>
+            
+
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+</ResourceDictionary>

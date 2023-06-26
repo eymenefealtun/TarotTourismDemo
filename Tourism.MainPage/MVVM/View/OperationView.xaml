@@ -66,31 +66,25 @@
 
 
 
-                <Border Grid.Column="1"
+                <!--<Border Grid.Column="1"
                         Grid.Row="1"
                         Width="660"
                         Height="445"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Background="#f6f7f9"
-                        CornerRadius="20">
+                        CornerRadius="20">-->
                     <DataGrid x:Name="dgwOperationMain"
                               Width="660"
                               Height="425"
-                              IsReadOnly="True"
-                              AutoGenerateColumns="False"
-                              FontFamily="/Fonts/#Poppins"
+                              VerticalAlignment="Top"
+                              HorizontalAlignment="Left"
                               SelectedItem="{Binding SelectedItem}"
-                              ScrollViewer.CanContentScroll="False"
-                              HeadersVisibility="Column"
-                              Background="Transparent"
-                              BorderBrush="Transparent"
                               Margin="0,0,0,10"
                               MouseDoubleClick="dgwOperationMain_MouseDoubleClick"
                               Loaded="dgwOperationMain_Loaded"
-                              AlternatingRowBackground="#dbdcdc"
-                              VirtualizingPanel.IsVirtualizing="True"
-                              SelectionChanged="dgwOperationMain_SelectionChanged">
+                              SelectionChanged="dgwOperationMain_SelectionChanged"
+                              Style="{StaticResource GeneralDataGridTheme}">
 
                         <DataGrid.Resources>
                             <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
@@ -201,7 +195,7 @@
 
 
                     </DataGrid >
-                </Border>
+                <!--</Border>-->
 
             </Grid>
 
@@ -222,7 +216,7 @@
 
 
 
-            <Border Grid.Column="1"
+            <!--<Border Grid.Column="1"
                     Background="#353340"
                     Width="190"
                     Height="40"
@@ -273,8 +267,19 @@
 
 
                 </Grid>
-            </Border>
-
+            </Border>-->
+            
+            <TextBox Height="40"
+                     VerticalContentAlignment="Center"
+                     HorizontalAlignment="Left"
+                     x:Name="tboxOperationSearch"
+                     Grid.Row="0"
+                     Grid.Column="1"
+                     Background="#353340"
+                     Tag="Search"
+                     Foreground="#CFCFCF"
+                     TextChanged="tboxOperationSearch_TextChanged"
+                     Style="{StaticResource ModernTextBox}" />
 
             <DatePicker   x:Name="datePickStartDate"
                           Grid.Row="0"
