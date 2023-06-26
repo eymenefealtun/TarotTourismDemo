@@ -32,17 +32,9 @@
             <DataGrid x:Name="dgwCurrency"
                       Height="425"
                       Width="130"
-                      IsReadOnly="True"
-                      FontFamily="/Fonts/#Poppins"
                       SelectedItem="{Binding SelectedItem}"
-                      AutoGenerateColumns="False"
-                      HeadersVisibility="Column"
-                      Background="Transparent"
-                      BorderBrush="Transparent"
-                      ScrollViewer.CanContentScroll="False"
-                      VirtualizingPanel.IsVirtualizing="True"
-                      AlternatingRowBackground="#dbdcdc"
                       RowHeight="25"
+                      Style="{StaticResource GeneralDataGridTheme}"
                       Margin="0,0,0,10">
 
                 <DataGrid.Columns>
@@ -160,11 +152,11 @@
                             x:Name="btnCancelNewCurrency"
                             Click="btnCancelNewCurrency_Click"
                             Margin="0,0,37,5"
-                            Style="{StaticResource CancelCurrencyButtonTheme}" />
+                            Style="{StaticResource CancelButtonTheme}" />
                     <Button Grid.Row="4"
                             x:Name="btnSaveNewCurrency"
                             Content="&#xE74E;"
-                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                            Style="{StaticResource SaveButtonTheme}"
                             HorizontalAlignment="Right"
                             Click="btnSaveNewCurrency_Click"
                             VerticalAlignment="Bottom"
@@ -183,7 +175,7 @@
                       HorizontalAlignment="Left"
                       Grid.Column="1"
                       Grid.Row="1"
-                      IsHitTestVisible="False"      
+                      IsHitTestVisible="False"
                       Margin="135,40,0,0"
                       Visibility="Hidden"
                       Width="100"
@@ -240,12 +232,12 @@
                             x:Name="btnCancelUpdatedCurrency"
                             Click="btnCancelUpdatedCurrency_Click"
                             Margin="0,0,37,5"
-                            Style="{StaticResource CancelCurrencyButtonTheme}" />
-                    
+                            Style="{StaticResource CancelButtonTheme}" />
+
                     <Button Grid.Row="4"
                             x:Name="btnSaveUpdatedCurrency"
                             Content="&#xE74E;"
-                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                            Style="{StaticResource SaveButtonTheme}"
                             HorizontalAlignment="Right"
                             Click="btnSaveUpdatedCurrency_Click"
                             VerticalAlignment="Bottom"

@@ -3,35 +3,38 @@
     <!--Text="&#xE74E;"-->
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
-           x:Key="SaveCurrencyButtonTheme">
+           x:Key="SaveButtonTheme">
         <Style.Setters>
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
-                        <Border  Background="#127b2d"
-                                 CornerRadius="10"
-                                 x:Name="borderMain">
+                        <Border x:Name="borderMain"
+                                Background="DarkGreen"
+                                CornerRadius="10">
+
                             <Grid VerticalAlignment="Stretch"
                                   HorizontalAlignment="Stretch"
                                   Background="{TemplateBinding Background}">
-                                <TextBlock Text="Save"
+                                <TextBlock Text="&#xE74E;"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
-                                           FontSize="12"
-                                           FontFamily="/Fonts/#Poppins"
+                                           FontSize="15"
+                                           FontFamily="Segoe MDL2 Assets"
                                            x:Name="mainIcon"
                                            Foreground="White" />
                             </Grid>
-                        </Border>
+
+                        </Border>       
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsMouseOver"
                                      Value="True">
                                 <Setter TargetName="borderMain"
                                         Property="Background"
-                                        Value="#8ae833" />      
+                                        Value="#17E453" />
                                 <Setter TargetName="mainIcon"
-                                        Property="Foreground"
-                                        Value="#555558" />
+                                        Property="FontSize"
+                                        Value="16" />
+
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -44,7 +47,7 @@
             <Setter Property="Height"
                     Value="25" />
             <Setter Property="Width"
-                    Value="50" />
+                    Value="30" />
             <Setter Property="Cursor"
                     Value="Hand" />
         </Style.Setters>

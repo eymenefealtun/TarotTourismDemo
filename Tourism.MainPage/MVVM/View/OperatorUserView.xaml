@@ -37,47 +37,10 @@
                 <DataGrid x:Name="dgwOperatorUser"
                           Width="400"
                           Height="425"
-                          IsReadOnly="True"
-                          AutoGenerateColumns="False"
-                          FontFamily="/Fonts/#Poppins"
                           SelectedItem="{Binding SelectedItem}"
-                          ScrollViewer.CanContentScroll="False"
                           CanUserSortColumns="False"
-                          HeadersVisibility="Column"
-                          Background="Transparent"
-                          BorderBrush="Transparent"
                           Margin="0,0,0,10"
-                          AlternatingRowBackground="#dbdcdc"
-                          VirtualizingPanel.IsVirtualizing="True">
-
-
-                    <DataGrid.Resources>
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                               TargetType="{x:Type DataGridColumnHeader}">
-
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="MinHeight"
-                                    Value="30" />
-                            <Setter Property="Cursor"
-                                    Value="Hand" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Poppins" />
-                            <Setter Property="BorderThickness"
-                                    Value="0.3" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Left" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                        </Style>
-
-                    </DataGrid.Resources>
+                          Style="{StaticResource GeneralDataGridTheme}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="  UserName"
@@ -108,11 +71,7 @@
 
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
-
                     </DataGrid.Columns>
-
-
                 </DataGrid >
             </Border>
 
@@ -231,12 +190,12 @@
                                 HorizontalAlignment="Right"
                                 x:Name="btnCancelNewUser"
                                 Margin="0,0,37,0"
-                                Style="{StaticResource CancelCurrencyButtonTheme}"
+                                Style="{StaticResource CancelButtonTheme}"
                                 Click="btnCancelNewUser_Click" />
                         <Button Grid.Row="4"
                                 x:Name="btnSaveNewUser"
                                 Content="&#xE74E;"
-                                Style="{StaticResource SaveCurrencyButtonTheme}"
+                                Style="{StaticResource SaveButtonTheme}"
                                 HorizontalAlignment="Right"
                                 Margin="0,0,5,0"
                                 Click="btnSaveNewUser_Click" />
@@ -359,12 +318,12 @@
                                 HorizontalAlignment="Right"
                                 x:Name="btnCancelUpdate"
                                 Margin="0,0,37,0"
-                                Style="{StaticResource CancelCurrencyButtonTheme}"
+                                Style="{StaticResource CancelButtonTheme}"
                                 Click="btnCancelUpdate_Click" />
                         <Button Grid.Row="4"
                                 x:Name="btnSaveUpdate"
                                 Content="&#xE74E;"
-                                Style="{StaticResource SaveCurrencyButtonTheme}"
+                                Style="{StaticResource SaveButtonTheme}"
                                 HorizontalAlignment="Right"
                                 Margin="0,0,5,0"
                                 Click="btnSaveUpdate_Click" />

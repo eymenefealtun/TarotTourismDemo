@@ -54,7 +54,6 @@
             <ToggleButton.Template>
                 <ControlTemplate TargetType="ToggleButton">
                     <Border x:Name="B1"
-                            Background="red"
                             BorderBrush="Transparent"
                             BorderThickness="1"
                             CornerRadius="20"
@@ -262,9 +261,9 @@
             <Button x:Name="btnCancelMainPart"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Right"
-                    Margin="0,0,51,62.5"
+                    Margin="0,0,51,62.5"        
                     Visibility="Hidden"
-                    Style="{StaticResource CancelButtonTheme}"
+                    Style="{StaticResource CancelCurrencyButtonTheme}"      
                     Click="btnCancelMainPart_Click" />
 
             <Button x:Name="btnSaveMainPart"
@@ -272,7 +271,7 @@
                     HorizontalAlignment="Right"
                     Margin="0,0,0,62.5"
                     Visibility="Hidden"
-                    Style="{StaticResource SaveButtonTheme}"
+                    Style="{StaticResource SaveCurrencyButtonTheme}"
                     Click="btnSaveMainPart_Click" />
 
             <Border Background="#F3F341 "
@@ -447,7 +446,7 @@
                     HorizontalAlignment="Right"
                     Margin="0,0,51,12.5"
                     Visibility="Hidden"
-                    Style="{StaticResource CancelButtonTheme}"
+                    Style="{StaticResource CancelCurrencyButtonTheme}"
                     Click="btnCancelPricePart_Click" />
 
             <Button x:Name="btnSavePricePart"
@@ -455,7 +454,7 @@
                     HorizontalAlignment="Right"
                     Margin="0,0,0,12.5"
                     Visibility="Hidden"
-                    Style="{StaticResource SaveButtonTheme}"
+                    Style="{StaticResource SaveCurrencyButtonTheme}"
                     Click="btnSavePricePart_Click" />
 
         </Grid>
@@ -515,7 +514,7 @@
                     HorizontalAlignment="Left"
                     Margin="-26,0,0,35.5"
                     Visibility="Hidden"
-                    Style="{StaticResource CancelButtonTheme}"
+                    Style="{StaticResource CancelCurrencyButtonTheme}"
                     Click="btnCancelDescriptionPart_Click" />
 
             <Button x:Name="btnSaveDescriptionPart"
@@ -523,7 +522,7 @@
                     HorizontalAlignment="Left"
                     Margin="25,0,0,35.5"
                     Visibility="Hidden"
-                    Style="{StaticResource SaveButtonTheme}"
+                    Style="{StaticResource SaveCurrencyButtonTheme}"
                     Click="btnSaveDescriptionPart_Click" />
 
 
@@ -574,7 +573,7 @@
                     HorizontalAlignment="Left"
                     Margin="-26,0,0,20.5"
                     Visibility="Hidden"
-                    Style="{StaticResource CancelButtonTheme}"
+                    Style="{StaticResource CancelCurrencyButtonTheme}"
                     Click="btnCancelNotePart_Click" />
 
             <Button x:Name="btnSaveNotePart"
@@ -582,7 +581,7 @@
                     HorizontalAlignment="Left"
                     Margin="25,0,0,20.5"
                     Visibility="Hidden"
-                    Style="{StaticResource SaveButtonTheme}"
+                    Style="{StaticResource SaveCurrencyButtonTheme}"
                     Click="btnSaveNotePart_Click" />
 
         </Grid>

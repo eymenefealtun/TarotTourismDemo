@@ -3,7 +3,7 @@
 
     <Style BasedOn="{StaticResource {x:Type Button}}"
            TargetType="{x:Type Button}"
-           x:Key="EditCurrencyButtonTheme">
+           x:Key="GridEditButtonTheme">
         <Style.Setters>
 
             <Setter Property="Background"

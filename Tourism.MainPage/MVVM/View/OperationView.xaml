@@ -62,18 +62,26 @@
 
 
             <Grid Grid.Row="1"
-                  Grid.Column="1">
+                  Grid.Column="1"
+                  Width="660"
+                  Height="445"
+                  HorizontalAlignment="Left"
+                  VerticalAlignment="Top">
 
 
 
-                <!--<Border Grid.Column="1"
+                <Border Grid.Column="1"
                         Grid.Row="1"
                         Width="660"
                         Height="445"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Background="#f6f7f9"
-                        CornerRadius="20">-->
+                        CornerRadius="20">
+
+
+
+
                     <DataGrid x:Name="dgwOperationMain"
                               Width="660"
                               Height="425"
@@ -85,68 +93,6 @@
                               Loaded="dgwOperationMain_Loaded"
                               SelectionChanged="dgwOperationMain_SelectionChanged"
                               Style="{StaticResource GeneralDataGridTheme}">
-
-                        <DataGrid.Resources>
-                            <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                                   TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background"
-                                        Value="Transparent" />
-                                <Setter Property="BorderThickness"
-                                        Value="1" />
-                                <Setter Property="MinHeight"
-                                        Value="30" />
-                                <Setter Property="Cursor"
-                                        Value="Hand" />
-                                <Setter Property="Foreground"
-                                        Value="Black" />
-                                <Setter Property="FontFamily"
-                                        Value="/Fonts/#Poppins" />
-                                <Setter Property="BorderThickness"
-                                        Value="0.3" />
-                                <Setter Property="BorderBrush"
-                                        Value="Transparent" />
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Left" />
-                                <Setter Property="FontFamily"
-                                        Value="/Fonts/#Roboto" />
-                            </Style>
-                            <Style x:Key="ToCenter"
-                                   TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment"
-                                        Value="Center" />
-                            </Style>
-                            <Style x:Key="ToRight"
-                                   TargetType="{x:Type TextBlock}">
-                                <Setter Property="HorizontalAlignment"
-                                        Value="Right" />
-                            </Style>
-                            <Style x:Key="ToColumnCenter"
-                                   TargetType="{x:Type DataGridColumnHeader}">
-                                <Setter Property="Background"
-                                        Value="Transparent" />
-                                <Setter Property="BorderThickness"
-                                        Value="1" />
-                                <Setter Property="MinHeight"
-                                        Value="30" />
-                                <Setter Property="Cursor"
-                                        Value="Hand" />
-                                <Setter Property="Foreground"
-                                        Value="Black" />
-                                <Setter Property="FontFamily"
-                                        Value="/Fonts/#Poppins" />
-                                <Setter Property="BorderThickness"
-                                        Value="0.3" />
-                                <Setter Property="BorderBrush"
-                                        Value="Transparent" />
-                                <Setter Property="HorizontalContentAlignment"
-                                        Value="Left" />
-                                <Setter Property="FontFamily"
-                                        Value="/Fonts/#Roboto" />
-                                <Setter Property="HorizontalAlignment"
-                                        Value="Center" />
-                            </Style>
-                        </DataGrid.Resources>
-
 
                         <DataGrid.ContextMenu>
                             <ContextMenu>
@@ -190,14 +136,12 @@
                                                 Binding="{Binding Currency}"
                                                 ElementStyle="{StaticResource ToCenter}"
                                                 HeaderStyle="{StaticResource ToColumnCenter}" />
-
                         </DataGrid.Columns>
 
-
                     </DataGrid >
-                <!--</Border>-->
-
+                </Border>
             </Grid>
+
 
             <Button x:Name="btnRefresh"
                     ToolTip="Refresh"
@@ -268,7 +212,7 @@
 
                 </Grid>
             </Border>-->
-            
+
             <TextBox Height="40"
                      VerticalContentAlignment="Center"
                      HorizontalAlignment="Left"

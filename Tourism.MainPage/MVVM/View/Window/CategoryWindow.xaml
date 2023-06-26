@@ -34,24 +34,17 @@
                 <DataGrid x:Name="dgwCategory"
                           Height="300"
                           Width="200"
-                          IsReadOnly="True"
-                          FontFamily="/Fonts/#Poppins"
                           SelectedItem="{Binding SelectedItem}"
-                          AutoGenerateColumns="False"
-                          HeadersVisibility="Column"
-                          Background="Transparent"
-                          BorderBrush="Transparent"
-                          ScrollViewer.CanContentScroll="False"
-                          VirtualizingPanel.IsVirtualizing="True"
-                          AlternatingRowBackground="#dbdcdc"
                           RowHeight="25"
                           Margin="0,0,0,10"
+                          Style="{StaticResource GeneralDataGridTheme }"
                           Loaded="dgwCategory_Loaded">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header=" Category Name"
                                             Width="130"
-                                            Binding="{Binding Name}" />
+                                            Binding="{Binding Name}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
 
                         <DataGridTemplateColumn x:Name="columnEdit"
                                                 Header=""
@@ -61,11 +54,9 @@
                                     <Button x:Name="btnEdit"
                                             CommandParameter="{Binding}"
                                             ToolTip="Edit"
-                                            Style="{StaticResource EditCurrencyButtonTheme}"
+                                            Style="{StaticResource GridEditButtonTheme}"
                                             Click="btnEdit_Click" />
-
                                 </DataTemplate>
-
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn x:Name="columnRelocate"
@@ -81,41 +72,12 @@
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center"
                                             Content="&#xE8DE;"
-                                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                                            Style="{StaticResource GridRelocateButtonTheme}"
                                             Click="btnRelocate_Click" />
-
                                 </DataTemplate>
-
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
-
-                    <DataGrid.Resources>
-
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                               TargetType="{x:Type DataGridColumnHeader}">
-
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="MinHeight"
-                                    Value="30" />
-                            <Setter Property="Cursor"
-                                    Value="Hand" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Center" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                        </Style>
-
-                    </DataGrid.Resources>
-
                 </DataGrid>
             </Border>
 
@@ -168,7 +130,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     Margin="0,22.5,0,0"
-                                    Style="{StaticResource CancelCurrencyButtonTheme}"
+                                    Style="{StaticResource CancelButtonTheme}"
                                     Click="btnCancelUpdate_Click" />
 
                             <Button x:Name="btnSaveUpdate"
@@ -178,7 +140,7 @@
                                     Content="&#xE74E;"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
-                                    Style="{StaticResource SaveCurrencyButtonTheme}"
+                                    Style="{StaticResource SaveButtonTheme}"
                                     Click="btnSaveUpdate_Click" />
 
 
@@ -218,7 +180,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     Margin="0,22.5,0,0"
-                                    Style="{StaticResource CancelCurrencyButtonTheme}"
+                                    Style="{StaticResource CancelButtonTheme}"
                                     Click="btnCancelAdd_Click" />
 
                             <Button x:Name="btnSaveAdd"
@@ -228,7 +190,7 @@
                                     Margin="61.5,22.5,0,0"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
-                                    Style="{StaticResource SaveCurrencyButtonTheme}"
+                                    Style="{StaticResource SaveButtonTheme}"
                                     Click="btnSaveAdd_Click" />
                         </Grid>
 

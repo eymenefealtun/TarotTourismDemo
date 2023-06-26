@@ -27,28 +27,20 @@
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     CornerRadius="10">
-                <DataGrid x:Name="dgwCurrency"      
+                <DataGrid x:Name="dgwCurrency"
                           Height="300"
                           Width="130"
-                          IsReadOnly="True"
-                          FontFamily="/Fonts/#Poppins"
                           SelectedItem="{Binding SelectedItem}"
-                          AutoGenerateColumns="False"
-                          HeadersVisibility="Column"
-                          Background="Transparent"
-                          BorderBrush="Transparent"
-                          ScrollViewer.CanContentScroll="False"
-                          VirtualizingPanel.IsVirtualizing="True"
-                          AlternatingRowBackground="#dbdcdc"
                           RowHeight="25"
                           Margin="0,0,0,10"
+                          Style="{StaticResource GeneralDataGridTheme}"
                           Loaded="dgwCurrency_Loaded">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="Currency"
                                             Width="60"
-                                            Binding="{Binding Name}" />
-
+                                            Binding="{Binding Name}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
 
                         <DataGridTemplateColumn x:Name="columnEdit"
                                                 Header=""
@@ -67,32 +59,6 @@
                         </DataGridTemplateColumn>
 
                     </DataGrid.Columns>
-
-                    <DataGrid.Resources>
-
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                               TargetType="{x:Type DataGridColumnHeader}">
-
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="MinHeight"
-                                    Value="30" />
-                            <Setter Property="Cursor"
-                                    Value="Hand" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Center" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                        </Style>
-
-                    </DataGrid.Resources>
-
                 </DataGrid>
             </Border>
 
@@ -143,7 +109,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     Margin="0,22.5,0,0"
-                                    Style="{StaticResource CancelCurrencyButtonTheme}"
+                                    Style="{StaticResource CancelButtonTheme}"
                                     Click="btnCancel_Click" />
 
                             <Button x:Name="btnSave"
@@ -153,7 +119,7 @@
                                     Content="&#xE74E;"
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
-                                    Style="{StaticResource SaveCurrencyButtonTheme}"
+                                    Style="{StaticResource SaveButtonTheme}"
                                     Click="btnSave_Click" />
                         </Grid>
 
@@ -193,7 +159,7 @@
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Top"
                                     Margin="0,22.5,0,0"
-                                    Style="{StaticResource CancelCurrencyButtonTheme}"
+                                    Style="{StaticResource CancelButtonTheme}"
                                     Click="btnAddCancel_Click" />
 
                             <Button x:Name="btnAddSave"
@@ -203,7 +169,7 @@
                                     HorizontalAlignment="Center"
                                     Content="&#xE74E;"
                                     VerticalAlignment="Top"
-                                    Style="{StaticResource SaveCurrencyButtonTheme}"
+                                    Style="{StaticResource SaveButtonTheme}"
                                     Click="btnAddSave_Click" />
                         </Grid>
 

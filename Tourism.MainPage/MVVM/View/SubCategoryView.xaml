@@ -69,23 +69,14 @@
                 <DataGrid x:Name="dgwCategory"
                           Height="425"
                           Width="400"
-                          IsReadOnly="True"
-                          FontFamily="/Fonts/#Poppins"
                           SelectedItem="{Binding SelectedItem}"
-                          AutoGenerateColumns="False"
-                          HeadersVisibility="Column"
-                          Background="Transparent"
-                          BorderBrush="Transparent"
-                          ScrollViewer.CanContentScroll="False"
-                          VirtualizingPanel.IsVirtualizing="True"
-                          AlternatingRowBackground="#dbdcdc"
+                          Style="{StaticResource GeneralDataGridTheme}"
                           RowHeight="25">
-
-
                     <DataGrid.Columns>
                         <DataGridTextColumn Header=" Category Name"
                                             Width="130"
-                                            Binding="{Binding Name}" />
+                                            Binding="{Binding Name}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
 
                         <DataGridTemplateColumn x:Name="columnEdit"
                                                 Header=""
@@ -96,10 +87,8 @@
                                             CommandParameter="{Binding}"
                                             ToolTip="Edit"
                                             Click="btnEdit_Click"
-                                            Style="{StaticResource EditCurrencyButtonTheme}" />
-
+                                            Style="{StaticResource GridEditButtonTheme}" />
                                 </DataTemplate>
-
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
                         <DataGridTemplateColumn x:Name="columnRelocate"
@@ -115,40 +104,13 @@
                                             VerticalAlignment="Center"
                                             HorizontalAlignment="Center"
                                             Click="btnRelocate_Click"
-                                            Content="&#xE8DE;"
-                                            Style="{StaticResource SaveCurrencyButtonTheme}" />
+                                            Style="{StaticResource GridRelocateButtonTheme}" />
 
                                 </DataTemplate>
 
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>
-
                     </DataGrid.Columns>
-
-                    <DataGrid.Resources>
-                        <Style BasedOn="{StaticResource {x:Type DataGridColumnHeader}}"
-                               TargetType="{x:Type DataGridColumnHeader}">
-
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="MinHeight"
-                                    Value="30" />
-                            <Setter Property="Cursor"
-                                    Value="Hand" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Center" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                        </Style>
-
-                    </DataGrid.Resources>
-
                 </DataGrid>
 
             </Border>
@@ -248,11 +210,10 @@
                             x:Name="btnCancelAddCategory"
                             Margin="0,0,37,0"
                             Click="btnCancelAddCategory_Click"
-                            Style="{StaticResource CancelCurrencyButtonTheme}" />
+                            Style="{StaticResource CancelButtonTheme}" />
                     <Button Grid.Row="4"
                             x:Name="btnSaveAddCategory"
-                            Content="&#xE74E;"
-                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                            Style="{StaticResource SaveButtonTheme}"
                             HorizontalAlignment="Right"
                             Click="btnSaveAddCategory_Click"
                             Margin="0,0,5,0" />
@@ -322,12 +283,12 @@
                             HorizontalAlignment="Right"
                             x:Name="btnCancelUpdate"
                             Margin="0,0,37,0"
-                            Style="{StaticResource CancelCurrencyButtonTheme}"
+                            Style="{StaticResource CancelButtonTheme}"
                             Click="btnCancelUpdate_Click" />
                     <Button Grid.Row="4"
                             x:Name="btnSaveUpdate"
                             Content="&#xE74E;"
-                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                            Style="{StaticResource SaveButtonTheme}"
                             HorizontalAlignment="Right"
                             Margin="0,0,5,0"
                             Click="btnSaveUpdate_Click" />
@@ -411,12 +372,13 @@
                             HorizontalAlignment="Right"
                             x:Name="btnRelocateCancel"
                             Margin="0,0,37,0"
-                            Style="{StaticResource CancelCurrencyButtonTheme}"
+                            Style="{StaticResource CancelButtonTheme}"
                             Click="btnRelocateCancel_Click" />
+
                     <Button Grid.Row="4"
                             x:Name="btnRelocateSave"
                             Content="&#xE74E;"
-                            Style="{StaticResource SaveCurrencyButtonTheme}"
+                            Style="{StaticResource SaveButtonTheme}"
                             HorizontalAlignment="Right"
                             Margin="0,0,5,0"
                             Click="btnRelocateSave_Click" />

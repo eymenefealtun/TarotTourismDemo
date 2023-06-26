@@ -29,83 +29,9 @@
                 <DataGrid Width="1050"
                           Height="330"
                           x:Name="dgwDailySales"
-                          IsReadOnly="True"
                           Loaded="dgwDailySales_Loaded"
-                          ScrollViewer.CanContentScroll="False"
-                          Background="Transparent"
                           Margin="0,0,0,10"
-                          AlternatingRowBackground="#dbdcdc"
-                          AutoGenerateColumns="False"
-                          BorderBrush="Transparent"
-                          HeadersVisibility="Column"
-                          FontFamily="/Fonts/#Poppins">
-                    <DataGrid.Resources>
-
-                        <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                            <Setter Property="FontSize"
-                                    Value="12" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Left" />
-
-                        </Style>
-                        <Style TargetType="{x:Type DataGridColumnHeader}"
-                               x:Key="ToColumnCenter">
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                            <Setter Property="FontSize"
-                                    Value="12" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Center" />
-
-                        </Style>
-                        <Style TargetType="{x:Type DataGridColumnHeader}"
-                               x:Key="ToColumnRight">
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                            <Setter Property="FontSize"
-                                    Value="12" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Right" />
-
-                        </Style>
-                        <Style x:Key="ToCenter"
-                               TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment"
-                                    Value="Center" />
-                        </Style>
-                        <Style x:Key="ToRight"
-                               TargetType="{x:Type TextBlock}">
-                            <Setter Property="HorizontalAlignment"
-                                    Value="Right" />
-                        </Style>
-                    </DataGrid.Resources>
-
+                          Style="{StaticResource GeneralDataGridTheme}">
                     <DataGrid.Columns>
                         <DataGridTextColumn Header=" Operator"
                                             Width="60"
@@ -159,7 +85,6 @@
                 </DataGrid>
 
             </Border>
-
         </StackPanel>
 
         <StackPanel>

@@ -37,61 +37,10 @@
                           VerticalAlignment="Center"
                           Width="850"
                           Height="425"
-                          IsReadOnly="True"
-                          AutoGenerateColumns="False"
-                          ScrollViewer.CanContentScroll="False"
                           EnableRowVirtualization="True"
-                          FontFamily="/Fonts/#Poppins"
                           Loaded="dgwCustomerOperation_Loaded"
                           MouseDoubleClick="dgwCustomerOperation_MouseDoubleClick"
-                          HeadersVisibility="Column"
-                          Background="Transparent"
-                          BorderBrush="Transparent"
-                   >
-
-                    <DataGrid.Resources>
-                        <Style TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Poppins" />
-                            <Setter Property="BorderThickness"
-                                    Value="0" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Left" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                        </Style>
-                        <Style x:Key="ToColumnCenter"
-                               TargetType="{x:Type DataGridColumnHeader}">
-                            <Setter Property="Background"
-                                    Value="Transparent" />
-                            <Setter Property="BorderThickness"
-                                    Value="1" />
-                            <Setter Property="MinHeight"
-                                    Value="30" />
-                            <Setter Property="Cursor"
-                                    Value="Hand" />
-                            <Setter Property="Foreground"
-                                    Value="Black" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Poppins" />
-                            <Setter Property="BorderThickness"
-                                    Value="0.3" />
-                            <Setter Property="BorderBrush"
-                                    Value="Transparent" />
-                            <Setter Property="HorizontalContentAlignment"
-                                    Value="Left" />
-                            <Setter Property="FontFamily"
-                                    Value="/Fonts/#Roboto" />
-                            <Setter Property="HorizontalAlignment"
-                                    Value="Left" />
-                        </Style>
-                    </DataGrid.Resources>
+                          Style="{StaticResource GeneralDataGridTheme}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header=" Bed Type"
@@ -188,10 +137,10 @@
                         </TextBlock.Style>
                     </TextBlock>
 
-                  
-                    
+
+
                 </Grid>
-                
+
 
             </Border>
 
@@ -252,7 +201,7 @@
                     ToolTip="Back"
                     FontSize="30"
                     Content="&#xEC52;"
-                    Style="{StaticResource RefreshAndBackButtonTheme}" 
+                    Style="{StaticResource RefreshAndBackButtonTheme}"
                     Command="{Binding OperationViewCommand}"
                     Click="btnBack_Click" />
 

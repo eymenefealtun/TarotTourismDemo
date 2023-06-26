@@ -46,11 +46,16 @@
                 <ResourceDictionary Source="Theme/GeneralSaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralCancelButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/InfoIconButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/GeneralDataGridTheme.xaml" />     
+                <ResourceDictionary Source="Theme/GeneralDataGridRowTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralDataGridTheme.xaml" />
+                <ResourceDictionary Source="Theme/CancelButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/SaveButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/GridEditButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/GridRelocateButtonTheme.xaml" />                      
 
 
                 <ResourceDictionary Source="Theme/Tools/ExcelButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/Tools/WordButtonTheme.xaml" />            
+                <ResourceDictionary Source="Theme/Tools/WordButtonTheme.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 
@@ -108,11 +113,11 @@
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:GeneralIncomeOutgoingViewModel}">
-                <view:GeneralIncomeOutgoingView />          
+                <view:GeneralIncomeOutgoingView />
             </DataTemplate>
 
             <DataTemplate DataType="{x:Type viewModel:EmptyPageViewModel}">
-                <view:EmptyPageView />      
+                <view:EmptyPageView />
             </DataTemplate>
         </ResourceDictionary>
     </Application.Resources>

@@ -1,0 +1,45 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style BasedOn="{StaticResource {x:Type Button}}"
+           TargetType="{x:Type Button}"
+           x:Key="GridRelocateButtonTheme"
+           x:Name="btnMain">
+        <Style.Setters>
+
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="BorderBrush"
+                    Value="{x:Null}" />
+            <Setter Property="FontFamily"
+                    Value="Segoe MDL2 Assets" />
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <TextBlock Text="&#xF003;"
+                                   x:Name="mainIcon"            
+                                   HorizontalAlignment="Right"
+                                   FontSize="15"
+                                   VerticalAlignment="Center" />
+
+                        <ControlTemplate.Triggers>
+                            <Trigger  Property="IsMouseOver"
+                                      Value="True">
+                                <Setter TargetName="mainIcon"           
+                                        Property="Foreground"
+                                        Value="Blue" />
+                                <Setter TargetName="mainIcon"
+                                        Property="FontSize"
+                                        Value="20" />
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+
+        </Style.Setters>
+    </Style>
+</ResourceDictionary>

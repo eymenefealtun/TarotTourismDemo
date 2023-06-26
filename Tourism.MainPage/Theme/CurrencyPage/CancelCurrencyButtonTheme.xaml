@@ -15,11 +15,12 @@
                             <Grid VerticalAlignment="Stretch"
                                   HorizontalAlignment="Stretch"
                                   Background="{TemplateBinding Background}">
-                                <TextBlock Text="&#xE711;"
+                                <TextBlock Text="Cancel"
                                            VerticalAlignment="Center"
                                            HorizontalAlignment="Center"
                                            FontSize="12"
-                                           FontFamily="Segoe MDL2 Assets"                                           
+                                           FontFamily="/Fonts/#Poppins"
+                                           x:Name="mainIcon"
                                            Foreground="White" />
                             </Grid>
                         </Border>
@@ -29,6 +30,9 @@
                                 <Setter TargetName="borderMain"
                                         Property="Background"
                                         Value="Red" />
+                                <Setter TargetName="mainIcon"
+                                        Property="Foreground"
+                                        Value="#b8d7c0" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -41,7 +45,7 @@
             <Setter Property="Height"
                     Value="25" />
             <Setter Property="Width"
-                    Value="30" />
+                    Value="50" />
             <Setter Property="Cursor"
                     Value="Hand" />
         </Style.Setters>
