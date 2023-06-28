@@ -33,6 +33,7 @@ namespace Tourism.MainPage.MVVM.View
 
         private void btnAddNewUser_Click(object sender, RoutedEventArgs e)
         {
+            columnEdit.Visibility = Visibility.Hidden;
             if (btnAddNewUser.IsChecked == true)
                 stckAddNewUser.Visibility = Visibility.Visible;
 
@@ -58,6 +59,7 @@ namespace Tourism.MainPage.MVVM.View
                     _operatorUserService.Add(operatorUser);
                     dgwOperatorUser.ItemsSource = _operatorFullService.GetOperatorUsers();
                     MessageBox.Show("Saved!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
+                    columnEdit.Visibility = Visibility.Visible;
                     ClearAddNewUser();
                 }
                 catch (Exception exception)
@@ -81,6 +83,7 @@ namespace Tourism.MainPage.MVVM.View
             cboxAddOperator.SelectedIndex = -1;
             tboxAddPassword.Text = string.Empty;
             tboxAddUserName.Text = string.Empty;
+            columnEdit.Visibility = Visibility.Visible;
         }
         private void ClearUpdateUser()
         {

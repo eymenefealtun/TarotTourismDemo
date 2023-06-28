@@ -8,7 +8,7 @@ namespace Tourism.Entities.Concrete
         public int Id { get; set; }
         public string ReservationCode { get; set; }
         public int Pax { get; set; }
-        public int Room { get; set; }
+        public int RoomId { get; set; }
         public decimal TotalPrice { get; set; }
         public string? Note { get; set; }
         public decimal DiscountedPrice { get; set; }

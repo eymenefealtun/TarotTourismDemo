@@ -40,7 +40,7 @@
                           EnableRowVirtualization="True"
                           Loaded="dgwCustomerOperation_Loaded"
                           MouseDoubleClick="dgwCustomerOperation_MouseDoubleClick"
-                          Style="{StaticResource GeneralDataGridTheme}">
+                          Style="{StaticResource GeneralDataGridWithoutAlternatingTheme}">
 
                     <DataGrid.Columns>
                         <DataGridTextColumn Header=" Bed Type"

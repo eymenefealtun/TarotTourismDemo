@@ -31,6 +31,7 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         public DbSet<CustomerOperation> CustomerOperations { get; set; }
         public DbSet<OperationInformation> OperationInformations { get; set; }
         public DbSet<OperatorUserFull> OperatorUserFulls { get; set; }
+        public DbSet<IncomeInformation> IncomeInformations { get; set; }        
 
         #endregion
 

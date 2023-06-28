@@ -110,7 +110,7 @@
             <Border Grid.Column="1"
                     Grid.Row="2"
                     Width="700"
-                    Height="300"
+                    Height="270"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Background="#f6f7f9"
@@ -125,13 +125,12 @@
                           CanUserAddRows="False"
                           CanUserSortColumns="False"
                           ItemStringFormat="dd/MM/yyyy"
-                          AlternationCount="4"
-                          Style="{StaticResource GeneralDataGridTheme}">
+                          Style="{StaticResource GeneralDataGridWithoutAlternatingTheme}">
 
 
                     <DataGrid.Columns>
 
-                        <DataGridTextColumn Header="Bed Type"
+                        <DataGridTextColumn Header="  Bed Type"
                                             Width="80"
                                             Binding="{Binding BedType}" />
                         <DataGridTextColumn Header="Gender"
@@ -160,10 +159,12 @@
 
                         <DataGridTextColumn Header="Phone"
                                             Width="110"
-                                            Binding="{Binding Phone}" />
+                                            Binding="{Binding Phone}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
                         <DataGridTextColumn Header="Id"
                                             Width="90"
-                                            Binding="{Binding IdNumber}" />
+                                            Binding="{Binding IdNumber}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
                     </DataGrid.Columns>
 
                 </DataGrid>

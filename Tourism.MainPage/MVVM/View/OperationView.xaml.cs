@@ -7,6 +7,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
+using Tourism.MainPage.MVVM.View.Window;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
 using Tourism.Entities.Models;

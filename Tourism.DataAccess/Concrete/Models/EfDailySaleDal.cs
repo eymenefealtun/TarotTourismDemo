@@ -12,7 +12,7 @@ namespace Tourism.DataAccess.Concrete.Models
         {
             using (AppDbContext context = new AppDbContext())
             {
-                return context.Set<DailySale>().FromSqlRaw(@"SELECT Ops.Name 'Operator' ,A.Name 'Agency',(SELECT CONCAT(o.StartDate,' | ', o.EndDate) )AS Period ,R.ReservationCode, R.Pax, R.Room,R.TotalPrice,O.DocumentCode,C.Name'Currency', Au.Username 'PurchasedBy', R.CreatedDate  FROM Operations O  --R.ReservationCode,R.Pax, R.Room, R.TotalPrice 
+                return context.Set<DailySale>().FromSqlRaw(@"SELECT Ops.Name 'Operator' ,A.Name 'Agency',(SELECT CONCAT(o.StartDate,' | ', o.EndDate) )AS Period ,R.ReservationCode, R.Pax, R.RoomId,R.TotalPrice,O.DocumentCode,C.Name'Currency', Au.Username 'PurchasedBy', R.CreatedDate  FROM Operations O  --R.ReservationCode,R.Pax, R.RoomId, R.TotalPrice 
 JOIN Reservations R ON R.OperationId = O.ID
 JOIN OperationPrices Op ON Op.OperationId = O.Id
 JOIN OperatorUsers Ou ON Ou.Id = O.CreatedBy

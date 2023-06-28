@@ -248,7 +248,7 @@ namespace Tourism.MainPage.MVVM.View
                     Id = _reservation.Id,
                     ReservationCode = _reservation.ReservationCode,
                     Pax = _reservation.Pax,
-                    Room = _reservation.Room,
+                    RoomId = _reservation.RoomId,
                     TotalPrice = _reservation.TotalPrice,
                     Note = text,
                     DiscountedPrice = Convert.ToDecimal(tboxDiscountedPrice.Text),
@@ -296,7 +296,7 @@ namespace Tourism.MainPage.MVVM.View
                     Id = _reservation.Id,
                     ReservationCode = _reservation.ReservationCode,
                     Pax = dgwCustomerOperation.Items.Count, //
-                    Room = _room.Count,//
+                    RoomId = _room.Count,//
 
                     TotalPrice = _reservation.TotalPrice,
                     Note = new TextRange(rbtboxNote.Document.ContentStart, rbtboxNote.Document.ContentEnd).Text,
@@ -322,7 +322,7 @@ namespace Tourism.MainPage.MVVM.View
                     Id = _reservation.Id,
                     ReservationCode = _reservation.ReservationCode,
                     Pax = Convert.ToInt32(null),
-                    Room = Convert.ToInt32(null),
+                    RoomId = Convert.ToInt32(null),
                     TotalPrice = _reservation.TotalPrice,
                     Note = new TextRange(rbtboxNote.Document.ContentStart, rbtboxNote.Document.ContentEnd).Text,
                     DiscountedPrice = Convert.ToDecimal(tboxDiscountedPrice.Text),

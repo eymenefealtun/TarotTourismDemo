@@ -9,6 +9,7 @@ namespace Tourism.DataAccess.Abstract
         Operation Add(Operation operation);
         Operation Update(Operation operation);
         Operation GetByOperationId(int operationId);        
+        List<Operation> GetByDocumentCode(string documentCode);                
 
-    }
+    }               
 }

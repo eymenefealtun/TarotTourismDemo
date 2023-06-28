@@ -1,5 +1,4 @@
-﻿
-namespace Tourism.MainPage.MVVM.ViewModel
+﻿namespace Tourism.MainPage.MVVM.ViewModel
 {
     public class SubCategoryViewModel : Core.ViewModel
     {

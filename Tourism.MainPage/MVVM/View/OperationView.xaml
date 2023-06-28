@@ -89,6 +89,8 @@
                               HorizontalAlignment="Left"
                               SelectedItem="{Binding SelectedItem}"
                               Margin="0,0,0,10"
+                              VerticalScrollBarVisibility="Visible"
+                             
                               MouseDoubleClick="dgwOperationMain_MouseDoubleClick"
                               Loaded="dgwOperationMain_Loaded"
                               SelectionChanged="dgwOperationMain_SelectionChanged"
@@ -223,7 +225,7 @@
                      Tag="Search"
                      Foreground="#CFCFCF"
                      TextChanged="tboxOperationSearch_TextChanged"
-                     Style="{StaticResource ModernTextBox}" />
+                     Style="{StaticResource SearchTextBox}" />
 
             <DatePicker   x:Name="datePickStartDate"
                           Grid.Row="0"

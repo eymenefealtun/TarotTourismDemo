@@ -1,15 +1,12 @@
-﻿using Microsoft.Office.Interop.Excel;
-using System;
-using System.Linq;
+﻿using System;
 using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
 
-namespace Tourism.MainPage
+namespace Tourism.MainPage.MVVM.View.Window
 {
     public partial class MainWindow : System.Windows.Window
     {
@@ -51,9 +48,6 @@ namespace Tourism.MainPage
 
             #endregion
 
-
-
-
             _firstSubButtons = firstSubButtons;
             _secondSubButtons = secondSubButtons;
             _allMainButtons = allMainButtons;
@@ -70,6 +64,37 @@ namespace Tourism.MainPage
         {
             InitializeComponent();
             this.IsHitTestVisible = false;
+        }
+
+        #region Screen
+        private void btnTopLeft_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+
+            if (this.WindowState == WindowState.Maximized)
+            {
+                var mouseX = e.GetPosition(this).X;
+                Top = 0;
+                this.WindowState = WindowState.Normal;
+                var width = RestoreBounds.Width;
+                var x = mouseX - width / 2;
+                var screenSize = SystemParameters.WorkArea.Width;
+                if (x < 0)
+                {
+                    x = 0;
+                }
+                else if (x + width > 0)
+                {
+                    x = screenSize - width;
+                }
+
+                this.WindowState = WindowState.Normal;
+                Left = x;
+                DragMove();
+                return;
+
+            }
+            DragMove();
+
         }
 
         private void btnClose_Click(object sender, RoutedEventArgs e)
@@ -96,7 +121,6 @@ namespace Tourism.MainPage
                 }
             }
         }
-
         private void btnRestoreDown_Click(object sender, RoutedEventArgs e)
         {
             RestoreDown();
@@ -106,18 +130,6 @@ namespace Tourism.MainPage
         {
             this.WindowState = WindowState.Minimized;
         }
-
-        #region Screen
-        private void btnTop_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
-        private void btnTopLeft_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
-        {
-            DragMove();
-        }
-
         private void btnTop_MouseDoubleClick_1(object sender, MouseButtonEventArgs e)
         {
             RestoreDown();
@@ -360,9 +372,9 @@ namespace Tourism.MainPage
 
             for (int i = 0; i < _mainWithSubButtons.Length; i++)
             {
-                    _mainWithSubButtons[i].IsChecked = false;
+                _mainWithSubButtons[i].IsChecked = false;
             }
-            for (int i = 0; i < _firstSubButtonsWithSubs.Length; i++)        
+            for (int i = 0; i < _firstSubButtonsWithSubs.Length; i++)
             {
                 _firstSubButtonsWithSubs[i].IsChecked = false;
             }
@@ -468,6 +480,7 @@ namespace Tourism.MainPage
             }
             return false;
         }
+
 
     }
 }

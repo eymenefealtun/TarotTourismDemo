@@ -74,7 +74,7 @@ namespace Tourism.MainPage.Core
                     {
                         TextBlock textBlock = dataGrid.Columns[i].GetCellContent(dataGrid.Items[j]) as TextBlock;
                         Range range = (Range)sheet.Cells[j + 2, i + 1];
-                        range.Value2 = textBlock.Text;
+                        range.Value2 = textBlock.Text; 
                     }
 
                 }

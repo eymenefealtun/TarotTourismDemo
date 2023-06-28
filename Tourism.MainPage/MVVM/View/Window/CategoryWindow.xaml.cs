@@ -4,11 +4,11 @@ using System.Windows.Controls;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 
-namespace Tourism.MainPage.MVVM.View
+namespace Tourism.MainPage.MVVM.View.Window
 {
 
 
-    public partial class CategoryWindow : Window
+    public partial class CategoryWindow : System.Windows.Window
     {
         private IMainCategoryService _mainCategoryService;
         private ISubCategoryService _subCategoryService;

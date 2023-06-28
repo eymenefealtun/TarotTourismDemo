@@ -13,7 +13,7 @@ namespace Tourism.Entities.Models
         public string PurchasedBy { get; set; }     
         public string ReservationCode { get; set; }
         public int Pax { get; set; }
-        public int Room { get; set; }
+        public int RoomId { get; set; }
         [Precision(18,2)]
         public decimal TotalPrice { get; set; }
         public DateTime CreatedDate { get; set; }                   

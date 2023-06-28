@@ -3,7 +3,8 @@ using System;
 using System.Windows;
 using Tourism.MainPage.Core;
 using Tourism.MainPage.MVVM.ViewModel;
-using Tourism.MainPage.Services;
+using Tourism.MainPage.MVVM.View.Window;
+using Tourism.MainPage.Services;        
 
 namespace Tourism.MainPage
 {
@@ -36,6 +37,7 @@ namespace Tourism.MainPage
             services.AddSingleton<SubCategoryViewModel>();
             services.AddSingleton<GeneralIncomeOutgoingViewModel>();
             services.AddSingleton<EmptyPageViewModel>();
+            services.AddSingleton<MainWindowViewModel>();
 
             services.AddSingleton<INavigationService, Services.NavigationService>();
 

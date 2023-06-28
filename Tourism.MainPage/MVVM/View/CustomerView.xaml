@@ -35,7 +35,7 @@
                      Tag="Search by name"
                      Background="#bada43"
                      TextChanged="tboxSearchName_TextChanged"
-                     Style="{StaticResource ModernTextBox}" />
+                     Style="{StaticResource SearchTextBox}" />
             <TextBox Height="40"
                      VerticalContentAlignment="Center"
                      HorizontalAlignment="Left"
@@ -45,7 +45,7 @@
                      Background="#852a29"
                      Foreground="#CFCFCF"
                      TextChanged="tboxSearchId_TextChanged"
-                     Style="{StaticResource ModernTextBox}" />
+                     Style="{StaticResource SearchTextBox}" />
             <TextBox Height="40"
                      VerticalContentAlignment="Center"
                      HorizontalAlignment="Left"
@@ -54,7 +54,7 @@
                      Background="#43da45"
                      Tag="Search by reservation code"
                      TextChanged="tboxSearchReservationCode_TextChanged"
-                     Style="{StaticResource ModernTextBox}" />
+                     Style="{StaticResource SearchTextBox}" />
 
 
             <Button x:Name="infoIcon"

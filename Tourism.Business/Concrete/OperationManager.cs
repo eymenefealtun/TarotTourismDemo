@@ -38,5 +38,10 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         {
             return _operationDal.Get(x => x.Id == operationId);
         }
+
+        public List<Operation> GetByDocumentCode(string documentCode)
+        {
+            return _operationDal.GetAll(x => x.DocumentCode.Contains(documentCode));
+        }
     }
 }

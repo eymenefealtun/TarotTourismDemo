@@ -1,5 +1,4 @@
-﻿
-namespace Tourism.MainPage.Core
+﻿namespace Tourism.MainPage.Core
 {
     public abstract class ViewModel : ObservableObject
     {

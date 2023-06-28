@@ -4,10 +4,10 @@ using System.Windows.Controls;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 
-namespace Tourism.MainPage.MVVM.View
+namespace Tourism.MainPage.MVVM.View.Window
 {
 
-    public partial class CurrencyWindow : Window
+    public partial class CurrencyWindow : System.Windows.Window
     {
         private ICurrencyService _currencyService;
 

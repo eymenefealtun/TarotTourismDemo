@@ -83,7 +83,7 @@
             <Trigger Property="AlternationIndex"
                      Value="1">
                 <Setter  Property="Background"
-                         Value="#dbdcdc" />
+                         Value="#e0e3e6" />     
 
             </Trigger>
             <Trigger Property="IsMouseOver"

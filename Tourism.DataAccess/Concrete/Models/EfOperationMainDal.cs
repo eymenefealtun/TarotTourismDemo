@@ -12,7 +12,7 @@ namespace Tourism.DataAccess.Concrete.Models
         {
             using (AppDbContext context = new AppDbContext())
             {
-                return context.Set<OperationMain>().FromSqlRaw(@"SELECT O.DocumentCode,Op.Name'Operator',O.StartDate,O.EndDate, SUM(R.Pax)  'Pax', SUM(R.Room)'Room',C.Name 'Currency', O.Id,Sc.Id 'SubCategoryId' FROM Operations O   
+                return context.Set<OperationMain>().FromSqlRaw(@"SELECT O.DocumentCode,Op.Name'Operator',O.StartDate,O.EndDate, SUM(R.Pax)  'Pax', SUM(R.RoomId)'Room',C.Name 'Currency', O.Id,Sc.Id 'SubCategoryId',SUM(R.DiscountedPrice) 'CurrentIncome' FROM Operations O   
         FULL JOIN Reservations R ON R.OperationId = O.Id
         FULL  JOIN SubCategory Sc ON sc.Id = O.SubCategoryId
         FULL  JOIN MainCategory Mc ON Mc.Id = Sc.MainCategoryId                 

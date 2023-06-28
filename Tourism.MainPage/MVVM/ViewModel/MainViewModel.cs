@@ -1,4 +1,6 @@
-﻿using Tourism.MainPage.Core;
+﻿using System.Windows;
+using System.Windows.Media;
+using Tourism.MainPage.Core;
 using Tourism.MainPage.Services;
 
 namespace Tourism.MainPage.MVVM.ViewModel
@@ -17,8 +19,15 @@ namespace Tourism.MainPage.MVVM.ViewModel
         public RelayCommand CurrencyViewCommand { get; set; }
         public RelayCommand MainCategoryViewCommand { get; set; }
         public RelayCommand SubCategoryViewCommand { get; set; }
-        public RelayCommand GeneralIncomeOutgoingCommand { get; set; }                        
-        public RelayCommand EmptyPageViewCommand { get; set; }                             
+        public RelayCommand GeneralIncomeOutgoingCommand { get; set; }
+        public RelayCommand EmptyPageViewCommand { get; set; }
+        public RelayCommand MainWindowViewCommand { get; set; }
+
+
+
+
+        public RelayCommand MoveViewCommand { get; set; }
+        public RelayCommand PinkCommand { get; set; }
 
         //public HomeViewModel HomeVm { get; set; }
         //public OperationViewModel OperationVm { get; set; }
@@ -45,6 +54,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
+        public GlobalViewModel Global { get; } = GlobalViewModel.Instance;
 
         public MainViewModel(INavigationService navService)
         {
@@ -64,9 +74,15 @@ namespace Tourism.MainPage.MVVM.ViewModel
             MainCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<MainCategoryViewModel>(); }, canExecute: o => true);
             SubCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SubCategoryViewModel>(); }, canExecute: o => true);
             GeneralIncomeOutgoingCommand = new RelayCommand(o => { Navigation.NavigateTo<GeneralIncomeOutgoingViewModel>(); }, canExecute: o => true);
-            EmptyPageViewCommand = new RelayCommand(o => { Navigation.NavigateTo<EmptyPageViewModel>(); }, canExecute: o => true);              
+            EmptyPageViewCommand = new RelayCommand(o => { Navigation.NavigateTo<EmptyPageViewModel>(); }, canExecute: o => true);
 
-                    
+
+
+            MoveViewCommand = new RelayCommand(o => { Application.Current.MainWindow.DragMove(); }, canExecute: o => false);
+            MainWindowViewCommand = new RelayCommand(o => { Navigation.NavigateTo<MainWindowViewModel>(); }, canExecute: o => true);
+            PinkCommand = new RelayCommand(o => { Application.Current.MainWindow.Background = new SolidColorBrush(Colors.Pink); }, canExecute: o => true);
+
+
 
             #region Old
             //HomeVm = new HomeViewModel();             

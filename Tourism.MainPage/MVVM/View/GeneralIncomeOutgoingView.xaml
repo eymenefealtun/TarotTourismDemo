@@ -5,27 +5,337 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View"
              mc:Ignorable="d"
-             d:DesignHeight="800"
+             d:DesignHeight="2000"
              d:DesignWidth="1500"
              Background="#0f171e">
-    <Grid Name="GeneralIncomeOutgoingViewMainGrid"
-          Background="Transparent">
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="50" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="30" />
-            </Grid.RowDefinitions>
-
-            
-            
 
 
-        </Grid>
+    <Grid Background="Transparent">
+
+
+        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+            <Grid Name="GeneralIncomeOutgoingViewMainGrid">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="50" />
+                    <ColumnDefinition  Width="725*" />
+                    <ColumnDefinition  Width="50" />
+                    <ColumnDefinition  Width="725*" />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="640" />
+                    <RowDefinition Height="640" />
+                    <RowDefinition Height="640" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <Button x:Name="btnRefresh"
+                        ToolTip="Refresh"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Foreground="White"
+                        FontSize="30"
+                        Cursor="Hand"
+                        Content="&#xE777;"
+                        Style="{StaticResource RefreshAndBackButtonTheme}"
+                        Click="btnRefresh_Click" />
+
+                <!--#region trial -->
+                <!--<TextBlock Text="asdasd"
+                           Foreground="White"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Grid.Column="1"
+                           Grid.Row="1" />
+
+                <TextBlock Text="asdasd"
+                           Foreground="White"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Grid.Column="2"
+                           Grid.Row="1" />
+
+                <TextBlock Text="asdasd"
+                           Foreground="White"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Grid.Column="1"
+                           Grid.Row="2" />
+
+                <TextBlock Text="asdasd"
+                           Foreground="White"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Grid.Column="2"
+                           Grid.Row="2" />
+
+                <TextBlock Text="asdasd"
+                           Foreground="White"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Grid.Column="1"
+                           Grid.Row="3" />
+
+                <TextBlock Text="asdasd"
+                           Foreground="White"
+                           FontSize="20"
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Grid.Column="2"
+                           Grid.Row="3" />
+
+                <TextBlock Text="asdasd"
+                           Foreground="Red"
+                           FontSize="20"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           Grid.Column="2"
+                           Grid.Row="3" />-->
+                <!--#endregion-->
+
+                <Grid Grid.Row="1"
+                      Grid.Column="0"
+                      Margin="0,70,0,0">
+
+                    <ToggleButton Margin="0,0,0,0"
+                                  Style="{StaticResource ToolsButtonTheme}"
+                                  x:Name="btnToolsGeneralIncome"
+                                  VerticalAlignment="Top"
+                                  MouseEnter="btnToolsGeneralIncome_MouseEnter"
+                                  MouseLeave="btnToolsGeneralIncome_MouseLeave"
+                                  Click="btnToolsGeneralIncome_Click" />
+
+                    <Button Style="{StaticResource ExcelButtonTheme}"
+                            x:Name="btnExcelGeneralIncome"
+                            Click="btnExcelGeneralIncome_Click"
+                            Visibility="Collapsed"
+                            VerticalAlignment="Top"
+                            Margin="0,40,0,0"
+                            MouseEnter="btnToolsGeneralIncome_MouseEnter"
+                            MouseLeave="btnToolsGeneralIncome_MouseLeave" />
+
+                    <Button Style="{StaticResource WordButtonTheme}"
+                            Margin="0,80,0,0"
+                            x:Name="btnWord"
+                            Visibility="Collapsed"
+                            VerticalAlignment="Top"
+                            MouseEnter="btnToolsGeneralIncome_MouseEnter"
+                            MouseLeave="btnToolsGeneralIncome_MouseLeave" />
+
+
+                </Grid>
+                <Grid Grid.Column="1"
+                      Grid.Row="1"
+                      Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}"
+                      Background="red"
+                      x:Name="grid11">
+                    <TextBlock Text="General Income"
+                               Foreground="LightGray"
+                               FontFamily="Camola"
+                               FontSize="16"
+                               Margin="20,46,0,0"
+                               VerticalAlignment="Top" />
+                    <Border Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}"
+                            Height="500"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,0"
+                            Background="#f6f7f9"
+                            CornerRadius="20">
+                        <DataGrid x:Name="dgwGeneralIncome"
+                                  Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}"
+                                  Height="500"
+                                  FontSize="11"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left"
+                                  SelectedItem="{Binding SelectedItem}"
+                                  VerticalScrollBarVisibility="Visible"
+                                  HorizontalScrollBarVisibility="Visible"
+                                  Style="{StaticResource GeneralDataGridTheme}">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header="   DocumentCode"
+                                                    Width="150*"
+                                                    Binding="{Binding DocumentCode}" />
+                                <DataGridTextColumn Header="Operator"
+                                                    Width="80*"
+                                                    Binding="{Binding Operator}" />
+                                <DataGridTextColumn Header="StartDate"
+                                                    Width="70*"
+                                                    Binding="{Binding StartDate, StringFormat= d}" />
+                                <DataGridTextColumn Header="EndDate"
+                                                    Width="70*"
+                                                    Binding="{Binding EndDate, StringFormat= d}" />
+                                <DataGridTextColumn Header="Pax"
+                                                    Width="40*"
+                                                    Binding="{Binding Pax}"
+                                                    ElementStyle="{StaticResource ToCenter}"
+                                                    HeaderStyle="{StaticResource ToColumnCenter}" />
+                                <DataGridTextColumn Header="Room"
+                                                    Width="50*"
+                                                    Binding="{Binding Room}"
+                                                    ElementStyle="{StaticResource ToCenter}"
+                                                    HeaderStyle="{StaticResource ToColumnCenter}" />
+                                <DataGridTextColumn Header="Current Income"
+                                                    Width="80*"
+                                                    Binding="{Binding CurrentIncome}"
+                                                    ElementStyle="{StaticResource ToRight}"
+                                                    HeaderStyle="{StaticResource ToColumnCenter}" />
+                                <DataGridTextColumn Header="Currency"
+                                                    Width="80*"
+                                                    Binding="{Binding Currency}"
+                                                    HeaderStyle="{StaticResource ToColumnCenter}" />
+
+                            </DataGrid.Columns>
+
+                        </DataGrid >
+                    </Border>
+
+
+
+                </Grid>
+                <Grid Grid.Column="1"
+                      Grid.Row="2"
+                      Background="Blue"
+                      x:Name="grid12">
+
+
+
+                </Grid>
+                <Grid Grid.Column="3"
+                      Grid.Row="1"
+                      Background="Transparent">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}" />
+                        <ColumnDefinition Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}" />
+                        <ColumnDefinition Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}" />
+                    </Grid.ColumnDefinitions>
+
+                    <StackPanel Grid.Column="0"
+                                Margin="5,0,0,0">
+
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin"
+                                        Value="0,30,0,0" />
+                            </Style>
+
+                        </StackPanel.Resources>
+
+                        <TextBlock Height="20"
+                                   Text="Income by Operation"
+                                   FontFamily="Camola"
+                                   Foreground="White" />
+                        <TextBlock Height="20"
+                                   Text="Trial"
+                                   FontFamily="Camola"
+                                   Foreground="White" />
+                        <TextBlock Height="20"
+                                   Text="Trial"
+                                   Foreground="White"
+                                   FontFamily="Camola" />
+
+                    </StackPanel>
+
+                    <StackPanel Grid.Column="1"
+                                Margin="5,0,0,0">
+
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type ComboBox}"
+                                   BasedOn="{StaticResource ComboBoxWithTBoxTheme}"
+                                   x:Key="Asd">
+                                <Setter Property="Margin"
+                                        Value="0,30,0,0" />
+                            </Style>
+
+                        </StackPanel.Resources>
+
+                        <ComboBox Height="20"
+                                  Width="150"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="DocumentCode"
+                                  IsTextSearchEnabled="False"
+                                  TextSearch.Text="{Binding SearchText, Mode=TwoWay}"
+                                  IsEditable="True"
+                                  TextBoxBase.TextChanged="cboxIncomeByOperation_TextChanged"
+                                  IsTextSearchCaseSensitive="False"
+                                  Style="{DynamicResource Asd}"
+                                  SelectionChanged="cboxIncomeByOperation_SelectionChanged"
+                                  x:Name="cboxIncomeByOperation" />
+                        <ComboBox Height="20"
+                                  Style="{DynamicResource Asd}"
+                                  Width="150" />
+                        <ComboBox Height="20"
+                                  Style="{DynamicResource Asd}"
+                                  Width="150" />
+
+                    </StackPanel>
+
+
+                    <StackPanel Grid.Column="2"
+                                Margin="5,0,0,0">
+
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBox}"
+                                   BasedOn="{StaticResource GeneralTextboxTheme}"
+                                   x:Key="GeneralTextboxTheme">
+                                <Setter Property="Margin"
+                                        Value="0,30,0,0" />
+                            </Style>
+
+                        </StackPanel.Resources>
+
+                        <TextBox Height="20"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100"
+                                 IsReadOnly="True"
+                                 x:Name="tboxIncomeByOperation" />
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+
+                    </StackPanel>
+
+
+
+                </Grid>
+
+
+
+                <Grid Grid.Column="3"
+                      Grid.Row="2"
+                      Background="cyan" />
+                <Grid Grid.Column="3"
+                      Grid.Row="3"
+                      Background="HotPink" />
+                <Grid Grid.Column="1"
+                      Grid.Row="3"
+                      Background="Yellow" />
+                <Grid Grid.Column="1"
+                      Grid.Row="4"
+                      Background="Green" />
+                <Grid Grid.Column="3"
+                      Grid.Row="4"
+                      Background="Orange" />
+
+
+
+
+            </Grid>
+        </ScrollViewer>
+
     </Grid>
 </UserControl>
