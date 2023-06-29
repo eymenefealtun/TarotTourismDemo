@@ -5,6 +5,6 @@ namespace Tourism.Entities.Abstract
 {
     public interface ICurrencyDal : IEntityRepository<Currency>
     {
-            
+        List<Currency> GetByOperation(int operationId);
     }
 }

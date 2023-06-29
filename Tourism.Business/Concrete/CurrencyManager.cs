@@ -23,6 +23,16 @@ namespace Tourism.Entities.Concrete
             return _currencyDal.GetAll();
         }
 
+        public List<Currency> GetByName(string currencyName)
+        {
+            return _currencyDal.GetAll(x=>x.Name.Contains(currencyName));
+        }
+
+        public List<Currency> GetByOperation(int operationId)
+        {
+            return _currencyDal.GetByOperation(operationId);           
+        }
+
         public Currency Update(Currency currency)       
         {
             ValidationTool.FluentValidate(new CurrencyValidator(), currency);

@@ -22,6 +22,12 @@ namespace Tourism.Entities.Concrete
         {
             return _subCategoryDal.GetAll();
         }
+
+        public List<SubCategory> GetByCategoryName(string subCategoryname)
+        {
+            return _subCategoryDal.GetAll(x => x.Name.Contains(subCategoryname));
+        }
+
         public List<SubCategory> GetByMainCategory(int mainCategoryId)
         {
             return _subCategoryDal.GetAll(x => x.MainCategoryId == mainCategoryId);

@@ -1,15 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.DataAccess.Abstract;
-
-namespace Tourism.Entities.Concrete
+﻿namespace Tourism.Entities.Concrete
 {
     public interface ICurrencyService 
     {
         List<Currency> GetAll();
+        List<Currency> GetByOperation(int operationId);
+        List<Currency> GetByName(string currencyName);
 
         Currency Update(Currency currency);
         Currency Add(Currency currency);        

@@ -8,6 +8,7 @@
                 Value="Black" />
         <Setter Property="FontFamily"
                 Value="/Fonts/#Poppins" />
+     
 
 
 
@@ -27,7 +28,7 @@
                                       BorderThickness="0"
                                       Height="{TemplateBinding Height}">
 
-                            <TextBox Name="mainText"
+                            <TextBox x:Name="mainText"
                                      Height="{TemplateBinding Height}"
                                      Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged, BindsDirectlyToSource=True,Mode=TwoWay}"
                                      Width="{TemplateBinding Width}"
@@ -47,8 +48,6 @@
                                                      Value="True">
                                             <Setter Property="CornerRadius"
                                                     Value="10 0 0 0" />
-
-
                                         </DataTrigger>
                                     </Style.Triggers>
                                 </Style>

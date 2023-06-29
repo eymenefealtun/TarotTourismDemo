@@ -37,5 +37,12 @@ namespace Tourism.Entities.Concrete
             ValidationTool.FluentValidate(new MainCategoryValidator(), mainCategory);
             return _mainCategoryDal.Add(mainCategory);
         }
+
+        public List<MainCategory> GetByCategoryName(string mainCategoryname)
+        {
+            return _mainCategoryDal.GetAll(x => x.Name.Contains(mainCategoryname));
+        }
+
+
     }
 }

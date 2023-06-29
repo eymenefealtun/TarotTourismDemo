@@ -1,4 +1,5 @@
-﻿using Tourism.Entities.Abstract;
+﻿using System.ComponentModel;
+using Tourism.Entities.Abstract;
 
 
 namespace Tourism.Entities.Concrete
@@ -8,16 +9,21 @@ namespace Tourism.Entities.Concrete
         private IOperatorDal _operatorDal;
         public OperatorManager(IOperatorDal operatorDal)
         {
-            _operatorDal = operatorDal;             
+            _operatorDal = operatorDal;
         }
-        public List<Operator> GetAll()              
+        public List<Operator> GetAll()
         {
             return _operatorDal.GetAll();
         }
 
-        public Operator GetByOperatorId(int operatorId)             
+        public List<Operator> GetByName(string operatorName)
         {
-            return _operatorDal.Get(x=>x.Id == operatorId);          
+            return _operatorDal.GetAll(x => x.Name.Contains(operatorName));
+        }
+
+        public Operator GetByOperatorId(int operatorId)
+        {
+            return _operatorDal.Get(x => x.Id == operatorId);
         }
     }
 }

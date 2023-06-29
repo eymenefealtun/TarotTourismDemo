@@ -5,7 +5,6 @@ namespace Tourism.Entities.Abstract
 {
     public interface IOperatorDal : IEntityRepository<Operator>
     {
-   
 
     }
 }

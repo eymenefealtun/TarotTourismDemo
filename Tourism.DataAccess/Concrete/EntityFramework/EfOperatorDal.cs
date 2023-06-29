@@ -5,6 +5,7 @@ using Tourism.Entities.Abstract;
 namespace Tourism.Entities.Concrete
 {
     public class EfOperatorDal : EfEntityRepositoryBase<Operator, AppDbContext>, IOperatorDal
-    {       
-    }       
+    {
+       
+    }
 }

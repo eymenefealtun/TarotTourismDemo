@@ -10,16 +10,19 @@
              Background="#0f171e">
 
 
-    <Grid Background="Transparent">
+    <Grid Background="Transparent "
+          Name="GeneralIncomeOutgoingViewMainGrid">
 
 
         <ScrollViewer VerticalScrollBarVisibility="Hidden">
-            <Grid Name="GeneralIncomeOutgoingViewMainGrid">
+            <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition  Width="50" />
-                    <ColumnDefinition  Width="725*" />
+                    <ColumnDefinition  Width="725*"
+                                       Name="firstColumn" />
                     <ColumnDefinition  Width="50" />
-                    <ColumnDefinition  Width="725*" />
+                    <ColumnDefinition  Width="725*"
+                                       Name="secondColumn" />
                 </Grid.ColumnDefinitions>
 
                 <Grid.RowDefinitions>
@@ -132,8 +135,8 @@
                 </Grid>
                 <Grid Grid.Column="1"
                       Grid.Row="1"
-                      Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}"
-                      Background="red"
+                      Width="{Binding Width, ElementName=firstColumn}"
+                      Background="Red"
                       x:Name="grid11">
                     <TextBlock Text="General Income"
                                Foreground="LightGray"
@@ -141,7 +144,7 @@
                                FontSize="16"
                                Margin="20,46,0,0"
                                VerticalAlignment="Top" />
-                    <Border Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}"
+                    <Border Width="{Binding Width, ElementName=firstColumn}"
                             Height="500"
                             Grid.Column="1"
                             Grid.Row="1"
@@ -151,7 +154,7 @@
                             Background="#f6f7f9"
                             CornerRadius="20">
                         <DataGrid x:Name="dgwGeneralIncome"
-                                  Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}"
+                                  Width="{Binding Width, ElementName=firstColumn}"
                                   Height="500"
                                   FontSize="11"
                                   VerticalAlignment="Top"
@@ -213,13 +216,34 @@
                 <Grid Grid.Column="3"
                       Grid.Row="1"
                       Background="Transparent">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="26" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}" />
                         <ColumnDefinition Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}" />
                         <ColumnDefinition Width="{Binding Width, ElementName=GeneralIncomeOutgoingViewMainGrid}" />
                     </Grid.ColumnDefinitions>
+                    <TextBlock Height="20"
+                               Text="Total Income By Far"
+                               Grid.Row="0"
+                               Grid.Column="0"
+                               FontFamily="Camola"
+                               Foreground="White" />
+
+                    <TextBox Height="20"
+                             Style="{StaticResource GeneralTextboxTheme}"
+                             Width="100"
+                             Grid.Row="0"
+                             Grid.Column="1"
+                             HorizontalAlignment="Left"
+                             IsReadOnly="True"
+                             Margin="5,0,0,0"
+                             x:Name="tboxIncomeByFar" />
 
                     <StackPanel Grid.Column="0"
+                                Grid.Row="1"
                                 Margin="5,0,0,0">
 
                         <StackPanel.Resources>
@@ -235,27 +259,56 @@
                                    FontFamily="Camola"
                                    Foreground="White" />
                         <TextBlock Height="20"
-                                   Text="Trial"
+                                   Text="Income by Main cat"
                                    FontFamily="Camola"
                                    Foreground="White" />
                         <TextBlock Height="20"
-                                   Text="Trial"
+                                   Text="Income by Sub cat"
                                    Foreground="White"
                                    FontFamily="Camola" />
+                        <TextBlock Height="20"
+                                   Text="Income by Reservation"
+                                   Foreground="White"
+                                   FontFamily="Camola" />
+                        <TextBlock Height="20"
+                                   Text="Income by Agency User"
+                                   Foreground="White"
+                                   FontFamily="Camola" />
+                        <TextBlock Height="20"
+                                   Text="Income by Agency"
+                                   Foreground="White"
+                                   FontFamily="Camola" />
+                        <TextBlock Height="20"
+                                   Text="Income by Opearator"
+                                   Foreground="White"
+                                   FontFamily="Camola" />
+                        <TextBlock Height="20"
+                                   Text="Income by Currency"
+                                   Foreground="White"
+                                   FontFamily="Camola" />
+                        <TextBlock Height="20"
+                                   Text="Income by Bed Type"
+                                   Foreground="White"
+                                   FontFamily="Camola" />
+                        <TextBlock Height="20"
+                                   Text="Number of Bed Sold"
+                                   Foreground="White"
+                                   FontFamily="Camola" />
+
 
                     </StackPanel>
 
                     <StackPanel Grid.Column="1"
+                                Grid.Row="1"
                                 Margin="5,0,0,0">
 
                         <StackPanel.Resources>
-                            <Style TargetType="{x:Type ComboBox}"
-                                   BasedOn="{StaticResource ComboBoxWithTBoxTheme}"
-                                   x:Key="Asd">
+                            <Style TargetType="{x:Type ComboBox}">
                                 <Setter Property="Margin"
                                         Value="0,30,0,0" />
                             </Style>
-
+                            <!--BasedOn="{StaticResource ComboBoxWithTBoxTheme}"
+                                   x:Key="Asd"-->
                         </StackPanel.Resources>
 
                         <ComboBox Height="20"
@@ -267,21 +320,141 @@
                                   IsEditable="True"
                                   TextBoxBase.TextChanged="cboxIncomeByOperation_TextChanged"
                                   IsTextSearchCaseSensitive="False"
-                                  Style="{DynamicResource Asd}"
+                                  BorderThickness="0"
+                                  FontFamily="/Fonts/#Poppins"
                                   SelectionChanged="cboxIncomeByOperation_SelectionChanged"
-                                  x:Name="cboxIncomeByOperation" />
+                                  x:Name="cboxIncomeByOperation"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+
                         <ComboBox Height="20"
-                                  Style="{DynamicResource Asd}"
-                                  Width="150" />
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="Name"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  FontFamily="/Fonts/#Poppins"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  x:Name="cboxMainCategory"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+
                         <ComboBox Height="20"
-                                  Style="{DynamicResource Asd}"
-                                  Width="150" />
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="Name"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  x:Name="cboxSubCategory"
+                                  FontFamily="/Fonts/#Poppins"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+
+                        <ComboBox Height="20"
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="ReservationCode"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  x:Name="cboxReservation"
+                                  FontFamily="/Fonts/#Poppins"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+
+                        <ComboBox Height="20"
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="Username"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  x:Name="cboxAgencyUser"
+                                  FontFamily="/Fonts/#Poppins"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+
+                        <ComboBox Height="20"
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="Name"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  x:Name="cboxAgency"
+                                  FontFamily="/Fonts/#Poppins"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+                        <ComboBox Height="20"
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="Name"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  x:Name="cboxOperator"
+                                  FontFamily="/Fonts/#Poppins"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+                        
+                        <ComboBox Height="20"
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="Name"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  x:Name="cboxCurrency"
+                                  FontFamily="/Fonts/#Poppins"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+                        <ComboBox Height="20"
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="Name"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  x:Name="cboxBedTypeIncome"
+                                  FontFamily="/Fonts/#Poppins"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
+                        <ComboBox Height="20"
+                                  IsEditable="True"
+                                  SelectedValuePath="Id"
+                                  DisplayMemberPath="Name"
+                                  IsTextSearchEnabled="False"
+                                  BorderThickness="0"
+                                  SelectionChanged="cboxPart11_SelectionChanged"
+                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
+                                  x:Name="cboxBedTypeNumber"
+                                  FontFamily="/Fonts/#Poppins"
+                                  IsTextSearchCaseSensitive="False"
+                                  Width="150"
+                                  DropDownOpened="cboxIncome_DropDownOpened" />
 
                     </StackPanel>
 
 
                     <StackPanel Grid.Column="2"
-                                Margin="5,0,0,0">
+                                Grid.Row="1"
+                                Margin="10,0,0,0">
 
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBox}"
@@ -301,11 +474,51 @@
                         <TextBox Height="20"
                                  IsReadOnly="True"
                                  Style="{DynamicResource GeneralTextboxTheme}"
+                                 x:Name="tboxMainCategory"
                                  Width="100" />
                         <TextBox Height="20"
                                  IsReadOnly="True"
+                                 x:Name="tboxSubCategory"
                                  Style="{DynamicResource GeneralTextboxTheme}"
                                  Width="100" />
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 x:Name="tboxReservation"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+                        
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 x:Name="tboxAgencyUser"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 x:Name="tboxAgency"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 x:Name="tboxOperator"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 x:Name="tboxCurrency"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 x:Name="tboxBedTypeIncome"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+                        <TextBox Height="20"
+                                 IsReadOnly="True"
+                                 x:Name="tboxBedTypeNumber"
+                                 Style="{DynamicResource GeneralTextboxTheme}"
+                                 Width="100" />
+                        
+
 
                     </StackPanel>
 

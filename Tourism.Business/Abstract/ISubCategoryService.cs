@@ -12,6 +12,7 @@ namespace Tourism.Entities.Concrete
         SubCategory Add(SubCategory subCategory);       
         List<SubCategory> GetAll();
         List<SubCategory> GetByMainCategory(int mainCategoryId);
+        List<SubCategory> GetByCategoryName(string subCategoryname);
         SubCategory GetBySubCategoryId(int subCategoryId);      
         SubCategory Update(SubCategory subCategory);      
     }
