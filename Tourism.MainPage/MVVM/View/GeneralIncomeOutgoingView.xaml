@@ -136,7 +136,8 @@
                 <Grid Grid.Column="1"
                       Grid.Row="1"
                       Width="{Binding Width, ElementName=firstColumn}"
-                      Background="Red"
+                      Background="Transparent"
+                      Visibility="Visible"
                       x:Name="grid11">
                     <TextBlock Text="General Income"
                                Foreground="LightGray"
@@ -209,14 +210,17 @@
                       Grid.Row="2"
                       Background="Blue"
                       x:Name="grid12">
-
-
-
                 </Grid>
                 <Grid Grid.Column="3"
                       Grid.Row="1"
-                      Background="Transparent">
-                    <Grid.RowDefinitions>
+                      Background="cyan"
+                      x:Name="grid13">
+                </Grid>
+                <Grid Grid.Column="3"
+                      Grid.Row="2"
+                      Background="LightCoral"
+                      Visibility="Visible">
+                    <!--<Grid.RowDefinitions>
                         <RowDefinition Height="26" />
                         <RowDefinition />
                     </Grid.RowDefinitions>
@@ -286,10 +290,7 @@
                                    Text="Income by Currency"
                                    Foreground="White"
                                    FontFamily="Camola" />
-                        <TextBlock Height="20"
-                                   Text="Income by Bed Type"
-                                   Foreground="White"
-                                   FontFamily="Camola" />
+
                         <TextBlock Height="20"
                                    Text="Number of Bed Sold"
                                    Foreground="White"
@@ -307,8 +308,10 @@
                                 <Setter Property="Margin"
                                         Value="0,30,0,0" />
                             </Style>
-                            <!--BasedOn="{StaticResource ComboBoxWithTBoxTheme}"
+                            -->
+                    <!--BasedOn="{StaticResource ComboBoxWithTBoxTheme}"
                                    x:Key="Asd"-->
+                    <!--
                         </StackPanel.Resources>
 
                         <ComboBox Height="20"
@@ -408,7 +411,7 @@
                                   IsTextSearchCaseSensitive="False"
                                   Width="150"
                                   DropDownOpened="cboxIncome_DropDownOpened" />
-                        
+
                         <ComboBox Height="20"
                                   IsEditable="True"
                                   SelectedValuePath="Id"
@@ -422,19 +425,7 @@
                                   IsTextSearchCaseSensitive="False"
                                   Width="150"
                                   DropDownOpened="cboxIncome_DropDownOpened" />
-                        <ComboBox Height="20"
-                                  IsEditable="True"
-                                  SelectedValuePath="Id"
-                                  DisplayMemberPath="Name"
-                                  IsTextSearchEnabled="False"
-                                  BorderThickness="0"
-                                  SelectionChanged="cboxPart11_SelectionChanged"
-                                  TextBoxBase.TextChanged="cboxPart11_TextChanged"
-                                  x:Name="cboxBedTypeIncome"
-                                  FontFamily="/Fonts/#Poppins"
-                                  IsTextSearchCaseSensitive="False"
-                                  Width="150"
-                                  DropDownOpened="cboxIncome_DropDownOpened" />
+
                         <ComboBox Height="20"
                                   IsEditable="True"
                                   SelectedValuePath="Id"
@@ -486,7 +477,7 @@
                                  x:Name="tboxReservation"
                                  Style="{DynamicResource GeneralTextboxTheme}"
                                  Width="100" />
-                        
+
                         <TextBox Height="20"
                                  IsReadOnly="True"
                                  x:Name="tboxAgencyUser"
@@ -507,36 +498,140 @@
                                  x:Name="tboxCurrency"
                                  Style="{DynamicResource GeneralTextboxTheme}"
                                  Width="100" />
-                        <TextBox Height="20"
-                                 IsReadOnly="True"
-                                 x:Name="tboxBedTypeIncome"
-                                 Style="{DynamicResource GeneralTextboxTheme}"
-                                 Width="100" />
+
                         <TextBox Height="20"
                                  IsReadOnly="True"
                                  x:Name="tboxBedTypeNumber"
                                  Style="{DynamicResource GeneralTextboxTheme}"
                                  Width="100" />
-                        
 
 
-                    </StackPanel>
 
-
+                    </StackPanel>-->
 
                 </Grid>
 
 
-
-                <Grid Grid.Column="3"
-                      Grid.Row="2"
-                      Background="cyan" />
                 <Grid Grid.Column="3"
                       Grid.Row="3"
                       Background="HotPink" />
+
+
+                <Grid Grid.Column="0"
+                      Grid.Row="3">
+
+                    <ToggleButton Margin="0,130,0,0"
+                                  Style="{StaticResource ToolsButtonTheme}"
+                                  x:Name="btnToolsForDgwGeneral"
+                                  VerticalAlignment="Top"
+                                  MouseEnter="btnToolsForDgwGeneral_MouseEnter"
+                                  MouseLeave="btnToolsForDgwGeneral_MouseLeave"
+                                  Click="btnToolsForDgwGeneral_Click" />
+
+                    <Button Style="{StaticResource ExcelButtonTheme}"
+                            x:Name="btnExcelsForDgwGeneral"
+                            Click="btnExcelsForDgwGeneral_Click"
+                            Visibility="Collapsed"
+                            VerticalAlignment="Top"
+                            Margin="0,170,0,0"
+                            MouseEnter="btnToolsForDgwGeneral_MouseEnter"
+                            MouseLeave="btnToolsForDgwGeneral_MouseLeave" />
+
+                    <Button Style="{StaticResource WordButtonTheme}"
+                            Margin="0,210,0,0"
+                            x:Name="btnWordForDgwGeneral"
+                            Visibility="Collapsed"
+                            VerticalAlignment="Top"
+                            MouseEnter="btnToolsForDgwGeneral_MouseEnter"
+                            MouseLeave="btnToolsForDgwGeneral_MouseLeave" />
+                </Grid>
+
                 <Grid Grid.Column="1"
                       Grid.Row="3"
-                      Background="Yellow" />
+                      Width="{Binding Width, ElementName=firstColumn}"
+                      Background="Transparent">
+                    <TextBlock Text="Search Income with Parameters"
+                               FontFamily="/Fonts/#Poppins"
+                               Foreground="White"
+                               HorizontalAlignment="Left"
+                               FontSize="23"
+                               VerticalAlignment="Top"
+                               Margin="0,0,0 ,0" />
+
+                    <TextBox Style="{StaticResource SearchTextBox}"
+                             Background="Red"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left"
+                             Margin="0,80,0,0"
+                             Foreground="White"
+                             Tag="Search"
+                             x:Name="tboxSearchForDgwGeneral"
+                             TextChanged="tboxSearchForDgwGeneral_TextChanged" />
+                    <TextBlock Text="Parameters"
+                               FontFamily="/Fonts/#Poppins"
+                               Foreground="White"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top"
+                               Margin="0,91,205 ,0" />
+
+                    <ComboBox Name="cboxForDgwGeneral"
+                              Width="200"
+                              Height="20"
+                              HorizontalAlignment="Right"
+                              VerticalAlignment="Top"
+                              SelectionChanged="cboxForDgwGeneral_SelectionChanged"
+                              Margin="0,90,0,0"
+                              Style="{StaticResource ComboBoxTheme}">
+                        <ComboBoxItem Content="Income by Operation" />
+                        <ComboBoxItem Content="Income by Main Category " />
+                        <ComboBoxItem Content="Income by Sub Category" />
+                        <ComboBoxItem Content="Income by Reservation" />
+                        <ComboBoxItem Content="Income by Agency User" />
+                        <ComboBoxItem Content="Income by Agency" />
+                        <ComboBoxItem Content="Income by Operator" />
+                        <ComboBoxItem Content="Income by Currency" />
+                        <ComboBoxItem Content="Number of bed sold" />
+                    </ComboBox>
+
+
+
+                    <Border Width="{Binding Width, ElementName=firstColumn}"
+                            Height="500"
+                            Grid.Column="1"
+                            Grid.Row="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Visibility="Hidden"
+                            Margin="0,0,0,10"
+                            x:Name="borderDgwGeneral"
+                            Background="#f6f7f9"
+                            CornerRadius="20">
+                        <DataGrid x:Name="dgwGeneral"
+                                  Width="{Binding Width, ElementName=firstColumn}"
+                                  Height="500"
+                                  FontSize="11"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left"
+                                  SelectedItem="{Binding SelectedItem}"
+                                  VerticalScrollBarVisibility="Visible"
+                                  HorizontalScrollBarVisibility="Visible"
+                                  Style="{StaticResource GeneralDataGridTheme}">
+
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Header=" Name"
+                                                    Width="Auto*"
+                                                    Binding="{Binding Name}"
+                                                    HeaderStyle="{StaticResource ToColumnCenter}" />
+                                <DataGridTextColumn Header="     Total"
+                                                    Width="50*"
+                                                    Binding="{Binding TotalIncome}"
+                                                    HeaderStyle="{StaticResource ResourceKey=ToColumnLeft}" />
+                            </DataGrid.Columns>
+
+                        </DataGrid >
+                    </Border>
+
+                </Grid>
                 <Grid Grid.Column="1"
                       Grid.Row="4"
                       Background="Green" />

@@ -220,7 +220,31 @@
         <Setter Property="HorizontalAlignment"
                 Value="Center" />
     </Style>
-
+    <Style x:Key="ToColumnLeft"
+           TargetType="{x:Type DataGridColumnHeader}">
+        <Setter Property="Background"
+                Value="Transparent" />
+        <Setter Property="BorderThickness"
+                Value="1" />
+        <Setter Property="MinHeight"
+                Value="30" />
+        <Setter Property="Cursor"
+                Value="Hand" />
+        <Setter Property="Foreground"
+                Value="Black" />
+        <Setter Property="FontFamily"
+                Value="/Fonts/#Poppins" />
+        <Setter Property="BorderThickness"
+                Value="0.3" />
+        <Setter Property="BorderBrush"
+                Value="Transparent" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Left" />
+        <Setter Property="FontFamily"
+                Value="/Fonts/#Roboto" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+    </Style>
 
 
     <Style x:Key="ToColumnRight"

@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
@@ -43,21 +44,7 @@ namespace Tourism.MainPage.MVVM.View
 
             dgwGeneralIncome.ItemsSource = _operationMainService.GetOperationMain();
 
-
-            cboxIncomeByOperation.ItemsSource = _operationService.GetAll();
-
-            tboxIncomeByFar.Text = _incomeInformationService.TotalIncomeByFar().TotalIncome.ToString();
-
-            cboxMainCategory.ItemsSource = _mainCategoryService.GetAll();
-            cboxSubCategory.ItemsSource = _subCategoryService.GetAll();
-            cboxReservation.ItemsSource = _reservationService.GetAll();
-
-            cboxAgencyUser.ItemsSource = _agencyUserService.GetAll();
-            cboxAgency.ItemsSource = _agencyService.GetAll();
-            cboxOperator.ItemsSource = _operatorService.GetAll();
-            cboxCurrency.ItemsSource = _currencyService.GetAll();
-            cboxBedTypeIncome.ItemsSource = _bedTypeService.GetAll();
-            cboxBedTypeNumber.ItemsSource = _bedTypeService.GetAll();
+            //tboxIncomeByFar.Text = _incomeInformationService.TotalIncomeByFar().TotalIncome.ToString();
 
         }
 
@@ -69,24 +56,17 @@ namespace Tourism.MainPage.MVVM.View
         #region Tools
         private void btnToolsGeneralIncome_MouseEnter(object sender, MouseEventArgs e)
         {
-            btnToolsGeneralIncome.IsChecked = true;
-            btnExcelGeneralIncome.Visibility = Visibility.Visible;
-            btnWord.Visibility = Visibility.Visible;
+            ToolMouseEnter(btnToolsGeneralIncome, btnExcelGeneralIncome, btnWord);
         }
 
         private void btnToolsGeneralIncome_MouseLeave(object sender, MouseEventArgs e)
         {
-            btnToolsGeneralIncome.IsChecked = false;
-            btnExcelGeneralIncome.Visibility = Visibility.Collapsed;
-            btnWord.Visibility = Visibility.Collapsed;
+            ToolMouseLeave(btnToolsGeneralIncome, btnExcelGeneralIncome, btnWord);
         }
 
         private void btnToolsGeneralIncome_Click(object sender, RoutedEventArgs e)
         {
-            if (btnToolsGeneralIncome.IsChecked == false)
-                btnToolsGeneralIncome.IsChecked = true;
-            else if (btnToolsGeneralIncome.IsChecked == true)
-                btnToolsGeneralIncome.IsChecked = false;
+            ToolButtonClick(btnToolsGeneralIncome);
         }
 
         private void btnExcelGeneralIncome_Click(object sender, RoutedEventArgs e)
@@ -94,138 +74,111 @@ namespace Tourism.MainPage.MVVM.View
             Utilities.ExportToExcel(dgwGeneralIncome);
 
         }
+
+        private void btnToolsForDgwGeneral_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ToolMouseEnter(btnToolsForDgwGeneral, btnExcelsForDgwGeneral, btnWordForDgwGeneral);
+
+        }
+
+        private void btnToolsForDgwGeneral_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ToolMouseLeave(btnToolsForDgwGeneral, btnExcelsForDgwGeneral, btnWordForDgwGeneral);
+        }
+
+        private void btnExcelsForDgwGeneral_Click(object sender, RoutedEventArgs e)
+        {
+            Utilities.ExportToExcel(dgwGeneral);
+        }
+
+        private void btnToolsForDgwGeneral_Click(object sender, RoutedEventArgs e)
+        {
+            ToolButtonClick(btnToolsForDgwGeneral);
+        }
+        private void ToolButtonClick(ToggleButton btn)
+        {
+            if (btn.IsChecked == false)
+                btn.IsChecked = true;
+            else if (btn.IsChecked == true)
+                btn.IsChecked = false;
+
+        }
+
+        private void ToolMouseLeave(ToggleButton toggleButton, Button btn2, Button btn3)
+        {
+            toggleButton.IsChecked = false;
+            btn2.Visibility = Visibility.Collapsed;
+            btn3.Visibility = Visibility.Collapsed;
+        }
+        private void ToolMouseEnter(ToggleButton toggleButton, Button btn2, Button btn3)
+        {
+            toggleButton.IsChecked = true;
+            btn2.Visibility = Visibility.Visible;
+            btn3.Visibility = Visibility.Visible;
+        }
         #endregion
 
-        private void cboxIncomeByOperation_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void cboxForDgwGeneral_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (cboxIncomeByOperation.SelectedIndex > -1)
+            tboxSearchForDgwGeneral.Text = String.Empty;
+            if (cboxForDgwGeneral.SelectedIndex > -1)
             {
-                string currency = _currencyService.GetByOperation(Convert.ToInt32(cboxIncomeByOperation.SelectedValue)).FirstOrDefault().Name.ToString();
-                string income = _incomeInformationService.GetByOperation(Convert.ToInt32(cboxIncomeByOperation.SelectedValue)).FirstOrDefault().TotalIncome.ToString();
-                if (income.IsNullOrEmpty())
-                {
-                    tboxIncomeByOperation.Text = "0,00";
-                    return;
-                }
-                tboxIncomeByOperation.Text = income + " " + currency;
+                if (borderDgwGeneral.Visibility == Visibility.Hidden)                    
+                    borderDgwGeneral.Visibility = Visibility.Visible;
+
+                if (cboxForDgwGeneral.SelectedIndex == 0)
+                    dgwGeneral.ItemsSource = _incomeInformationService.GetByOperation(null);
+                if (cboxForDgwGeneral.SelectedIndex == 1)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByMainCategory(null);
+                if (cboxForDgwGeneral.SelectedIndex == 2)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeBySubCategory(null);
+                if (cboxForDgwGeneral.SelectedIndex == 3)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByReservation(null);
+                if (cboxForDgwGeneral.SelectedIndex == 4)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByAgencyUser(null);
+                if (cboxForDgwGeneral.SelectedIndex == 5)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByAgency(null);
+                if (cboxForDgwGeneral.SelectedIndex == 6)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByOperator(null);
+                if (cboxForDgwGeneral.SelectedIndex == 7)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByCurrency(null);
+                if (cboxForDgwGeneral.SelectedIndex == 8)
+                    dgwGeneral.ItemsSource = _incomeInformationService.NumberOfBedSold(null);
+
 
             }
-            if (tboxIncomeByOperation.Text.IsNullOrEmpty())
-                tboxIncomeByOperation.Text = "0,00 ";
         }
 
-        private void cboxIncomeByOperation_TextChanged(object sender, TextChangedEventArgs e)
+        private void tboxSearchForDgwGeneral_TextChanged(object sender, TextChangedEventArgs e)
         {
-            cboxIncomeByOperation.ItemsSource = _operationService.GetByDocumentCode(cboxIncomeByOperation.Text);
-
-            if (cboxIncomeByOperation.Text.IsNullOrEmpty())
-                cboxIncomeByOperation.ItemsSource = _operationService.GetAll();
-        }
-
-        private int ComboBoxSelectedValue(ComboBox box)
-        {
-            int selectedValue = Convert.ToInt32(box.SelectedValue);
-            return selectedValue;
-        }
-        private void CboxTextChanged(ComboBox cbox, TextBox tbox, Array result, Array getAll)
-        {
-            cbox.ItemsSource = result;
-            if (cbox.Text.IsNullOrEmpty())
-                cbox.ItemsSource = getAll;
-        }
-        private void CboxSelectionChanged(ComboBox cbox, TextBox tbox, object result)
-        {
-            if (cbox.SelectedIndex > -1)
+            if (cboxForDgwGeneral.SelectedIndex > -1)
             {
-                if (result == null)
-                {
-                    tbox.Text = "0,00";
-                    return;
-                }
-                tbox.Text = result.ToString();
+                string text = tboxSearchForDgwGeneral.Text;
+                if (cboxForDgwGeneral.SelectedIndex == 0)
+                    dgwGeneral.ItemsSource = _incomeInformationService.GetByOperation(text);
+                if (cboxForDgwGeneral.SelectedIndex == 1)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByMainCategory(text);
+                if (cboxForDgwGeneral.SelectedIndex == 2)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeBySubCategory(text);
+                if (cboxForDgwGeneral.SelectedIndex == 3)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByReservation(text);
+                if (cboxForDgwGeneral.SelectedIndex == 4)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByAgencyUser(text);
+                if (cboxForDgwGeneral.SelectedIndex == 5)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByAgency(text);
+                if (cboxForDgwGeneral.SelectedIndex == 6)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByOperator(text);
+                if (cboxForDgwGeneral.SelectedIndex == 7)
+                    dgwGeneral.ItemsSource = _incomeInformationService.TotalIncomeByCurrency(text);
+                if (cboxForDgwGeneral.SelectedIndex == 8)
+                    dgwGeneral.ItemsSource = _incomeInformationService.NumberOfBedSold(text);
+
+
             }
-            if (tbox.Text.IsNullOrEmpty())
-                tbox.Text = "0,00 ";
         }
-        private void cboxIncome_DropDownOpened(object sender, EventArgs e)
-        {
-            if (sender == cboxIncomeByOperation)
-                cboxIncomeByOperation.ItemsSource = _operationService.GetAll();
-            if (sender == cboxMainCategory)
-                cboxMainCategory.ItemsSource = _mainCategoryService.GetAll();
-            if (sender == cboxSubCategory)
-                cboxSubCategory.ItemsSource = _subCategoryService.GetAll();
-            if (sender == cboxReservation)
-                cboxReservation.ItemsSource = _reservationService.GetAll();
-            if (sender == cboxAgencyUser)
-                cboxAgencyUser.ItemsSource = _agencyUserService.GetAll();
-            if (sender == cboxAgency)
-                cboxAgency.ItemsSource = _agencyService.GetAll();
-            if (sender == cboxOperator)
-                cboxOperator.ItemsSource = _operatorService.GetAll();
-            if (sender == cboxCurrency)
-                cboxCurrency.ItemsSource = _currencyService.GetAll();
-            if (sender == cboxBedTypeIncome)
-                cboxBedTypeIncome.ItemsSource = _bedTypeService.GetAll();
-            if (sender == cboxBedTypeNumber)
-                cboxBedTypeNumber.ItemsSource = _bedTypeService.GetAll();
-
-        }
-
-        private void cboxPart11_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (sender == cboxMainCategory)
-                CboxSelectionChanged(cboxMainCategory, tboxMainCategory, _incomeInformationService.TotalIncomeByMainCategory(ComboBoxSelectedValue(cboxMainCategory)).TotalIncome);
-            if (sender == cboxSubCategory)
-                CboxSelectionChanged(cboxSubCategory, tboxSubCategory, _incomeInformationService.TotalIncomeBySubCategory(ComboBoxSelectedValue(cboxSubCategory)).TotalIncome);
-            if (sender == cboxReservation)
-                CboxSelectionChanged(cboxReservation, tboxReservation, _incomeInformationService.TotalIncomeByReservation(ComboBoxSelectedValue(cboxReservation)).TotalIncome);
-            if (sender == cboxAgencyUser)
-                CboxSelectionChanged(cboxAgencyUser, tboxAgencyUser, _incomeInformationService.TotalIncomeByAgencyUser(ComboBoxSelectedValue(cboxAgencyUser)).TotalIncome);
-            if (sender == cboxAgency)
-                CboxSelectionChanged(cboxAgency, tboxAgency, _incomeInformationService.TotalIncomeByAgency(ComboBoxSelectedValue(cboxAgency)).TotalIncome);
-            if (sender == cboxOperator)
-                CboxSelectionChanged(cboxOperator, tboxOperator, _incomeInformationService.TotalIncomeByOperator(ComboBoxSelectedValue(cboxOperator)).TotalIncome);
-
-            if (sender == cboxCurrency)
-                CboxSelectionChanged(cboxCurrency, tboxCurrency, _incomeInformationService.TotalIncomeByCurrency(ComboBoxSelectedValue(cboxCurrency)).TotalIncome);
-            if (sender == cboxBedTypeIncome)
-                CboxSelectionChanged(cboxBedTypeIncome, tboxBedTypeIncome, _incomeInformationService.TotalIncomeByBedType(ComboBoxSelectedValue(cboxBedTypeIncome)).TotalIncome);
-            if (sender == cboxBedTypeNumber)
-                CboxSelectionChanged(cboxBedTypeNumber, tboxBedTypeNumber, _incomeInformationService.NumberOfBedSold(ComboBoxSelectedValue(cboxBedTypeNumber)).TotalIncome);
-
-
-
-        }
-
-        private void cboxPart11_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (sender == cboxMainCategory)
-                CboxTextChanged(cboxMainCategory, tboxMainCategory, _mainCategoryService.GetByCategoryName(cboxMainCategory.Text).ToArray(), _mainCategoryService.GetAll().ToArray());
-            if (sender == cboxSubCategory)
-                CboxTextChanged(cboxSubCategory, tboxSubCategory, _subCategoryService.GetByCategoryName(cboxSubCategory.Text).ToArray(), _subCategoryService.GetAll().ToArray());
-            if (sender == cboxReservation)
-                CboxTextChanged(cboxReservation, tboxReservation, _reservationService.GetByReservattionCode(cboxReservation.Text).ToArray(), _reservationService.GetAll().ToArray());
-            if (sender == cboxAgencyUser)
-                CboxTextChanged(cboxAgencyUser, tboxAgencyUser, _agencyUserService.GetByName(cboxAgencyUser.Text).ToArray(), _agencyUserService.GetAll().ToArray());
-            if (sender == cboxAgency)
-                CboxTextChanged(cboxAgency, tboxAgency, _agencyService.GetByName(cboxAgency.Text).ToArray(), _agencyService.GetAll().ToArray());
-            if (sender == cboxOperator)
-                CboxTextChanged(cboxOperator, tboxAgencyUser, _operatorService.GetByName(cboxOperator.Text).ToArray(), _operatorService.GetAll().ToArray());
-
-            if (sender == cboxCurrency)
-                CboxTextChanged(cboxCurrency, tboxCurrency, _currencyService.GetByName(cboxCurrency.Text).ToArray(), _currencyService.GetAll().ToArray());
-            if (sender == cboxBedTypeIncome)
-                CboxTextChanged(cboxBedTypeIncome, tboxBedTypeIncome, _bedTypeService.GetByName(cboxBedTypeIncome.Text).ToArray(), _bedTypeService.GetAll().ToArray());
-            if (sender == cboxBedTypeNumber)
-                CboxTextChanged(cboxBedTypeNumber, tboxBedTypeNumber, _bedTypeService.GetByName(cboxBedTypeNumber.Text).ToArray(), _bedTypeService.GetAll().ToArray());
-        }
-
-
-
-
 
 
     }
 
 }
+

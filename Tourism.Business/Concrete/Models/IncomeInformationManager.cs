@@ -1,6 +1,5 @@
 ﻿using Tourism.Business.Abstract.Models;
 using Tourism.DataAccess.Abstract.Models;
-using Tourism.Entities.Concrete;
 using Tourism.Entities.Models;
 
 namespace Tourism.Business.Concrete.Models
@@ -9,64 +8,65 @@ namespace Tourism.Business.Concrete.Models
     {
 
         private IIncomeInformationDal _incomeInformationDal;
-        public IncomeInformationManager(IIncomeInformationDal incomeInformationDal)
-        {
-            _incomeInformationDal = incomeInformationDal;
-        }
-
-        public List<IncomeInformation> GetByOperation(int operationId)
-        {
-            return _incomeInformationDal.GetByOperation(operationId);
-        }
-
-        public IncomeInformation NumberOfBedSold(int bedTypeId)
-        {
-            return _incomeInformationDal.NumberOfBedSold(bedTypeId);
-        }
-
-        public IncomeInformation TotalIncomeByAgency(int agencyId)
-        {
-            return _incomeInformationDal.TotalIncomeByAgency(agencyId);
-        }
-
-        public IncomeInformation TotalIncomeByAgencyUser(int agencyUserId)
-        {
-            return _incomeInformationDal.TotalIncomeByAgencyUser(agencyUserId);
-        }
-
-        public IncomeInformation TotalIncomeByBedType(int bedTypeId)
-        {
-            return _incomeInformationDal.TotalIncomeByBedType(bedTypeId);
-        }
-
-        public IncomeInformation TotalIncomeByCurrency(int currencyId)
-        {
-            return _incomeInformationDal.TotalIncomeByCurrency(currencyId);         
-        }
-
         public IncomeInformation TotalIncomeByFar()
         {
             return _incomeInformationDal.TotalIncomeByFar();
         }
 
-        public IncomeInformation TotalIncomeByMainCategory(int mainCategoryId)
+        public IncomeInformationManager(IIncomeInformationDal incomeInformationDal)
         {
-            return _incomeInformationDal.TotalIncomeByMainCategory(mainCategoryId);
+            _incomeInformationDal = incomeInformationDal;
         }
 
-        public IncomeInformation TotalIncomeByOperator(int operatorId)
+        public List<IncomeInformation> GetByOperation(string name)
         {
-            return _incomeInformationDal.TotalIncomeByOperator(operatorId);
+            return _incomeInformationDal.GetByOperation(name);
         }
 
-        public IncomeInformation TotalIncomeByReservation(int reservationId)
+        public List<IncomeInformation> NumberOfBedSold(string name)
         {
-            return _incomeInformationDal.TotalIncomeByReservation(reservationId);
+            return _incomeInformationDal.NumberOfBedSold(name);
         }
 
-        public IncomeInformation TotalIncomeBySubCategory(int subCategoryId)
+        public List<IncomeInformation> TotalIncomeByAgency(string name)
         {
-            return _incomeInformationDal.TotalIncomeBySubCategory(subCategoryId);
+            return _incomeInformationDal.TotalIncomeByAgency(name);
+        }
+
+        public List<IncomeInformation> TotalIncomeByAgencyUser(string name)
+        {
+            return _incomeInformationDal.TotalIncomeByAgencyUser(name);
+        }
+
+        public List<IncomeInformation> TotalIncomeByBedType(string name)
+        {
+            return _incomeInformationDal.TotalIncomeByBedType(name);
+        }
+
+        public List<IncomeInformation> TotalIncomeByCurrency(string name)
+        {
+            return _incomeInformationDal.TotalIncomeByCurrency(name);
+        }
+
+   
+        public List<IncomeInformation> TotalIncomeByMainCategory(string name)
+        {
+            return _incomeInformationDal.TotalIncomeByMainCategory(name);
+        }
+
+        public List<IncomeInformation> TotalIncomeByOperator(string name)
+        {
+            return _incomeInformationDal.TotalIncomeByOperator(name);
+        }
+
+        public List<IncomeInformation> TotalIncomeByReservation(string name)
+        {
+            return _incomeInformationDal.TotalIncomeByReservation(name);
+        }
+
+        public List<IncomeInformation> TotalIncomeBySubCategory(string name)
+        {
+            return _incomeInformationDal.TotalIncomeBySubCategory(name);
         }
     }
 }
