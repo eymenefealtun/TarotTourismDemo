@@ -24,26 +24,26 @@ namespace Tourism.MainPage.MVVM.View.Window
         public MainWindow()
         {
             InitializeComponent();
-            ToggleButton[] allButtons = new ToggleButton[] { btnCategories, btnCurrency, btnCustomers, btnHome, btnIncome, btnIncomeIncoming, btnIncomeOutgoing, btnMainCategory, btnModifications, btnOperations, btnOutcome, btnSubCategory, btnSubOperatorUser };
+            ToggleButton[] allButtons = new ToggleButton[] { btnCategories, btnCurrency, btnCustomers, btnHome, btnIncome, btnIncomeIncoming, btnIncomeOutgoing, btnMainCategory, btnModifications, btnOperations, btnOutcome, btnSubCategory, btnSubOperatorUser, btnSubOperations, btnAddOperation, btnDuplicateOperation };
 
             ToggleButton[] allMainButtons = new ToggleButton[] { btnHome, btnOperations, btnModifications, btnCustomers, btnIncome, btnOutcome };
             ToggleButton[] mainWithSubButtons = new ToggleButton[] { btnModifications, btnIncome, btnOutcome };
 
 
             #region firstSubButtons
-            ToggleButton[] firstSubButtons = new ToggleButton[] { btnSubOperatorUser, btnCategories, btnCurrency, btnIncomeIncoming, btnIncomeOutgoing };
-            ToggleButton[] firstSubButtonsWithSubs = new ToggleButton[] { btnCategories };
+            ToggleButton[] firstSubButtons = new ToggleButton[] { btnSubOperatorUser, btnCategories, btnCurrency, btnIncomeIncoming, btnIncomeOutgoing, btnSubOperations };
+            ToggleButton[] firstSubButtonsWithSubs = new ToggleButton[] { btnCategories, btnSubOperations };
 
-            ToggleButton[] modificationSubButtons = new ToggleButton[] { btnSubOperatorUser, btnCategories, btnCurrency };
+            ToggleButton[] modificationSubButtons = new ToggleButton[] { btnSubOperatorUser, btnCategories, btnCurrency, btnSubOperations };
 
             ToggleButton[] incomeSubButtons = new ToggleButton[] { btnIncomeIncoming, btnIncomeOutgoing };
             #endregion
 
 
             #region secondSubButtons
-            ToggleButton[] secondSubButtons = new ToggleButton[] { btnSubCategory, btnMainCategory };
+            ToggleButton[] secondSubButtons = new ToggleButton[] { btnSubCategory, btnMainCategory, btnAddOperation, btnDuplicateOperation };
 
-            ToggleButton[] modificationSecondSubButtons = new ToggleButton[] { btnSubCategory, btnMainCategory };
+            ToggleButton[] modificationSecondSubButtons = new ToggleButton[] { btnSubCategory, btnMainCategory, btnAddOperation, btnDuplicateOperation };
             ToggleButton[] modificationCategorySecondSubButton = new ToggleButton[] { btnSubCategory, btnMainCategory };
 
             #endregion
@@ -250,13 +250,19 @@ namespace Tourism.MainPage.MVVM.View.Window
             btnCurrency.IsChecked = false;
             btnSubOperatorUser.IsChecked = false;
 
+
             btnSubCategory.IsChecked = false;
             btnMainCategory.IsChecked = false;
+
+            btnAddOperation.IsChecked = false;
+            btnDuplicateOperation.IsChecked = false;
 
 
             LooseFocusOfSubButton(btnIncome);
             btnIncomeIncoming.IsChecked = false;
             btnIncomeOutgoing.IsChecked = false;
+
+
         }
 
 
@@ -267,6 +273,7 @@ namespace Tourism.MainPage.MVVM.View.Window
                 btnSubOperatorUser.Visibility = Visibility.Visible;
                 btnCurrency.Visibility = Visibility.Visible;
                 btnCategories.Visibility = Visibility.Visible;
+                btnSubOperations.Visibility = Visibility.Visible;
             }
             else if (btnSubOperatorUser.Visibility == Visibility.Visible)
             {
@@ -275,8 +282,15 @@ namespace Tourism.MainPage.MVVM.View.Window
                 btnCategories.Visibility = Visibility.Collapsed;
                 btnSubCategory.Visibility = Visibility.Collapsed;
                 btnMainCategory.Visibility = Visibility.Collapsed;
+                btnSubOperations.Visibility = Visibility.Collapsed;
+                btnAddOperation.Visibility = Visibility.Collapsed;
+                btnDuplicateOperation.Visibility = Visibility.Collapsed;
+
+
                 LooseFocusOfSubButton(btnCategories);
+                LooseFocusOfSubButton(btnSubOperations);
                 btnCategories.IsChecked = false;
+                btnSubOperations.IsChecked = false;
             }
 
         }
@@ -300,13 +314,34 @@ namespace Tourism.MainPage.MVVM.View.Window
             if (sender.GetType() == typeof(ToggleButton))
             {
                 ToggleButton toggleButton = (ToggleButton)sender;
-                OpenCategories(toggleButton);
+                if (sender == btnCategories)
+                    OpenCategories();
+                if (sender == btnSubOperations)
+                    OpenSubOperations();
+
                 return;
             }
             LooseFocusOfSubButton(btnIncome);
             FocusToSubButton(btnModifications);
         }
+        private void btnSubOperations_Click(object sender, RoutedEventArgs e)
+        {
 
+            if (sender.GetType() == typeof(RadioButton))
+            {
+                RadioButton radioButton = (RadioButton)sender;
+            }
+            if (sender.GetType() == typeof(ToggleButton))
+            {
+                ToggleButton toggleButton = (ToggleButton)sender;
+                if (sender == btnSubOperations)
+                    OpenSubOperations();
+
+                return;
+            }
+            LooseFocusOfSubButton(btnIncome);
+            FocusToSubButton(btnSubOperations);
+        }
 
         private void LooseFocusOfSubButton(ToggleButton button)
         {
@@ -320,25 +355,38 @@ namespace Tourism.MainPage.MVVM.View.Window
         }
 
 
-        private void OpenCategories(ToggleButton toggleButton)
+        private void OpenCategories()
         {
-            if (toggleButton == btnCategories)
+
+            if (btnCategories.IsChecked == true)
             {
-                if (toggleButton.IsChecked == true)
-                {
-                    btnSubCategory.Visibility = Visibility.Visible;
-                    btnMainCategory.Visibility = Visibility.Visible;
-                }
-                else if (toggleButton.IsChecked == false)
-                {
-                    btnSubCategory.Visibility = Visibility.Collapsed;
-                    btnMainCategory.Visibility = Visibility.Collapsed;
-                    LooseFocusOfSubButton(btnCategories);
-                }
+                btnSubCategory.Visibility = Visibility.Visible;
+                btnMainCategory.Visibility = Visibility.Visible;
+            }
+            else if (btnCategories.IsChecked == false)
+            {
+                btnSubCategory.Visibility = Visibility.Collapsed;
+                btnMainCategory.Visibility = Visibility.Collapsed;
+                LooseFocusOfSubButton(btnCategories);
             }
 
-        }
 
+        }
+        private void OpenSubOperations()
+        {
+
+            if (btnSubOperations.IsChecked == true)
+            {
+                btnAddOperation.Visibility = Visibility.Visible;
+                btnDuplicateOperation.Visibility = Visibility.Visible;
+            }
+            else if (btnSubOperations.IsChecked == false)
+            {
+                btnAddOperation.Visibility = Visibility.Collapsed;
+                btnDuplicateOperation.Visibility = Visibility.Collapsed;
+                LooseFocusOfSubButton(btnSubOperations);
+            }
+        }
 
 
         private void btnIncome_Click(object sender, RoutedEventArgs e)
@@ -399,16 +447,16 @@ namespace Tourism.MainPage.MVVM.View.Window
                 if (Search(button, search))
                 {
                     button.Visibility = Visibility.Visible;
-                    if (IsInsideOfTheArray(button, _modificationSubButtons))
-                    {
-                        btnModifications.Visibility = Visibility.Visible;
-                        //btnModifications.IsChecked = true;
-                    }
-                    else if (IsInsideOfTheArray(button, _incomeSubButtons))
-                    {
-                        btnIncome.Visibility = Visibility.Visible;
-                        //btnIncome.IsChecked = true;
-                    }
+                    //if (IsInsideOfTheArray(button, _modificationSubButtons))
+                    //{
+                    //    btnModifications.Visibility = Visibility.Visible;
+                    //    //btnModifications.IsChecked = true;
+                    //}
+                    //else if (IsInsideOfTheArray(button, _incomeSubButtons))
+                    //{
+                    //    btnIncome.Visibility = Visibility.Visible;
+                    //    //btnIncome.IsChecked = true;
+                    //}
                 }
                 else if (!Search(button, search))
                 {
@@ -423,13 +471,13 @@ namespace Tourism.MainPage.MVVM.View.Window
                 {
                     button.Visibility = Visibility.Visible;
 
-                    if (IsInsideOfTheArray(button, _modificationCategorySecondSubButton))
-                    {
-                        btnModifications.Visibility = Visibility.Visible;
-                        //btnModifications.IsChecked = true;
-                        //btnCategories.IsChecked = true;
-                        btnCategories.Visibility = Visibility.Visible;
-                    }
+                    //if (IsInsideOfTheArray(button, _modificationCategorySecondSubButton))
+                    //{
+                    //    btnModifications.Visibility = Visibility.Visible;
+                    //    //btnModifications.IsChecked = true;
+                    //    //btnCategories.IsChecked = true;
+                    //    btnCategories.Visibility = Visibility.Visible;
+                    //}
                 }
                 else if (!Search(button, search))
                 {

@@ -96,6 +96,7 @@
                                  Command="{Binding OperatorUserViewCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
 
+
                     <!--#region Categories -->
                     <ToggleButton Content="Categories"
                                   x:Name="btnCategories"
@@ -133,6 +134,30 @@
 
                     <!--#endregion-->
 
+                    <!--#region Operations -->
+                    <ToggleButton Content="Operations"
+                                  x:Name="btnSubOperations"
+                                  Height="30"
+                                  FontSize="12"
+                                  Visibility="Collapsed"
+                                  Click="btnModificationsSubMenu_Click"
+                                  Style="{StaticResource MenuButtonWithSecondSubTheme}" />
+
+                    <RadioButton Content="- Add new operation"
+                                 Height="30"
+                                 x:Name="btnAddOperation"
+                                 Visibility="Collapsed"
+                                 Click="btnModificationsSubMenu_Click"
+                                 Command="{Binding AddOperationViewCommand}"
+                                 Style="{StaticResource MenuSecondSubButtonTheme}" />
+                    <RadioButton Content="- Duplicate operation"
+                                 Height="30"
+                                 x:Name="btnDuplicateOperation"
+                                 Visibility="Collapsed"
+                                 Click="btnModificationsSubMenu_Click"
+                                 Command="{Binding DuplicateOperationViewCommand}"
+                                 Style="{StaticResource MenuSecondSubButtonTheme}" />
+                    <!--#endregion-->
 
                     <RadioButton Content="Customers"
                                  Height="50"

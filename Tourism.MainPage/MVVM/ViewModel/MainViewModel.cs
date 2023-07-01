@@ -22,6 +22,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
         public RelayCommand GeneralIncomeOutgoingCommand { get; set; }
         public RelayCommand EmptyPageViewCommand { get; set; }
         public RelayCommand MainWindowViewCommand { get; set; }
+        public RelayCommand DuplicateOperationViewCommand { get; set; }     
 
 
 
@@ -75,6 +76,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
             SubCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SubCategoryViewModel>(); }, canExecute: o => true);
             GeneralIncomeOutgoingCommand = new RelayCommand(o => { Navigation.NavigateTo<GeneralIncomeOutgoingViewModel>(); }, canExecute: o => true);
             EmptyPageViewCommand = new RelayCommand(o => { Navigation.NavigateTo<EmptyPageViewModel>(); }, canExecute: o => true);
+            DuplicateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<DuplicateOperationViewModel>(); }, canExecute: o => true);
 
 
 

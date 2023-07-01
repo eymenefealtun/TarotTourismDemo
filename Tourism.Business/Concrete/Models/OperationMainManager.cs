@@ -12,6 +12,14 @@ namespace Tourism.Business.Concrete.Models
             _operationMainDal = operationMainDal;
         }
 
+        public List<OperationMain> GetByDocumentCode(string documentCode)
+        {
+            return _operationMainDal.GetByDocumentCode(documentCode);
+
+        }
+
+
+
         //public OperationMain GetByOperationId(int operationId)
 
         //{
@@ -29,8 +37,8 @@ namespace Tourism.Business.Concrete.Models
         //}
 
         public List<OperationMain> SearchOperationMain(string documentCode, int mainCategoryId, int subCategoryId, DateTime startDate, DateTime endDate, int operatorId, int currencyId, bool isActive)
-        {       
-            return _operationMainDal.SearchOperationMain(documentCode, mainCategoryId, subCategoryId, startDate, endDate, operatorId,currencyId,isActive);
+        {
+            return _operationMainDal.SearchOperationMain(documentCode, mainCategoryId, subCategoryId, startDate, endDate, operatorId, currencyId, isActive);
         }
 
 

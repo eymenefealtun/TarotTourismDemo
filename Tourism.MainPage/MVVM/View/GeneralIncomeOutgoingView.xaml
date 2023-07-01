@@ -14,7 +14,8 @@
           Name="GeneralIncomeOutgoingViewMainGrid">
 
 
-        <ScrollViewer VerticalScrollBarVisibility="Hidden">
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition  Width="50" />
@@ -139,19 +140,28 @@
                       Background="Transparent"
                       Visibility="Visible"
                       x:Name="grid11">
+                    <TextBox Style="{StaticResource SearchTextBox}"
+                             Background="#353340"
+                             VerticalAlignment="Top"
+                             HorizontalAlignment="Left"
+                             Margin="0,80,0,0"
+                             Foreground="White"
+                             Tag="Search"
+                             x:Name="tboxSearchForGeneral"
+                             TextChanged="tboxSearchForGeneral_TextChanged" />
                     <TextBlock Text="General Income"
                                Foreground="LightGray"
                                FontFamily="Camola"
-                               FontSize="16"
-                               Margin="20,46,0,0"
+                               FontSize="23"
+                               Margin="0,0,0,0"
                                VerticalAlignment="Top" />
                     <Border Width="{Binding Width, ElementName=firstColumn}"
                             Height="500"
                             Grid.Column="1"
                             Grid.Row="1"
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
-                            Margin="0,0,0,0"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Bottom"
+                            Margin="0,0,0,10"
                             Background="#f6f7f9"
                             CornerRadius="20">
                         <DataGrid x:Name="dgwGeneralIncome"
@@ -208,18 +218,41 @@
                 </Grid>
                 <Grid Grid.Column="1"
                       Grid.Row="2"
-                      Background="Blue"
+                      Background="Transparent"
                       x:Name="grid12">
+
+                    <TextBlock  Text="Trial"
+                                VerticalAlignment="Center"
+                                FontFamily="/Fonts/#Poppins"
+                                HorizontalAlignment="Center"
+                                Foreground="White"
+                                FontSize="30" />
                 </Grid>
                 <Grid Grid.Column="3"
                       Grid.Row="1"
-                      Background="cyan"
+                      Background="Transparent"
                       x:Name="grid13">
+
+                    <TextBlock  Text="Trial"
+                                VerticalAlignment="Center"
+                                FontFamily="/Fonts/#Poppins"
+                                HorizontalAlignment="Center"
+                                Foreground="White"
+                                FontSize="30" />
+
                 </Grid>
                 <Grid Grid.Column="3"
                       Grid.Row="2"
-                      Background="LightCoral"
+                      Background="Transparent"
                       Visibility="Visible">
+
+
+                    <TextBlock  Text="Trial"
+                                VerticalAlignment="Center"
+                                FontFamily="/Fonts/#Poppins"
+                                HorizontalAlignment="Center"
+                                Foreground="White"
+                                FontSize="30" />
                     <!--<Grid.RowDefinitions>
                         <RowDefinition Height="26" />
                         <RowDefinition />
@@ -514,7 +547,15 @@
 
                 <Grid Grid.Column="3"
                       Grid.Row="3"
-                      Background="HotPink" />
+                      Background="Transparent">
+
+                    <TextBlock  Text="Trial"
+                                VerticalAlignment="Center"
+                                FontFamily="/Fonts/#Poppins"
+                                HorizontalAlignment="Center"
+                                Foreground="White"
+                                FontSize="30" />
+                </Grid>
 
 
                 <Grid Grid.Column="0"
@@ -552,7 +593,7 @@
                       Background="Transparent">
                     <TextBlock Text="Search Income with Parameters"
                                FontFamily="/Fonts/#Poppins"
-                               Foreground="White"
+                               Foreground="LightGray"
                                HorizontalAlignment="Left"
                                FontSize="23"
                                VerticalAlignment="Top"
@@ -601,7 +642,7 @@
                             Grid.Row="1"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Bottom"
-                            Visibility="Hidden"
+                            Visibility="Visible"
                             Margin="0,0,0,10"
                             x:Name="borderDgwGeneral"
                             Background="#f6f7f9"
@@ -619,7 +660,7 @@
 
                             <DataGrid.Columns>
                                 <DataGridTextColumn Header=" Name"
-                                                    Width="Auto*"
+                                                    Width="Auto"
                                                     Binding="{Binding Name}"
                                                     HeaderStyle="{StaticResource ToColumnCenter}" />
                                 <DataGridTextColumn Header="     Total"
@@ -643,6 +684,7 @@
 
 
             </Grid>
+
         </ScrollViewer>
 
     </Grid>

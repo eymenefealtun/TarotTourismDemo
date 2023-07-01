@@ -28,6 +28,7 @@
                 Content="&#xEC52;"
                 Style="{StaticResource RefreshAndBackButtonTheme}"
                 ToolTip="Back"
+                Visibility="Collapsed"
                 Command="{Binding OperationViewCommand}"
                 Click="btnBack_Click" />
 
@@ -266,7 +267,7 @@
                        Grid.Column="1"
                        Grid.Row="1"
                        VerticalAlignment="Top"
-                       Text="Description:"
+                       Text="Itinerary:"
                        Foreground="White"
                        FontSize="12"
                        FontFamily="/Fonts/#Poppins"

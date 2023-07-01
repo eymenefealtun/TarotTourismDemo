@@ -62,7 +62,7 @@
                     FontSize="30"
                     Cursor="Hand"
                     Foreground="#627581"
-                    ToolTip="You can search simultaneously with three variables"
+                    Tag="You can search simultaneously with three variables"
                     Grid.Column="1"
                     HorizontalAlignment="Left"
                     Margin="600,0,0,0"

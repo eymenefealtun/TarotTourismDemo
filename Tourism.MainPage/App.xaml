@@ -128,8 +128,12 @@
                 <window:MainWindow />
             </DataTemplate>
             
-            
-            
+            <DataTemplate DataType="{x:Type viewModel:DuplicateOperationViewModel}">
+                <view:DuplicateOperationView />
+            </DataTemplate>
+
+
+
         </ResourceDictionary>
     </Application.Resources>
 

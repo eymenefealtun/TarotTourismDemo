@@ -8,9 +8,6 @@
                 Value="Black" />
         <Setter Property="FontFamily"
                 Value="/Fonts/#Poppins" />
-     
-
-
 
         <Setter Property="Template">
             <Setter.Value>
@@ -18,26 +15,39 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
-                            <ColumnDefinition MaxWidth="28" />
+                            <ColumnDefinition MaxWidth="18" />
                         </Grid.ColumnDefinitions>
-
                         <ToggleButton Name="PART_EditableTextBox"
                                       Style="{StaticResource ComboBoxWithTBoxToggleButtonTheme}"
                                       IsChecked="{Binding Path=IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                       Padding="5,0,0,0"
                                       BorderThickness="0"
                                       Height="{TemplateBinding Height}">
-
                             <TextBox x:Name="mainText"
                                      Height="{TemplateBinding Height}"
-                                     Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged, BindsDirectlyToSource=True,Mode=TwoWay}"
                                      Width="{TemplateBinding Width}"
                                      Foreground="Black"
+                                     Text="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged, BindsDirectlyToSource=True,Mode=OneWayToSource}"
                                      Background="Transparent"
                                      CaretBrush="Black"
                                      Visibility="Visible"
                                      BorderThickness="0">
+                                <TextBox.Resources>
+                                    <Style TargetType="{x:Type TextBox}">
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SelectedIndex, RelativeSource={RelativeSource AncestorType={x:Type ComboBox}}}"
+                                                         Value="-1">
+                                                <Setter Property="Text"
+                                                        Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Text, UpdateSourceTrigger=PropertyChanged, BindsDirectlyToSource=True,Mode=OneWayToSource}" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+
+                                    </Style>
+
+                                </TextBox.Resources>
                             </TextBox>
+
+
 
                             <ToggleButton.Resources>
                                 <Style TargetType="{x:Type Border}">
@@ -53,6 +63,8 @@
                                 </Style>
                             </ToggleButton.Resources>
                         </ToggleButton>
+
+
 
                         <ToggleButton Grid.Column="1"
                                       Margin="0"
@@ -118,5 +130,14 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <!--<Style.Triggers>
+            <DataTrigger Binding="{Binding Source=SelectionChanged}"
+                         Value="True">
+                <DataTrigger.Setters>
+                    <Setter Property="Text"
+                            Value="{Binding SelectedItem.DocumentCode}" />
+                </DataTrigger.Setters>
+            </DataTrigger>
+        </Style.Triggers>-->
     </Style>
 </ResourceDictionary>

@@ -22,6 +22,8 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         public DbSet<Room> Rooms { get; set; }
         public DbSet<BedType> BedTypes { get; set; }
         public DbSet<Customer> Customers { get; set; }
+        public DbSet<Preference> Preferences { get; set; }
+        public DbSet<BackgroundTheme> BackgroundThemes { get; set; }
 
 
         #region Models
@@ -31,14 +33,14 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         public DbSet<CustomerOperation> CustomerOperations { get; set; }
         public DbSet<OperationInformation> OperationInformations { get; set; }
         public DbSet<OperatorUserFull> OperatorUserFulls { get; set; }
-        public DbSet<IncomeInformation> IncomeInformations { get; set; }        
+        public DbSet<IncomeInformation> IncomeInformations { get; set; }
 
         #endregion
 
-        public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
+        //public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
+        //{
 
-        }
+        //}
         public AppDbContext()
         {
 
@@ -47,6 +49,9 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         {
             modelBuilder.Entity<Operation>().HasOne(x => x.OperatorUserCreated).WithMany(x => x.OperatorCreate).HasForeignKey(x => x.CreatedBy);
             modelBuilder.Entity<Operation>().HasOne(x => x.OperatorUserUpdated).WithMany(x => x.OperatorUpdate).HasForeignKey(x => x.LastUpdatedBy);
+            //modelBuilder.Entity<OperatorUser>().HasOne(x => x.Id).WithOne(x => x.Preference).HasForeignKey<Preference>(x => x.OperatorUserId);
+
+
 
             // modelBuilder.Entity<OperationInformation>().Property(x => x.RowVersion).IsRowVersion();
 
@@ -58,6 +63,8 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
             //modelBuilder.Entity<Operation>().HasOne(x => x.OperationPrice).WithOne(x => x.Operation).HasForeignKey<OperationPrice>(x=>x.OperationId);
 
         }
+
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             Initializer.Build();

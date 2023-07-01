@@ -2,7 +2,6 @@
 using Tourism.Core.DataAccess.EntityFramework.Concrete;
 using Tourism.DataAccess.Concrete.EntityFramework;
 using Tourism.Entities.Abstract;
-using Tourism.Entities.Models;
 
 namespace Tourism.Entities.Concrete
 {

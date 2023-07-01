@@ -10,6 +10,8 @@ namespace Tourism.DataAccess.Abstract
         Operation Update(Operation operation);
         Operation GetByOperationId(int operationId);        
         List<Operation> GetByDocumentCode(string documentCode);                
+        List<Operation> GetBySubCategory(int subCategoryId);
+        List<Operation> GetBySubCategoryAndDocumentCode(string documentCode, int subCategoryId);
 
-    }               
+    }
 }

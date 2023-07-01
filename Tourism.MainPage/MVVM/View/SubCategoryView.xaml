@@ -37,7 +37,7 @@
                 FontSize="30"
                 Cursor="Hand"
                 Foreground="#627581"
-                ToolTip="Choose main category first"
+                Tag="Choose main category first"
                 Grid.Column="1"
                 HorizontalAlignment="Left"
                 Margin="170,0,0,0"

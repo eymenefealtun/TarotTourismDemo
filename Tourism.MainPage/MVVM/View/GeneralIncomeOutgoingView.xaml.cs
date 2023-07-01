@@ -17,33 +17,33 @@ namespace Tourism.MainPage.MVVM.View
     {
         private IOperationMainService _operationMainService;
         private IIncomeInformationService _incomeInformationService;
-        private IOperationService _operationService;
-        private ICurrencyService _currencyService;
-        private ISubCategoryService _subCategoryService;
-        private IMainCategoryService _mainCategoryService;
-        private IReservationService _reservationService;
-        private IAgencyUserService _agencyUserService;
-        private IAgencyService _agencyService;
-        private IOperatorService _operatorService;
-        private IBedTypeService _bedTypeService;
+        //private IOperationService _operationService;
+        //private ICurrencyService _currencyService;
+        //private ISubCategoryService _subCategoryService;
+        //private IMainCategoryService _mainCategoryService;
+        //private IReservationService _reservationService;
+        //private IAgencyUserService _agencyUserService;
+        //private IAgencyService _agencyService;
+        //private IOperatorService _operatorService;
+        //private IBedTypeService _bedTypeService;
         public GeneralIncomeOutgoingView()
         {
             InitializeComponent();
             _operationMainService = Instancefactory.GetInstance<IOperationMainService>();
             _incomeInformationService = Instancefactory.GetInstance<IIncomeInformationService>();
-            _operationService = Instancefactory.GetInstance<IOperationService>();
-            _currencyService = Instancefactory.GetInstance<ICurrencyService>();
-            _subCategoryService = Instancefactory.GetInstance<ISubCategoryService>();
-            _mainCategoryService = Instancefactory.GetInstance<IMainCategoryService>();
-            _reservationService = Instancefactory.GetInstance<IReservationService>();
-            _agencyUserService = Instancefactory.GetInstance<IAgencyUserService>();
-            _agencyService = Instancefactory.GetInstance<IAgencyService>();
-            _operatorService = Instancefactory.GetInstance<IOperatorService>();
-            _bedTypeService = Instancefactory.GetInstance<IBedTypeService>();
+            //_operationService = Instancefactory.GetInstance<IOperationService>();
+            //_currencyService = Instancefactory.GetInstance<ICurrencyService>();
+            //_subCategoryService = Instancefactory.GetInstance<ISubCategoryService>();
+            //_mainCategoryService = Instancefactory.GetInstance<IMainCategoryService>();
+            //_reservationService = Instancefactory.GetInstance<IReservationService>();
+            //_agencyUserService = Instancefactory.GetInstance<IAgencyUserService>();
+            //_agencyService = Instancefactory.GetInstance<IAgencyService>();
+            //_operatorService = Instancefactory.GetInstance<IOperatorService>();
+            //_bedTypeService = Instancefactory.GetInstance<IBedTypeService>();
 
 
             dgwGeneralIncome.ItemsSource = _operationMainService.GetOperationMain();
-
+            cboxForDgwGeneral.SelectedIndex = 0;
             //tboxIncomeByFar.Text = _incomeInformationService.TotalIncomeByFar().TotalIncome.ToString();
 
         }
@@ -51,6 +51,8 @@ namespace Tourism.MainPage.MVVM.View
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             dgwGeneralIncome.ItemsSource = _operationMainService.GetOperationMain();
+            cboxForDgwGeneral.SelectedIndex = 0;
+            tboxSearchForDgwGeneral.Text = String.Empty;
         }
 
         #region Tools
@@ -123,7 +125,7 @@ namespace Tourism.MainPage.MVVM.View
             tboxSearchForDgwGeneral.Text = String.Empty;
             if (cboxForDgwGeneral.SelectedIndex > -1)
             {
-                if (borderDgwGeneral.Visibility == Visibility.Hidden)                    
+                if (borderDgwGeneral.Visibility == Visibility.Hidden)
                     borderDgwGeneral.Visibility = Visibility.Visible;
 
                 if (cboxForDgwGeneral.SelectedIndex == 0)
@@ -175,6 +177,12 @@ namespace Tourism.MainPage.MVVM.View
 
 
             }
+        }
+
+        private void tboxSearchForGeneral_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string text = tboxSearchForGeneral.Text;
+            dgwGeneralIncome.ItemsSource = _operationMainService.GetByDocumentCode(text);
         }
 
 

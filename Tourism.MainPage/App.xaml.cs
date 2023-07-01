@@ -38,6 +38,7 @@ namespace Tourism.MainPage
             services.AddSingleton<GeneralIncomeOutgoingViewModel>();
             services.AddSingleton<EmptyPageViewModel>();
             services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<DuplicateOperationViewModel>();
 
             services.AddSingleton<INavigationService, Services.NavigationService>();
 

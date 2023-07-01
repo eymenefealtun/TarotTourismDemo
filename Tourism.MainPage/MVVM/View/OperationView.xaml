@@ -90,7 +90,6 @@
                               SelectedItem="{Binding SelectedItem}"
                               Margin="0,0,0,10"
                               VerticalScrollBarVisibility="Visible"
-                             
                               MouseDoubleClick="dgwOperationMain_MouseDoubleClick"
                               Loaded="dgwOperationMain_Loaded"
                               SelectionChanged="dgwOperationMain_SelectionChanged"
@@ -98,9 +97,6 @@
 
                         <DataGrid.ContextMenu>
                             <ContextMenu>
-                                <MenuItem Header="Add new Operation"
-                                          Click="MenuItem_Click">
-                                </MenuItem>
                                 <MenuItem  x:Name="menuUpdateOperation"
                                            Click="menuUpdateOperation_Click">
                                 </MenuItem>

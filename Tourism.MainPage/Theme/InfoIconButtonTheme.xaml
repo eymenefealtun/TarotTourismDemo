@@ -34,7 +34,7 @@
                                       Visibility="Collapsed"
                                       CornerRadius="15"
                                       Margin="0,-2,0,0">
-                                <Label Content="{TemplateBinding ToolTip}"
+                                <Label Content="{TemplateBinding Tag}"
                                        VerticalAlignment="Center"
                                        HorizontalAlignment="Center"
                                        FontSize="14"

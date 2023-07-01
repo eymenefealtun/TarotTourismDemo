@@ -162,10 +162,7 @@ namespace Tourism.MainPage.MVVM.View
             dgwOperationMain.Items.SortDescriptions.Add(new SortDescription("StartDate", ListSortDirection.Ascending));
         }
 
-        private void MenuItem_Click(object sender, RoutedEventArgs e)
-        {
-            GetAddOperationView();
-        }
+        
 
         private void GetCustomerOperationView()
         {

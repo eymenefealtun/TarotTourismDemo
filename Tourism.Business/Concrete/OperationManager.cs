@@ -1,4 +1,5 @@
-﻿using Tourism.Business.ValidationRules.FluentValidation;
+﻿using System.Security.Cryptography.X509Certificates;
+using Tourism.Business.ValidationRules.FluentValidation;
 using Tourism.Core.CrossCuttingConcerns.Validation.ValidatorTool;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
@@ -42,6 +43,15 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         public List<Operation> GetByDocumentCode(string documentCode)
         {
             return _operationDal.GetAll(x => x.DocumentCode.Contains(documentCode));
+        }
+        public List<Operation> GetBySubCategoryAndDocumentCode(string documentCode, int subCategoryId)
+        {
+            return _operationDal.GetAll(x => x.SubCategoryId == subCategoryId && x.DocumentCode.Contains(documentCode));
+        }
+
+        public List<Operation> GetBySubCategory(int subCategoryId)
+        {
+            return _operationDal.GetAll(x => x.SubCategoryId == subCategoryId);
         }
     }
 }
