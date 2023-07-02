@@ -52,10 +52,11 @@
                 <ResourceDictionary Source="Theme/SaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GridEditButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GridRelocateButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/GeneralDataGridWithoutAlternatingTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralDataGridWithoutAlternatingTheme.xaml" />       
                 <ResourceDictionary Source="Theme/GeneralScrollViewerTheme.xaml" />
                 <ResourceDictionary Source="Theme/ComboBoxWithTBoxToggleButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/ComboBoxWithTBoxTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralIconButtonTheme.xaml" />
 
 
                 <ResourceDictionary Source="Theme/Tools/ExcelButtonTheme.xaml" />

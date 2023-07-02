@@ -23,115 +23,389 @@
         </Grid.RowDefinitions>
 
         <Button Style="{StaticResource InfoIconButtonTheme}"
-                Tag="asdasd"
+                Tag="Double click operation you want to duplicate"
                 Visibility="Visible"
                 Grid.Row="0"
                 FontSize="30"
                 Cursor="Hand"
+                Margin="400,0,0,0"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Center"
-                Foreground="Red"
+                Foreground="#e1e1e1e1"
                 Grid.Column="1" />
 
 
         <Grid Grid.Row="1"
               Grid.Column="1">
+            <Border Grid.Column="1"
+                    Grid.Row="1"
+                    Width="450"
+                    Height="445"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    x:Name="borderGrid"
+                    Visibility="Visible"
+                    Background="#f6f7f9"
+                    CornerRadius="20">
+                <DataGrid x:Name="dgwOperationMain"
+                          Width="450"
+                          Height="425"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left"
+                          SelectedItem="{Binding SelectedItem}"
+                          Margin="0,0,0,10"
+                          VerticalScrollBarVisibility="Visible"
+                          Style="{StaticResource GeneralDataGridTheme}">
 
-            <StackPanel Orientation="Horizontal">
-                <StackPanel Orientation="Vertical">
-                    <TextBlock Height="20"
-                               Margin="0,10,0,0"
-                               Text="Main Category"
-                               Foreground="White"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Left" />
-                    <TextBlock Height="20"
-                               Text="Sub Category"
-                               Foreground="White"
-                               Margin="0,10,0,0"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Left" />
-                    <TextBlock Height="20"
-                               Text="Operation"
-                               Foreground="White"
-                               Margin="0,10,0,0"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Left" />
-                    <TextBlock Height="20"
-                               Text="Number of duplicate"
-                               Foreground="White"
-                               Margin="0,10,0,0"
-                               VerticalAlignment="Top"
-                               HorizontalAlignment="Left" />
-                </StackPanel>
-                <StackPanel Orientation="Vertical"
-                            Margin="5,0,0,0">
-                    <ComboBox Style="{StaticResource ComboBoxTheme}"
-                              Height="20"
-                              Width="100"
-                              Name="cboxMainCategory"
-                              Margin="0,10,0,0"
-                              DisplayMemberPath="Name"
-                              SelectedValuePath="Id"
-                              VerticalAlignment="Top"
-                              SelectionChanged="cboxMainCategory_SelectionChanged"
-                              HorizontalAlignment="Left" />
-                    <ComboBox Style="{StaticResource ComboBoxTheme}"
-                              Height="20"
-                              Width="100"
-                              Margin="0,10,0,0"
-                              Name="cboxSubCategory"
-                              VerticalAlignment="Top"
-                              DisplayMemberPath="Name"
-                              SelectedValuePath="Id"
-                              IsHitTestVisible="False"
-                              SelectionChanged="cboxSubCategory_SelectionChanged"
-                              HorizontalAlignment="Left" />
-                    
-                    <ComboBox Style="{StaticResource ComboBoxWithTBoxTheme}"
-                              Height="20"
-                              Width="100"
-                              Margin="0,10,0,0"
-                              IsHitTestVisible="True"
-                              IsTextSearchEnabled="False"
-                              IsTextSearchCaseSensitive="False"
-                              TextBoxBase.TextChanged="cboxOperation_TextChanged"
-                              DisplayMemberPath="DocumentCode"
-                              SelectedValuePath="Id"
-                              Name="cboxOperation"
-                              SelectionChanged="cboxOperation_SelectionChanged"
-                              VerticalAlignment="Top"
-                              HorizontalAlignment="Left" />
-                    
-                    <ComboBox Style="{StaticResource ComboBoxTheme}"
-                              Height="20"
-                              Width="100"
-                              Margin="0,10,0,0"
-                              IsHitTestVisible="False"
-                              Name="cboxNumberOfDuplicate"
-                              VerticalAlignment="Top"
-                              HorizontalAlignment="Left">
-                        <ComboBoxItem Content="1" />
-                        <ComboBoxItem Content="2" />
-                        <ComboBoxItem Content="3" />
-                        <ComboBoxItem Content="4" />
-                        <ComboBoxItem Content="5" />
-                        <ComboBoxItem Content="6" />
-                        <ComboBoxItem Content="7" />
-                        <ComboBoxItem Content="8" />
-                        <ComboBoxItem Content="9" />
-                        <ComboBoxItem Content="10" />
-                    </ComboBox>
-                    
-                </StackPanel>
+                    <DataGrid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem  x:Name="menuUpdateOperation">
+                            </MenuItem>
+                            <MenuItem Header="Example">
+                            </MenuItem>
+
+                        </ContextMenu>
+                    </DataGrid.ContextMenu>
+
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="  DocumentCode"
+                                            MinWidth="120"
+                                            Binding="{Binding DocumentCode}" />
+                        <DataGridTextColumn Header="StartDate"
+                                            MinWidth="70"
+                                            Binding="{Binding StartDate, StringFormat= d}" />
+                        <DataGridTextColumn Header="EndDate"
+                                            MinWidth="70"
+                                            Binding="{Binding EndDate, StringFormat= d}" />
+                        <DataGridTextColumn Header="Pax"
+                                            MinWidth="40"
+                                            Binding="{Binding Pax}"
+                                            ElementStyle="{StaticResource ToCenter}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
+                        <DataGridTextColumn Header="Room"
+                                            MinWidth="50"
+                                            Binding="{Binding Room}"
+                                            ElementStyle="{StaticResource ToCenter}"
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />
+                        <DataGridTemplateColumn x:Name="columnDuplicate"
+                                                Header=""
+                                                Width="25">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button x:Name="btnChooseForDeuplication"
+                                            CommandParameter="{Binding}"
+                                            ToolTip="Duplicate"
+                                            Cursor="Hand"
+                                            Content="&#xE8C8;"
+                                            FontSize="14"
+                                            Foreground="Red"
+                                            Background="OrangeRed"
+                                            Style="{StaticResource GeneralIconButtonTheme}"
+                                            Click="btnChooseForDeuplication_Click" />
+
+                                </DataTemplate>
+
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+
+                </DataGrid >
+            </Border>
+
+            <StackPanel Orientation="Vertical">
+                <TextBlock Height="20"
+                           Text="Number of duplicate"
+                           x:Name="tboxNumberOfDuplicate"
+                           Foreground="White"
+                           Visibility="Collapsed"
+                           VerticalAlignment="Top"
+                           HorizontalAlignment="Left" />
+                <ComboBox Style="{StaticResource ComboBoxTheme}"
+                          Height="20"
+                          Width="170"
+                          Name="cboxNumberOfDuplicate"
+                          VerticalAlignment="Top"
+                          HorizontalAlignment="Left"
+                          Visibility="Collapsed"
+                          SelectionChanged="cboxNumberOfDuplicate_SelectionChanged"
+                          Margin="5,0,0,0">
+
+                    <ComboBoxItem Content="1" />
+                    <ComboBoxItem Content="2" />
+                    <ComboBoxItem Content="3" />
+                    <ComboBoxItem Content="4" />
+                    <ComboBoxItem Content="5" />
+                    <ComboBoxItem Content="6" />
+                    <ComboBoxItem Content="7" />
+                    <ComboBoxItem Content="8" />
+                    <ComboBoxItem Content="9" />
+                    <ComboBoxItem Content="10" />
+                </ComboBox>
             </StackPanel>
 
 
+            <Grid Width="500"
+                  HorizontalAlignment="Left">
+                <StackPanel Orientation="Horizontal"
+                            Margin="0,40,0,0">
+                    
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBlock}">
+                                <Setter Property="Margin"
+                                        Value="0,20,0,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="1st"
+                                   x:Name="tboxFirst"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="2nd"
+                                   x:Name="tboxSecond"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="3rd"
+                                   x:Name="tboxThird"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="4th"
+                                   x:Name="tboxFourth"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="5th"
+                                   x:Name="tboxFifth"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="6th"
+                                   x:Name="tboxSixth"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="7th"
+                                   x:Name="tboxSeventh"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="8th"
+                                   x:Name="tboxEighth"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="9th"
+                                   x:Name="tboxNinth"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+                        <TextBlock Text="10th"
+                                   x:Name="tboxTenth"
+                                   Foreground="White"
+                                   Visibility="Collapsed" />
+
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Vertical"
+                                Margin="10,0,0,0">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type DatePicker}">
+                                <Setter Property="Margin"
+                                        Value="0,10,0,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="Start Date"
+                                   Foreground="White"
+                                   FontFamily="/Fonts/#Poppins"
+                                   HorizontalAlignment="Center"
+                                   Visibility="Collapsed"
+                                   x:Name="tBlockStartDate" />
+                        <DatePicker x:Name="datePickFirstStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickSecondStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickThirdStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickFourthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickFifthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickSixthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickSeventhStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickEighthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickNinthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickTenthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+
+                    </StackPanel>
+
+
+
+                    <StackPanel Orientation="Vertical"
+                                Margin="10,0,0,0">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type DatePicker}">
+                                <Setter Property="Margin"
+                                        Value="0,10,0,0" />
+                            </Style>
+                        </StackPanel.Resources>
+                        <TextBlock Text="End Date"
+                                   Foreground="White"
+                                   FontFamily="/Fonts/#Poppins"
+                                   HorizontalAlignment="Center"
+                                   Visibility="Collapsed"
+                                   x:Name="tBlockEndDate" />
+
+                        <DatePicker x:Name="datePickFirstEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePicSecondkEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickThirdEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickFourthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickFifthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickSixthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickSeventhEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickEighthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickNinthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickTenthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Vertical"
+                                Margin="10,0,0,0">
+                        <StackPanel.Resources>
+                            <Style TargetType="{x:Type TextBox}">
+                                <Setter Property="Margin"
+                                        Value="0,20,0,0" />
+
+                            </Style>
+                        </StackPanel.Resources>
+
+                        <TextBlock Text="Document Code"
+                                   Foreground="White"
+                                   FontFamily="/Fonts/#Poppins"
+                                   HorizontalAlignment="Center"
+                                   Visibility="Collapsed"
+                                   x:Name="tBlockDocumentCode" />
+
+                        <TextBox x:Name="tboxFirsDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+
+                        <TextBox x:Name="tboxSecondDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+                        <TextBox x:Name="tboxThirdDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+                        <TextBox x:Name="tboxFourthDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+                        <TextBox x:Name="tboxFifthDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+                        <TextBox x:Name="tboxSixthDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+                        <TextBox x:Name="tboxSeventhDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+                        <TextBox x:Name="tboxEighthDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+                        <TextBox x:Name="tboxNinthDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+                        <TextBox x:Name="tboxTenthDocumentCode"
+                                 Visibility="Collapsed"
+                                 Width="100"
+                                 Height="20"
+                                 Margin="0,12,0,0"
+                                 Style="{StaticResource GeneralTextboxTheme}" />
+
+
+
+                    </StackPanel>
+                </StackPanel>
+
+
+            </Grid>
+
         </Grid>
 
+        <Button Style="{StaticResource GeneralIconButtonTheme}"
+                Content="&#xE72C;"
+                Foreground="White"
+                Background="BlueViolet"
+                FontSize="30"
+                Grid.Row="0"
+                Grid.Column="0"
+                x:Name="btnRefresh"
+                VerticalAlignment="Center"
+                HorizontalAlignment="Right"
+                Click="btnRefresh_Click" />
 
-
-
+        <TextBox Style="{StaticResource SearchTextBox}"
+                 Grid.Column="1"
+                 Background="#e1e1e1"
+                 Tag="Search"
+                 HorizontalAlignment="Left"
+                 Foreground="Black"
+                 x:Name="tboxSearchOperations"
+                 TextChanged="tboxSearchOperations_TextChanged" />
 
     </Grid>
 
