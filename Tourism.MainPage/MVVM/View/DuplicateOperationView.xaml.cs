@@ -52,15 +52,10 @@ namespace Tourism.MainPage.MVVM.View
             _documentCode = operationMain.DocumentCode;
             tboxNumberOfDuplicate.Visibility = Visibility.Visible;
             cboxNumberOfDuplicate.Visibility = Visibility.Visible;
+
+            tboxNumberOfDuplicate.Text = $"Number of {_documentCode} to duplicate";
         }
 
-        private void btnRefresh_Click(object sender, RoutedEventArgs e)
-        {
-            borderGrid.Visibility = Visibility.Visible;
-            dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
-            tboxNumberOfDuplicate.Visibility = Visibility.Collapsed;
-            cboxNumberOfDuplicate.Visibility = Visibility.Collapsed;
-        }
 
         private void tboxSearchOperations_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -72,38 +67,90 @@ namespace Tourism.MainPage.MVVM.View
         {
             if (cboxNumberOfDuplicate.SelectedIndex > -1)
             {
-                tBlockEndDate.Visibility = Visibility.Visible;
-                tBlockStartDate.Visibility = Visibility.Visible;
-                tBlockDocumentCode.Visibility = Visibility.Visible;
-
-                for (int i = 0; i < cboxNumberOfDuplicate.SelectedIndex + 1; i++)
-                {
-                    
-                    _textBlocks[i].Visibility = Visibility.Visible;
-                    _endDates[i].Visibility = Visibility.Visible;
-                    _startDates[i].Visibility = Visibility.Visible;
-                    _tboxDocumentCodes[i].Visibility = Visibility.Visible;
-
-                }
-                for (int i = 9; i > cboxNumberOfDuplicate.SelectedIndex; i--)
-                {
-                    _textBlocks[i].Visibility = Visibility.Collapsed;
-                    _endDates[i].Visibility = Visibility.Collapsed;
-                    _startDates[i].Visibility = Visibility.Collapsed;
-                    _tboxDocumentCodes[i].Visibility = Visibility.Collapsed;
-                    _endDates[i].SelectedDate = null;
-                    _startDates[i].SelectedDate = null;
-                    _tboxDocumentCodes[i].Text = string.Empty;
-                }
+                OpenDuplication();
             }
+        }
 
+        private void OpenDuplication()
+        {
+            tboxSearchOperations.Visibility = Visibility.Collapsed;
+            tBlockEndDate.Visibility = Visibility.Visible;
+            tBlockStartDate.Visibility = Visibility.Visible;
+            tBlockDocumentCode.Visibility = Visibility.Visible;
+            btnSave.Visibility = Visibility.Visible;
+            btnCancel.Visibility = Visibility.Visible;
+            grdDuplication.Visibility = Visibility.Visible;
+            for (int i = 0; i < cboxNumberOfDuplicate.SelectedIndex + 1; i++)
+            {
+
+                _textBlocks[i].Visibility = Visibility.Visible;
+                _endDates[i].Visibility = Visibility.Visible;
+                _startDates[i].Visibility = Visibility.Visible;
+                _tboxDocumentCodes[i].Visibility = Visibility.Visible;
+
+            }
+            for (int i = 9; i > cboxNumberOfDuplicate.SelectedIndex; i--)
+            {
+                _textBlocks[i].Visibility = Visibility.Collapsed;
+                _endDates[i].Visibility = Visibility.Collapsed;
+                _startDates[i].Visibility = Visibility.Collapsed;
+                _tboxDocumentCodes[i].Visibility = Visibility.Collapsed;
+                _endDates[i].SelectedDate = null;
+                _startDates[i].SelectedDate = null;
+                _tboxDocumentCodes[i].Text = string.Empty;
+            }
+        }
+
+        private void CloseDuplication()
+        {
+            tboxSearchOperations.Visibility = Visibility.Visible;
+
+            tBlockEndDate.Visibility = Visibility.Collapsed;
+            tBlockStartDate.Visibility = Visibility.Collapsed;
+            tBlockDocumentCode.Visibility = Visibility.Collapsed;
+            btnSave.Visibility = Visibility.Collapsed;
+            btnCancel.Visibility = Visibility.Collapsed;
+            grdDuplication.Visibility = Visibility.Collapsed;
+            cboxNumberOfDuplicate.SelectedIndex = -1;
+
+            borderGrid.Visibility = Visibility.Visible;
+            cboxNumberOfDuplicate.Visibility = Visibility.Collapsed;
+            tboxNumberOfDuplicate.Visibility = Visibility.Collapsed;
+
+
+
+            for (int i = 0; i < cboxNumberOfDuplicate.SelectedIndex + 1; i++)
+            {
+                _textBlocks[i].Visibility = Visibility.Collapsed;
+                _endDates[i].Visibility = Visibility.Collapsed;
+                _startDates[i].Visibility = Visibility.Collapsed;
+                _tboxDocumentCodes[i].Visibility = Visibility.Collapsed;
+                _endDates[i].SelectedDate = null;
+                _startDates[i].SelectedDate = null;
+                _tboxDocumentCodes[i].Text = string.Empty;
+            }
         }
 
 
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btnRefresh_Click(object sender, RoutedEventArgs e)
+        {
+            CloseDuplication();
+            tboxSearchOperations.Text = string.Empty;
+            dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
+
+        }
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            CloseDuplication();
+            dgwOperationMain.ItemsSource = _operationMainService.GetByDocumentCode(tboxSearchOperations.Text);
 
 
-
-
+        }
     }
 
 

@@ -33,7 +33,14 @@
                 VerticalAlignment="Center"
                 Foreground="#e1e1e1e1"
                 Grid.Column="1" />
-
+        <TextBox Style="{StaticResource SearchTextBox}"
+                 Grid.Column="1"
+                 Background="#e1e1e1"
+                 Tag="Search"
+                 HorizontalAlignment="Left"
+                 Foreground="Black"
+                 x:Name="tboxSearchOperations"
+                 TextChanged="tboxSearchOperations_TextChanged" />
 
         <Grid Grid.Row="1"
               Grid.Column="1">
@@ -99,7 +106,7 @@
                                             Content="&#xE8C8;"
                                             FontSize="14"
                                             Foreground="Red"
-                                            Background="OrangeRed"
+                                            Background="Blue"
                                             Style="{StaticResource GeneralIconButtonTheme}"
                                             Click="btnChooseForDeuplication_Click" />
 
@@ -114,7 +121,7 @@
 
             <StackPanel Orientation="Vertical">
                 <TextBlock Height="20"
-                           Text="Number of duplicate"
+                           Text=""
                            x:Name="tboxNumberOfDuplicate"
                            Foreground="White"
                            Visibility="Collapsed"
@@ -145,67 +152,25 @@
 
 
             <Grid Width="500"
-                  HorizontalAlignment="Left">
-                <StackPanel Orientation="Horizontal"
-                            Margin="0,40,0,0">
-                    
-                    <StackPanel Orientation="Vertical">
+                  HorizontalAlignment="Left"
+                  x:Name="grdDuplication"
+                  Visibility="Collapsed">
+                <StackPanel Orientation="Vertical"
+                            Margin="0,40,0,0"
+                            Background="Transparent">
+                    <StackPanel.Resources>
+                        <Style TargetType="{x:Type StackPanel}">
+                            <Setter Property="Margin"
+                                    Value="0,15,0,0" />
+                        </Style>
+                    </StackPanel.Resources>
+
+
+                    <StackPanel Orientation="Horizontal">
                         <StackPanel.Resources>
                             <Style TargetType="{x:Type TextBlock}">
                                 <Setter Property="Margin"
-                                        Value="0,20,0,0" />
-                            </Style>
-                        </StackPanel.Resources>
-                        <TextBlock Text="1st"
-                                   x:Name="tboxFirst"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="2nd"
-                                   x:Name="tboxSecond"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="3rd"
-                                   x:Name="tboxThird"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="4th"
-                                   x:Name="tboxFourth"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="5th"
-                                   x:Name="tboxFifth"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="6th"
-                                   x:Name="tboxSixth"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="7th"
-                                   x:Name="tboxSeventh"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="8th"
-                                   x:Name="tboxEighth"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="9th"
-                                   x:Name="tboxNinth"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-                        <TextBlock Text="10th"
-                                   x:Name="tboxTenth"
-                                   Foreground="White"
-                                   Visibility="Collapsed" />
-
-                    </StackPanel>
-
-
-                    <StackPanel Orientation="Vertical"
-                                Margin="10,0,0,0">
-                        <StackPanel.Resources>
-                            <Style TargetType="{x:Type DatePicker}">
-                                <Setter Property="Margin"
-                                        Value="0,10,0,0" />
+                                        Value="40,0,0,0" />
                             </Style>
                         </StackPanel.Resources>
                         <TextBlock Text="Start Date"
@@ -214,49 +179,6 @@
                                    HorizontalAlignment="Center"
                                    Visibility="Collapsed"
                                    x:Name="tBlockStartDate" />
-                        <DatePicker x:Name="datePickFirstStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickSecondStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickThirdStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickFourthStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickFifthStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickSixthStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickSeventhStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickEighthStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickNinthStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickTenthStartDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-
-                    </StackPanel>
-
-
-
-                    <StackPanel Orientation="Vertical"
-                                Margin="10,0,0,0">
-                        <StackPanel.Resources>
-                            <Style TargetType="{x:Type DatePicker}">
-                                <Setter Property="Margin"
-                                        Value="0,10,0,0" />
-                            </Style>
-                        </StackPanel.Resources>
                         <TextBlock Text="End Date"
                                    Foreground="White"
                                    FontFamily="/Fonts/#Poppins"
@@ -264,121 +186,243 @@
                                    Visibility="Collapsed"
                                    x:Name="tBlockEndDate" />
 
-                        <DatePicker x:Name="datePickFirstEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePicSecondkEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickThirdEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickFourthEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickFifthEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickSixthEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickSeventhEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickEighthEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickNinthEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-                        <DatePicker x:Name="datePickTenthEndDate"
-                                    Visibility="Collapsed"
-                                    BorderBrush="Transparent" />
-
-                    </StackPanel>
-
-                    <StackPanel Orientation="Vertical"
-                                Margin="10,0,0,0">
-                        <StackPanel.Resources>
-                            <Style TargetType="{x:Type TextBox}">
-                                <Setter Property="Margin"
-                                        Value="0,20,0,0" />
-
-                            </Style>
-                        </StackPanel.Resources>
-
                         <TextBlock Text="Document Code"
                                    Foreground="White"
                                    FontFamily="/Fonts/#Poppins"
                                    HorizontalAlignment="Center"
                                    Visibility="Collapsed"
                                    x:Name="tBlockDocumentCode" />
+                    </StackPanel>
 
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="1st"
+                                   x:Name="tboxFirst"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickFirstStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickFirstEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxFirsDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+                    </StackPanel>
 
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="2nd"
+                                   x:Name="tboxSecond"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickSecondStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePicSecondkEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxSecondDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="3rd"
+                                   x:Name="tboxThird"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickThirdStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickThirdEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxThirdDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="4th"
+                                   x:Name="tboxFourth"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickFourthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickFourthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxFourthDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="5th"
+                                   x:Name="tboxFifth"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickFifthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickFifthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxFifthDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="6th"
+                                   x:Name="tboxSixth"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickSixthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickSixthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxSixthDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="7th"
+                                   x:Name="tboxSeventh"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickSeventhStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickSeventhEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxSeventhDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="8th"
+                                   x:Name="tboxEighth"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickEighthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickEighthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxEighthDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal">
+
+                        <TextBlock Text="9th"
+                                   x:Name="tboxNinth"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickNinthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickNinthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxNinthDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                    </StackPanel>
+
+
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="10th"
+                                   x:Name="tboxTenth"
+                                   Foreground="White"
+                                   Visibility="Collapsed"
+                                   Width="30" />
+                        <DatePicker x:Name="datePickTenthStartDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
+                        <DatePicker x:Name="datePickTenthEndDate"
+                                    Visibility="Collapsed"
+                                    BorderBrush="Transparent" />
                         <TextBox x:Name="tboxTenthDocumentCode"
                                  Visibility="Collapsed"
                                  Width="100"
                                  Height="20"
-                                 Margin="0,12,0,0"
                                  Style="{StaticResource GeneralTextboxTheme}" />
 
-
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal"
+                                Height="40">
+                        <Button x:Name="btnCancel"
+                                Click="btnCancel_Click"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Visibility="Collapsed"
+                                Margin="390,0,0,0"
+                                Style="{StaticResource CancelCurrencyButtonTheme}" />
+                        <Button x:Name="btnSave"
+                                Click="btnSave_Click"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Right"
+                                Margin="2,0,0,0"
+                                Visibility="Collapsed"
+                                Style="{StaticResource SaveCurrencyButtonTheme}" />
+               
 
                     </StackPanel>
+
+
+
+
+
                 </StackPanel>
 
 
@@ -398,14 +442,6 @@
                 HorizontalAlignment="Right"
                 Click="btnRefresh_Click" />
 
-        <TextBox Style="{StaticResource SearchTextBox}"
-                 Grid.Column="1"
-                 Background="#e1e1e1"
-                 Tag="Search"
-                 HorizontalAlignment="Left"
-                 Foreground="Black"
-                 x:Name="tboxSearchOperations"
-                 TextChanged="tboxSearchOperations_TextChanged" />
 
     </Grid>
 
