@@ -23,7 +23,7 @@
         </Grid.RowDefinitions>
 
         <Button Style="{StaticResource InfoIconButtonTheme}"
-                Tag="Double click operation you want to duplicate"
+                Tag="Click operation you want to duplicate"
                 Visibility="Visible"
                 Grid.Row="0"
                 FontSize="30"
@@ -84,7 +84,7 @@
                         <DataGridTextColumn Header="EndDate"
                                             MinWidth="70"
                                             Binding="{Binding EndDate, StringFormat= d}" />
-                        <DataGridTextColumn Header="Pax"
+                        <!--<DataGridTextColumn Header="Pax"
                                             MinWidth="40"
                                             Binding="{Binding Pax}"
                                             ElementStyle="{StaticResource ToCenter}"
@@ -93,7 +93,7 @@
                                             MinWidth="50"
                                             Binding="{Binding Room}"
                                             ElementStyle="{StaticResource ToCenter}"
-                                            HeaderStyle="{StaticResource ToColumnCenter}" />
+                                            HeaderStyle="{StaticResource ToColumnCenter}" />-->
                         <DataGridTemplateColumn x:Name="columnDuplicate"
                                                 Header=""
                                                 Width="25">
@@ -415,7 +415,7 @@
                                 Margin="2,0,0,0"
                                 Visibility="Collapsed"
                                 Style="{StaticResource SaveCurrencyButtonTheme}" />
-               
+
 
                     </StackPanel>
 

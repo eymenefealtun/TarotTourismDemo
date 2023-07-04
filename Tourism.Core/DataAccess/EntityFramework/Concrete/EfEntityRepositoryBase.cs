@@ -67,6 +67,21 @@ namespace Tourism.Core.DataAccess.EntityFramework.Concrete
             }
         }
 
+        public List<TEntity> BulkInsert(List<TEntity> entity)
+        {
+            using (TContext context = new TContext())
+            {
+                for (int i = 0; i < entity.Count; i++)
+                {
+                    context.Set<TEntity>().Add(entity[i]);
+                }
+
+                context.SaveChanges();
+                return entity.ToList();
+
+            }
+        }
+
 
         #region Old
         //        public List<TEntity> GetOperationMain()

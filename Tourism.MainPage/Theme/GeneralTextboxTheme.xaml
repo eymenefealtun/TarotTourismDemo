@@ -18,22 +18,22 @@
                                 Height="{TemplateBinding Height}">
 
                             <Grid>
-                                <TextBox  Height="25"
-                                          Width="140"
-                                          Text="{Binding Path=Text,
+                                <TextBox Width="{TemplateBinding Width}"        
+                                         Height="{TemplateBinding Height}"
+                                         Text="{Binding Path=Text,
                                             RelativeSource={RelativeSource TemplatedParent}, 
                                             Mode=TwoWay,
                                             UpdateSourceTrigger=PropertyChanged}"
-                                          BorderThickness="0"
-                                          Background="Transparent"
-                                          Foreground="Black"
-                                          FontSize="12"
-                                          HorizontalAlignment="Left"
-                                          VerticalContentAlignment="Center"
-                                          HorizontalContentAlignment="Left"
-                                          Margin="1"
-                                          VerticalAlignment="Center"
-                                          FontFamily="/Fonts/#Poppins" />
+                                         BorderThickness="0"
+                                         Background="Transparent"
+                                         Foreground="Black"
+                                         FontSize="12"
+                                         HorizontalAlignment="Left"
+                                         VerticalContentAlignment="Center"
+                                         HorizontalContentAlignment="Left"
+                                         Margin="1"
+                                         VerticalAlignment="Center"
+                                         FontFamily="/Fonts/#Poppins" />
                             </Grid>
                         </Border>
                     </Grid>

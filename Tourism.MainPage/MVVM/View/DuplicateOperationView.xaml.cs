@@ -3,8 +3,9 @@ using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
-using Tourism.Entities.Models;
 using System.Windows;
+using System.Collections.Generic;
+using System;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -14,10 +15,15 @@ namespace Tourism.MainPage.MVVM.View
         private ISubCategoryService _subCategoryService;
         private IOperationService _operationService;
         private IOperationMainService _operationMainService;
+        private IOperationPriceService _operationPriceService;
         private TextBlock[] _textBlocks;
         private DatePicker[] _startDates;
         private DatePicker[] _endDates;
         private TextBox[] _tboxDocumentCodes;
+        private Operation _operation;
+        private OperationPrice _operationPrice;
+
+
         public DuplicateOperationView()
         {
             InitializeComponent();
@@ -25,8 +31,9 @@ namespace Tourism.MainPage.MVVM.View
             _subCategoryService = Instancefactory.GetInstance<ISubCategoryService>();
             _operationService = Instancefactory.GetInstance<IOperationService>();
             _operationMainService = Instancefactory.GetInstance<IOperationMainService>();
+            _operationPriceService = Instancefactory.GetInstance<IOperationPriceService>();
 
-            dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
+            dgwOperationMain.ItemsSource = _operationService.GetAll();
             TextBlock[] textBlocks = { tboxFirst, tboxSecond, tboxThird, tboxFourth, tboxFifth, tboxSixth, tboxSeventh, tboxEighth, tboxNinth, tboxTenth };
             DatePicker[] startDates = { datePickFirstStartDate, datePickSecondStartDate, datePickThirdStartDate, datePickFourthStartDate, datePickFifthStartDate, datePickSixthStartDate, datePickSeventhStartDate, datePickEighthStartDate, datePickNinthStartDate, datePickTenthStartDate };
             DatePicker[] endDates = { datePickFirstEndDate, datePicSecondkEndDate, datePickThirdEndDate, datePickFourthEndDate, datePickFifthEndDate, datePickSixthEndDate, datePickSeventhEndDate, datePickEighthEndDate, datePickNinthEndDate, datePickTenthEndDate };
@@ -38,29 +45,34 @@ namespace Tourism.MainPage.MVVM.View
 
         }
 
-        private int _chosenOperationId;
-        private string _documentCode;
-
-
         private void btnChooseForDeuplication_Click(object sender, System.Windows.RoutedEventArgs e)
         {
-            borderGrid.Visibility = Visibility.Collapsed;
             Button button = sender as Button;
-            OperationMain operationMain = button.CommandParameter as OperationMain;
 
-            _chosenOperationId = operationMain.Id;
-            _documentCode = operationMain.DocumentCode;
+            Operation operation = button.CommandParameter as Operation;
+            _operation = operation;
+            _operationPrice = _operationPriceService.GetByOperation(_operation.Id);
+
             tboxNumberOfDuplicate.Visibility = Visibility.Visible;
             cboxNumberOfDuplicate.Visibility = Visibility.Visible;
 
-            tboxNumberOfDuplicate.Text = $"Number of {_documentCode} to duplicate";
+            tboxSearchOperations.Visibility = Visibility.Collapsed;
+            borderGrid.Visibility = Visibility.Collapsed;
+
+            tboxNumberOfDuplicate.Text = $"Number of {_operation.DocumentCode} to duplicate";
+
+            for (int i = 0; i < cboxNumberOfDuplicate.Items.Count; i++)
+            {
+                _endDates[i].SelectedDate = null;
+                _startDates[i].SelectedDate = null;
+                _tboxDocumentCodes[i].Text = string.Empty;
+            }
         }
 
 
         private void tboxSearchOperations_TextChanged(object sender, TextChangedEventArgs e)
         {
-            dgwOperationMain.ItemsSource = _operationMainService.GetByDocumentCode(tboxSearchOperations.Text);
-
+            dgwOperationMain.ItemsSource = _operationService.GetByDocumentCode(tboxSearchOperations.Text);
         }
 
         private void cboxNumberOfDuplicate_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,7 +85,6 @@ namespace Tourism.MainPage.MVVM.View
 
         private void OpenDuplication()
         {
-            tboxSearchOperations.Visibility = Visibility.Collapsed;
             tBlockEndDate.Visibility = Visibility.Visible;
             tBlockStartDate.Visibility = Visibility.Visible;
             tBlockDocumentCode.Visibility = Visibility.Visible;
@@ -134,23 +145,68 @@ namespace Tourism.MainPage.MVVM.View
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            if (MessageBox.Show("Are you sure you want to duplicate?", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+            {
+                try
+                {
+                    List<Operation> operation = new List<Operation>();
+                    for (int i = 0; i < cboxNumberOfDuplicate.SelectedIndex + 1; i++)
+                    {
+                        operation.Add(new Operation
+                        {
+                            DocumentCode = _tboxDocumentCodes[i].Text,
+                            StartDate = Convert.ToDateTime(_startDates[i].SelectedDate),
+                            EndDate = Convert.ToDateTime(_endDates[i].SelectedDate),
+                            Description = _operation.Description,
+                            Note = null,
+                            CreatedBy = _operation.CreatedBy,           //Going to be updated
+                            LastUpdatedBy = _operation.LastUpdatedBy,   //Going to be updated
+                            CurrencyId = _operation.CurrencyId,
+                            SubCategoryId = _operation.SubCategoryId,
+                            OperationPrice = new OperationPrice()
+                            {
+                                DoubleRoom = _operationPrice.DoubleRoom,
+                                SingleRoom = _operationPrice.SingleRoom,
+                                TripleRoom = _operationPrice.TripleRoom,
+                                QuadRoom = _operationPrice.QuadRoom,
+                                Baby = _operationPrice.Baby,
+                                Child = _operationPrice.Child,
+                            }
 
+                        });
+                    }
+                    _operationService.BulkInsert(operation);
+                    MessageBox.Show("Duplication succeed!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
+                    CloseDuplication();
+                    tboxSearchOperations.Text = string.Empty;
+                    dgwOperationMain.ItemsSource = _operationService.GetAll();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+
+
+            }
         }
 
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             CloseDuplication();
             tboxSearchOperations.Text = string.Empty;
-            dgwOperationMain.ItemsSource = _operationMainService.GetOperationMain();
+            dgwOperationMain.ItemsSource = _operationService.GetAll();
+
 
         }
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
             CloseDuplication();
-            dgwOperationMain.ItemsSource = _operationMainService.GetByDocumentCode(tboxSearchOperations.Text);
+            dgwOperationMain.ItemsSource = _operationService.GetByDocumentCode(tboxSearchOperations.Text);
+
 
 
         }
+
     }
 
 

@@ -10,6 +10,7 @@ namespace Tourism.Core.DataAccess.EntityFramework.Abstract
         T Add(T entity);
         T Update(T entity);
         List<T> BulkUpdate(List<T> entity);
+        List<T> BulkInsert(List<T> entity);         
 
         #region Old
         // List<T> GetOperationMain();

@@ -1,8 +1,10 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using Azure;
+using System.Security.Cryptography.X509Certificates;
 using Tourism.Business.ValidationRules.FluentValidation;
 using Tourism.Core.CrossCuttingConcerns.Validation.ValidatorTool;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
+using Operation = Tourism.Entities.Concrete.Operation;
 
 namespace Tourism.DataAccess.Concrete.EntityFramework
 {
@@ -52,6 +54,12 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         public List<Operation> GetBySubCategory(int subCategoryId)
         {
             return _operationDal.GetAll(x => x.SubCategoryId == subCategoryId);
+        }
+
+        public List<Operation> BulkInsert(List<Operation> opearationList)
+        {
+            ValidationTool.FluentValidateForList(new OperationValidator(), opearationList.ToArray());
+            return _operationDal.BulkInsert(opearationList);            
         }
     }
 }

@@ -7,9 +7,13 @@ namespace Tourism.Entities.Concrete
         private IOperationPriceDal _operationPriceDal;
         public OperationPriceManager(IOperationPriceDal operationPriceDal)
         {
-            _operationPriceDal = operationPriceDal;         
+            _operationPriceDal = operationPriceDal;
         }
 
+        public OperationPrice GetByOperation(int operationId)
+        {
+            return _operationPriceDal.Get(x => x.OperationId == operationId);           
+        }
 
 
     }

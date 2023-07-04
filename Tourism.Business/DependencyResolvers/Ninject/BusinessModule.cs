@@ -71,6 +71,11 @@ namespace Tourism.Business.DependencyResolvers.Ninject
 
             Bind<IIncomeInformationService>().To<IncomeInformationManager>().InSingletonScope();
             Bind<IIncomeInformationDal>().To<EfIncomeInformationDal>().InSingletonScope();
+
+
+
+            Bind<IOperationPriceService>().To<OperationPriceManager>().InSingletonScope();
+            Bind<IOperationPriceDal>().To<EfOperationPriceDal>().InSingletonScope();                
         }
 
 

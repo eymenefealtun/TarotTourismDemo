@@ -1,5 +1,4 @@
 ﻿using Tourism.Entities.Concrete;
-using Tourism.Entities.Models;
 
 namespace Tourism.DataAccess.Abstract
 {
@@ -8,8 +7,9 @@ namespace Tourism.DataAccess.Abstract
         List<Operation> GetAll();
         Operation Add(Operation operation);
         Operation Update(Operation operation);
-        Operation GetByOperationId(int operationId);        
-        List<Operation> GetByDocumentCode(string documentCode);                
+        Operation GetByOperationId(int operationId);
+        List<Operation> BulkInsert(List<Operation> opearationList);
+        List<Operation> GetByDocumentCode(string documentCode);
         List<Operation> GetBySubCategory(int subCategoryId);
         List<Operation> GetBySubCategoryAndDocumentCode(string documentCode, int subCategoryId);
 

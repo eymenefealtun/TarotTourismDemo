@@ -17,7 +17,7 @@ namespace Tourism.Entities.Concrete
         public decimal Baby { get; set; }
         [Timestamp]
         public byte[] RowVersion { get; set; }
-        public Operation Operation { get; set; }
+        public Operation Operation { get; set; }//= new Operation(); 
 
 
     }
