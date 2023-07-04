@@ -10,7 +10,7 @@
                     <ControlTemplate TargetType="Button">
                         <Border Background="Transparent"
                                 x:Name="borderMain"
-                                CornerRadius="0,10,0,0">
+                                CornerRadius="0,20,0,0">
                             <Grid VerticalAlignment="Stretch"
                                   HorizontalAlignment="Stretch"
                                   Background="{TemplateBinding Background}">

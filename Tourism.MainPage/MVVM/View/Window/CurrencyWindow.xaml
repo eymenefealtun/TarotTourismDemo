@@ -72,11 +72,8 @@
                         Content="r"
                         x:Name="btnClose"
                         ToolTip="Close"
-                        HorizontalContentAlignment="Center"
-                        VerticalContentAlignment="Center"
                         Click="btnClose_Click"
-                        Style="{StaticResource CurrencyCloseButtonTheme }"
-                        Grid.RowSpan="2" />
+                        Style="{StaticResource CurrencyCloseButtonTheme }" />
 
                 <StackPanel x:Name="stackUpdate"
                             Visibility="Hidden">

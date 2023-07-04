@@ -1,0 +1,170 @@
+﻿<Window x:Class="Tourism.MainPage.MVVM.View.Window.LoginWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View.Window"
+        mc:Ignorable="d"
+        Title="LoginWindow"
+        Height="425"
+        Width="475"
+        WindowState="Normal"
+        WindowStyle="None"
+        WindowStartupLocation="CenterScreen"
+        Background="Transparent">
+    <Border Background="#21282c"
+            CornerRadius="20">
+        <Grid>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="50" />
+                <RowDefinition />
+                <RowDefinition Height="50" />
+
+            </Grid.RowDefinitions>
+
+            <Button Height="20"
+                    Width="40"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Top"
+                    Content="r"
+                    x:Name="btnClose"
+                    ToolTip="Close"
+                    Click="btnClose_Click"
+                    Style="{StaticResource CurrencyCloseButtonTheme }"
+                    Grid.RowSpan="2" />
+
+            <Grid Grid.Row="1">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <TextBlock  Text="Tarot MIS"
+                            Foreground="White"
+                            FontFamily="/Fonts/#Poppins"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Top"
+                            Margin="5,5,0,0" />
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition />
+                        <RowDefinition Height="100" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Grid.Column="0"
+                          Grid.Row="1">
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center">
+                            <Grid>
+                                <Button Style="{StaticResource GeneralIconButtonTheme}"
+                                        Content="&#xE77B;"
+                                        Foreground="White"
+                                        IsHitTestVisible="False"
+                                        FontSize="20" />
+                                <Label Content="Username"
+                                       Foreground="LightGray"
+                                       FontFamily="Consola"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Visibility="Visible"
+                                       Margin="30,0,0,0" />
+
+                            </Grid>
+                            <Grid>
+
+                                <Button Content="&#xE72E;"
+                                        Style="{StaticResource GeneralIconButtonTheme}"
+                                        Foreground="White"
+                                        IsHitTestVisible="False"
+                                        FontSize="20" />
+                                <Label Content="Password"
+                                       Foreground="LightGray"
+                                       FontFamily="Consola"
+                                       VerticalAlignment="Center"
+                                       HorizontalAlignment="Center"
+                                       Visibility="Visible"
+                                       Margin="30,0,0,0" />
+
+                            </Grid>
+
+
+                        </StackPanel>
+
+                    </Grid>
+
+
+                    <Grid Grid.Column="1"
+                          Grid.Row="1">
+                        <StackPanel Orientation="Vertical"
+                                    HorizontalAlignment="Left"
+                                    VerticalAlignment="Center">
+                            <TextBox Width="100"
+                                     Height="20"
+                                     Style="{StaticResource GeneralTextboxTheme}"
+                                     x:Name="tboxUsername"
+                                     Margin="0,0,0,7" />
+                            <Border Background="White"
+                                    Width="{Binding Width, ElementName=tboxPassword}"
+                                    Height="{Binding Height, ElementName=tboxPassword}"
+                                    Margin="0,3,0,0"
+                                    CornerRadius="5">
+
+                                <PasswordBox Width="100"
+                                             Height="20"
+                                             x:Name="tboxPassword"
+                                             BorderThickness="0"
+                                             Background="Transparent" />
+                            </Border>
+                        </StackPanel>
+
+                        <Border CornerRadius="5"
+                                Background="#627581"
+                                Height="20"
+                                Width="60"
+                                VerticalAlignment="Bottom"
+                                HorizontalAlignment="Left"
+                                x:Name="borderLogin"
+                                Margin="40,0,0,0">
+                            <Button Background="Transparent"
+                                    Width="{Binding Width, ElementName=borderLogin}"
+                                    Height="{Binding Height,ElementName=borderLogin}"
+                                    BorderThickness="0"
+                                    Content="Login"
+                                    x:Name="btnLogin"
+                                    Click="btnLogin_Click"
+                                    FontFamily="/Fonts/#Poppins"
+                                    Foreground="White" />
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver"
+                                                 Value="True">
+                                            <Setter  Property="Background"
+                                                     Value="#72838e" />
+
+
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+
+                        </Border>
+
+                    </Grid>
+
+                </Grid>
+
+
+            </Grid>
+
+        </Grid>
+    </Border>
+</Window>
