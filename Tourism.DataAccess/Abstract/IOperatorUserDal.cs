@@ -5,6 +5,7 @@ namespace Tourism.Entities.Abstract
 {
     public interface IOperatorUserDal : IEntityRepository<OperatorUser>
     {
+        OperatorUser GetByUsernameAndPassword(string username, string password);
 
     }
 }

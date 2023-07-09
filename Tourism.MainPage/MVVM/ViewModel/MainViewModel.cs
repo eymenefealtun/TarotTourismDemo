@@ -22,7 +22,9 @@ namespace Tourism.MainPage.MVVM.ViewModel
         public RelayCommand GeneralIncomeOutgoingCommand { get; set; }
         public RelayCommand EmptyPageViewCommand { get; set; }
         public RelayCommand MainWindowViewCommand { get; set; }
-        public RelayCommand DuplicateOperationViewCommand { get; set; }     
+        public RelayCommand DuplicateOperationViewCommand { get; set; }
+        public RelayCommand LoginViewCommand { get; set; }
+        public RelayCommand MainWindowCommand { get; set; }
 
 
 
@@ -56,11 +58,33 @@ namespace Tourism.MainPage.MVVM.ViewModel
             }
         }
         public GlobalViewModel Global { get; } = GlobalViewModel.Instance;
-
+        //public MainViewModel()
+        //{
+        //    Navigation.NavigateTo<HomeViewModel>();
+        //    HomeViewCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, canExecute: o => true);
+        //    OperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperationViewModel>(); }, canExecute: o => true);
+        //    CustomerViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerViewModel>(); }, canExecute: o => true);
+        //    SettingsViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, canExecute: o => true);
+        //    CustomerOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerOperationViewModel>(); }, canExecute: o => true);
+        //    AddOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<AddOperationViewModel>(); }, canExecute: o => true);
+        //    UpdateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<UpdateOperationViewModel>(); }, canExecute: o => true);
+        //    ReservationDetailViewCommand = new RelayCommand(o => { Navigation.NavigateTo<ReservationDetailViewModel>(); }, canExecute: o => true);
+        //    OperatorUserViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperatorUserViewModel>(); }, canExecute: o => true);
+        //    CurrencyViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CurrencyViewModel>(); }, canExecute: o => true);
+        //    MainCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<MainCategoryViewModel>(); }, canExecute: o => true);
+        //    SubCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SubCategoryViewModel>(); }, canExecute: o => true);
+        //    GeneralIncomeOutgoingCommand = new RelayCommand(o => { Navigation.NavigateTo<GeneralIncomeOutgoingViewModel>(); }, canExecute: o => true);
+        //    EmptyPageViewCommand = new RelayCommand(o => { Navigation.NavigateTo<EmptyPageViewModel>(); }, canExecute: o => true);
+        //    DuplicateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<DuplicateOperationViewModel>(); }, canExecute: o => true);
+        //    LoginViewCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
+        //    MainWindowCommand = new RelayCommand(o => { Navigation.NavigateTo<MainWindowViewModel>(); }, canExecute: o => true);
+        //}
         public MainViewModel(INavigationService navService)
         {
             Navigation = navService;
+            // Navigation.NavigateTo<MainWindowViewModel>();
             Navigation.NavigateTo<HomeViewModel>();
+            //Navigation.NavigateTo<LoginViewModel>();
 
             HomeViewCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, canExecute: o => true);
             OperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperationViewModel>(); }, canExecute: o => true);
@@ -77,6 +101,8 @@ namespace Tourism.MainPage.MVVM.ViewModel
             GeneralIncomeOutgoingCommand = new RelayCommand(o => { Navigation.NavigateTo<GeneralIncomeOutgoingViewModel>(); }, canExecute: o => true);
             EmptyPageViewCommand = new RelayCommand(o => { Navigation.NavigateTo<EmptyPageViewModel>(); }, canExecute: o => true);
             DuplicateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<DuplicateOperationViewModel>(); }, canExecute: o => true);
+            LoginViewCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
+            MainWindowCommand = new RelayCommand(o => { Navigation.NavigateTo<MainWindowViewModel>(); }, canExecute: o => true);
 
 
 

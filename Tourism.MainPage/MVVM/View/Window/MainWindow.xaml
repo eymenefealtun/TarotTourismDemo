@@ -13,8 +13,11 @@
         ResizeMode="CanResizeWithGrip"
         WindowStyle="None"
         Background="#1b2530"
-        WindowState="Maximized">
-
+        WindowState="Maximized"
+        Visibility="Visible">
+    <Window.Resources>
+    </Window.Resources>
+    
     <Border x:Name="mainWindowMainBorder">
 
 
@@ -293,6 +296,7 @@
                            Foreground="#c7cacf"
                            VerticalAlignment="Center"
                            HorizontalAlignment="Left"
+                           x:Name="tblockUsername"
                            FontSize="14"
                            Grid.Column="1"
                            Margin="5,0,0,0" />

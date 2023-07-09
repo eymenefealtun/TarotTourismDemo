@@ -1,16 +1,23 @@
-﻿using System;
+﻿using Microsoft.Extensions.DependencyInjection;
+using System;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
+using Tourism.Business.DependencyResolvers.Ninject;
+using Tourism.Entities.Concrete;
+using Tourism.MainPage.MVVM.ViewModel;
+using Tourism.MainPage.Services;
 
 namespace Tourism.MainPage.MVVM.View.Window
 {
     public partial class MainWindow : System.Windows.Window
     {
         public string _textMain;
+        private IOperatorUserService _operatorUserService;
+
         ToggleButton[] _allButtons;
         ToggleButton[] _allMainButtons;
         ToggleButton[] _firstSubButtons;
@@ -59,12 +66,56 @@ namespace Tourism.MainPage.MVVM.View.Window
             _modificationCategorySecondSubButton = modificationCategorySecondSubButton;
             _firstSubButtonsWithSubs = firstSubButtonsWithSubs;
         }
-
-        public MainWindow(int number)
+        public MainWindow(int operatorUserId)
         {
             InitializeComponent();
-            this.IsHitTestVisible = false;
+            ToggleButton[] allButtons = new ToggleButton[] { btnCategories, btnCurrency, btnCustomers, btnHome, btnIncome, btnIncomeIncoming, btnIncomeOutgoing, btnMainCategory, btnModifications, btnOperations, btnOutcome, btnSubCategory, btnSubOperatorUser, btnSubOperations, btnAddOperation, btnDuplicateOperation };
+
+            ToggleButton[] allMainButtons = new ToggleButton[] { btnHome, btnOperations, btnModifications, btnCustomers, btnIncome, btnOutcome };
+            ToggleButton[] mainWithSubButtons = new ToggleButton[] { btnModifications, btnIncome, btnOutcome };
+
+
+            #region firstSubButtons
+            ToggleButton[] firstSubButtons = new ToggleButton[] { btnSubOperatorUser, btnCategories, btnCurrency, btnIncomeIncoming, btnIncomeOutgoing, btnSubOperations };
+            ToggleButton[] firstSubButtonsWithSubs = new ToggleButton[] { btnCategories, btnSubOperations };
+
+            ToggleButton[] modificationSubButtons = new ToggleButton[] { btnSubOperatorUser, btnCategories, btnCurrency, btnSubOperations };
+
+            ToggleButton[] incomeSubButtons = new ToggleButton[] { btnIncomeIncoming, btnIncomeOutgoing };
+            #endregion
+
+
+            #region secondSubButtons
+            ToggleButton[] secondSubButtons = new ToggleButton[] { btnSubCategory, btnMainCategory, btnAddOperation, btnDuplicateOperation };
+
+            ToggleButton[] modificationSecondSubButtons = new ToggleButton[] { btnSubCategory, btnMainCategory, btnAddOperation, btnDuplicateOperation };
+            ToggleButton[] modificationCategorySecondSubButton = new ToggleButton[] { btnSubCategory, btnMainCategory };
+
+            #endregion
+
+            _firstSubButtons = firstSubButtons;
+            _secondSubButtons = secondSubButtons;
+            _allMainButtons = allMainButtons;
+            _modificationSecondSubButtons = modificationSecondSubButtons;
+            _modificationSubButtons = modificationSubButtons;
+            _incomeSubButtons = incomeSubButtons;
+            _allButtons = allButtons;
+            _mainWithSubButtons = mainWithSubButtons;
+            _modificationCategorySecondSubButton = modificationCategorySecondSubButton;
+            _firstSubButtonsWithSubs = firstSubButtonsWithSubs;
+
+            _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
+            string username = _operatorUserService.GetByUserId(operatorUserId).Username;
+            tblockUsername.Text = username;
+
         }
+
+
+        //public MainWindow(int number)
+        //{
+        //    InitializeComponent();
+        //    this.IsHitTestVisible = false;
+        //}
 
         #region Screen
         private void btnTopLeft_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)

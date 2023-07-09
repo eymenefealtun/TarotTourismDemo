@@ -3,7 +3,7 @@ using Tourism.MainPage.Services;
 
 namespace Tourism.MainPage.MVVM.ViewModel
 {
-    public class CustomerViewModel : Core.ViewModel
+    public class LoginViewModel : Core.ViewModel
     {
         private INavigationService _navigation;
         public INavigationService Navigation
@@ -15,13 +15,13 @@ namespace Tourism.MainPage.MVVM.ViewModel
                 OnPropertyChanged();
             }
         }
-        public RelayCommand OperationViewCommand { get; set; }               
-        public CustomerViewModel(INavigationService navigation)
+        public RelayCommand MainWindowCommand { get; set; }
+        public LoginViewModel(INavigationService navigation)
         {
             Navigation = navigation;
-            OperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperationViewModel>(); }, canExecute: o/*: object*/ => true);
+            MainWindowCommand = new RelayCommand(o => { Navigation.NavigateTo<MainWindowViewModel>(); }, canExecute: o => true);
+
         }
- 
 
     }
-}       
+}

@@ -4,6 +4,7 @@
              xmlns:viewModel="clr-namespace:Tourism.MainPage.MVVM.ViewModel"
              xmlns:view="clr-namespace:Tourism.MainPage.MVVM.View"
              xmlns:window="clr-namespace:Tourism.MainPage.MVVM.View.Window">
+
     <Application.Resources>
 
         <ResourceDictionary>
@@ -52,7 +53,7 @@
                 <ResourceDictionary Source="Theme/SaveButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GridEditButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GridRelocateButtonTheme.xaml" />
-                <ResourceDictionary Source="Theme/GeneralDataGridWithoutAlternatingTheme.xaml" />       
+                <ResourceDictionary Source="Theme/GeneralDataGridWithoutAlternatingTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralScrollViewerTheme.xaml" />
                 <ResourceDictionary Source="Theme/ComboBoxWithTBoxToggleButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/ComboBoxWithTBoxTheme.xaml" />
@@ -61,6 +62,13 @@
 
                 <ResourceDictionary Source="Theme/Tools/ExcelButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/Tools/WordButtonTheme.xaml" />
+
+
+
+
+
+
+                <ResourceDictionary Source="Theme/LoginPage/LoginButtonTheme.xaml" />
 
             </ResourceDictionary.MergedDictionaries>
 
@@ -128,11 +136,14 @@
             <DataTemplate DataType="{x:Type viewModel:MainWindowViewModel}">
                 <window:MainWindow />
             </DataTemplate>
-            
+
             <DataTemplate DataType="{x:Type viewModel:DuplicateOperationViewModel}">
                 <view:DuplicateOperationView />
             </DataTemplate>
 
+            <DataTemplate DataType="{x:Type viewModel:LoginViewModel}">
+                <window:LoginWindow />
+            </DataTemplate>
 
 
         </ResourceDictionary>

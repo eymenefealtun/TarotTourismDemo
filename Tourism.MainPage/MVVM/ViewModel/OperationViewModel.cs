@@ -1,12 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Tourism.Entities.Models;
-using Tourism.MainPage.Core;
+﻿using Tourism.MainPage.Core;
 using Tourism.MainPage.Services;
 
 namespace Tourism.MainPage.MVVM.ViewModel

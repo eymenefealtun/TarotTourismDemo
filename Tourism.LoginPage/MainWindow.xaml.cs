@@ -1,31 +1,28 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
 using System.Threading;
+using System;
 using System.Windows;
-using System.Windows.Input;
-using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
-using Tourism.MainPage.MVVM.ViewModel;
-using Tourism.MainPage.Services;
-using ViewModel = Tourism.Core;
+using Tourism.Business.DependencyResolvers.Ninject;
+using System.Windows.Input;
 
-
-namespace Tourism.MainPage.MVVM.View.Window
+namespace Tourism.LoginPage
 {
-    public partial class LoginWindow : System.Windows.Window
+
+    public partial class MainWindow : Window
     {
-        private readonly ServiceProvider _serviceProvider;
+        //private readonly ServiceProvider _serviceProvider;
         private IOperatorUserService _operatorUserService;
 
-        public LoginWindow()
+        public MainWindow()
         {
             InitializeComponent();
-            IServiceCollection services = new ServiceCollection();  //specifying the DI Container
+            //IServiceCollection services = new ServiceCollection();  //specifying the DI Container
+
             //services.AddSingleton<MainWindow>(provider => new MainWindow
             //{
             //    DataContext = provider.GetRequiredService<MainViewModel>()
             //});
-          
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
 
         }
@@ -51,12 +48,13 @@ namespace Tourism.MainPage.MVVM.View.Window
             Login();
         }
 
-        App _app;
+
         //MainWindow _mainWindow = new MainWindow();      
 
+        //Tourism.MainPage.App _mainPage;
+       
         private void Login()
         {
-            return;
             try
             {
                 string userName = tboxUsername.Text;
@@ -76,22 +74,21 @@ namespace Tourism.MainPage.MVVM.View.Window
                 else
                 {
                     lblWrongCredentials.Visibility = Visibility.Collapsed;
-                    MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-                    mainWindow.Show();
+                    //MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+                    //mainWindow.Show();
+                    //  _mainPage = new MainPage.App();
+                    //Tourism.MainPage.App app = new Tourism.MainPage.App();
 
-                    //App app = new App();
-                    //app.Start();                    
+                    //Tourism.MainPage. = new Tourism.MainPage.MVVM.View.Window.MainWindow();
+                    //Tourism.MainPage.App app = new MainPage.App();
+                    //app.Run();
 
-                    //app.Start(2);
-                    //var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+                    Tourism.MainPage.MVVM.View.Window.MainWindow _mainPage = new Tourism.MainPage.MVVM.View.Window.MainWindow();
 
+                    _mainPage.Show();
+                    //_mainPage = new MainPage.MVVM.ViewModel.MainWindowViewModel();
+                    //_mainPage.Show();
 
-                    //MainWindowViewModel viewModel = new MainWindowViewModel(user.Id);
-                    // mainWindow.Show();
-
-                    //App app = new App();
-                    //app.Start();
-                    // _mainWindow.Visibility = Visibility.Visible;    
                     MessageBox.Show("1");
 
 
@@ -119,6 +116,7 @@ namespace Tourism.MainPage.MVVM.View.Window
 
 
         }
+
 
 
 

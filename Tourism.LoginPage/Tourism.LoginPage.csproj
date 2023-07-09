@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net6.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="MVVM\Model\ViewModel\" />
+    <Folder Include="MVVM\Model\View\" />
+    <Folder Include="Services\" />
+    <Folder Include="MVVM\Model\" />
+    <Folder Include="MVVM\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Tourism.Business\Tourism.Business.csproj" />
+    <ProjectReference Include="..\Tourism.MainPage\Tourism.MainPage.csproj" />
+  </ItemGroup>
+
+</Project>

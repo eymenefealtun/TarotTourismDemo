@@ -4,7 +4,7 @@ using System.Windows;
 using Tourism.MainPage.Core;
 using Tourism.MainPage.MVVM.ViewModel;
 using Tourism.MainPage.MVVM.View.Window;
-using Tourism.MainPage.Services;        
+using Tourism.MainPage.Services;
 
 namespace Tourism.MainPage
 {
@@ -21,13 +21,17 @@ namespace Tourism.MainPage
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
+            //services.AddSingleton<LoginWindow>(provider => new LoginWindow
+            //{
+            //    DataContext = provider.GetRequiredService<MainViewModel>()
+            //});
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<OperationViewModel>();
             services.AddSingleton<HomeViewModel>();
             services.AddSingleton<CustomerViewModel>();
             services.AddSingleton<SettingsViewModel>();
             services.AddSingleton<CustomerOperationViewModel>();
-            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<AddOperationViewModel>();
             services.AddSingleton<UpdateOperationViewModel>();
             services.AddSingleton<ReservationDetailViewModel>();
@@ -37,10 +41,11 @@ namespace Tourism.MainPage
             services.AddSingleton<SubCategoryViewModel>();
             services.AddSingleton<GeneralIncomeOutgoingViewModel>();
             services.AddSingleton<EmptyPageViewModel>();
-            services.AddSingleton<MainWindowViewModel>();
+            // services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<DuplicateOperationViewModel>();
+            services.AddSingleton<LoginViewModel>();
 
-            services.AddSingleton<INavigationService, Services.NavigationService>();
+            services.AddSingleton<INavigationService, NavigationService>();
 
             services.AddSingleton<Func<Type, ViewModel>>(serviceProvider => viewModelType => (ViewModel)serviceProvider.GetRequiredService(viewModelType));
 
@@ -48,12 +53,35 @@ namespace Tourism.MainPage
 
         }
 
-        protected override void OnStartup(StartupEventArgs e)
+        public void Start()
         {
-            var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-            mainWindow.Show();
-            base.OnStartup(e);
+
+            MessageBox.Show("asdasd");
+
         }
 
+
+
+
+        protected override void OnStartup(StartupEventArgs e)
+        {
+
+            Window mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            mainWindow.Show();
+
+            //var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+            //LoginWindow loginWindow = new LoginWindow();
+            //LoginWindow loginWindow = new LoginWindow();
+            // _mainWindow.Visibility = Visibility.Visible;
+
+            //loginWindow.Show();
+            //_mainWindow.Visibility = Visibility.Collapsed();
+
+            // mainWindow.Show();
+
+            base.OnStartup(e);
+
+
+        }
     }
 }
