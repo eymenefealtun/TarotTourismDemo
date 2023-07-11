@@ -21,10 +21,10 @@ namespace Tourism.MainPage
             {
                 DataContext = provider.GetRequiredService<MainViewModel>()
             });
-            //services.AddSingleton<LoginWindow>(provider => new LoginWindow
-            //{
-            //    DataContext = provider.GetRequiredService<MainViewModel>()
-            //});
+            services.AddSingleton<LoginWindow>(provider => new LoginWindow
+            {
+                DataContext = provider.GetRequiredService<MainViewModel>()
+            });
             services.AddSingleton<MainViewModel>();
             services.AddSingleton<OperationViewModel>();
             services.AddSingleton<HomeViewModel>();
@@ -41,9 +41,10 @@ namespace Tourism.MainPage
             services.AddSingleton<SubCategoryViewModel>();
             services.AddSingleton<GeneralIncomeOutgoingViewModel>();
             services.AddSingleton<EmptyPageViewModel>();
-            // services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<DuplicateOperationViewModel>();
             services.AddSingleton<LoginViewModel>();
+
 
             services.AddSingleton<INavigationService, NavigationService>();
 
@@ -53,31 +54,26 @@ namespace Tourism.MainPage
 
         }
 
-        public void Start()
+
+        private void ShowMain()
         {
-
-            MessageBox.Show("asdasd");
-
-        }
-
-
-
-
-        protected override void OnStartup(StartupEventArgs e)
-        {
-
             Window mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
             mainWindow.Show();
 
-            //var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
-            //LoginWindow loginWindow = new LoginWindow();
-            //LoginWindow loginWindow = new LoginWindow();
-            // _mainWindow.Visibility = Visibility.Visible;
+        }
 
-            //loginWindow.Show();
-            //_mainWindow.Visibility = Visibility.Collapsed();
+        private void ShowLogin()
+        {
+            var loginWindow = _serviceProvider.GetRequiredService<LoginWindow>();
+            loginWindow.Show();
 
-            // mainWindow.Show();
+        }
+        protected override void OnStartup(StartupEventArgs e)
+        {
+
+            ShowMain();
+            //ShowLogin();
+
 
             base.OnStartup(e);
 

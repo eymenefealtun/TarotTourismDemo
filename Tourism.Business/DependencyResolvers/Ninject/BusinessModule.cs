@@ -1,5 +1,6 @@
 ﻿using Ninject.Modules;
 using Tourism.Business.Abstract.Models;
+using Tourism.Business.Authentication;
 using Tourism.Business.Concrete.Models;
 using Tourism.DataAccess.Abstract;
 using Tourism.DataAccess.Abstract.Models;
@@ -75,7 +76,10 @@ namespace Tourism.Business.DependencyResolvers.Ninject
 
 
             Bind<IOperationPriceService>().To<OperationPriceManager>().InSingletonScope();
-            Bind<IOperationPriceDal>().To<EfOperationPriceDal>().InSingletonScope();                
+            Bind<IOperationPriceDal>().To<EfOperationPriceDal>().InSingletonScope();
+
+
+            Bind<IAuthenticationService>().To<AuthenticationService>().InSingletonScope();
         }
 
 

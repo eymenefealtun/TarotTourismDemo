@@ -3,12 +3,11 @@ using System;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using Tourism.Business.Authentication;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 using Tourism.MainPage.MVVM.ViewModel;
 using Tourism.MainPage.Services;
-using ViewModel = Tourism.Core;
-
 
 namespace Tourism.MainPage.MVVM.View.Window
 {
@@ -16,17 +15,45 @@ namespace Tourism.MainPage.MVVM.View.Window
     {
         private readonly ServiceProvider _serviceProvider;
         private IOperatorUserService _operatorUserService;
+        private IAuthenticationService _authenticationService;
 
+        private int _operatorUserId;
         public LoginWindow()
         {
             InitializeComponent();
             IServiceCollection services = new ServiceCollection();  //specifying the DI Container
-            //services.AddSingleton<MainWindow>(provider => new MainWindow
-            //{
-            //    DataContext = provider.GetRequiredService<MainViewModel>()
-            //});
-          
+
+            services.AddSingleton<MainWindow>(provider => new MainWindow(_operatorUserId)
+            {
+                DataContext = provider.GetRequiredService<MainViewModel>()
+            });
+            services.AddSingleton<MainViewModel>();
+            services.AddSingleton<OperationViewModel>();
+            services.AddSingleton<HomeViewModel>();
+            services.AddSingleton<CustomerViewModel>();
+            services.AddSingleton<SettingsViewModel>();
+            services.AddSingleton<CustomerOperationViewModel>();
+            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<AddOperationViewModel>();
+            services.AddSingleton<UpdateOperationViewModel>();
+            services.AddSingleton<ReservationDetailViewModel>();
+            services.AddSingleton<OperatorUserViewModel>();
+            services.AddSingleton<CurrencyViewModel>();
+            services.AddSingleton<MainCategoryViewModel>();
+            services.AddSingleton<SubCategoryViewModel>();
+            services.AddSingleton<GeneralIncomeOutgoingViewModel>();
+            services.AddSingleton<EmptyPageViewModel>();
+            services.AddSingleton<MainWindowViewModel>();
+            services.AddSingleton<DuplicateOperationViewModel>();
+            services.AddSingleton<LoginViewModel>();
+
+            services.AddSingleton<INavigationService, NavigationService>();
+
+            services.AddSingleton<Func<Type, Core.ViewModel>>(serviceProvider => viewModelType => (Core.ViewModel)serviceProvider.GetRequiredService(viewModelType));
+            _serviceProvider = services.BuildServiceProvider();
+
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
+            _authenticationService = Instancefactory.GetInstance<IAuthenticationService>();
 
         }
 
@@ -51,12 +78,17 @@ namespace Tourism.MainPage.MVVM.View.Window
             Login();
         }
 
-        App _app;
+        // App _app;
+
+
+
+
+
         //MainWindow _mainWindow = new MainWindow();      
 
         private void Login()
         {
-            return;
+            //return;
             try
             {
                 string userName = tboxUsername.Text;
@@ -65,7 +97,7 @@ namespace Tourism.MainPage.MVVM.View.Window
                 Mouse.OverrideCursor = Cursors.Wait;
                 Thread.Sleep(100);
                 var user = _operatorUserService.GetByUsernameAndPassword(userName, password);
-                Mouse.OverrideCursor = Cursors.Arrow;
+                Mouse.OverrideCursor = null;
 
 
                 if (user == null)
@@ -76,42 +108,10 @@ namespace Tourism.MainPage.MVVM.View.Window
                 else
                 {
                     lblWrongCredentials.Visibility = Visibility.Collapsed;
+                    _operatorUserId = user.Id;
                     MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
                     mainWindow.Show();
-
-                    //App app = new App();
-                    //app.Start();                    
-
-                    //app.Start(2);
-                    //var mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-
-
-                    //MainWindowViewModel viewModel = new MainWindowViewModel(user.Id);
-                    // mainWindow.Show();
-
-                    //App app = new App();
-                    //app.Start();
-                    // _mainWindow.Visibility = Visibility.Visible;    
-                    MessageBox.Show("1");
-
-
-
-                    //MainWindow mainWindow = new MainWindow(user.Id);
-
-                    //mainWindow.Show();
-
-
-                    //this.Close();
-
-
-
-
-
-
-
-
-                    //var mainwindow = _serviceProvider.GetRequiredService<MainWindow>();
-
+                    this.Close();
 
                 }
             }

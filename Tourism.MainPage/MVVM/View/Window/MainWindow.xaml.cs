@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
+using Tourism.Business.Authentication;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 using Tourism.MainPage.MVVM.ViewModel;
@@ -105,6 +106,7 @@ namespace Tourism.MainPage.MVVM.View.Window
             _firstSubButtonsWithSubs = firstSubButtonsWithSubs;
 
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
+            _authenticationService = Instancefactory.GetInstance<IAuthenticationService>(); 
             string username = _operatorUserService.GetByUserId(operatorUserId).Username;
             tblockUsername.Text = username;
 

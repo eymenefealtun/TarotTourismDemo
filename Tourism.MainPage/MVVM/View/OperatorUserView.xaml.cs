@@ -51,7 +51,7 @@ namespace Tourism.MainPage.MVVM.View
                     var operatorUser = new OperatorUser()
                     {
                         Username = tboxAddUserName.Text,
-                        Password = tboxAddPassword.Text,
+                        PasswordHash = tboxAddPassword.Text,
                         OperatorId = Convert.ToInt32(cboxAddOperator.SelectedValue),
                         UserLevelId = Convert.ToInt32(cboxAddLevel.SelectedValue),
                     };
@@ -114,7 +114,7 @@ namespace Tourism.MainPage.MVVM.View
 
             cboxUpdateLevel.SelectedItem = cboxUpdateLevel.Items.OfType<UserLevel>().FirstOrDefault(x => x.Id == user.UserLevelId);
             cboxUpdateOperator.SelectedItem = cboxUpdateOperator.Items.OfType<Operator>().FirstOrDefault(x => x.Id == user.OperatorId);
-            tboxUpdatePassword.Text = user.Password;
+            tboxUpdatePassword.Text = user.PasswordHash;
             tboxUpdateUsername.Text = user.Username;
             _userId = user.Id;
         }
@@ -135,7 +135,7 @@ namespace Tourism.MainPage.MVVM.View
                     {
                         Id = _userId,
                         Username = tboxUpdateUsername.Text,
-                        Password = tboxUpdatePassword.Text,
+                        PasswordHash = tboxUpdatePassword.Text,
                         UserLevelId = Convert.ToInt32(cboxUpdateLevel.SelectedValue),
                         OperatorId = Convert.ToInt32(cboxUpdateOperator.SelectedValue),
                     };
