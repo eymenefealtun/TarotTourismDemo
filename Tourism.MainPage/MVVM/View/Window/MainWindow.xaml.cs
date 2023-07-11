@@ -106,7 +106,6 @@ namespace Tourism.MainPage.MVVM.View.Window
             _firstSubButtonsWithSubs = firstSubButtonsWithSubs;
 
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
-            _authenticationService = Instancefactory.GetInstance<IAuthenticationService>(); 
             string username = _operatorUserService.GetByUserId(operatorUserId).Username;
             tblockUsername.Text = username;
 
