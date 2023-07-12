@@ -48,7 +48,7 @@
                                             Binding="{Binding Username}" />
                         <DataGridTextColumn Header="Password"
                                             MinWidth="80"
-                                            Binding="{Binding Password}" />
+                                            Binding="{Binding PasswordHash}" />
                         <DataGridTextColumn Header="Operator"
                                             MinWidth="70"
                                             Binding="{Binding OperatorName}" />

@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Threading;
 using System.Windows;
@@ -16,6 +17,10 @@ namespace Tourism.MainPage.MVVM.View.Window
         private readonly ServiceProvider _serviceProvider;
         private IOperatorUserService _operatorUserService;
         private IAuthenticationService _authenticationService;
+
+
+        private readonly IPasswordHasher _passwordHasher;//Asp.Net package downloaded for this
+
 
         private int _operatorUserId;
         public LoginWindow()
@@ -54,7 +59,7 @@ namespace Tourism.MainPage.MVVM.View.Window
 
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
             _authenticationService = Instancefactory.GetInstance<IAuthenticationService>();
-
+            _passwordHasher = new PasswordHasher();
         }
 
 
@@ -78,48 +83,81 @@ namespace Tourism.MainPage.MVVM.View.Window
             Login();
         }
 
-        // App _app;
-
-
-
-
-
-        //MainWindow _mainWindow = new MainWindow();      
+        private void btnLogin_Click_1(object sender, RoutedEventArgs e)
+        {
+            Login();
+        }
 
         private void Login()
         {
-            //return;
-            try
+
+
+            #region 1
+            //try
+            //{
+            //    string userName = tboxUsername.Text;
+            //    string password = tboxPassword.Password.ToString();
+
+
+            //    Mouse.OverrideCursor = Cursors.Wait;
+            //    Thread.Sleep(100);
+            //    var user = _operatorUserService.GetByUsernameAndPassword(userName, password);
+            //    Mouse.OverrideCursor = null;
+
+            //    if (user == null)
+            //    {
+            //        lblWrongCredentials.Visibility = Visibility.Visible;
+
+            //    }
+            //    else
+            //    {
+            //        lblWrongCredentials.Visibility = Visibility.Collapsed;
+            //        _operatorUserId = user.Id;
+            //        MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+            //        mainWindow.Show();
+            //        this.Close();
+
+            //    }
+            //}
+            //catch (Exception) { }
+            #endregion
+
+            string usernameByUser = tboxUsername.Text;
+            string passwordByUser = tboxPassword.Password;
+
+            Mouse.OverrideCursor = Cursors.Wait;
+            Thread.Sleep(100);
+            var user = _operatorUserService.GetByUsername(usernameByUser);
+            Mouse.OverrideCursor = null;
+
+            if (user == null)
             {
-                string userName = tboxUsername.Text;
-                string password = tboxPassword.Password.ToString();
-
-                Mouse.OverrideCursor = Cursors.Wait;
-                Thread.Sleep(100);
-                var user = _operatorUserService.GetByUsernameAndPassword(userName, password);
-                Mouse.OverrideCursor = null;
-
-
-                if (user == null)
-                {
-                    lblWrongCredentials.Visibility = Visibility.Visible;
-                    return;
-                }
-                else
-                {
-                    lblWrongCredentials.Visibility = Visibility.Collapsed;
-                    _operatorUserId = user.Id;
-                    MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
-                    mainWindow.Show();
-                    this.Close();
-
-                }
+                lblWrongCredentials.Visibility = Visibility.Visible;
+                return;
             }
-            catch (Exception) { }
+
+            string hashedPassword = _passwordHasher.HashPassword(user.PasswordHash);
+
+            PasswordVerificationResult passwordResult = _passwordHasher.VerifyHashedPassword(hashedPassword, passwordByUser);
+            if (passwordResult != PasswordVerificationResult.Success)
+            {
+                lblWrongCredentials.Visibility = Visibility.Visible;
+            }
+            else if (passwordResult == PasswordVerificationResult.Success)
+            {
+                lblWrongCredentials.Visibility = Visibility.Collapsed;
+                _operatorUserId = user.Id;
+                MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
+                mainWindow.Show();
+                this.Close();
+            }
+
+
 
 
         }
 
+     
 
 
 

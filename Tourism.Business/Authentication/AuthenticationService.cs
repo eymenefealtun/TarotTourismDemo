@@ -1,6 +1,4 @@
-﻿using FluentValidation.Validators;
-using Microsoft.AspNet.Identity;
-using System.Runtime.CompilerServices;
+﻿using Microsoft.AspNet.Identity;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 

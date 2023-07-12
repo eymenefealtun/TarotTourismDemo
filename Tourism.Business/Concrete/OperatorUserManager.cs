@@ -24,6 +24,11 @@ namespace Tourism.Entities.Concrete
             return _operatorUserDal.GetAll();
         }
 
+        public OperatorUser GetByPassword(string password)
+        {
+            return _operatorUserDal.Get(x => x.PasswordHash == password);   
+        }
+
         public OperatorUser GetByUserId(int userId)
         {
             return _operatorUserDal.Get(x => x.Id == userId);
@@ -39,6 +44,11 @@ namespace Tourism.Entities.Concrete
             return _operatorUserDal.GetByUsernameAndPassword(username, password);
         }
 
+        public OperatorUser GetByUsernameSqlRaw(string username)
+        {               
+            return _operatorUserDal.GetByUsernameSqlRaw(username);
+        }
+
         public OperatorUser Update(OperatorUser operatorUser)
         {
             ValidationTool.FluentValidate(new OperatorUserValidator(), operatorUser);
@@ -46,10 +56,7 @@ namespace Tourism.Entities.Concrete
         }
 
 
-        private void Login(string username, string password)
-        {
-
-        }
+  
 
 
 

@@ -8,8 +8,8 @@ namespace Tourism.Entities.Models
     {
         public int OperatorUserId { get; set; }     
         public string Username { get; set; }
-        public string Password { get; set; }
-        public string OperatorName { get; set; }
+        public string PasswordHash { get; set; }
+        public string OperatorName { get; set; }        
         public string Level { get; set; }       
     }
 }

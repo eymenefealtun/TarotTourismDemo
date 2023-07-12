@@ -71,8 +71,8 @@ namespace Tourism.MainPage
         protected override void OnStartup(StartupEventArgs e)
         {
 
-            ShowMain();
-            //ShowLogin();
+            //ShowMain();
+           ShowLogin();
 
 
             base.OnStartup(e);

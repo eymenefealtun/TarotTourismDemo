@@ -1,4 +1,4 @@
-﻿ using Tourism.Core.Entities;
+﻿using Tourism.Core.Entities;
 
 namespace Tourism.Entities.Concrete
 {
@@ -10,7 +10,7 @@ namespace Tourism.Entities.Concrete
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Username { get; set; }
-        public string PasswordHash { get; set; }        
+        public string PasswordHash { get; set; }
         public int OperatorId { get; set; }
         public int UserLevelId { get; set; }
         public DateTime DateJoined { get; set; }

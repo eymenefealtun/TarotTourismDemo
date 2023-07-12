@@ -116,6 +116,7 @@
                                      Height="20"
                                      Style="{StaticResource GeneralTextboxTheme}"
                                      x:Name="tboxUsername"
+                                     KeyUp="tboxPassword_KeyUp"
                                      Margin="0,0,0,7" />
                             <Border Background="White"
                                     Width="{Binding Width, ElementName=tboxPassword}"
@@ -143,6 +144,7 @@
                                 Margin="40,0,0,0"
                                 Cursor="Hand"
                                 x:Name="btnLogin"
+                                Click="btnLogin_Click_1"
                                 FontFamily="/Fonts/#Poppins"
                                 Command="{Binding Path= MainWindowCommand}"
                                 Foreground="White"
