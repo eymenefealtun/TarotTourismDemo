@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View.Window"
         mc:Ignorable="d"
         Title="LoginWindow"
-        Height="425"
-        Width="475"
+        Height="350"
+        Width="450"
         WindowState="Normal"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
@@ -43,139 +43,161 @@
                         HorizontalAlignment="Left"
                         VerticalAlignment="Top"
                         Margin="15,5,0,0" />
-            <Grid Grid.Row="1">
-
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100" />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="100" />
-                </Grid.ColumnDefinitions>
-
-                <Grid Grid.Column="1">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="100" />
-                        <RowDefinition />
-                        <RowDefinition Height="100" />
-                    </Grid.RowDefinitions>
-
-                    <Grid Grid.Column="0"
-                          Grid.Row="1">
-                        <StackPanel Orientation="Vertical"
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    Margin="0,0,0,10">
-                            <Grid>
-                                <Button Style="{StaticResource GeneralIconButtonTheme}"
-                                        Content="&#xE77B;"
-                                        Foreground="White"
-                                        IsHitTestVisible="False"
-                                        FontSize="20" />
-                                <Label Content="Username"
-                                       Foreground="LightGray"
-                                       FontFamily="Consola"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Visibility="Visible"
-                                       Margin="30,0,0,0" />
-
-                            </Grid>
-                            <Grid>
-
-                                <Button Content="&#xE72E;"
-                                        Style="{StaticResource GeneralIconButtonTheme}"
-                                        Foreground="White"
-                                        IsHitTestVisible="False"
-                                        FontSize="20" />
-                                <Label Content="Password"
-                                       Foreground="LightGray"
-                                       FontFamily="Consola"
-                                       VerticalAlignment="Center"
-                                       HorizontalAlignment="Center"
-                                       Visibility="Visible"
-                                       Margin="30,0,0,0" />
-
-                            </Grid>
 
 
-                        </StackPanel>
+
+            <StackPanel Orientation="Horizontal"
+                        Grid.Column="0"
+                        Grid.Row="1"
+                        VerticalAlignment="Center"
+                        HorizontalAlignment="Center"
+                        Margin="0,0,20,0">
+                <StackPanel Orientation="Vertical"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,10">
+                    <Grid>
+                        <Button Style="{StaticResource GeneralIconButtonTheme}"
+                                Content="&#xE77B;"
+                                Foreground="White"
+                                IsHitTestVisible="False"
+                                FontSize="20" />
+                        <Label Content="Username"
+                               Foreground="LightGray"
+                               FontFamily="Consola"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Visibility="Visible"
+                               Margin="30,0,0,0" />
+
+                    </Grid>
+                    <Grid>
+
+                        <Button Content="&#xE72E;"
+                                Style="{StaticResource GeneralIconButtonTheme}"
+                                Foreground="White"
+                                IsHitTestVisible="False"
+                                FontSize="20" />
+                        <Label Content="Password"
+                               Foreground="LightGray"
+                               FontFamily="Consola"
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Visibility="Visible"
+                               Margin="30,0,0,0" />
 
                     </Grid>
 
 
-                    <Grid Grid.Column="1"
-                          Grid.Row="1">
-                        <StackPanel Orientation="Vertical"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    Margin="0,0,0,10">
+                </StackPanel>
+
+
+
+                <StackPanel Orientation="Vertical"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Margin="0,0,0,10">
+                    <TextBox Width="135"
+                             Height="20"
+                             Style="{StaticResource GeneralTextboxTheme}"
+                             x:Name="tboxUsername"
+                             KeyUp="tboxPassword_KeyUp"
+                             Margin="0,0,0,7" />
+
+
+                    <Border Background="White"
+                            Height="21"
+                            Margin="0,0,0,0"
+                            Width="135"
+                            CornerRadius="5">
+                        <Grid VerticalAlignment="Stretch"
+                              HorizontalAlignment="Stretch">
+
+                            <PasswordBox Width="100"
+                                         Height="20"
+                                         HorizontalAlignment="Left"
+                                         VerticalAlignment="Center"
+                                         x:Name="pboxPassword"
+                                         FontSize="12"
+                                         HorizontalContentAlignment="Left"
+                                         VerticalContentAlignment="Center"
+                                         BorderThickness="0"
+                                         KeyUp="tboxPassword_KeyUp"
+                                         Background="Transparent" />
                             <TextBox Width="100"
                                      Height="20"
-                                     Style="{StaticResource GeneralTextboxTheme}"
-                                     x:Name="tboxUsername"
+                                     x:Name="tboxPassword"
+                                     Visibility="Hidden"
+                                     HorizontalAlignment="Left"
                                      KeyUp="tboxPassword_KeyUp"
-                                     Margin="0,0,0,7" />
-                            <Border Background="White"
-                                    Width="{Binding Width, ElementName=tboxPassword}"
-                                    Height="{Binding Height, ElementName=tboxPassword}"
-                                    Margin="0,3,0,0"
-                                    CornerRadius="5">
+                                     VerticalAlignment="Center"
+                                     HorizontalContentAlignment="Left"
+                                     VerticalContentAlignment="Center"
+                                     Style="{StaticResource GeneralTextboxTheme}"
+                                     Text="{Binding Password, ElementName=pboxPassword,UpdateSourceTrigger=PropertyChanged,Mode=TwoWay}" />
 
-                                <PasswordBox Width="100"
-                                             Height="20"
-                                             x:Name="tboxPassword"
-                                             BorderThickness="0"
-                                             KeyUp="tboxPassword_KeyUp"
-                                             Background="Transparent" />
-                            </Border>
-
-                        </StackPanel>
+                        </Grid>
 
 
+                    </Border>
 
-                        <Button Background="Transparent"
-                                Width="60"
-                                Height="20"
-                                VerticalAlignment="Bottom"
-                                HorizontalAlignment="Left"
-                                Margin="40,0,0,0"
-                                Cursor="Hand"
-                                x:Name="btnLogin"
-                                Click="btnLogin_Click_1"
-                                FontFamily="/Fonts/#Poppins"
-                                Command="{Binding Path= MainWindowCommand}"
-                                Foreground="White"
-                                Style="{StaticResource LoginButtonTheme}" />
-
-
-
-                    </Grid>
-                    <Grid  Margin="0,0,0,0"
-                           VerticalAlignment="Top"
+                    <Label Content="Wrong credentials!"
+                           FontWeight="Bold"
                            x:Name="lblWrongCredentials"
-                           Visibility="Collapsed"
-                           Grid.Row="2"
-                           Grid.Column="2">
+                           Foreground="Black"
+                           FontSize="12"
+                           Grid.Row="1"
+                           VerticalAlignment="Top"
+                           Visibility="Hidden"
+                           HorizontalAlignment="Center"
+                           Margin="0,-75,0,0" />
+                    <Button Background="Transparent"
+                            Width="60"
+                            Height="20"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Left"
+                            Margin="70,0,0,-40"
+                            Cursor="Hand"
+                            x:Name="btnLogin"
+                            Click="btnLogin_Click_1"
+                            FontFamily="/Fonts/#Poppins"
+                            Command="{Binding Path= MainWindowCommand}"
+                            Foreground="White"
+                            Style="{StaticResource LoginButtonTheme}" />
+                </StackPanel>
 
-                        <Label Content="Wrong credentials!"
-                               FontWeight="Bold"
-                               Foreground="Black"
-                               VerticalAlignment="Center"
-                               FontSize="12"
-                               Margin="0,0,0,0" />
-                    </Grid>
 
 
 
-                </Grid>
+
+                <ToggleButton Content="Show"
+                              FontFamily="/Fonts/#Poppins"
+                              Foreground="#4e5e67"
+                              Width="30"
+                              Height="20"
+                              FontSize="11"
+                              x:Name="tglBtnShowHide"
+                              Margin="-35,17,0,0"
+                              Cursor="Hand"
+                              Click="tglBtnShowHide_Click"
+                              Style="{StaticResource GeneralToggleButtonTheme}" />
 
 
-            </Grid>
+
+            </StackPanel>
+
+
+
+
+
+
+
 
         </Grid>
+
+
+
+
 
     </Border>
 </Window>

@@ -72,7 +72,7 @@ namespace Tourism.MainPage
         {
 
             //ShowMain();
-           ShowLogin();
+            ShowLogin();
 
 
             base.OnStartup(e);

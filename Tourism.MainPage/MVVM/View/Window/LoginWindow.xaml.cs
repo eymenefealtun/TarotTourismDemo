@@ -9,6 +9,7 @@ using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 using Tourism.MainPage.MVVM.ViewModel;
 using Tourism.MainPage.Services;
+using Tourism.MainPage.Services.Authentications;
 
 namespace Tourism.MainPage.MVVM.View.Window
 {
@@ -51,6 +52,8 @@ namespace Tourism.MainPage.MVVM.View.Window
             services.AddSingleton<MainWindowViewModel>();
             services.AddSingleton<DuplicateOperationViewModel>();
             services.AddSingleton<LoginViewModel>();
+
+            services.AddScoped<IAuthenticator, Authenticator>(); //
 
             services.AddSingleton<INavigationService, NavigationService>();
 
@@ -123,7 +126,7 @@ namespace Tourism.MainPage.MVVM.View.Window
             #endregion
 
             string usernameByUser = tboxUsername.Text;
-            string passwordByUser = tboxPassword.Password;
+            string passwordByUser = pboxPassword.Password;
 
             Mouse.OverrideCursor = Cursors.Wait;
             Thread.Sleep(100);
@@ -157,9 +160,26 @@ namespace Tourism.MainPage.MVVM.View.Window
 
         }
 
-     
+        private void tglBtnShowHide_Click(object sender, RoutedEventArgs e)
+        {
+                        
+            // pboxPassword.CaretIndex = pboxPassword.Password.Length;
 
+            if (tglBtnShowHide.IsChecked == true)
+            {
+                tboxPassword.Text = pboxPassword.Password;
+                tglBtnShowHide.Content = "Hide";
+                tboxPassword.Visibility = Visibility.Visible;
 
+            }
+            if (tglBtnShowHide.IsChecked == false)
+            {
+                // tboxPassword.Text = pboxPassword.Password;
+                tglBtnShowHide.Content = "Show";
+                tboxPassword.Visibility = Visibility.Hidden;
+
+            }
+        }
 
 
     }

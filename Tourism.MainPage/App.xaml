@@ -57,7 +57,9 @@
                 <ResourceDictionary Source="Theme/GeneralScrollViewerTheme.xaml" />
                 <ResourceDictionary Source="Theme/ComboBoxWithTBoxToggleButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/ComboBoxWithTBoxTheme.xaml" />
-                <ResourceDictionary Source="Theme/GeneralIconButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralIconButtonTheme.xaml" />           
+                <ResourceDictionary Source="Theme/GeneralIconToggleButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralToggleButtonTheme.xaml" />
 
 
                 <ResourceDictionary Source="Theme/Tools/ExcelButtonTheme.xaml" />
