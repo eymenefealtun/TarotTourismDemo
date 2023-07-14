@@ -11,6 +11,7 @@ using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
 using Tourism.MainPage.MVVM.ViewModel;
 using Tourism.MainPage.Services;
+using Tourism.MainPage.Services.Authentications;
 
 namespace Tourism.MainPage.MVVM.View.Window
 {
@@ -106,8 +107,10 @@ namespace Tourism.MainPage.MVVM.View.Window
             _firstSubButtonsWithSubs = firstSubButtonsWithSubs;
 
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
-            string username = _operatorUserService.GetByUserId(operatorUserId).Username;
+            string username = _operatorUserService.GetByUserId(operatorUserId).FirstName;
             tblockUsername.Text = username;
+
+            int userLevel = User.CurrentUser().UserLevelId;
 
         }
 
@@ -351,9 +354,18 @@ namespace Tourism.MainPage.MVVM.View.Window
 
         private void btnMenuButtonTheme_Click(object sender, RoutedEventArgs e)
         {
-            LooseFocusOfSubButton(btnModifications);
-            LooseFocusOfSubButton(btnIncome);
-            btnSettings.IsChecked = false;
+            try
+            {
+                throw new Exception();
+                LooseFocusOfSubButton(btnModifications);
+                LooseFocusOfSubButton(btnIncome);
+                btnSettings.IsChecked = false;
+            }
+            catch (Exception exception)
+            {
+                MessageBox.Show(exception.Message);
+            }
+
         }
 
 

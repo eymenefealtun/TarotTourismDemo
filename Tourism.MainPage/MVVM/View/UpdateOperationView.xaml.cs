@@ -7,6 +7,7 @@ using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
+using Tourism.MainPage.Services.Authentications;
 using Operation = Tourism.Entities.Concrete.Operation;
 
 namespace Tourism.MainPage.MVVM.View
@@ -354,7 +355,7 @@ namespace Tourism.MainPage.MVVM.View
                 Note = new TextRange(rbtboxNote.Document.ContentStart, rbtboxNote.Document.ContentEnd).Text,
                 CreatedDate = _createdDate,
                 LastUpdated = DateTime.Now,
-                LastUpdatedBy = _updateUserId,
+                LastUpdatedBy = User.CurrentUser().Id,//_updateUserId, //
                 CreatedBy = _createUserId,
                 CurrencyId = Convert.ToInt32(cboxCurrency.SelectedValue),
                 SubCategoryId = Convert.ToInt32(cboxSubCategory.SelectedValue),

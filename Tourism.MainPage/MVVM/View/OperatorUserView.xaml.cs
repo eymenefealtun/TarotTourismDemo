@@ -15,6 +15,7 @@ namespace Tourism.MainPage.MVVM.View
         IUserLevelService _userLevelService;
         IOperatorService _operatorService;
         IOperatorUserService _operatorUserService;
+        OperatorUser _operatorUser;
         public OperatorUserView()
         {
             InitializeComponent();
@@ -54,6 +55,11 @@ namespace Tourism.MainPage.MVVM.View
                         PasswordHash = tboxAddPassword.Text,
                         OperatorId = Convert.ToInt32(cboxAddOperator.SelectedValue),
                         UserLevelId = Convert.ToInt32(cboxAddLevel.SelectedValue),
+                        FirstName = tboxAddFirstName.Text,
+                        LastName = tboxAddLastName.Text,
+                        DateJoined = DateTime.Now,
+                        Email = tboxAddEmail.Text,
+                        IsActive = true,
                     };
 
                     _operatorUserService.Add(operatorUser);
@@ -96,7 +102,7 @@ namespace Tourism.MainPage.MVVM.View
             cboxUpdateLevel.SelectedIndex = -1;
             cboxUpdateOperator.SelectedIndex = -1;
         }
-        private int _userId;
+
         private void btnEdit_Click(object sender, RoutedEventArgs e)
         {
             btnUpdateUser.Visibility = Visibility.Visible;
@@ -111,12 +117,15 @@ namespace Tourism.MainPage.MVVM.View
             Button button = sender as Button;
             OperatorUserFull operatorUserFull = button.CommandParameter as OperatorUserFull;
             var user = _operatorUserService.GetByUserId(operatorUserFull.OperatorUserId);
+            _operatorUser = user;
 
             cboxUpdateLevel.SelectedItem = cboxUpdateLevel.Items.OfType<UserLevel>().FirstOrDefault(x => x.Id == user.UserLevelId);
             cboxUpdateOperator.SelectedItem = cboxUpdateOperator.Items.OfType<Operator>().FirstOrDefault(x => x.Id == user.OperatorId);
             tboxUpdatePassword.Text = user.PasswordHash;
             tboxUpdateUsername.Text = user.Username;
-            _userId = user.Id;
+            tboxUpdateEmail.Text = user.Email;
+            tboxUpdateFirstName.Text = user.FirstName;
+            tboxUpdateLastName.Text = user.LastName;
         }
 
         private void btnCancelUpdate_Click(object sender, RoutedEventArgs e)
@@ -133,11 +142,17 @@ namespace Tourism.MainPage.MVVM.View
                 {
                     var user = new OperatorUser()
                     {
-                        Id = _userId,
+                        Id = _operatorUser.Id,
                         Username = tboxUpdateUsername.Text,
                         PasswordHash = tboxUpdatePassword.Text,
                         UserLevelId = Convert.ToInt32(cboxUpdateLevel.SelectedValue),
                         OperatorId = Convert.ToInt32(cboxUpdateOperator.SelectedValue),
+                        FirstName = tboxUpdateFirstName.Text,
+                        LastName = tboxUpdateLastName.Text,
+                        DateJoined = _operatorUser.DateJoined,
+                        Email = tboxUpdateEmail.Text,
+
+                        IsActive = true, //this is going to be refactored (User is going to be able to modift activation of the user)
                     };
 
                     _operatorUserService.Update(user);

@@ -96,20 +96,26 @@
                         x:Name="stckAddNewUser"
                         Grid.Row="1"
                         Background="Transparent"
-                        Visibility="Hidden"
+                        Visibility="Collapsed"
                         Margin="469,30,0,0"
-                        Width="150"
-                        Height="150">
+                        Width="250"
+                        Height="300">
 
                 <Border  Background="#5834aa"
-                         Width="150"
-                         Height="150"
+                         Width="250"
+                         Height="300"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Center"
                          CornerRadius="0,10,0,10">
-                    <Grid  Width="150"
-                           Height="150">
+                    <Grid  Width="250"
+                           Height="300">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+
                             <RowDefinition Height="30" />
                             <RowDefinition Height="30" />
                             <RowDefinition Height="30" />
@@ -145,9 +151,31 @@
                                    Grid.Row="3"
                                    VerticalAlignment="Center"
                                    Margin="1" />
+                        <TextBlock Text="First Name"
+                                   FontSize="10"
+                                   FontFamily="/Fonts/#Poppins"
+                                   Foreground="#ffffff"
+                                   Grid.Row="4"
+                                   VerticalAlignment="Center"
+                                   Margin="1" />
+                        <TextBlock Text="Last Name"
+                                   FontSize="10"
+                                   FontFamily="/Fonts/#Poppins"
+                                   Foreground="#ffffff"
+                                   Grid.Row="5"
+                                   VerticalAlignment="Center"
+                                   Margin="1" />
+                        <TextBlock Text="Email"
+                                   FontSize="10"
+                                   FontFamily="/Fonts/#Poppins"
+                                   Foreground="#ffffff"
+                                   Grid.Row="6"
+                                   VerticalAlignment="Center"
+                                   Margin="1" />
+
 
                         <ComboBox x:Name="cboxAddLevel"
-                                  Width="90"
+                                  Width="150"
                                   Height="20"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
@@ -158,7 +186,7 @@
                                   Style="{StaticResource ComboBoxTheme}" />
 
                         <ComboBox x:Name="cboxAddOperator"
-                                  Width="90"
+                                  Width="150"
                                   Height="20"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
@@ -170,29 +198,56 @@
 
                         <TextBox  x:Name="tboxAddUserName"
                                   Height="20"
-                                  Width="90"
+                                  Width="150"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
                                   Grid.Row="2"
                                   Margin="0,0,5,0"
                                   Style="{StaticResource GeneralTextboxTheme}" />
 
+                        <TextBox  x:Name="tboxAddFirstName"
+                                  Height="20"
+                                  Width="150"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Row="4"
+                                  Margin="0,0,5,0"
+                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                        <TextBox  x:Name="tboxAddLastName"
+                                  Height="20"
+                                  Width="150"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Row="5"
+                                  Margin="0,0,5,0"
+                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                        <TextBox  x:Name="tboxAddEmail"
+                                  Height="20"
+                                  Width="150"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Row="6"
+                                  Margin="0,0,5,0"
+                                  Style="{StaticResource GeneralTextboxTheme}" />
+
 
                         <TextBox  x:Name="tboxAddPassword"
                                   Height="20"
-                                  Width="90"
+                                  Width="150"
                                   Grid.Row="3"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
                                   Margin="0,0,5,0"
                                   Style="{StaticResource GeneralTextboxTheme}" />
-                        <Button Grid.Row="4"
+                        <Button Grid.Row="9"
                                 HorizontalAlignment="Right"
                                 x:Name="btnCancelNewUser"
                                 Margin="0,0,37,0"
                                 Style="{StaticResource CancelButtonTheme}"
                                 Click="btnCancelNewUser_Click" />
-                        <Button Grid.Row="4"
+                        <Button Grid.Row="9"
                                 x:Name="btnSaveNewUser"
                                 Content="&#xE74E;"
                                 Style="{StaticResource SaveButtonTheme}"
@@ -213,7 +268,7 @@
                           Grid.Column="1"
                           Grid.Row="1"
                           Margin="405,40,0,0"
-                          Visibility="Hidden"
+                          Visibility="Collapsed"
                           Width="100"
                           Content="Update the user"
                           Style="{StaticResource UpdateUserButtonTheme}" />
@@ -224,20 +279,26 @@
                         x:Name="stckUpdateUser"
                         Grid.Row="1"
                         Background="Transparent"
-                        Visibility="Hidden"
+                        Visibility="Collapsed"
                         Margin="469,70,0,0"
-                        Width="150"
-                        Height="150">
+                        Width="250"
+                        Height="300">
 
                 <Border  Background="#c9ff4e"
-                         Width="150"
-                         Height="150"
+                         Width="250"
+                         Height="300"
                          VerticalAlignment="Center"
                          HorizontalAlignment="Center"
                          CornerRadius="0,10,0,10">
-                    <Grid  Width="150"
-                           Height="150">
+                    <Grid  Width="250"
+                           Height="300">
                         <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+
                             <RowDefinition Height="30" />
                             <RowDefinition Height="30" />
                             <RowDefinition Height="30" />
@@ -273,9 +334,30 @@
                                    Grid.Row="3"
                                    VerticalAlignment="Center"
                                    Margin="1" />
+                        <TextBlock Text="First Name"
+                                   FontSize="10"
+                                   FontFamily="/Fonts/#Poppins"
+                                   Foreground="#535050"
+                                   Grid.Row="4"
+                                   VerticalAlignment="Center"
+                                   Margin="1" />
+                        <TextBlock Text="Last Name"
+                                   FontSize="10"
+                                   FontFamily="/Fonts/#Poppins"
+                                   Foreground="#535050"
+                                   Grid.Row="5"
+                                   VerticalAlignment="Center"
+                                   Margin="1" />
+                        <TextBlock Text="Email"
+                                   FontSize="10"
+                                   FontFamily="/Fonts/#Poppins"
+                                   Foreground="#535050"
+                                   Grid.Row="6"
+                                   VerticalAlignment="Center"
+                                   Margin="1" />
 
                         <ComboBox x:Name="cboxUpdateLevel"
-                                  Width="90"
+                                  Width="150"
                                   Height="20"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
@@ -286,7 +368,7 @@
                                   Style="{StaticResource ComboBoxTheme}" />
 
                         <ComboBox x:Name="cboxUpdateOperator"
-                                  Width="90"
+                                  Width="150"
                                   Height="20"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
@@ -298,7 +380,7 @@
 
                         <TextBox  x:Name="tboxUpdateUsername"
                                   Height="20"
-                                  Width="90"
+                                  Width="150"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
                                   Grid.Row="2"
@@ -308,19 +390,45 @@
 
                         <TextBox  x:Name="tboxUpdatePassword"
                                   Height="20"
-                                  Width="90"
+                                  Width="150"
                                   Grid.Row="3"
                                   VerticalAlignment="Center"
                                   HorizontalAlignment="Right"
                                   Margin="0,0,5,0"
                                   Style="{StaticResource GeneralTextboxTheme}" />
-                        <Button Grid.Row="4"
+                        <TextBox  x:Name="tboxUpdateFirstName"
+                                  Height="20"
+                                  Width="150"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Row="4"
+                                  Margin="0,0,5,0"
+                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                        <TextBox  x:Name="tboxUpdateLastName"
+                                  Height="20"
+                                  Width="150"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Row="5"
+                                  Margin="0,0,5,0"
+                                  Style="{StaticResource GeneralTextboxTheme}" />
+
+                        <TextBox  x:Name="tboxUpdateEmail"
+                                  Height="20"
+                                  Width="150"
+                                  VerticalAlignment="Center"
+                                  HorizontalAlignment="Right"
+                                  Grid.Row="6"
+                                  Margin="0,0,5,0"
+                                  Style="{StaticResource GeneralTextboxTheme}" />
+                        <Button Grid.Row="9"
                                 HorizontalAlignment="Right"
                                 x:Name="btnCancelUpdate"
                                 Margin="0,0,37,0"
                                 Style="{StaticResource CancelButtonTheme}"
                                 Click="btnCancelUpdate_Click" />
-                        <Button Grid.Row="4"
+                        <Button Grid.Row="9"
                                 x:Name="btnSaveUpdate"
                                 Content="&#xE74E;"
                                 Style="{StaticResource SaveButtonTheme}"

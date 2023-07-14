@@ -5,6 +5,7 @@ using System.Windows.Documents;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
+using Tourism.MainPage.Services.Authentications;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -49,8 +50,8 @@ namespace Tourism.MainPage.MVVM.View
                         StartDate = (DateTime)datePickStartDate.SelectedDate,
                         EndDate = Convert.ToDateTime(datePickEndDate.SelectedDate),
                         Description = new TextRange(rbtboxDescription.Document.ContentStart, rbtboxDescription.Document.ContentEnd).Text,
-                        LastUpdatedBy = 1,
-                        CreatedBy = 1,
+                        LastUpdatedBy = User.CurrentUser().Id,
+                        CreatedBy = User.CurrentUser().Id,   
                         CreatedDate = DateTime.Now,
                         LastUpdated = DateTime.Now,
                         CurrencyId = Convert.ToInt32(cboxCurrency.SelectedValue),

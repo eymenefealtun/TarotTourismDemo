@@ -63,6 +63,8 @@ namespace Tourism.MainPage.MVVM.View.Window
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
             _authenticationService = Instancefactory.GetInstance<IAuthenticationService>();
             _passwordHasher = new PasswordHasher();
+
+
         }
 
 
@@ -149,7 +151,9 @@ namespace Tourism.MainPage.MVVM.View.Window
             else if (passwordResult == PasswordVerificationResult.Success)
             {
                 lblWrongCredentials.Visibility = Visibility.Collapsed;
-                _operatorUserId = user.Id;
+
+                User.currentOperatorUser = user; //Current user is set in order to use it in all over the app
+                _operatorUserId = User.CurrentUser().Id;
                 MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
                 mainWindow.Show();
                 this.Close();
@@ -162,7 +166,7 @@ namespace Tourism.MainPage.MVVM.View.Window
 
         private void tglBtnShowHide_Click(object sender, RoutedEventArgs e)
         {
-                        
+
             // pboxPassword.CaretIndex = pboxPassword.Password.Length;
 
             if (tglBtnShowHide.IsChecked == true)
@@ -180,6 +184,10 @@ namespace Tourism.MainPage.MVVM.View.Window
 
             }
         }
+
+
+
+
 
 
     }

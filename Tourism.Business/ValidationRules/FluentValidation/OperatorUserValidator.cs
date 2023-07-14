@@ -10,7 +10,7 @@ namespace Tourism.Business.ValidationRules.FluentValidation
 
             RuleFor(x => x.Username).NotNull().NotEmpty().MaximumLength(50).WithMessage("Username is not in the correct fomat");
             RuleFor(x => x.PasswordHash).NotNull().NotEmpty().MaximumLength(50).WithMessage("Password is not in the correct fomat");
-
+            RuleFor(x => x.Email).EmailAddress().NotNull().NotEmpty().WithMessage("Invalid email");
         }
 
 

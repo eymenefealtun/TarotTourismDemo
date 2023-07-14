@@ -6,6 +6,7 @@ using Tourism.Entities.Concrete;
 using System.Windows;
 using System.Collections.Generic;
 using System;
+using Tourism.MainPage.Services.Authentications;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -159,8 +160,8 @@ namespace Tourism.MainPage.MVVM.View
                             EndDate = Convert.ToDateTime(_endDates[i].SelectedDate),
                             Description = _operation.Description,
                             Note = null,
-                            CreatedBy = _operation.CreatedBy,           //Going to be updated
-                            LastUpdatedBy = _operation.LastUpdatedBy,   //Going to be updated
+                            CreatedBy = User.CurrentUser().Id,
+                            LastUpdatedBy = User.CurrentUser().Id,//_operation.LastUpdatedBy,   //Going to be updated
                             CurrencyId = _operation.CurrencyId,
                             SubCategoryId = _operation.SubCategoryId,
                             OperationPrice = new OperationPrice()
@@ -173,7 +174,7 @@ namespace Tourism.MainPage.MVVM.View
                                 Child = _operationPrice.Child,
                             }
 
-                        });
+                        }) ;
                     }
                     _operationService.BulkInsert(operation);
                     MessageBox.Show("Duplication succeed!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);

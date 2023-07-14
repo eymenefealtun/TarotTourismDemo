@@ -80,7 +80,7 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
                     if (e.State == EntityState.Added)
                     {
                         operation.CreatedDate = DateTime.Now;
-                        //operation.CreatedBy =
+                        //operation.CreatedBy = User.currentOperatorUser.
                         operation.LastUpdated = operation.CreatedDate;
                         operation.IsActive = true;
                     }
