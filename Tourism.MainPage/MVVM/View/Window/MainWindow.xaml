@@ -17,7 +17,7 @@
         Visibility="Visible">
     <Window.Resources>
     </Window.Resources>
-    
+
     <Border x:Name="mainWindowMainBorder">
 
 
@@ -93,11 +93,12 @@
                                   Click="btnModifications_Click" />
                     <RadioButton Content="OperatorUser"
                                  Height="30"
+                                 Click="btnModificationsSubMenu_Click"
                                  x:Name="btnSubOperatorUser"
                                  Visibility="Collapsed"
-                                 Click="btnModificationsSubMenu_Click"
-                                 Command="{Binding OperatorUserViewCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
+
+                    <!--Command="{Binding OperatorUserViewCommand}"-->
 
 
                     <!--#region Categories -->

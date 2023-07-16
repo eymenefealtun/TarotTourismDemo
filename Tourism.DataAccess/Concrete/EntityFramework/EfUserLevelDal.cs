@@ -4,7 +4,7 @@ using Tourism.Entities.Abstract;
 
 namespace Tourism.Entities.Concrete
 {
-    public class EfUserLevelDal : EfEntityRepositoryBase<UserLevel, AppDbContext>, IUserLevelDal
+    public class EfUserLevelDal// : EfEntityRepositoryBase<UserLevel, AppDbContext>, IUserLevelDal
     {       
     }
 }

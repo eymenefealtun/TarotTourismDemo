@@ -15,7 +15,7 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<OperatorUser> OperatorUsers { get; set; }
         public DbSet<Operator> Operators { get; set; }
-        public DbSet<UserLevel> UserLevels { get; set; }
+        // public DbSet<UserLevel> UserLevels { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
         public DbSet<AgencyUser> AgencyUsers { get; set; }
         public DbSet<Agency> Agencies { get; set; }
@@ -24,6 +24,8 @@ namespace Tourism.DataAccess.Concrete.EntityFramework
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Preference> Preferences { get; set; }
         public DbSet<BackgroundTheme> BackgroundThemes { get; set; }
+        public DbSet<OperatorUserRole> OperatorUserRoles { get; set; }              
+        public DbSet<Role> Roles { get; set; }
 
 
         #region Models

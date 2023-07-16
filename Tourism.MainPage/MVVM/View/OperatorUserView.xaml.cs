@@ -26,9 +26,9 @@ namespace Tourism.MainPage.MVVM.View
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
 
             dgwOperatorUser.ItemsSource = _operatorFullService.GetOperatorUsers();
-            cboxAddLevel.ItemsSource = _userLevelService.GetAll();
+            //cboxAddLevel.ItemsSource = _userLevelService.GetAll();
             cboxAddOperator.ItemsSource = _operatorService.GetAll();
-            cboxUpdateLevel.ItemsSource = _userLevelService.GetAll();
+            //cboxUpdateLevel.ItemsSource = _userLevelService.GetAll();
             cboxUpdateOperator.ItemsSource = _operatorService.GetAll();
         }
 
@@ -54,7 +54,7 @@ namespace Tourism.MainPage.MVVM.View
                         Username = tboxAddUserName.Text,
                         PasswordHash = tboxAddPassword.Text,
                         OperatorId = Convert.ToInt32(cboxAddOperator.SelectedValue),
-                        UserLevelId = Convert.ToInt32(cboxAddLevel.SelectedValue),
+                        //UserLevelId = Convert.ToInt32(cboxAddLevel.SelectedValue),
                         FirstName = tboxAddFirstName.Text,
                         LastName = tboxAddLastName.Text,
                         DateJoined = DateTime.Now,
@@ -119,7 +119,7 @@ namespace Tourism.MainPage.MVVM.View
             var user = _operatorUserService.GetByUserId(operatorUserFull.OperatorUserId);
             _operatorUser = user;
 
-            cboxUpdateLevel.SelectedItem = cboxUpdateLevel.Items.OfType<UserLevel>().FirstOrDefault(x => x.Id == user.UserLevelId);
+           // cboxUpdateLevel.SelectedItem = cboxUpdateLevel.Items.OfType<UserLevel>().FirstOrDefault(x => x.Id == user.UserLevelId);
             cboxUpdateOperator.SelectedItem = cboxUpdateOperator.Items.OfType<Operator>().FirstOrDefault(x => x.Id == user.OperatorId);
             tboxUpdatePassword.Text = user.PasswordHash;
             tboxUpdateUsername.Text = user.Username;
@@ -145,7 +145,7 @@ namespace Tourism.MainPage.MVVM.View
                         Id = _operatorUser.Id,
                         Username = tboxUpdateUsername.Text,
                         PasswordHash = tboxUpdatePassword.Text,
-                        UserLevelId = Convert.ToInt32(cboxUpdateLevel.SelectedValue),
+                        //UserLevelId = Convert.ToInt32(cboxUpdateLevel.SelectedValue),
                         OperatorId = Convert.ToInt32(cboxUpdateOperator.SelectedValue),
                         FirstName = tboxUpdateFirstName.Text,
                         LastName = tboxUpdateLastName.Text,

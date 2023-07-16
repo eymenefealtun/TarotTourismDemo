@@ -38,7 +38,7 @@ namespace Tourism.Business.DependencyResolvers.Ninject
             Bind<ISubCategoryDal>().To<EfSubCategoryDal>().InSingletonScope();
 
             Bind<IUserLevelService>().To<UserLevelManager>().InSingletonScope();
-            Bind<IUserLevelDal>().To<EfUserLevelDal>().InSingletonScope();
+         //   Bind<IUserLevelDal>().To<EfUserLevelDal>().InSingletonScope();
 
             Bind<ICurrencyService>().To<CurrencyManager>().InSingletonScope();
             Bind<ICurrencyDal>().To<EfCurrencyDal>().InSingletonScope();

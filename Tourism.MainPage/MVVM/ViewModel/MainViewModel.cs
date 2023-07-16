@@ -1,7 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Media;
+using Tourism.Core.Exceptions;
 using Tourism.MainPage.Core;
 using Tourism.MainPage.Services;
+using Tourism.MainPage.Services.Authentications;
 
 namespace Tourism.MainPage.MVVM.ViewModel
 {
@@ -58,27 +60,32 @@ namespace Tourism.MainPage.MVVM.ViewModel
             }
         }
         public GlobalViewModel Global { get; } = GlobalViewModel.Instance;
-        //public MainViewModel()
-        //{
-        //    Navigation.NavigateTo<HomeViewModel>();
-        //    HomeViewCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, canExecute: o => true);
-        //    OperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperationViewModel>(); }, canExecute: o => true);
-        //    CustomerViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerViewModel>(); }, canExecute: o => true);
-        //    SettingsViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, canExecute: o => true);
-        //    CustomerOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerOperationViewModel>(); }, canExecute: o => true);
-        //    AddOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<AddOperationViewModel>(); }, canExecute: o => true);
-        //    UpdateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<UpdateOperationViewModel>(); }, canExecute: o => true);
-        //    ReservationDetailViewCommand = new RelayCommand(o => { Navigation.NavigateTo<ReservationDetailViewModel>(); }, canExecute: o => true);
-        //    OperatorUserViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperatorUserViewModel>(); }, canExecute: o => true);
-        //    CurrencyViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CurrencyViewModel>(); }, canExecute: o => true);
-        //    MainCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<MainCategoryViewModel>(); }, canExecute: o => true);
-        //    SubCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SubCategoryViewModel>(); }, canExecute: o => true);
-        //    GeneralIncomeOutgoingCommand = new RelayCommand(o => { Navigation.NavigateTo<GeneralIncomeOutgoingViewModel>(); }, canExecute: o => true);
-        //    EmptyPageViewCommand = new RelayCommand(o => { Navigation.NavigateTo<EmptyPageViewModel>(); }, canExecute: o => true);
-        //    DuplicateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<DuplicateOperationViewModel>(); }, canExecute: o => true);
-        //    LoginViewCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
-        //    MainWindowCommand = new RelayCommand(o => { Navigation.NavigateTo<MainWindowViewModel>(); }, canExecute: o => true);
-        //}
+
+        public enum Statusses
+        {
+            Worker,
+        }
+
+        int _homeViewCommandAuthLevel = 1;
+        int _operationViewCommandAuthLevel = 1;
+        int _customerViewCommandAuthLevel = 1;
+        int _settingsViewCommandAuthLevel = 1;
+        int _customerOperationViewCommandAuthLevel = 1;
+        int _addOperationViewCommandAuthLevel = 1;
+        int _operatorUserViewAuthLevel = 1;
+        int _updateOperationViewCommandAuthLevel = 1;
+        int _reservationDetailViewCommand = 1;
+        int _operatorUserViewCommandAuthLevel = 1;
+
+        int _currencyViewCommand = 1;
+        int _mainCategoryViewCommand = 1;
+        int _subCategoryViewCommand = 1;
+        int _generalIncomeOutgoingCommand = 1;
+        int _emptyPageViewCommand = 1;
+        int _loginViewCommand = 1;
+        int _mainWindowCommand;
+
+
         public MainViewModel(INavigationService navService)
         {
             Navigation = navService;
@@ -94,7 +101,17 @@ namespace Tourism.MainPage.MVVM.ViewModel
             AddOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<AddOperationViewModel>(); }, canExecute: o => true);
             UpdateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<UpdateOperationViewModel>(); }, canExecute: o => true);
             ReservationDetailViewCommand = new RelayCommand(o => { Navigation.NavigateTo<ReservationDetailViewModel>(); }, canExecute: o => true);
-            OperatorUserViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperatorUserViewModel>(); }, canExecute: o => true);
+
+            OperatorUserViewCommand = new RelayCommand(o =>
+            {
+                //if (User.CurrentUser().UserLevelId <= _operatorUserViewCommandAuthLevel)
+                    Navigation.NavigateTo<OperatorUserViewModel>();                 
+                //else
+                //    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
+
+
             CurrencyViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CurrencyViewModel>(); }, canExecute: o => true);
             MainCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<MainCategoryViewModel>(); }, canExecute: o => true);
             SubCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SubCategoryViewModel>(); }, canExecute: o => true);

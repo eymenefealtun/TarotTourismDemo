@@ -3,7 +3,7 @@ using Tourism.Entities.Concrete;
 
 namespace Tourism.Entities.Abstract
 {
-    public interface IUserLevelDal : IEntityRepository<UserLevel>
+    public interface IUserLevelDal //: IEntityRepository<UserLevel>
     {
 
     }       

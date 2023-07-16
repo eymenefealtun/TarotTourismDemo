@@ -8,7 +8,9 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using Tourism.Business.Authentication;
 using Tourism.Business.DependencyResolvers.Ninject;
+using Tourism.Core.Exceptions;
 using Tourism.Entities.Concrete;
+using Tourism.MainPage.Core;
 using Tourism.MainPage.MVVM.ViewModel;
 using Tourism.MainPage.Services;
 using Tourism.MainPage.Services.Authentications;
@@ -110,7 +112,7 @@ namespace Tourism.MainPage.MVVM.View.Window
             string username = _operatorUserService.GetByUserId(operatorUserId).FirstName;
             tblockUsername.Text = username;
 
-            int userLevel = User.CurrentUser().UserLevelId;
+            //int userLevel = User.CurrentUser().UserLevelId;
 
         }
 
@@ -356,7 +358,7 @@ namespace Tourism.MainPage.MVVM.View.Window
         {
             try
             {
-                throw new Exception();
+                //throw new Exception();
                 LooseFocusOfSubButton(btnModifications);
                 LooseFocusOfSubButton(btnIncome);
                 btnSettings.IsChecked = false;
@@ -371,6 +373,25 @@ namespace Tourism.MainPage.MVVM.View.Window
 
         private void btnModificationsSubMenu_Click(object sender, RoutedEventArgs e)
         {
+            var viewModel = (MainViewModel)DataContext;
+
+            if (sender == btnSubOperatorUser)
+            {
+                try
+                {
+                    viewModel.OperatorUserViewCommand.Execute(true);
+                }
+                catch (UserNotAuthorizedException exception)
+                {
+                    MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+            }
+
+
+
+
+
+
             if (sender.GetType() == typeof(RadioButton))
             {
                 RadioButton radioButton = (RadioButton)sender;
