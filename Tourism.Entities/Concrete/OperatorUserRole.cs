@@ -9,5 +9,6 @@ namespace Tourism.Entities.Concrete
         public int RoleId { get; set; }                         
 
         public OperatorUser OperatorUser { get; set; }              
+        public Role Roles { get; set; }                         
     }
 }

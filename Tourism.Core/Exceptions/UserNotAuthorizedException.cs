@@ -7,7 +7,7 @@
         {
             get
             {
-                return "Authorization failed";
+                return "You are not authorized";            
             }
         }
         public UserNotAuthorizedException()

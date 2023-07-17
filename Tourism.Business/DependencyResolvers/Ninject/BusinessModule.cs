@@ -1,6 +1,8 @@
 ﻿using Ninject.Modules;
+using Tourism.Business.Abstract;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.Authentication;
+using Tourism.Business.Concrete;
 using Tourism.Business.Concrete.Models;
 using Tourism.DataAccess.Abstract;
 using Tourism.DataAccess.Abstract.Models;
@@ -38,7 +40,16 @@ namespace Tourism.Business.DependencyResolvers.Ninject
             Bind<ISubCategoryDal>().To<EfSubCategoryDal>().InSingletonScope();
 
             Bind<IUserLevelService>().To<UserLevelManager>().InSingletonScope();
-         //   Bind<IUserLevelDal>().To<EfUserLevelDal>().InSingletonScope();
+            //   Bind<IUserLevelDal>().To<EfUserLevelDal>().InSingletonScope();
+
+
+
+            Bind<IOperatorUserRoleService>().To<OperatorUserRoleManager>().InSingletonScope();
+            Bind<IOperatorUserRoleDal>().To<EfOperatorUserRoleDal>().InSingletonScope();
+
+            Bind<IRoleService>().To<RoleManager>().InSingletonScope();
+            Bind<IRoleDal>().To<EfRoleDal>().InSingletonScope();
+
 
             Bind<ICurrencyService>().To<CurrencyManager>().InSingletonScope();
             Bind<ICurrencyDal>().To<EfCurrencyDal>().InSingletonScope();

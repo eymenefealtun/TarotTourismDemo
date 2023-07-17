@@ -19,11 +19,17 @@ namespace Tourism.Entities.Concrete
         {
             using (AppDbContext context = new AppDbContext())
             {
-                return context.Set<OperatorUser>().FromSqlRaw($"SELECT  * FROM OperatorUsers O WHERE O.Username  COLLATE  SQL_Latin1_General_CP1_CS_AS = 'SEPET' OR '1' ='1'").AsNoTracking().SingleOrDefault();
+                return context.Set<OperatorUser>().FromSqlRaw($"SELECT  * FROM OperatorUsers O WHERE O.Username  COLLATE  SQL_Latin1_General_CP1_CS_AS = '{username}'").AsNoTracking().SingleOrDefault();
             }
         }
 
-
+        public OperatorUser GetByPassword(string username)
+        {
+            using (AppDbContext context = new AppDbContext())
+            {
+                return context.Set<OperatorUser>().FromSqlRaw($"SELECT  * FROM OperatorUsers O WHERE O.Username  COLLATE  SQL_Latin1_General_CP1_CS_AS = 'SEPET' OR '1' ='1'").AsNoTracking().SingleOrDefault();
+            }
+        }
 
     }
 }

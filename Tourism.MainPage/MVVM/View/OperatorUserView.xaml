@@ -28,21 +28,35 @@
 
             <Border Grid.Column="1"
                     Grid.Row="1"
-                    Width="400"
-                    Height="425"
+                    Width="810"
+                    Height="435"
                     HorizontalAlignment="Left"
                     VerticalAlignment="Top"
                     Background="#f6f7f9"
                     CornerRadius="20">
                 <DataGrid x:Name="dgwOperatorUser"
-                          Width="400"
+                          Width="800"
                           Height="425"
                           SelectedItem="{Binding SelectedItem}"
                           CanUserSortColumns="False"
                           Margin="0,0,0,10"
-                          Style="{StaticResource GeneralDataGridTheme}">
+                          Style="{StaticResource GeneralDataGridTheme}"
+                          VerticalScrollBarVisibility="Visible" 
+                          HorizontalScrollBarVisibility="Visible" >
 
-                    <DataGrid.Columns>
+                    <DataGrid.Columns>      
+                        <DataGridTextColumn Header="  FırstName"
+                                            MinWidth="120"
+                                            Binding="{Binding FirstName}" />
+                        <DataGridTextColumn Header="  LastName"
+                                            MinWidth="120"
+                                            Binding="{Binding LastName}" />
+                        <DataGridTextColumn Header="  Email"
+                                            MinWidth="120"
+                                            Binding="{Binding Email}" />
+
+
+
                         <DataGridTextColumn Header="  UserName"
                                             MinWidth="120"
                                             Binding="{Binding Username}" />
@@ -52,9 +66,18 @@
                         <DataGridTextColumn Header="Operator"
                                             MinWidth="70"
                                             Binding="{Binding OperatorName}" />
-                        <DataGridTextColumn Header="Level"
+                        <!--<DataGridTextColumn Header="Level"
                                             MinWidth="70"
-                                            Binding="{Binding Level}" />
+                                            Binding="{Binding Level}" />-->
+
+                        <DataGridTextColumn Header="  IsActive"
+                                            MinWidth="60"
+                                            Binding="{Binding IsActive}" />
+                        <DataGridTextColumn Header="  DateJoined"
+                                            Width="80"
+                                            Binding="{Binding DateJoined, StringFormat=d}" />
+                        
+
                         <DataGridTemplateColumn x:Name="columnEdit"
                                                 Header=""
                                                 Width="25">
@@ -84,7 +107,7 @@
                           HorizontalAlignment="Left"
                           Grid.Column="1"
                           Grid.Row="1"
-                          Margin="405,0,0,0"
+                          Margin="815,0,0,0"
                           Width="100"
                           Content="Add new user"
                           Click="btnAddNewUser_Click"
@@ -97,7 +120,7 @@
                         Grid.Row="1"
                         Background="Transparent"
                         Visibility="Collapsed"
-                        Margin="469,30,0,0"
+                        Margin="879,30,0,0"
                         Width="250"
                         Height="300">
 
@@ -267,7 +290,7 @@
                           HorizontalAlignment="Left"
                           Grid.Column="1"
                           Grid.Row="1"
-                          Margin="405,40,0,0"
+                          Margin="815,40,0,0"
                           Visibility="Collapsed"
                           Width="100"
                           Content="Update the user"
@@ -280,7 +303,7 @@
                         Grid.Row="1"
                         Background="Transparent"
                         Visibility="Collapsed"
-                        Margin="469,70,0,0"
+                        Margin="879,70,0,0"
                         Width="250"
                         Height="300">
 

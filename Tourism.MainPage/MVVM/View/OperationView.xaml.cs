@@ -23,7 +23,7 @@ namespace Tourism.MainPage.MVVM.View
         private ICustomerOperationService _customerOperationService;
         private IMainCategoryService _mainCategoryService;
         private ISubCategoryService _subCategoryService;
-        private IUserLevelService _userLevelService;
+        //private IUserLevelService _userLevelService;
         private IOperatorService _operatorService;
         private ICurrencyService _currencyService;
         #endregion  
@@ -47,7 +47,7 @@ namespace Tourism.MainPage.MVVM.View
             _mainCategoryService = Instancefactory.GetInstance<IMainCategoryService>();
             _subCategoryService = Instancefactory.GetInstance<ISubCategoryService>();
             _operationService = Instancefactory.GetInstance<IOperationService>();
-            _userLevelService = Instancefactory.GetInstance<IUserLevelService>();
+            //_userLevelService = Instancefactory.GetInstance<IUserLevelService>();
             _operatorService = Instancefactory.GetInstance<IOperatorService>();
             _currencyService = Instancefactory.GetInstance<ICurrencyService>();
 

@@ -1,9 +1,15 @@
 ﻿using Microsoft.AspNet.Identity;
 using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Net.WebSockets;
+using System.Text;
 using System.Threading;
 using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Input;
+using Tourism.Business.Abstract;
 using Tourism.Business.Authentication;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
@@ -18,6 +24,7 @@ namespace Tourism.MainPage.MVVM.View.Window
         private readonly ServiceProvider _serviceProvider;
         private IOperatorUserService _operatorUserService;
         private IAuthenticationService _authenticationService;
+        private IOperatorUserRoleService _operatorUserRoleService;
 
 
         private readonly IPasswordHasher _passwordHasher;//Asp.Net package downloaded for this
@@ -62,6 +69,7 @@ namespace Tourism.MainPage.MVVM.View.Window
 
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
             _authenticationService = Instancefactory.GetInstance<IAuthenticationService>();
+            _operatorUserRoleService = Instancefactory.GetInstance<IOperatorUserRoleService>();
             _passwordHasher = new PasswordHasher();
 
 
@@ -132,7 +140,9 @@ namespace Tourism.MainPage.MVVM.View.Window
 
             Mouse.OverrideCursor = Cursors.Wait;
             Thread.Sleep(100);
-            var user = _operatorUserService.GetByUsername(usernameByUser);
+            //var user = _operatorUserService.GetByUsername(usernameByUser);
+            var user = _operatorUserService.GetByUsernameSqlRaw(usernameByUser);
+
             Mouse.OverrideCursor = null;
 
             if (user == null)
@@ -140,6 +150,7 @@ namespace Tourism.MainPage.MVVM.View.Window
                 lblWrongCredentials.Visibility = Visibility.Visible;
                 return;
             }
+            var userRoles = _operatorUserRoleService.GetByUserUserId(user.Id);
 
             string hashedPassword = _passwordHasher.HashPassword(user.PasswordHash);
 
@@ -152,7 +163,30 @@ namespace Tourism.MainPage.MVVM.View.Window
             {
                 lblWrongCredentials.Visibility = Visibility.Collapsed;
 
-                User.currentOperatorUser = user; //Current user is set in order to use it in all over the app
+                User._operatorUserRoles = userRoles;
+
+                var userRolesInString = new List<string>();
+
+                for (int i = 0; i < User.GetCurrentUserRoles().Count; i++)
+                {
+                    userRolesInString.Add(User.GetCurrentUserRoles()[i].Roles.Name.ToString());
+                }
+                User._operatorUserRolesInString = userRolesInString;
+
+                User._currentOperatorUser = user; //Current user is set in order to use it in all over the app
+                            
+                #region RoleTrial
+                //var builder = new StringBuilder();
+                ////var list = User.GetCurrentUserRoles();
+                //var list = User.GetCurrentUserRolesInString();
+                //for (int i = 0; i < User.GetCurrentUserRolesInString().Count; i++)
+                //{
+                //    builder.Append(list[i].ToString() + " ");
+                //}
+                //MessageBox.Show(builder.ToString()); 
+                #endregion
+
+
                 _operatorUserId = User.CurrentUser().Id;
                 MainWindow mainWindow = _serviceProvider.GetRequiredService<MainWindow>();
                 mainWindow.Show();

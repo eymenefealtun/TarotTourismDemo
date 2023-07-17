@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Windows;
 using System.Windows.Media;
 using Tourism.Core.Exceptions;
 using Tourism.MainPage.Core;
@@ -85,6 +86,21 @@ namespace Tourism.MainPage.MVVM.ViewModel
         int _loginViewCommand = 1;
         int _mainWindowCommand;
 
+        private bool IsUserAuthorized(string[] requiredRoles)
+        {
+            bool isContain = false;
+            for (int i = 0; i < requiredRoles.Length; i++)
+            {
+                if (User.GetCurrentUserRolesInString().Contains(requiredRoles[i]))
+                {
+                    isContain = true;
+                    break;
+                }
+
+            }
+
+            return isContain;
+        }
 
         public MainViewModel(INavigationService navService)
         {
@@ -104,13 +120,11 @@ namespace Tourism.MainPage.MVVM.ViewModel
 
             OperatorUserViewCommand = new RelayCommand(o =>
             {
-                //if (User.CurrentUser().UserLevelId <= _operatorUserViewCommandAuthLevel)
-                    Navigation.NavigateTo<OperatorUserViewModel>();                 
-                //else
-                //    throw new UserNotAuthorizedException();
+                if (IsUserAuthorized(new string[] { "Admin", "Manager" }))
+                    Navigation.NavigateTo<OperatorUserViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
             }, canExecute: o => true);
-
-
 
             CurrencyViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CurrencyViewModel>(); }, canExecute: o => true);
             MainCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<MainCategoryViewModel>(); }, canExecute: o => true);

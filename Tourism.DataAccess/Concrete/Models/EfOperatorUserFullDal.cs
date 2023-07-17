@@ -12,7 +12,7 @@ namespace Tourism.DataAccess.Concrete.Models
         {
             using (AppDbContext context = new AppDbContext())
             {
-                return context.Set<OperatorUserFull>().FromSqlRaw($"SELECT O.Id 'OperatorUserId',O.Username, O.PasswordHash, Op.Name'OperatorName', U.Name'Level' FROM OperatorUsers O JOIN Operators Op ON O.OperatorId = Op.Id JOIN UserLevels U ON U.Id = O.UserLevelId ORDER BY O.Id").AsNoTracking().ToList();
+                return context.Set<OperatorUserFull>().FromSqlRaw($"SELECT  o.FirstName,o.LastName,o.Email,O.Username, O.PasswordHash, Op.Name'OperatorName', o.IsActive,O.Id 'OperatorUserId' , o.DateJoined FROM OperatorUsers O JOIN Operators Op ON O.OperatorId = Op.Id ORDER BY O.Id").AsNoTracking().ToList();
             }
         }
 

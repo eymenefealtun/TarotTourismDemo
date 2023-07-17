@@ -384,6 +384,9 @@ namespace Tourism.MainPage.MVVM.View.Window
                 catch (UserNotAuthorizedException exception)
                 {
                     MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                    LooseFocusOfSubButton(btnSubOperatorUser);
+                    btnSubOperatorUser.IsChecked = false;
+                    return;
                 }
             }
 

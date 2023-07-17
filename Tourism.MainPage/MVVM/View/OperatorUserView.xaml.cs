@@ -12,7 +12,7 @@ namespace Tourism.MainPage.MVVM.View
     public partial class OperatorUserView : UserControl
     {
         IOperatorUserFullService _operatorFullService;
-        IUserLevelService _userLevelService;
+        //IUserLevelService _userLevelService;
         IOperatorService _operatorService;
         IOperatorUserService _operatorUserService;
         OperatorUser _operatorUser;
@@ -21,7 +21,7 @@ namespace Tourism.MainPage.MVVM.View
             InitializeComponent();
 
             _operatorFullService = Instancefactory.GetInstance<IOperatorUserFullService>();
-            _userLevelService = Instancefactory.GetInstance<IUserLevelService>();
+            //_userLevelService = Instancefactory.GetInstance<IUserLevelService>();
             _operatorService = Instancefactory.GetInstance<IOperatorService>();
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
 
