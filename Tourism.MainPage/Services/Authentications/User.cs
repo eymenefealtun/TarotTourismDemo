@@ -1,5 +1,4 @@
-﻿
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using Tourism.Entities.Concrete;
 
@@ -39,16 +38,38 @@ namespace Tourism.MainPage.Services.Authentications
             worker
         }
 
-        public static bool IsOperatorUserAuthorized(int operatorUserLevel, int[] requiredStatus)
+        public static bool IsOperatorUserAuthorized(string[] requiredRoles)
         {
-            bool isAuthorized = false;
+            bool isContain = false;
+            
 
-            if (requiredStatus.Contains(operatorUserLevel))
-                isAuthorized = true;
+            // return directy true if current user is admin
+            if (User.GetCurrentUserRolesInString().Contains("Admin"))
+                return true;
 
-            return isAuthorized;
+            for (int i = 0; i < requiredRoles.Length; i++)
+            {
+                if (User.GetCurrentUserRolesInString().Contains(requiredRoles[i]))
+                {
+                    isContain = true;
+                    break;
+                }
+            }
 
+            return isContain;
         }
+
+
+        //public static bool IsOperatorUserAuthorized(int operatorUserLevel, int[] requiredStatus)
+        //{
+        //    bool isAuthorized = false;
+
+        //    if (requiredStatus.Contains(operatorUserLevel))
+        //        isAuthorized = true;
+
+        //    return isAuthorized;
+
+        //}
 
 
     }

@@ -12,6 +12,7 @@ using Tourism.DataAccess.Abstract;
 using Tourism.Entities.Concrete;
 using Tourism.Entities.Models;
 using Tourism.MainPage.Core;
+using Tourism.MainPage.Services.Authentications;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -162,12 +163,18 @@ namespace Tourism.MainPage.MVVM.View
             dgwOperationMain.Items.SortDescriptions.Add(new SortDescription("StartDate", ListSortDirection.Ascending));
         }
 
-        
+
 
         private void GetCustomerOperationView()
         {
-            CustomerOperationView customerOperationView = new CustomerOperationView(_operationId, _documentCode, _subCategoryId);
-            OperationViewMainGrid.Children.Add(customerOperationView);
+            if (User.IsOperatorUserAuthorized(new string[] { "Manager, Outgoing Operator" }))
+            {
+                CustomerOperationView customerOperationView = new CustomerOperationView(_operationId, _documentCode, _subCategoryId);
+                OperationViewMainGrid.Children.Add(customerOperationView);
+            }
+            else
+                MessageBox.Show("User not authorized", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+
         }
 
         private void GetAddOperationView()
@@ -177,8 +184,13 @@ namespace Tourism.MainPage.MVVM.View
         }
         private void GetUpdateOperation()
         {
-            UpdateOperationView updateOperationView = new UpdateOperationView(_operationId);
-            OperationViewMainGrid.Children.Add(updateOperationView);
+            if (User.IsOperatorUserAuthorized(new string[] { "Manager, Outgoing Operator" }))
+            {
+                UpdateOperationView updateOperationView = new UpdateOperationView(_operationId);
+                OperationViewMainGrid.Children.Add(updateOperationView);
+            }
+            else
+                MessageBox.Show("User not authorized", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
         }
 
 

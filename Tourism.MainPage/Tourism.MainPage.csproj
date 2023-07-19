@@ -70,6 +70,7 @@
 
   <ItemGroup>
     <Folder Include="MVVM\Model\" />
+    <Folder Include="Services\Pages\" />
     <Folder Include="Theme\AddPage\" />
     <Folder Include="Theme\ReservationDetailsPage\" />
   </ItemGroup>

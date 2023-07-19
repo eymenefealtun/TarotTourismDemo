@@ -356,6 +356,24 @@ namespace Tourism.MainPage.MVVM.View.Window
 
         private void btnMenuButtonTheme_Click(object sender, RoutedEventArgs e)
         {
+            var viewModel = (MainViewModel)DataContext;
+
+            try
+            {
+                if (sender == btnOperations)
+                    GetPage(viewModel.OperationViewCommand);
+
+            }
+            catch (UserNotAuthorizedException exception)
+            {
+                MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
+
+            }
+
+
             try
             {
                 //throw new Exception();
@@ -370,27 +388,61 @@ namespace Tourism.MainPage.MVVM.View.Window
 
         }
 
+        private void GetPage(RelayCommand command)
+        {
+            //var viewModel = (MainViewModel)DataContext;
 
+            try
+            {
+                command.Execute(true);
+            }
+            catch (UserNotAuthorizedException exception)
+            {
+                throw new UserNotAuthorizedException();
+            }
+            catch(Exception exception)
+            {
+                throw new Exception();
+            }
+
+        }
         private void btnModificationsSubMenu_Click(object sender, RoutedEventArgs e)
         {
             var viewModel = (MainViewModel)DataContext;
 
-            if (sender == btnSubOperatorUser)
+            #region oldController
+            //if (sender == btnSubOperatorUser)
+            //{
+            //    try
+            //    {
+            //        viewModel.OperatorUserViewCommand.Execute(true);
+            //    }
+            //    catch (UserNotAuthorizedException exception)
+            //    {
+            //        MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+            //        //LooseFocusOfSubButton(btnSubOperatorUser);
+            //        //btnSubOperatorUser.IsChecked = false;
+            //        return;
+            //    }
+            //} 
+            #endregion
+
+            try
             {
-                try
-                {
-                    viewModel.OperatorUserViewCommand.Execute(true);
-                }
-                catch (UserNotAuthorizedException exception)
-                {
-                    MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
-                    LooseFocusOfSubButton(btnSubOperatorUser);
-                    btnSubOperatorUser.IsChecked = false;
-                    return;
-                }
+                if (sender == btnSubOperatorUser)
+                    GetPage(viewModel.OperatorUserViewCommand);
+                if (sender == btnOperations)
+                    GetPage(viewModel.OperationViewCommand);
+
             }
+            catch (UserNotAuthorizedException exception)
+            {
+                MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch (Exception)
+            {
 
-
+            }
 
 
 

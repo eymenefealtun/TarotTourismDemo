@@ -7,6 +7,7 @@ using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Models;
 using Tourism.MainPage.Core;
+using Tourism.MainPage.Services.Authentications;
 
 namespace Tourism.MainPage.MVVM.View
 {
@@ -203,9 +204,36 @@ namespace Tourism.MainPage.MVVM.View
 
         private void GetReservationDetail()
         {
-            ReservationDetailView reservationDetailView = new ReservationDetailView(_operationId, _subCategoryId, _reservationId, _isActive);
-            MainGrid.Children.Add(reservationDetailView);
+            if (User.IsOperatorUserAuthorized(new string[] { "Admin", "Manager","Outgoing Operator" }))     
+            {
+                ReservationDetailView reservationDetailView = new ReservationDetailView(_operationId, _subCategoryId, _reservationId, _isActive);
+                MainGrid.Children.Add(reservationDetailView);
+            }
+            else
+                MessageBox.Show("User not authorized", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                        
+            #region TrialOfRelayComand
+            //// var viewModel = (MainViewModel)DataContext;
+            //var operationViewModel = (OperationViewModel)DataContext;
+
+
+            //try
+            //{
+            //    //viewModel.ReservationDetailViewCommand.Execute(true);
+            //    operationViewModel.ReservationDetailViewCommand.Execute(true);
+            //}
+            //catch (UserNotAuthorizedException exception)
+            //{
+            //    MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+            //    //LooseFocusOfSubButton(btnSubOperatorUser);
+            //    //btnSubOperatorUser.IsChecked = false;
+            //    return;
+            //} 
+            #endregion
+
         }
+
+
         private bool _isActive = true;
         private void tglIsActive_Click(object sender, RoutedEventArgs e)
         {

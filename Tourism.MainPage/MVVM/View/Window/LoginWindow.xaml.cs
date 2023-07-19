@@ -165,7 +165,7 @@ namespace Tourism.MainPage.MVVM.View.Window
 
                 User._operatorUserRoles = userRoles;
 
-                var userRolesInString = new List<string>();
+                var userRolesInString = new List<string>();         
 
                 for (int i = 0; i < User.GetCurrentUserRoles().Count; i++)
                 {
@@ -173,8 +173,8 @@ namespace Tourism.MainPage.MVVM.View.Window
                 }
                 User._operatorUserRolesInString = userRolesInString;
 
-                User._currentOperatorUser = user; //Current user is set in order to use it in all over the app
-                            
+              User._currentOperatorUser = user; //Current user is set in order to use it in all over the app
+
                 #region RoleTrial
                 //var builder = new StringBuilder();
                 ////var list = User.GetCurrentUserRoles();

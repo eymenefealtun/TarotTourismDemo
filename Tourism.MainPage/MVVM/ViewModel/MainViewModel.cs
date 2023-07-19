@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Media;
 using Tourism.Core.Exceptions;
 using Tourism.MainPage.Core;
@@ -62,46 +61,6 @@ namespace Tourism.MainPage.MVVM.ViewModel
         }
         public GlobalViewModel Global { get; } = GlobalViewModel.Instance;
 
-        public enum Statusses
-        {
-            Worker,
-        }
-
-        int _homeViewCommandAuthLevel = 1;
-        int _operationViewCommandAuthLevel = 1;
-        int _customerViewCommandAuthLevel = 1;
-        int _settingsViewCommandAuthLevel = 1;
-        int _customerOperationViewCommandAuthLevel = 1;
-        int _addOperationViewCommandAuthLevel = 1;
-        int _operatorUserViewAuthLevel = 1;
-        int _updateOperationViewCommandAuthLevel = 1;
-        int _reservationDetailViewCommand = 1;
-        int _operatorUserViewCommandAuthLevel = 1;
-
-        int _currencyViewCommand = 1;
-        int _mainCategoryViewCommand = 1;
-        int _subCategoryViewCommand = 1;
-        int _generalIncomeOutgoingCommand = 1;
-        int _emptyPageViewCommand = 1;
-        int _loginViewCommand = 1;
-        int _mainWindowCommand;
-
-        private bool IsUserAuthorized(string[] requiredRoles)
-        {
-            bool isContain = false;
-            for (int i = 0; i < requiredRoles.Length; i++)
-            {
-                if (User.GetCurrentUserRolesInString().Contains(requiredRoles[i]))
-                {
-                    isContain = true;
-                    break;
-                }
-
-            }
-
-            return isContain;
-        }
-
         public MainViewModel(INavigationService navService)
         {
             Navigation = navService;
@@ -109,31 +68,105 @@ namespace Tourism.MainPage.MVVM.ViewModel
             Navigation.NavigateTo<HomeViewModel>();
             //Navigation.NavigateTo<LoginViewModel>();
 
-            HomeViewCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, canExecute: o => true);
-            OperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<OperationViewModel>(); }, canExecute: o => true);
-            CustomerViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerViewModel>(); }, canExecute: o => true);
-            SettingsViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, canExecute: o => true);
-            CustomerOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerOperationViewModel>(); }, canExecute: o => true);
-            AddOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<AddOperationViewModel>(); }, canExecute: o => true);
-            UpdateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<UpdateOperationViewModel>(); }, canExecute: o => true);
-            ReservationDetailViewCommand = new RelayCommand(o => { Navigation.NavigateTo<ReservationDetailViewModel>(); }, canExecute: o => true);
+
+
+
+            OperationViewCommand = new RelayCommand(o =>                    
+            {
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))                 
+                    Navigation.NavigateTo<OperationViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
+
+            CustomerViewCommand = new RelayCommand(o =>
+            {
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator", "Human Resources" }))
+                    Navigation.NavigateTo<CustomerViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
+
+            AddOperationViewCommand = new RelayCommand(o =>
+            {
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                    Navigation.NavigateTo<AddOperationViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
 
             OperatorUserViewCommand = new RelayCommand(o =>
             {
-                if (IsUserAuthorized(new string[] { "Admin", "Manager" }))
+                if (User.IsOperatorUserAuthorized(new string[] { "Admin" }))
                     Navigation.NavigateTo<OperatorUserViewModel>();
                 else
                     throw new UserNotAuthorizedException();
             }, canExecute: o => true);
 
-            CurrencyViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CurrencyViewModel>(); }, canExecute: o => true);
-            MainCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<MainCategoryViewModel>(); }, canExecute: o => true);
-            SubCategoryViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SubCategoryViewModel>(); }, canExecute: o => true);
-            GeneralIncomeOutgoingCommand = new RelayCommand(o => { Navigation.NavigateTo<GeneralIncomeOutgoingViewModel>(); }, canExecute: o => true);
+            CurrencyViewCommand = new RelayCommand(o =>
+            {
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                    Navigation.NavigateTo<CurrencyViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
+            MainCategoryViewCommand = new RelayCommand(o =>
+            {
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                    Navigation.NavigateTo<MainCategoryViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
+
+            SubCategoryViewCommand = new RelayCommand(o =>
+            {
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                    Navigation.NavigateTo<SubCategoryViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
+
+            GeneralIncomeOutgoingCommand = new RelayCommand(o =>
+            {
+                if (User.IsOperatorUserAuthorized(new string[] { "Accounting" }))
+                    Navigation.NavigateTo<GeneralIncomeOutgoingViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
+
+            DuplicateOperationViewCommand = new RelayCommand(o =>
+            {
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                    Navigation.NavigateTo<DuplicateOperationViewModel>();
+                else
+                    throw new UserNotAuthorizedException();
+            }, canExecute: o => true);
+
+
+
+            #region The Pages NavigatingFromAnotherPage
+            ReservationDetailViewCommand = new RelayCommand(o => { Navigation.NavigateTo<ReservationDetailViewModel>(); }, canExecute: o => true);
+            UpdateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<UpdateOperationViewModel>(); }, canExecute: o => true);
+            CustomerOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<CustomerOperationViewModel>(); }, canExecute: o => true);
+
+            #endregion
+
+            HomeViewCommand = new RelayCommand(o => { Navigation.NavigateTo<HomeViewModel>(); }, canExecute: o => true);
             EmptyPageViewCommand = new RelayCommand(o => { Navigation.NavigateTo<EmptyPageViewModel>(); }, canExecute: o => true);
-            DuplicateOperationViewCommand = new RelayCommand(o => { Navigation.NavigateTo<DuplicateOperationViewModel>(); }, canExecute: o => true);
             LoginViewCommand = new RelayCommand(o => { Navigation.NavigateTo<LoginViewModel>(); }, canExecute: o => true);
             MainWindowCommand = new RelayCommand(o => { Navigation.NavigateTo<MainWindowViewModel>(); }, canExecute: o => true);
+            SettingsViewCommand = new RelayCommand(o => { Navigation.NavigateTo<SettingsViewModel>(); }, canExecute: o => true);
+
+
+
+
 
 
 

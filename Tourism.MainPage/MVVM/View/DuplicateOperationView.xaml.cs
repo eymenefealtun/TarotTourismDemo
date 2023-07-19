@@ -160,8 +160,8 @@ namespace Tourism.MainPage.MVVM.View
                             EndDate = Convert.ToDateTime(_endDates[i].SelectedDate),
                             Description = _operation.Description,
                             Note = null,
-                            CreatedBy = User.CurrentUser().Id,
-                            LastUpdatedBy = User.CurrentUser().Id,//_operation.LastUpdatedBy,   //Going to be updated
+                            CreatedBy = Services.Authentications.User.CurrentUser().Id,
+                            LastUpdatedBy = Services.Authentications.User.CurrentUser().Id,//_operation.LastUpdatedBy,   //Going to be updated
                             CurrencyId = _operation.CurrencyId,
                             SubCategoryId = _operation.SubCategoryId,
                             OperationPrice = new OperationPrice()

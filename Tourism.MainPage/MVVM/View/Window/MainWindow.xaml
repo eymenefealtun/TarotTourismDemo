@@ -79,7 +79,7 @@
                                  Height="50"
                                  FontSize="14"
                                  Style="{StaticResource MenuButtonTheme}"
-                                 Command="{Binding  OperationViewCommand}"
+     
                                  Click="btnMenuButtonTheme_Click" />
 
 

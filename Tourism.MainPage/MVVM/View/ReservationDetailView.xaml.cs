@@ -102,7 +102,7 @@ namespace Tourism.MainPage.MVVM.View
             Agency agency = _agencyService.GetByAgencyId(agencyUser.AgencyId);
             tboxAgencyUser.Text = agencyUser.Username;
             tboxAgency.Text = agency.Name;
-            tboxReservationCode.Text = _reservation.ReservationCode;
+            tboxReservationCode.Text = _reservation.ReservationCode;        
 
 
             cboxCurrency.ItemsSource = _currencyService.GetAll();
@@ -132,6 +132,7 @@ namespace Tourism.MainPage.MVVM.View
         private void btnBack_Click(object sender, RoutedEventArgs e)
         {
             this.Visibility = Visibility.Collapsed;
+
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -152,7 +153,7 @@ namespace Tourism.MainPage.MVVM.View
             btnSave.Visibility = Visibility.Visible;
             dgwCustomerOperation.IsReadOnly = false;
             dgwCustomerOperation.Columns[0].IsReadOnly = true;
-
+                        
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -351,7 +352,7 @@ namespace Tourism.MainPage.MVVM.View
             List<Room> room = _roomService.GetByReservationId(_reservationId);
             _room = room;
             _reservation = reservation2;
-        }
+        }           
         private void toggleBtnIsActive_Click(object sender, RoutedEventArgs e)
         {
 
@@ -409,7 +410,7 @@ namespace Tourism.MainPage.MVVM.View
                         rbtboxNote.IsReadOnly = true;
                         GetBottom();
                     }
-                    catch (Exception exception)
+                    catch (Exception exception)                         
                     {
                         MessageBox.Show(exception.Message);
                     }
@@ -427,7 +428,6 @@ namespace Tourism.MainPage.MVVM.View
         private void btnExcel_Click(object sender, RoutedEventArgs e)
         {
             Utilities.ExportReservationDetailToExcel(dgwCustomerOperation, _reservation.ReservationCode);
-
         }
 
         private void btnTools_MouseEnter(object sender, MouseEventArgs e)
