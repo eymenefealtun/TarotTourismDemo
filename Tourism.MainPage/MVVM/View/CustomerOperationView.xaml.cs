@@ -204,7 +204,7 @@ namespace Tourism.MainPage.MVVM.View
 
         private void GetReservationDetail()
         {
-            if (User.IsOperatorUserAuthorized(new string[] { "Admin", "Manager","Outgoing Operator" }))     
+            if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))     
             {
                 ReservationDetailView reservationDetailView = new ReservationDetailView(_operationId, _subCategoryId, _reservationId, _isActive);
                 MainGrid.Children.Add(reservationDetailView);

@@ -61,6 +61,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
         }
         public GlobalViewModel Global { get; } = GlobalViewModel.Instance;
 
+
         public MainViewModel(INavigationService navService)
         {
             Navigation = navService;
@@ -71,9 +72,9 @@ namespace Tourism.MainPage.MVVM.ViewModel
 
 
 
-            OperationViewCommand = new RelayCommand(o =>                    
+            OperationViewCommand = new RelayCommand(o =>
             {
-                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))                 
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))
                     Navigation.NavigateTo<OperationViewModel>();
                 else
                     throw new UserNotAuthorizedException();
@@ -82,7 +83,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
 
             CustomerViewCommand = new RelayCommand(o =>
             {
-                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator", "Human Resources" }))
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))
                     Navigation.NavigateTo<CustomerViewModel>();
                 else
                     throw new UserNotAuthorizedException();
@@ -91,7 +92,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
 
             AddOperationViewCommand = new RelayCommand(o =>
             {
-                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))
                     Navigation.NavigateTo<AddOperationViewModel>();
                 else
                     throw new UserNotAuthorizedException();
@@ -108,7 +109,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
 
             CurrencyViewCommand = new RelayCommand(o =>
             {
-                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))
                     Navigation.NavigateTo<CurrencyViewModel>();
                 else
                     throw new UserNotAuthorizedException();
@@ -116,7 +117,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
 
             MainCategoryViewCommand = new RelayCommand(o =>
             {
-                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))
                     Navigation.NavigateTo<MainCategoryViewModel>();
                 else
                     throw new UserNotAuthorizedException();
@@ -125,7 +126,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
 
             SubCategoryViewCommand = new RelayCommand(o =>
             {
-                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))
                     Navigation.NavigateTo<SubCategoryViewModel>();
                 else
                     throw new UserNotAuthorizedException();
@@ -143,7 +144,7 @@ namespace Tourism.MainPage.MVVM.ViewModel
 
             DuplicateOperationViewCommand = new RelayCommand(o =>
             {
-                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operator" }))
+                if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))
                     Navigation.NavigateTo<DuplicateOperationViewModel>();
                 else
                     throw new UserNotAuthorizedException();

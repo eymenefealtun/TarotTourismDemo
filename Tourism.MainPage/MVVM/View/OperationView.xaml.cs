@@ -167,7 +167,7 @@ namespace Tourism.MainPage.MVVM.View
 
         private void GetCustomerOperationView()
         {
-            if (User.IsOperatorUserAuthorized(new string[] { "Manager, Outgoing Operator" }))
+            if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting" }))
             {
                 CustomerOperationView customerOperationView = new CustomerOperationView(_operationId, _documentCode, _subCategoryId);
                 OperationViewMainGrid.Children.Add(customerOperationView);
@@ -183,8 +183,8 @@ namespace Tourism.MainPage.MVVM.View
             OperationViewMainGrid.Children.Add(addOperationView);
         }
         private void GetUpdateOperation()
-        {
-            if (User.IsOperatorUserAuthorized(new string[] { "Manager, Outgoing Operator" }))
+        {               
+            if (User.IsOperatorUserAuthorized(new string[] { "Manager", "Outgoing Operations Assistant Manager", "Outgoing Operations Supervisor", "Accounting"  }))
             {
                 UpdateOperationView updateOperationView = new UpdateOperationView(_operationId);
                 OperationViewMainGrid.Children.Add(updateOperationView);

@@ -1,19 +1,18 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
+using System.Linq;
+using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Interop;
-using Tourism.Business.Authentication;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Core.Exceptions;
 using Tourism.Entities.Concrete;
 using Tourism.MainPage.Core;
 using Tourism.MainPage.MVVM.ViewModel;
-using Tourism.MainPage.Services;
-using Tourism.MainPage.Services.Authentications;
+
 
 namespace Tourism.MainPage.MVVM.View.Window
 {
@@ -32,6 +31,10 @@ namespace Tourism.MainPage.MVVM.View.Window
         ToggleButton[] _mainWithSubButtons;
         ToggleButton[] _modificationCategorySecondSubButton;
         ToggleButton[] _firstSubButtonsWithSubs;
+        ToggleButton[] _pageNavigatorButtons;
+
+        ToggleButton _currentPageButton;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -75,6 +78,9 @@ namespace Tourism.MainPage.MVVM.View.Window
             InitializeComponent();
             ToggleButton[] allButtons = new ToggleButton[] { btnCategories, btnCurrency, btnCustomers, btnHome, btnIncome, btnIncomeIncoming, btnIncomeOutgoing, btnMainCategory, btnModifications, btnOperations, btnOutcome, btnSubCategory, btnSubOperatorUser, btnSubOperations, btnAddOperation, btnDuplicateOperation };
 
+            ToggleButton[] pageNavigatorButtons = new ToggleButton[] { btnHome, btnOperations, btnSubOperatorUser, btnSubCategory, btnMainCategory, btnCurrency, btnAddOperation, btnDuplicateOperation, btnCustomers, btnIncomeIncoming, btnIncomeOutgoing };
+
+
             ToggleButton[] allMainButtons = new ToggleButton[] { btnHome, btnOperations, btnModifications, btnCustomers, btnIncome, btnOutcome };
             ToggleButton[] mainWithSubButtons = new ToggleButton[] { btnModifications, btnIncome, btnOutcome };
 
@@ -97,6 +103,7 @@ namespace Tourism.MainPage.MVVM.View.Window
 
             #endregion
 
+            _pageNavigatorButtons = pageNavigatorButtons;
             _firstSubButtons = firstSubButtons;
             _secondSubButtons = secondSubButtons;
             _allMainButtons = allMainButtons;
@@ -113,15 +120,9 @@ namespace Tourism.MainPage.MVVM.View.Window
             tblockUsername.Text = username;
 
             //int userLevel = User.CurrentUser().UserLevelId;
-
+            _currentPageButton = btnHome;
         }
 
-
-        //public MainWindow(int number)
-        //{
-        //    InitializeComponent();
-        //    this.IsHitTestVisible = false;
-        //}
 
         #region Screen
         private void btnTopLeft_PreviewMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
@@ -360,12 +361,18 @@ namespace Tourism.MainPage.MVVM.View.Window
 
             try
             {
+
                 if (sender == btnOperations)
-                    GetPage(viewModel.OperationViewCommand);
+                    GetPage(viewModel.OperationViewCommand, btnOperations);
+                if (sender == btnCustomers)
+                    GetPage(viewModel.CustomerViewCommand, btnCustomers);
+                if (sender == btnHome)
+                    GetPage(viewModel.HomeViewCommand, btnHome);
 
             }
             catch (UserNotAuthorizedException exception)
             {
+                _currentPageButton.IsChecked = true;
                 MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             catch (Exception)
@@ -388,19 +395,61 @@ namespace Tourism.MainPage.MVVM.View.Window
 
         }
 
-        private void GetPage(RelayCommand command)
+        private void GetPage(RelayCommand command, object sender)
         {
             //var viewModel = (MainViewModel)DataContext;
 
             try
             {
                 command.Execute(true);
+
+                if (sender == btnHome)
+                    _currentPageButton = btnHome;
+                if (sender == btnOperations)
+                    _currentPageButton = btnOperations;
+                if (sender == btnSubOperatorUser)
+                    _currentPageButton = btnSubOperatorUser;
+                if (sender == btnSubCategory)
+                    _currentPageButton = btnSubCategory;
+                if (sender == btnMainCategory)
+                    _currentPageButton = btnMainCategory;
+                if (sender == btnCurrency)
+                    _currentPageButton = btnCurrency;
+                if (sender == btnAddOperation)
+                    _currentPageButton = btnAddOperation;
+                if (sender == btnDuplicateOperation)
+                    _currentPageButton = btnDuplicateOperation;
+                if (sender == btnCustomers)
+                    _currentPageButton = btnCustomers;
+                if (sender == btnIncomeIncoming)
+                    _currentPageButton = btnIncomeIncoming;
+                if (sender == btnIncomeOutgoing)
+                    _currentPageButton = btnIncomeOutgoing;
+
+                for (int i = 0; i < _modificationSubButtons.Length; i++)
+                {
+                    if (_modificationSubButtons.Contains(_currentPageButton))
+                        FocusToSubButton(_modificationSubButtons[i]);
+                    else
+                        LooseFocusOfSubButton(_modificationSubButtons[i]);
+
+                }
+                for (int i = 0; i < _incomeSubButtons.Length; i++)
+                {
+                    if (_incomeSubButtons.Contains(_currentPageButton))
+                        FocusToSubButton(_incomeSubButtons[i]);
+                    else
+                        LooseFocusOfSubButton(_incomeSubButtons[i]);
+                }
+
             }
             catch (UserNotAuthorizedException exception)
             {
+
                 throw new UserNotAuthorizedException();
+
             }
-            catch(Exception exception)
+            catch (Exception exception)
             {
                 throw new Exception();
             }
@@ -430,14 +479,25 @@ namespace Tourism.MainPage.MVVM.View.Window
             try
             {
                 if (sender == btnSubOperatorUser)
-                    GetPage(viewModel.OperatorUserViewCommand);
-                if (sender == btnOperations)
-                    GetPage(viewModel.OperationViewCommand);
+                    GetPage(viewModel.OperatorUserViewCommand, btnSubOperatorUser);
+                if (sender == btnSubCategory)
+                    GetPage(viewModel.SubCategoryViewCommand, btnSubCategory);
+                if (sender == btnMainCategory)
+                    GetPage(viewModel.MainCategoryViewCommand, btnMainCategory);
+                if (sender == btnCurrency)
+                    GetPage(viewModel.CurrencyViewCommand, btnCurrency);
+                if (sender == btnAddOperation)
+                    GetPage(viewModel.AddOperationViewCommand, btnAddOperation);
+                if (sender == btnDuplicateOperation)
+                    GetPage(viewModel.DuplicateOperationViewCommand, btnDuplicateOperation);
+
 
             }
             catch (UserNotAuthorizedException exception)
             {
+                _currentPageButton.IsChecked = true;
                 MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             catch (Exception)
             {
@@ -464,6 +524,35 @@ namespace Tourism.MainPage.MVVM.View.Window
             LooseFocusOfSubButton(btnIncome);
             FocusToSubButton(btnModifications);
         }
+
+        private void btnIncomeSubClick(object sender, RoutedEventArgs e)
+        {
+            var viewModel = (MainViewModel)DataContext;
+
+            try
+            {
+                if (sender == btnIncomeIncoming)
+                    GetPage(viewModel.EmptyPageViewCommand, btnIncomeIncoming);
+                if (sender == btnIncomeOutgoing)
+                    GetPage(viewModel.GeneralIncomeOutgoingCommand, btnIncomeOutgoing);
+
+            }
+            catch (UserNotAuthorizedException exception)
+            {
+                _currentPageButton.IsChecked = true;
+                MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                return; 
+            }
+            catch (Exception)
+            {
+
+            }
+
+            LooseFocusOfSubButton(btnModifications);
+            FocusToSubButton(btnIncome);
+        }
+
+
         private void btnSubOperations_Click(object sender, RoutedEventArgs e)
         {
 
@@ -547,11 +636,7 @@ namespace Tourism.MainPage.MVVM.View.Window
         }
 
 
-        private void btnIncomeSubClick(object sender, RoutedEventArgs e)
-        {
-            LooseFocusOfSubButton(btnModifications);
-            FocusToSubButton(btnIncome);
-        }
+      
 
         private void tboxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {

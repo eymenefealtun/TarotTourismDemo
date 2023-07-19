@@ -71,7 +71,6 @@
                                  Style="{StaticResource MenuButtonTheme}"
                                  IsChecked="True"
                                  Margin="0,10,0,0"
-                                 Command="{Binding Path= HomeViewCommand}"
                                  Click="btnMenuButtonTheme_Click" />
 
                     <RadioButton Content="Operations"
@@ -114,14 +113,12 @@
                                  x:Name="btnSubCategory"
                                  Visibility="Collapsed"
                                  Click="btnModificationsSubMenu_Click"
-                                 Command="{Binding SubCategoryViewCommand}"
                                  Style="{StaticResource MenuSecondSubButtonTheme}" />
                     <RadioButton Content="- MainCategory"
                                  Height="30"
                                  x:Name="btnMainCategory"
                                  Visibility="Collapsed"
                                  Click="btnModificationsSubMenu_Click"
-                                 Command="{Binding MainCategoryViewCommand}"
                                  Style="{StaticResource MenuSecondSubButtonTheme}" />
                     <!--#endregion-->
 
@@ -133,7 +130,6 @@
                                  x:Name="btnCurrency"
                                  Visibility="Collapsed"
                                  Click="btnModificationsSubMenu_Click"
-                                 Command="{Binding CurrencyViewCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
 
                     <!--#endregion-->
@@ -152,24 +148,22 @@
                                  x:Name="btnAddOperation"
                                  Visibility="Collapsed"
                                  Click="btnModificationsSubMenu_Click"
-                                 Command="{Binding AddOperationViewCommand}"
                                  Style="{StaticResource MenuSecondSubButtonTheme}" />
                     <RadioButton Content="- Duplicate operation"
                                  Height="30"
                                  x:Name="btnDuplicateOperation"
                                  Visibility="Collapsed"
                                  Click="btnModificationsSubMenu_Click"
-                                 Command="{Binding DuplicateOperationViewCommand}"
                                  Style="{StaticResource MenuSecondSubButtonTheme}" />
                     <!--#endregion-->
 
                     <RadioButton Content="Customers"
                                  Height="50"
                                  x:Name="btnCustomers"
-                                 Command="{Binding Path= CustomerViewCommand}"
                                  FontSize="14"
                                  Style="{StaticResource MenuButtonTheme}"
                                  Click="btnMenuButtonTheme_Click" />
+                    <!--Command="{Binding Path= CustomerViewCommand}"-->
 
                     <!--#region Income -->
                     <ToggleButton Content="Income"
@@ -186,7 +180,6 @@
                                  FontSize="12"
                                  Visibility="Collapsed"
                                  Click="btnIncomeSubClick"
-                                 Command="{Binding Path=EmptyPageViewCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
 
 
@@ -196,7 +189,6 @@
                                  FontSize="12"
                                  Visibility="Collapsed"
                                  Click="btnIncomeSubClick"
-                                 Command="{Binding Path=GeneralIncomeOutgoingCommand}"
                                  Style="{StaticResource MenuSubButtonTheme}" />
 
 
