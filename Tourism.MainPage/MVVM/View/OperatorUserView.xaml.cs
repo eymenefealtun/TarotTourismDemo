@@ -1,7 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using Tourism.Business.Abstract;
 using Tourism.Business.Abstract.Models;
 using Tourism.Business.DependencyResolvers.Ninject;
 using Tourism.Entities.Concrete;
@@ -15,25 +19,41 @@ namespace Tourism.MainPage.MVVM.View
         //IUserLevelService _userLevelService;
         IOperatorService _operatorService;
         IOperatorUserService _operatorUserService;
+        IOperatorUserRoleService _operatorUserRoleService;
+        IRoleService _roleService;
+
+
         OperatorUser _operatorUser;
+        ToggleButton[] _addRoleButtons;
+
         public OperatorUserView()
         {
             InitializeComponent();
 
             _operatorFullService = Instancefactory.GetInstance<IOperatorUserFullService>();
-            //_userLevelService = Instancefactory.GetInstance<IUserLevelService>();
             _operatorService = Instancefactory.GetInstance<IOperatorService>();
             _operatorUserService = Instancefactory.GetInstance<IOperatorUserService>();
+            _operatorUserRoleService = Instancefactory.GetInstance<IOperatorUserRoleService>();
+            _roleService = Instancefactory.GetInstance<IRoleService>();
+
+
+
 
             dgwOperatorUser.ItemsSource = _operatorFullService.GetOperatorUsers();
-            //cboxAddLevel.ItemsSource = _userLevelService.GetAll();
             cboxAddOperator.ItemsSource = _operatorService.GetAll();
-            //cboxUpdateLevel.ItemsSource = _userLevelService.GetAll();
             cboxUpdateOperator.ItemsSource = _operatorService.GetAll();
+
+
+
+
+            ToggleButton[] addRoleButtons = new ToggleButton[] { btnAddAccounting, btnAddAdmin, btnAddCustomer, btnAddHumanResources, btnAddManager, btnAddOutgoingOperationsAssistantManager, btnAddOutgoingOperationsSupervisor };
+            _addRoleButtons = addRoleButtons;
         }
 
         private void btnAddNewUser_Click(object sender, RoutedEventArgs e)
         {
+            ClearRoleButtons(_addRoleButtons);
+
             columnEdit.Visibility = Visibility.Hidden;
             if (btnAddNewUser.IsChecked == true)
                 stckAddNewUser.Visibility = Visibility.Visible;
@@ -42,13 +62,60 @@ namespace Tourism.MainPage.MVVM.View
                 stckAddNewUser.Visibility = Visibility.Hidden;
         }
 
+        private void ClearRoleButtons(ToggleButton[] buttons)
+        {
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                buttons[i].IsChecked = false;
+            }
+        }
+
+        private List<OperatorUserRole> GetUserRoles(ToggleButton[] buttons)
+        {
+            var operatorUserRoles = new List<OperatorUserRole>();
+
+
+            for (int i = 0; i < buttons.Length; i++)
+            {
+                if (buttons[i].IsChecked == true)
+                {
+                    if (buttons[i] == btnAddAccounting)
+                        operatorUserRoles.Add(new OperatorUserRole { RoleId = _roleService.GetByRoleName("Accounting").Id });
+
+                    else if (buttons[i] == btnAddAdmin)
+                        operatorUserRoles.Add(new OperatorUserRole { RoleId = _roleService.GetByRoleName("Admin").Id });
+
+                    else if (buttons[i] == btnAddCustomer)
+                        operatorUserRoles.Add(new OperatorUserRole { RoleId = _roleService.GetByRoleName("Customer").Id });
+
+                    else if (buttons[i] == btnAddHumanResources)
+                        operatorUserRoles.Add(new OperatorUserRole { RoleId = _roleService.GetByRoleName("Human Resources").Id });
+
+                    else if (buttons[i] == btnAddManager)
+                        operatorUserRoles.Add(new OperatorUserRole { RoleId = _roleService.GetByRoleName("Manager").Id });
+
+                    else if (buttons[i] == btnAddOutgoingOperationsAssistantManager)
+                        operatorUserRoles.Add(new OperatorUserRole { RoleId = _roleService.GetByRoleName("Outgoing Operations Assistant Manager").Id });
+
+                    else if (buttons[i] == btnAddOutgoingOperationsSupervisor)
+                        operatorUserRoles.Add(new OperatorUserRole { RoleId = _roleService.GetByRoleName("Outgoing Operations Supervisor").Id });
+                }
+            }
+
+
+
+            return operatorUserRoles;
+        }
+
+
         private void btnSaveNewUser_Click(object sender, RoutedEventArgs e)
         {
 
             if (MessageBox.Show("Are you sure you want to save?", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) ;
             {
-                try
-                {
+                //try
+                //{
+
                     var operatorUser = new OperatorUser()
                     {
                         Username = tboxAddUserName.Text,
@@ -60,18 +127,21 @@ namespace Tourism.MainPage.MVVM.View
                         DateJoined = DateTime.Now,
                         Email = tboxAddEmail.Text,
                         IsActive = true,
+                        OperatorUserRoles = GetUserRoles(_addRoleButtons)
                     };
+
+
 
                     _operatorUserService.Add(operatorUser);
                     dgwOperatorUser.ItemsSource = _operatorFullService.GetOperatorUsers();
                     MessageBox.Show("Saved!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
                     columnEdit.Visibility = Visibility.Visible;
                     ClearAddNewUser();
-                }
-                catch (Exception exception)
-                {
-                    MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
-                }
+                //}
+                //catch (Exception exception)
+                //{
+                //    MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                //}
 
             }
         }
@@ -85,7 +155,7 @@ namespace Tourism.MainPage.MVVM.View
         {
             stckAddNewUser.Visibility = Visibility.Hidden;
             btnAddNewUser.IsChecked = false;
-            cboxAddLevel.SelectedIndex = -1;
+            //cboxAddLevel.SelectedIndex = -1;
             cboxAddOperator.SelectedIndex = -1;
             tboxAddPassword.Text = string.Empty;
             tboxAddUserName.Text = string.Empty;
@@ -119,7 +189,7 @@ namespace Tourism.MainPage.MVVM.View
             var user = _operatorUserService.GetByUserId(operatorUserFull.OperatorUserId);
             _operatorUser = user;
 
-           // cboxUpdateLevel.SelectedItem = cboxUpdateLevel.Items.OfType<UserLevel>().FirstOrDefault(x => x.Id == user.UserLevelId);
+            // cboxUpdateLevel.SelectedItem = cboxUpdateLevel.Items.OfType<UserLevel>().FirstOrDefault(x => x.Id == user.UserLevelId);
             cboxUpdateOperator.SelectedItem = cboxUpdateOperator.Items.OfType<Operator>().FirstOrDefault(x => x.Id == user.OperatorId);
             tboxUpdatePassword.Text = user.PasswordHash;
             tboxUpdateUsername.Text = user.Username;
@@ -171,6 +241,28 @@ namespace Tourism.MainPage.MVVM.View
         private void btnRefresh_Click(object sender, RoutedEventArgs e)
         {
             dgwOperatorUser.ItemsSource = _operatorFullService.GetOperatorUsers();
+
+        }
+
+
+        private void btnOpenRoles_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridRoles.Visibility != Visibility.Visible)
+            {
+                gridRoles.Visibility = Visibility.Visible;
+                btnOpenRoles.Visibility = Visibility.Collapsed;
+                btnCloseRole.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void btnCloseRole_Click(object sender, RoutedEventArgs e)
+        {
+            if (gridRoles.Visibility == Visibility.Visible)
+            {
+                gridRoles.Visibility = Visibility.Collapsed;
+                btnOpenRoles.Visibility = Visibility.Visible;
+                btnCloseRole.Visibility = Visibility.Collapsed;
+            }
 
         }
     }

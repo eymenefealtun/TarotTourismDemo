@@ -5,480 +5,617 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:local="clr-namespace:Tourism.MainPage.MVVM.View"
              mc:Ignorable="d"
-             d:DesignHeight="800"
+             d:DesignHeight="1000"
              d:DesignWidth="1500"
              Background="#0f171e">
 
 
     <Grid Name="OperatorUserMainGrid"
           Background="Transparent">
+        <ScrollViewer VerticalScrollBarVisibility="Visible">
+            <Grid x:Name="Main">
 
-        <Grid x:Name="Main">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition  Width="50" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition  Width="50" />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="50" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
 
-            <Grid.RowDefinitions>
-                <RowDefinition Height="50" />
-                <RowDefinition Height="*" />
-                <RowDefinition Height="30" />
-            </Grid.RowDefinitions>
+                <Border Grid.Column="1"
+                        Grid.Row="1"
+                        Width="810"
+                        Height="435"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Top"
+                        Background="#f6f7f9"
+                        CornerRadius="20">
+                    <DataGrid x:Name="dgwOperatorUser"
+                              Width="800"
+                              Height="425"
+                              SelectedItem="{Binding SelectedItem}"
+                              CanUserSortColumns="False"
+                              Margin="0,0,0,10"
+                              Style="{StaticResource GeneralDataGridTheme}"
+                              VerticalScrollBarVisibility="Visible"
+                              HorizontalScrollBarVisibility="Visible">
 
-            <Border Grid.Column="1"
-                    Grid.Row="1"
-                    Width="810"
-                    Height="435"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top"
-                    Background="#f6f7f9"
-                    CornerRadius="20">
-                <DataGrid x:Name="dgwOperatorUser"
-                          Width="800"
-                          Height="425"
-                          SelectedItem="{Binding SelectedItem}"
-                          CanUserSortColumns="False"
-                          Margin="0,0,0,10"
-                          Style="{StaticResource GeneralDataGridTheme}"
-                          VerticalScrollBarVisibility="Visible" 
-                          HorizontalScrollBarVisibility="Visible" >
+                        <DataGrid.Columns>
+                            <DataGridTemplateColumn x:Name="columnEdit"
+                                                    Header=""
+                                                    Width="25">
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button x:Name="btnEdit"
+                                                CommandParameter="{Binding}"
+                                                ToolTip="Edit"
+                                                Cursor="Hand"
+                                                Style="{StaticResource EditCurrencyButtonTheme}"
+                                                Click="btnEdit_Click" />
 
-                    <DataGrid.Columns>      
-                        <DataGridTextColumn Header="  FırstName"
-                                            MinWidth="120"
-                                            Binding="{Binding FirstName}" />
-                        <DataGridTextColumn Header="  LastName"
-                                            MinWidth="120"
-                                            Binding="{Binding LastName}" />
-                        <DataGridTextColumn Header="  Email"
-                                            MinWidth="120"
-                                            Binding="{Binding Email}" />
+                                    </DataTemplate>
 
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+
+                            <DataGridTextColumn Header="  FırstName"
+                                                MinWidth="120"
+                                                Binding="{Binding FirstName}" />
+                            <DataGridTextColumn Header="  LastName"
+                                                MinWidth="120"
+                                                Binding="{Binding LastName}" />
+                            <DataGridTextColumn Header="  Email"
+                                                MinWidth="120"
+                                                Binding="{Binding Email}" />
 
 
-                        <DataGridTextColumn Header="  UserName"
-                                            MinWidth="120"
-                                            Binding="{Binding Username}" />
-                        <DataGridTextColumn Header="Password"
-                                            MinWidth="80"
-                                            Binding="{Binding PasswordHash}" />
-                        <DataGridTextColumn Header="Operator"
-                                            MinWidth="70"
-                                            Binding="{Binding OperatorName}" />
-                        <!--<DataGridTextColumn Header="Level"
+
+                            <DataGridTextColumn Header="  UserName"
+                                                MinWidth="120"
+                                                Binding="{Binding Username}" />
+                            <DataGridTextColumn Header="Password"
+                                                MinWidth="80"
+                                                Binding="{Binding PasswordHash}" />
+                            <DataGridTextColumn Header="Operator"
+                                                MinWidth="70"
+                                                Binding="{Binding OperatorName}" />
+                            <!--<DataGridTextColumn Header="Level"
                                             MinWidth="70"
                                             Binding="{Binding Level}" />-->
 
-                        <DataGridTextColumn Header="  IsActive"
-                                            MinWidth="60"
-                                            Binding="{Binding IsActive}" />
-                        <DataGridTextColumn Header="  DateJoined"
-                                            Width="80"
-                                            Binding="{Binding DateJoined, StringFormat=d}" />
-                        
-
-                        <DataGridTemplateColumn x:Name="columnEdit"
-                                                Header=""
-                                                Width="25">
-                            <DataGridTemplateColumn.CellTemplate>
-                                <DataTemplate>
-                                    <Button x:Name="btnEdit"
-                                            CommandParameter="{Binding}"
-                                            ToolTip="Edit"
-                                            Cursor="Hand"
-                                            Style="{StaticResource EditCurrencyButtonTheme}"
-                                            Click="btnEdit_Click" />
-
-                                </DataTemplate>
-
-                            </DataGridTemplateColumn.CellTemplate>
-                        </DataGridTemplateColumn>
-                    </DataGrid.Columns>
-                </DataGrid >
-            </Border>
+                            <DataGridTextColumn Header="  IsActive"
+                                                MinWidth="60"
+                                                Binding="{Binding IsActive}" />
+                            <DataGridTextColumn Header="  DateJoined"
+                                                Width="80"
+                                                Binding="{Binding DateJoined, StringFormat=d}" />
 
 
 
-
-            <ToggleButton x:Name="btnAddNewUser"
-                          Height="30"
-                          VerticalAlignment="Top"
-                          HorizontalAlignment="Left"
-                          Grid.Column="1"
-                          Grid.Row="1"
-                          Margin="815,0,0,0"
-                          Width="100"
-                          Content="Add new user"
-                          Click="btnAddNewUser_Click"
-                          Style="{StaticResource AddNewUserButtonTheme}" />
-
-            <StackPanel VerticalAlignment="Top"
-                        HorizontalAlignment="Left"
-                        Grid.Column="1"
-                        x:Name="stckAddNewUser"
-                        Grid.Row="1"
-                        Background="Transparent"
-                        Visibility="Collapsed"
-                        Margin="879,30,0,0"
-                        Width="250"
-                        Height="300">
-
-                <Border  Background="#5834aa"
-                         Width="250"
-                         Height="300"
-                         VerticalAlignment="Center"
-                         HorizontalAlignment="Center"
-                         CornerRadius="0,10,0,10">
-                    <Grid  Width="250"
-                           Height="300">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Text="Level"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#ffffff"
-                                   Grid.Row="0"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Operator"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#ffffff"
-                                   Grid.Row="1"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Username"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#ffffff"
-                                   Grid.Row="2"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Password"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#ffffff"
-                                   Grid.Row="3"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="First Name"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#ffffff"
-                                   Grid.Row="4"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Last Name"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#ffffff"
-                                   Grid.Row="5"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Email"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#ffffff"
-                                   Grid.Row="6"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-
-
-                        <ComboBox x:Name="cboxAddLevel"
-                                  Width="150"
-                                  Height="20"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Margin="0,0,5,0"
-                                  SelectedValuePath="Id"
-                                  DisplayMemberPath="Name"
-                                  Grid.Row="0"
-                                  Style="{StaticResource ComboBoxTheme}" />
-
-                        <ComboBox x:Name="cboxAddOperator"
-                                  Width="150"
-                                  Height="20"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Margin="0,0,5,0"
-                                  SelectedValuePath="Id"
-                                  DisplayMemberPath="Name"
-                                  Grid.Row="1"
-                                  Style="{StaticResource ComboBoxTheme}" />
-
-                        <TextBox  x:Name="tboxAddUserName"
-                                  Height="20"
-                                  Width="150"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Grid.Row="2"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-
-                        <TextBox  x:Name="tboxAddFirstName"
-                                  Height="20"
-                                  Width="150"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Grid.Row="4"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-
-                        <TextBox  x:Name="tboxAddLastName"
-                                  Height="20"
-                                  Width="150"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Grid.Row="5"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-
-                        <TextBox  x:Name="tboxAddEmail"
-                                  Height="20"
-                                  Width="150"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Grid.Row="6"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-
-
-                        <TextBox  x:Name="tboxAddPassword"
-                                  Height="20"
-                                  Width="150"
-                                  Grid.Row="3"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-                        <Button Grid.Row="9"
-                                HorizontalAlignment="Right"
-                                x:Name="btnCancelNewUser"
-                                Margin="0,0,37,0"
-                                Style="{StaticResource CancelButtonTheme}"
-                                Click="btnCancelNewUser_Click" />
-                        <Button Grid.Row="9"
-                                x:Name="btnSaveNewUser"
-                                Content="&#xE74E;"
-                                Style="{StaticResource SaveButtonTheme}"
-                                HorizontalAlignment="Right"
-                                Margin="0,0,5,0"
-                                Click="btnSaveNewUser_Click" />
-                    </Grid>
-
+                        </DataGrid.Columns>
+                    </DataGrid >
                 </Border>
 
 
-            </StackPanel>
+                <Grid Grid.Row="1"
+                      Grid.Column="1"
+                      Width="400"
+                      Height="400"
+                      VerticalAlignment="Center"
+                      HorizontalAlignment="Left"
+                      Margin="0,440,0,0">
 
-            <ToggleButton x:Name="btnUpdateUser"
-                          Height="30"
-                          VerticalAlignment="Top"
-                          HorizontalAlignment="Left"
-                          Grid.Column="1"
-                          Grid.Row="1"
-                          Margin="815,40,0,0"
-                          Visibility="Collapsed"
-                          Width="100"
-                          Content="Update the user"
-                          Style="{StaticResource UpdateUserButtonTheme}" />
-
-            <StackPanel VerticalAlignment="Top"
-                        HorizontalAlignment="Left"
-                        Grid.Column="1"
-                        x:Name="stckUpdateUser"
-                        Grid.Row="1"
-                        Background="Transparent"
-                        Visibility="Collapsed"
-                        Margin="879,70,0,0"
-                        Width="250"
-                        Height="300">
-
-                <Border  Background="#c9ff4e"
-                         Width="250"
-                         Height="300"
-                         VerticalAlignment="Center"
-                         HorizontalAlignment="Center"
-                         CornerRadius="0,10,0,10">
-                    <Grid  Width="250"
-                           Height="300">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                            <RowDefinition Height="30" />
-                        </Grid.RowDefinitions>
-
-                        <TextBlock Text="Level"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#535050"
-                                   Grid.Row="0"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Operator"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#535050"
-                                   Grid.Row="1"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Username"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#535050"
-                                   Grid.Row="2"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Password"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#535050"
-                                   Grid.Row="3"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="First Name"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#535050"
-                                   Grid.Row="4"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Last Name"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#535050"
-                                   Grid.Row="5"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-                        <TextBlock Text="Email"
-                                   FontSize="10"
-                                   FontFamily="/Fonts/#Poppins"
-                                   Foreground="#535050"
-                                   Grid.Row="6"
-                                   VerticalAlignment="Center"
-                                   Margin="1" />
-
-                        <ComboBox x:Name="cboxUpdateLevel"
-                                  Width="150"
-                                  Height="20"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Margin="0,0,5,0"
-                                  SelectedValuePath="Id"
-                                  DisplayMemberPath="Name"
-                                  Grid.Row="0"
-                                  Style="{StaticResource ComboBoxTheme}" />
-
-                        <ComboBox x:Name="cboxUpdateOperator"
-                                  Width="150"
-                                  Height="20"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Margin="0,0,5,0"
-                                  SelectedValuePath="Id"
-                                  DisplayMemberPath="Name"
+                    <ToggleButton x:Name="btnAddNewUser"
+                                  Height="30"
+                                  VerticalAlignment="Top"
+                                  HorizontalAlignment="Left"
+                                  Grid.Column="1"
                                   Grid.Row="1"
-                                  Style="{StaticResource ComboBoxTheme}" />
+                                  Margin="0,0,0,0"
+                                  Width="100"
+                                  Content="Add new user"
+                                  Click="btnAddNewUser_Click"
+                                  Style="{StaticResource AddNewUserButtonTheme}" />
 
-                        <TextBox  x:Name="tboxUpdateUsername"
-                                  Height="20"
-                                  Width="150"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Grid.Row="2"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
+                    <StackPanel VerticalAlignment="Top"
+                                HorizontalAlignment="Left"
+                                Grid.Column="1"
+                                x:Name="stckAddNewUser"
+                                Grid.Row="1"
+                                Background="Transparent"
+                                Visibility="Collapsed"
+                                Margin="54,30,0,0"
+                                Width="250"
+                                Height="300">
 
+                        <Border  Background="#5834aa"
+                                 Width="250"
+                                 Height="280"
+                                 VerticalAlignment="Center"
+                                 HorizontalAlignment="Center"
+                                 CornerRadius="0,10,0,10">
+                            <Grid  Width="250"
+                                   Height="280">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
 
-                        <TextBox  x:Name="tboxUpdatePassword"
-                                  Height="20"
-                                  Width="150"
-                                  Grid.Row="3"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-                        <TextBox  x:Name="tboxUpdateFirstName"
-                                  Height="20"
-                                  Width="150"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Grid.Row="4"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-
-                        <TextBox  x:Name="tboxUpdateLastName"
-                                  Height="20"
-                                  Width="150"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Grid.Row="5"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-
-                        <TextBox  x:Name="tboxUpdateEmail"
-                                  Height="20"
-                                  Width="150"
-                                  VerticalAlignment="Center"
-                                  HorizontalAlignment="Right"
-                                  Grid.Row="6"
-                                  Margin="0,0,5,0"
-                                  Style="{StaticResource GeneralTextboxTheme}" />
-                        <Button Grid.Row="9"
-                                HorizontalAlignment="Right"
-                                x:Name="btnCancelUpdate"
-                                Margin="0,0,37,0"
-                                Style="{StaticResource CancelButtonTheme}"
-                                Click="btnCancelUpdate_Click" />
-                        <Button Grid.Row="9"
-                                x:Name="btnSaveUpdate"
-                                Content="&#xE74E;"
-                                Style="{StaticResource SaveButtonTheme}"
-                                HorizontalAlignment="Right"
-                                Margin="0,0,5,0"
-                                Click="btnSaveUpdate_Click" />
-                    </Grid>
-
-                </Border>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
 
 
-            </StackPanel>
+                                <TextBlock Text="Operator"
+                                           FontSize="11"
+                                           FontFamily="/Fonts/#Poppins"
+                                           Foreground="#ffffff"
+                                           Grid.Row="0"
+                                           VerticalAlignment="Center"
+                                           Margin="1" />
+                                <TextBlock Text="Username"
+                                           FontSize="11"
+                                           FontFamily="/Fonts/#Poppins"
+                                           Foreground="#ffffff"
+                                           Grid.Row="1"
+                                           VerticalAlignment="Center"
+                                           Margin="1" />
+                                <TextBlock Text="Password"
+                                           FontSize="11"
+                                           FontFamily="/Fonts/#Poppins"
+                                           Foreground="#ffffff"
+                                           Grid.Row="2"
+                                           VerticalAlignment="Center"
+                                           Margin="1" />
+                                <TextBlock Text="First Name"
+                                           FontSize="11"
+                                           FontFamily="/Fonts/#Poppins"
+                                           Foreground="#ffffff"
+                                           Grid.Row="3"
+                                           VerticalAlignment="Center"
+                                           Margin="1" />
+                                <TextBlock Text="Last Name"
+                                           FontSize="11"
+                                           FontFamily="/Fonts/#Poppins"
+                                           Foreground="#ffffff"
+                                           Grid.Row="4"
+                                           VerticalAlignment="Center"
+                                           Margin="1" />
+                                <TextBlock Text="Email"
+                                           FontSize="11"
+                                           FontFamily="/Fonts/#Poppins"
+                                           Foreground="#ffffff"
+                                           Grid.Row="5"
+                                           VerticalAlignment="Center"
+                                           Margin="1" />
+                                <TextBlock Text="Roles"
+                                           FontSize="11"
+                                           FontFamily="/Fonts/#Poppins"
+                                           Foreground="#ffffff"
+                                           Grid.Row="6"
+                                           VerticalAlignment="Center"
+                                           Margin="1" />
 
 
-            <Button x:Name="btnRefresh"
-                    ToolTip="Refresh"
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    Foreground="White"
-                    FontSize="30"
-                    Content="&#xE777;"
-                    Cursor="Hand"
-                    Style="{StaticResource RefreshAndBackButtonTheme}"
-                    Click="btnRefresh_Click" />
+                                <ComboBox x:Name="cboxAddOperator"
+                                          Width="150"
+                                          Height="20"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Margin="0,0,5,0"
+                                          SelectedValuePath="Id"
+                                          DisplayMemberPath="Name"
+                                          Grid.Row="0"
+                                          Style="{StaticResource ComboBoxTheme}" />
 
-        </Grid>
+                                <TextBox  x:Name="tboxAddUserName"
+                                          Height="20"
+                                          Width="150"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Grid.Row="1"
+                                          Margin="0,0,5,0"
+                                          Style="{StaticResource GeneralTextboxTheme}" />
+                                <TextBox  x:Name="tboxAddPassword"
+                                          Height="20"
+                                          Width="150"
+                                          Grid.Row="2"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Margin="0,0,5,0"
+                                          Style="{StaticResource GeneralTextboxTheme}" />
+                                <TextBox  x:Name="tboxAddFirstName"
+                                          Height="20"
+                                          Width="150"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Grid.Row="3"
+                                          Margin="0,0,5,0"
+                                          Style="{StaticResource GeneralTextboxTheme}" />
 
+                                <TextBox  x:Name="tboxAddLastName"
+                                          Height="20"
+                                          Width="150"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Grid.Row="4"
+                                          Margin="0,0,5,0"
+                                          Style="{StaticResource GeneralTextboxTheme}" />
+
+                                <TextBox  x:Name="tboxAddEmail"
+                                          Height="20"
+                                          Width="150"
+                                          VerticalAlignment="Center"
+                                          HorizontalAlignment="Right"
+                                          Grid.Row="5"
+                                          Margin="0,0,5,0"
+                                          Style="{StaticResource GeneralTextboxTheme}" />
+
+                                <Button x:Name="btnOpenRoles"
+                                        FontSize="10"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right"
+                                        VerticalContentAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        FontWeight="Black"
+                                        Grid.Row="6"
+                                        Foreground="Black"
+                                        Background="Crimson"
+                                        Content="&#xE710;"
+                                        Click="btnOpenRoles_Click"
+                                        Visibility="Visible"
+                                        Style="{StaticResource GeneralIconButtonTheme  }" />
+                                <Button x:Name="btnCloseRole"
+                                        FontSize="10"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Right"
+                                        VerticalContentAlignment="Center"
+                                        HorizontalContentAlignment="Center"
+                                        Grid.Row="6"
+                                        Foreground="Black"
+                                        Background="Crimson"
+                                        FontWeight="Black"
+                                        Content="&#xE738;"
+                                        Visibility="Collapsed"
+                                        Click="btnCloseRole_Click"
+                                        Style="{StaticResource GeneralIconButtonTheme  }" />
+
+
+                                <Button Grid.Row="9"
+                                        HorizontalAlignment="Right"
+                                        x:Name="btnCancelNewUser"
+                                        Margin="0,0,37,0"
+                                        Style="{StaticResource CancelButtonTheme}"
+                                        Click="btnCancelNewUser_Click" />
+                                <Button Grid.Row="9"
+                                        x:Name="btnSaveNewUser"
+                                        Content="&#xE74E;"
+                                        Style="{StaticResource SaveButtonTheme}"
+                                        HorizontalAlignment="Right"
+                                        Margin="0,0,5,0"
+                                        Click="btnSaveNewUser_Click" />
+                            </Grid>
+
+                        </Border>
+
+                        <Grid VerticalAlignment="Top"
+                              HorizontalAlignment="Center"
+                              Grid.Row="1"
+                              Grid.Column="1"
+                              Width="210"
+                              Height="140"
+                              Margin="0,-120,-310.2,0"
+                              Visibility="Collapsed"
+                              x:Name="gridRoles">
+
+                            <Polygon Points="0,37.5 50,0, 50,75"
+                                     Stroke="#7f8082"
+                                     Margin="-10,-2.6,0,0"
+                                     Fill="#7f8082"
+                                     VerticalAlignment="Top"
+                                     HorizontalAlignment="Center" />
+                            <Border HorizontalAlignment="Center"
+                                    VerticalAlignment="Top"
+                                    Background="#7f8082"
+                                    Width="300"
+                                    Margin="0,-20,-350,0"
+                                    CornerRadius="5"
+                                    Height="155">
+                                <Grid>
+                                    <StackPanel Width="25"
+                                                HorizontalAlignment="Left">
+                                        <ToggleButton Content="&#xE739;"
+                                                      x:Name="btnAddAdmin"
+                                                      
+                                                      Tag="&#xE73A;"
+                                                      Height="22"
+                                                      Foreground="White"
+                                                      Style="{StaticResource GeneralIconButtonThemeWithTrigger}" />
+                                        <ToggleButton Content="&#xE739;"
+                                                      x:Name="btnAddAccounting"
+                                                      Tag="&#xE73A;"
+                                                      Foreground="White"
+                                                      Style="{StaticResource GeneralIconButtonThemeWithTrigger}" />
+                                        <ToggleButton Content="&#xE739;"
+                                                      Tag="&#xE73A;"
+                                                      x:Name="btnAddHumanResources"
+                                                      Foreground="White"
+                                                      Style="{StaticResource GeneralIconButtonThemeWithTrigger}" />
+                                        <ToggleButton Content="&#xE739;"
+                                                      Tag="&#xE73A;"
+                                                      x:Name="btnAddManager"
+                                                      Foreground="White"
+                                                      Style="{StaticResource GeneralIconButtonThemeWithTrigger}" />
+                                        <ToggleButton Content="&#xE739;"
+                                                      Tag="&#xE73A;"
+                                                      x:Name="btnAddOutgoingOperationsAssistantManager"
+                                                      Foreground="White"
+                                                      Style="{StaticResource GeneralIconButtonThemeWithTrigger}" />
+                                        <ToggleButton Content="&#xE739;"
+                                                      Tag="&#xE73A;"
+                                                      x:Name="btnAddOutgoingOperationsSupervisor"
+                                                      Foreground="White"
+                                                      Style="{StaticResource GeneralIconButtonThemeWithTrigger}" />
+                                        <ToggleButton Content="&#xE739;"
+                                                      Tag="&#xE73A;"
+                                                      x:Name="btnAddCustomer"           
+                                                      Foreground="White"
+                                                      Style="{StaticResource GeneralIconButtonThemeWithTrigger}" />
+                                    </StackPanel>
+
+                                    <StackPanel 
+                                                HorizontalAlignment="Left"
+                                                Margin="25,0,0,0">
+
+                                        <TextBlock Text="Admin"
+                                                   Foreground="Wheat"
+                                                   FontFamily="/Fonts/#Poppins"
+                                                   Height="22"
+                                                   Margin="0,0,0,0" />
+
+                                        <TextBlock Text="Accounting"
+                                                   Foreground="Wheat"
+                                                   FontFamily="/Fonts/#Poppins"
+                                                   Height="22" />
+                                        <TextBlock Text="Human Resources"
+                                                   Foreground="Wheat"
+                                                   FontFamily="/Fonts/#Poppins"
+                                                   Height="22" />
+                                        <TextBlock Text="Manager"
+                                                   Foreground="Wheat"
+                                                   FontFamily="/Fonts/#Poppins"
+                                                   Height="22" />
+                                        <TextBlock Text="Outgoing Operations Assistant Manager"
+                                                   Foreground="Wheat"
+                                                   FontFamily="/Fonts/#Poppins"
+                                                   Height="22" />
+                                        <TextBlock Text="Outgoing Operations Supervisor"
+                                                   Foreground="Wheat"
+                                                   FontFamily="/Fonts/#Poppins"
+                                                   Height="22" />
+                                        <TextBlock Text="Customer"
+                                                   Foreground="Wheat"
+                                                   FontFamily="/Fonts/#Poppins"
+                                                   Height="22" />
+                                    </StackPanel>
+                                </Grid>
+
+
+                            </Border>
+
+
+
+                        </Grid>
+                    </StackPanel>
+
+                </Grid>
+
+
+
+
+                <ToggleButton x:Name="btnUpdateUser"
+                              Height="30"
+                              VerticalAlignment="Top"
+                              HorizontalAlignment="Left"
+                              Grid.Column="1"
+                              Grid.Row="1"
+                              Margin="815,40,0,0"
+                              Visibility="Collapsed"
+                              Width="100"
+                              Content="Update the user"
+                              Style="{StaticResource UpdateUserButtonTheme}" />
+
+                <StackPanel VerticalAlignment="Top"
+                            HorizontalAlignment="Left"
+                            Grid.Column="1"
+                            x:Name="stckUpdateUser"
+                            Grid.Row="1"
+                            Background="Transparent"
+                            Visibility="Collapsed"
+                            Margin="879,70,0,0"
+                            Width="250"
+                            Height="300">
+
+                    <Border  Background="#c9ff4e"
+                             Width="250"
+                             Height="300"
+                             VerticalAlignment="Center"
+                             HorizontalAlignment="Center"
+                             CornerRadius="0,10,0,10">
+                        <Grid  Width="250"
+                               Height="300">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="Level"
+                                       FontSize="10"
+                                       FontFamily="/Fonts/#Poppins"
+                                       Foreground="#535050"
+                                       Grid.Row="0"
+                                       VerticalAlignment="Center"
+                                       Margin="1" />
+                            <TextBlock Text="Operator"
+                                       FontSize="10"
+                                       FontFamily="/Fonts/#Poppins"
+                                       Foreground="#535050"
+                                       Grid.Row="1"
+                                       VerticalAlignment="Center"
+                                       Margin="1" />
+                            <TextBlock Text="Username"
+                                       FontSize="10"
+                                       FontFamily="/Fonts/#Poppins"
+                                       Foreground="#535050"
+                                       Grid.Row="2"
+                                       VerticalAlignment="Center"
+                                       Margin="1" />
+                            <TextBlock Text="Password"
+                                       FontSize="10"
+                                       FontFamily="/Fonts/#Poppins"
+                                       Foreground="#535050"
+                                       Grid.Row="3"
+                                       VerticalAlignment="Center"
+                                       Margin="1" />
+                            <TextBlock Text="First Name"
+                                       FontSize="10"
+                                       FontFamily="/Fonts/#Poppins"
+                                       Foreground="#535050"
+                                       Grid.Row="4"
+                                       VerticalAlignment="Center"
+                                       Margin="1" />
+                            <TextBlock Text="Last Name"
+                                       FontSize="10"
+                                       FontFamily="/Fonts/#Poppins"
+                                       Foreground="#535050"
+                                       Grid.Row="5"
+                                       VerticalAlignment="Center"
+                                       Margin="1" />
+                            <TextBlock Text="Email"
+                                       FontSize="10"
+                                       FontFamily="/Fonts/#Poppins"
+                                       Foreground="#535050"
+                                       Grid.Row="6"
+                                       VerticalAlignment="Center"
+                                       Margin="1" />
+
+                            <ComboBox x:Name="cboxUpdateLevel"
+                                      Width="150"
+                                      Height="20"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Margin="0,0,5,0"
+                                      SelectedValuePath="Id"
+                                      DisplayMemberPath="Name"
+                                      Grid.Row="0"
+                                      Style="{StaticResource ComboBoxTheme}" />
+
+                            <ComboBox x:Name="cboxUpdateOperator"
+                                      Width="150"
+                                      Height="20"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Margin="0,0,5,0"
+                                      SelectedValuePath="Id"
+                                      DisplayMemberPath="Name"
+                                      Grid.Row="1"
+                                      Style="{StaticResource ComboBoxTheme}" />
+
+                            <TextBox  x:Name="tboxUpdateUsername"
+                                      Height="20"
+                                      Width="150"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Grid.Row="2"
+                                      Margin="0,0,5,0"
+                                      Style="{StaticResource GeneralTextboxTheme}" />
+
+
+                            <TextBox  x:Name="tboxUpdatePassword"
+                                      Height="20"
+                                      Width="150"
+                                      Grid.Row="3"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Margin="0,0,5,0"
+                                      Style="{StaticResource GeneralTextboxTheme}" />
+                            <TextBox  x:Name="tboxUpdateFirstName"
+                                      Height="20"
+                                      Width="150"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Grid.Row="4"
+                                      Margin="0,0,5,0"
+                                      Style="{StaticResource GeneralTextboxTheme}" />
+
+                            <TextBox  x:Name="tboxUpdateLastName"
+                                      Height="20"
+                                      Width="150"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Grid.Row="5"
+                                      Margin="0,0,5,0"
+                                      Style="{StaticResource GeneralTextboxTheme}" />
+
+                            <TextBox  x:Name="tboxUpdateEmail"
+                                      Height="20"
+                                      Width="150"
+                                      VerticalAlignment="Center"
+                                      HorizontalAlignment="Right"
+                                      Grid.Row="6"
+                                      Margin="0,0,5,0"
+                                      Style="{StaticResource GeneralTextboxTheme}" />
+                            <Button Grid.Row="9"
+                                    HorizontalAlignment="Right"
+                                    x:Name="btnCancelUpdate"
+                                    Margin="0,0,37,0"
+                                    Style="{StaticResource CancelButtonTheme}"
+                                    Click="btnCancelUpdate_Click" />
+                            <Button Grid.Row="9"
+                                    x:Name="btnSaveUpdate"
+                                    Content="&#xE74E;"
+                                    Style="{StaticResource SaveButtonTheme}"
+                                    HorizontalAlignment="Right"
+                                    Margin="0,0,5,0"
+                                    Click="btnSaveUpdate_Click" />
+                        </Grid>
+
+                    </Border>
+
+
+                </StackPanel>
+
+
+                <Button x:Name="btnRefresh"
+                        ToolTip="Refresh"
+                        Grid.Row="0"
+                        Grid.Column="0"
+                        Foreground="White"
+                        FontSize="30"
+                        Content="&#xE777;"
+                        Cursor="Hand"
+                        Style="{StaticResource RefreshAndBackButtonTheme}"
+                        Click="btnRefresh_Click" />
+
+            </Grid>
+        </ScrollViewer>
     </Grid>
 
 

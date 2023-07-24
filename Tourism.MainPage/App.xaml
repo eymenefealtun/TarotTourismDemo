@@ -60,6 +60,7 @@
                 <ResourceDictionary Source="Theme/GeneralIconButtonTheme.xaml" />           
                 <ResourceDictionary Source="Theme/GeneralIconToggleButtonTheme.xaml" />
                 <ResourceDictionary Source="Theme/GeneralToggleButtonTheme.xaml" />
+                <ResourceDictionary Source="Theme/GeneralIconButtonThemeWithTrigger.xaml" />            
 
 
                 <ResourceDictionary Source="Theme/Tools/ExcelButtonTheme.xaml" />

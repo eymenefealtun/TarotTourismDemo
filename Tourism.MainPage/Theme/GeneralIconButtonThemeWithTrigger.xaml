@@ -1,11 +1,11 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    <Style TargetType="Button"
-           BasedOn="{StaticResource {x:Type Button}}"
-           x:Key="GeneralIconButtonTheme">
+    <Style TargetType="ToggleButton"
+           BasedOn="{StaticResource {x:Type ToggleButton}}"
+           x:Key="GeneralIconButtonThemeWithTrigger">
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="Button">
+                <ControlTemplate TargetType="ToggleButton">
                     <Grid VerticalAlignment="Stretch"
                           HorizontalAlignment="Stretch">
                         <Label Content="{TemplateBinding Content}"
@@ -16,8 +16,9 @@
                                x:Name="mainIcon" />
 
                         <TextBlock  Background="{TemplateBinding Background}"
-                                    Visibility="Collapsed"              
-                                    x:Name="background"/>
+                                    Visibility="Hidden"
+                                    Text="{TemplateBinding Tag}"
+                                    x:Name="background" />
                     </Grid>
 
                     <ControlTemplate.Triggers>
@@ -26,6 +27,12 @@
                             <Setter TargetName="mainIcon"
                                     Property="Foreground"
                                     Value="{Binding Background, ElementName=background}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked"
+                                 Value="True">
+                            <Setter Property="Content"
+                                    TargetName="mainIcon"
+                                    Value="{Binding Text, ElementName=background}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
 

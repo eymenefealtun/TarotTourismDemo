@@ -296,7 +296,8 @@ namespace Tourism.MainPage.MVVM.View.Window
             public POINT ptMaxTrackSize;
         }
         #endregion
-
+                
+        #region Part is goint to be updated after new button added
         private void btnSettings_Click(object sender, RoutedEventArgs e)
         {
             btnCustomers.IsChecked = false;
@@ -374,6 +375,7 @@ namespace Tourism.MainPage.MVVM.View.Window
             {
                 _currentPageButton.IsChecked = true;
                 MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
             }
             catch (Exception)
             {
@@ -541,7 +543,7 @@ namespace Tourism.MainPage.MVVM.View.Window
             {
                 _currentPageButton.IsChecked = true;
                 MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
-                return; 
+                return;
             }
             catch (Exception)
             {
@@ -572,16 +574,7 @@ namespace Tourism.MainPage.MVVM.View.Window
             FocusToSubButton(btnSubOperations);
         }
 
-        private void LooseFocusOfSubButton(ToggleButton button)
-        {
-            button.BorderThickness = new Thickness(0);
-        }
 
-        private void FocusToSubButton(ToggleButton button)
-        {
-            button.BorderThickness = new Thickness(1);
-            btnSettings.IsChecked = false;
-        }
 
 
         private void OpenCategories()
@@ -633,10 +626,20 @@ namespace Tourism.MainPage.MVVM.View.Window
                 btnIncome.IsChecked = false;
 
             }
+        } 
+        #endregion
+
+
+        private void LooseFocusOfSubButton(ToggleButton button)
+        {
+            button.BorderThickness = new Thickness(0);
         }
 
-
-      
+        private void FocusToSubButton(ToggleButton button)
+        {
+            button.BorderThickness = new Thickness(1);
+            btnSettings.IsChecked = false;
+        }
 
         private void tboxSearch_TextChanged(object sender, TextChangedEventArgs e)
         {
@@ -737,14 +740,8 @@ namespace Tourism.MainPage.MVVM.View.Window
             }
 
 
-        }
+        }       
 
-        private bool IsInsideOfTheArray(object button, Array array)
-        {
-            if (Array.IndexOf(array, button) > -1)
-                return true;
-            return false;
-        }
         private bool Search(ToggleButton button, string search)
         {
             if (button.Content.ToString().ToLower().Contains(search))

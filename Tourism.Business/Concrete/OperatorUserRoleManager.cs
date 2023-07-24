@@ -13,6 +13,11 @@ namespace Tourism.Business.Concrete
             _operatorUserRoleDal = operatorUserRoleDal;
         }
 
+        //public OperatorUserRole GetByRoleName(string roleName)
+        //{
+        //    return _operatorUserRoleDal.Get(x => x.Roles.Name == roleName);
+        //}
+
         public List<OperatorUserRole> GetByUserUserId(int operatorUserId)
         {
             return _operatorUserRoleDal.GetByUserUserId(operatorUserId);
