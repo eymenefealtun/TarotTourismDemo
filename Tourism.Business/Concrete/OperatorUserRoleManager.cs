@@ -13,6 +13,11 @@ namespace Tourism.Business.Concrete
             _operatorUserRoleDal = operatorUserRoleDal;
         }
 
+        public List<OperatorUserRole> BulkDelete(List<OperatorUserRole> roles)
+        {
+            return _operatorUserRoleDal.BulkDelete(roles);
+        }
+
         //public OperatorUserRole GetByRoleName(string roleName)
         //{
         //    return _operatorUserRoleDal.Get(x => x.Roles.Name == roleName);

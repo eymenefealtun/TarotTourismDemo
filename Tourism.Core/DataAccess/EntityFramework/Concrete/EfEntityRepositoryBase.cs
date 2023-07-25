@@ -41,6 +41,25 @@ namespace Tourism.Core.DataAccess.EntityFramework.Concrete
             }
         }
 
+        public TEntity Delete(TEntity entity)
+        {
+            using (TContext context = new TContext())
+            {
+                context.Set<TEntity>().Remove(entity);
+                context.SaveChanges();
+                return entity;
+            }
+        }
+        public List<TEntity> BulkDelete(List<TEntity> entities)
+        {
+            using (TContext context = new TContext())
+            {
+
+                context.Set<TEntity>().RemoveRange(entities);
+                context.SaveChanges();
+                return entities;
+            }
+        }
         public TEntity Update(TEntity entity)
         {
             using (TContext context = new TContext())

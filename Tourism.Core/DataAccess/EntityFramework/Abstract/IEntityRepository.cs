@@ -9,8 +9,10 @@ namespace Tourism.Core.DataAccess.EntityFramework.Abstract
         List<T> GetAll(Expression<Func<T, bool>> filter = null);
         T Add(T entity);
         T Update(T entity);
+        T Delete(T entity);
         List<T> BulkUpdate(List<T> entity);
         List<T> BulkInsert(List<T> entity);         
+        List<T> BulkDelete(List<T> entity);         
 
         #region Old
         // List<T> GetOperationMain();

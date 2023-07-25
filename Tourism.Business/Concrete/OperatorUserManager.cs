@@ -1,4 +1,5 @@
-﻿using Tourism.Business.ValidationRules.FluentValidation;
+﻿using System.Transactions;
+using Tourism.Business.ValidationRules.FluentValidation;
 using Tourism.Core.CrossCuttingConcerns.Validation.ValidatorTool;
 using Tourism.Entities.Abstract;
 
@@ -26,7 +27,7 @@ namespace Tourism.Entities.Concrete
 
         public OperatorUser GetByPassword(string password)
         {
-            return _operatorUserDal.Get(x => x.PasswordHash == password);   
+            return _operatorUserDal.Get(x => x.PasswordHash == password);
         }
 
         public OperatorUser GetByUserId(int userId)
@@ -36,7 +37,7 @@ namespace Tourism.Entities.Concrete
 
         public OperatorUser GetByUsername(string username)
         {
-            return _operatorUserDal.Get(x=>x.Username == username);      
+            return _operatorUserDal.Get(x => x.Username == username);
         }
 
         public OperatorUser GetByUsernameAndPassword(string username, string password)
@@ -45,18 +46,21 @@ namespace Tourism.Entities.Concrete
         }
 
         public OperatorUser GetByUsernameSqlRaw(string username)
-        {               
+        {
             return _operatorUserDal.GetByUsernameSqlRaw(username);
         }
+
+
 
         public OperatorUser Update(OperatorUser operatorUser)
         {
             ValidationTool.FluentValidate(new OperatorUserValidator(), operatorUser);
+
             return _operatorUserDal.Update(operatorUser);
         }
 
 
-  
+
 
 
 
