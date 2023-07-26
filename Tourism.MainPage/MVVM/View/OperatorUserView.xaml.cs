@@ -371,14 +371,67 @@ namespace Tourism.MainPage.MVVM.View
             }
         }
 
-        private void btnUpdateUser_UnChecked(object sender, RoutedEventArgs e)
+        private void RemoveRole(int operatorUserId, string roleName)
         {
+            OperatorUserRole operatorUserRole = _operatorUserRoleService.GetByUserIdAndRoleName(operatorUserId, roleName);
+            try
+            {
+                _operatorUserRoleService.Delete(operatorUserRole);
+            MessageBox.Show("Role is removed", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
+
+
+            }
+            catch (Exception)
+            {
+
+               
+            }
+        }
+
+        private void btnUpdateUser_Click(object sender, RoutedEventArgs e)
+        {
+
+            var existingRoles = _operatorUserRoleService.GetByUserUserId(_operatorUser.Id);
+
+
+
+            if (sender == btnUpdateAccounting && btnUpdateAccounting.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Accounting") != null)
+                if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    RemoveRole(_operatorUser.Id, "Accounting");
+
+            if (sender == btnUpdateAdmin && btnUpdateAdmin.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Admin") != null)
+                if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    RemoveRole(_operatorUser.Id, "Admin");
+
+            if (sender == btnUpdateCustomer && btnUpdateCustomer.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Customer") != null)
+                if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    RemoveRole(_operatorUser.Id, "Customer");
+
+            if (sender == btnUpdateHumanResources && btnUpdateHumanResources.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Human Resources") != null)
+                if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    RemoveRole(_operatorUser.Id, "Human Resources");
+
+            if (sender == btnUpdateManager && btnUpdateManager.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Manager") != null)
+                if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    RemoveRole(_operatorUser.Id, "Manager");
+
+            if (sender == btnUpdateOutgoingOperationsAssistantManager && btnUpdateOutgoingOperationsAssistantManager.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Outgoing Operations Assistant Manager") != null)
+                if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                 RemoveRole(_operatorUser.Id, "Outgoing Operations Assistant Manager");
+
+            if (sender == btnUpdateOutgoingOperationsSupervisor && btnUpdateOutgoingOperationsSupervisor.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Outgoing Operations Supervisor") != null)
+                if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
+                    RemoveRole(_operatorUser.Id, "Outgoing Operations Supervisor");
+
+
+
+
+
 
         }
 
-        private void btnUpdateUser_Checked(object sender, RoutedEventArgs e)
-        {
 
-        }
+
+
     }
 }

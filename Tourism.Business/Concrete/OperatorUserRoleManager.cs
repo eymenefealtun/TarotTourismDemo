@@ -18,10 +18,15 @@ namespace Tourism.Business.Concrete
             return _operatorUserRoleDal.BulkDelete(roles);
         }
 
-        //public OperatorUserRole GetByRoleName(string roleName)
-        //{
-        //    return _operatorUserRoleDal.Get(x => x.Roles.Name == roleName);
-        //}
+        public OperatorUserRole Delete(OperatorUserRole operatorUserRole)
+        {
+            return _operatorUserRoleDal.Delete(operatorUserRole);
+        }
+
+        public OperatorUserRole GetByUserIdAndRoleName(int operatorUserId, string roleName)
+        {
+            return _operatorUserRoleDal.Get(x => x.Roles.Name == roleName && x.OperatorUserId == operatorUserId);
+        }
 
         public List<OperatorUserRole> GetByUserUserId(int operatorUserId)
         {
