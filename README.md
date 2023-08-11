@@ -1,4 +1,4 @@
-# TarotTyping
+# TarotTourismDemo
 <p align="center">
   <img src="https://github.com/eymenefealtun/TarotTourismDemo/blob/master/Resources/Pictures/Banner.png?raw=true" alt="Sublime's custom image"/>
 </p>
