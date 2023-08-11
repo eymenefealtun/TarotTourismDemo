@@ -24,7 +24,7 @@
 
 Tarot Tourism is a Outgoing Tourism Operator desktop application , written in [C#](https://learn.microsoft.com/en-us/dotnet/csharp/) based on [WPF](https://learn.microsoft.com/en-us/dotnet/desktop/wpf/overview/?view=netdesktop-7.0). It uses [MSSQL](https://www.microsoft.com/en-us/sql-server) for Database, [Entity Framework Core](https://learn.microsoft.com/en-us/ef/core/) for Object Relational Mapping, [FluentValidation](https://github.com/FluentValidation/FluentValidation) for validation, [Ninject](http://www.ninject.org/) for Dependency Injection.
 
-![IMAGE ALT TEXT HERE](https://i.ytimg.com/an_webp/z9YZz3M4Lwk/mqdefault_6s.webp?du=3000&sqp=CJjY2KYG&rs=AOn4CLA046wxTwS02uG0-CC5PEl6M0jysw)
+[![](https://markdown-videos-api.jorgenkh.no/youtube/z9YZz3M4Lwk)](https://youtu.be/dQw4w9WgXcQ)
 
 ### Created By: [@eymenefealtun](https://github.com/eymenefealtun)
 * Linkedin: [@eymenefealtun](https://www.linkedin.com/in/eymen-efe-altun-a1681821b)
