@@ -140,7 +140,7 @@ namespace Tourism.MainPage.MVVM.View
         private void btnSaveNewUser_Click(object sender, RoutedEventArgs e)
         {
 
-            if (MessageBox.Show("Are you sure you want to save?", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) ;
+            if (MessageBox.Show("Are you sure you want to save?", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) 
             {
                 try
                 {
@@ -290,35 +290,35 @@ namespace Tourism.MainPage.MVVM.View
         private void btnSaveUpdate_Click(object sender, RoutedEventArgs e)
         {
 
-            if (MessageBox.Show("Are you sure you want to update?", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes) ;
+            if (MessageBox.Show("Are you sure you want to update?", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
             {
-                //try
-                //{
-                var existingRoles = _operatorUserRoleService.GetByUserUserId(_operatorUser.Id);
-                var user = new OperatorUser()
+                try
                 {
-                    Id = _operatorUser.Id,
-                    Username = tboxUpdateUsername.Text,
-                    PasswordHash = tboxUpdatePassword.Text,
-                    OperatorId = Convert.ToInt32(cboxUpdateOperator.SelectedValue),
-                    FirstName = tboxUpdateFirstName.Text,
-                    LastName = tboxUpdateLastName.Text,
-                    DateJoined = _operatorUser.DateJoined,
-                    Email = tboxUpdateEmail.Text,
-                    OperatorUserRoles = GetUserRoles(_updateRoleButtons, existingRoles),
+                    var existingRoles = _operatorUserRoleService.GetByUserUserId(_operatorUser.Id);
+                    var user = new OperatorUser()
+                    {
+                        Id = _operatorUser.Id,
+                        Username = tboxUpdateUsername.Text,
+                        PasswordHash = tboxUpdatePassword.Text,
+                        OperatorId = Convert.ToInt32(cboxUpdateOperator.SelectedValue),
+                        FirstName = tboxUpdateFirstName.Text,
+                        LastName = tboxUpdateLastName.Text,
+                        DateJoined = _operatorUser.DateJoined,
+                        Email = tboxUpdateEmail.Text,
+                        OperatorUserRoles = GetUserRoles(_updateRoleButtons, existingRoles),
 
-                    IsActive = true, //this is going to be refactored (User is going to be able to modift activation of the user)
-                };
+                        IsActive = true, //this is going to be refactored (User is going to be able to modift activation of the user)
+                    };
 
-                _operatorUserService.Update(user);
-                dgwOperatorUser.ItemsSource = _operatorFullService.GetOperatorUsers();
-                MessageBox.Show("Updated!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
-                ClearUpdateUser();
-                //}
-                //catch (Exception exception)
-                //{
-                //    MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
-                //}
+                    _operatorUserService.Update(user);
+                    dgwOperatorUser.ItemsSource = _operatorFullService.GetOperatorUsers();
+                    MessageBox.Show("Updated!", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
+                    ClearUpdateUser();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message, "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
 
         }
@@ -377,14 +377,14 @@ namespace Tourism.MainPage.MVVM.View
             try
             {
                 _operatorUserRoleService.Delete(operatorUserRole);
-            MessageBox.Show("Role is removed", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Role is removed", "Tarot MIS", MessageBoxButton.OK, MessageBoxImage.Information);
 
 
             }
             catch (Exception)
             {
 
-               
+
             }
         }
 
@@ -417,7 +417,7 @@ namespace Tourism.MainPage.MVVM.View
 
             if (sender == btnUpdateOutgoingOperationsAssistantManager && btnUpdateOutgoingOperationsAssistantManager.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Outgoing Operations Assistant Manager") != null)
                 if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
-                 RemoveRole(_operatorUser.Id, "Outgoing Operations Assistant Manager");
+                    RemoveRole(_operatorUser.Id, "Outgoing Operations Assistant Manager");
 
             if (sender == btnUpdateOutgoingOperationsSupervisor && btnUpdateOutgoingOperationsSupervisor.IsChecked == false && existingRoles.SingleOrDefault(x => x.Roles.Name == "Outgoing Operations Supervisor") != null)
                 if (MessageBox.Show("Are you sure you want to remove the role!", "Tarot MIS", MessageBoxButton.YesNo, MessageBoxImage.Question) == MessageBoxResult.Yes)
